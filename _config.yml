@@ -1,6 +1,2 @@
-safe:true
-auto:false
-server:false
+markdown: rdiscount 
 
-source: .
-destination: ./_site
