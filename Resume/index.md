@@ -1,7 +1,3 @@
----
-layout: resume
-title: Resume
----
 
 # Lucas David-Roesler
 
