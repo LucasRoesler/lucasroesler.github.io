@@ -9,7 +9,7 @@
         <title>{{ site.title }}</title>
     {% endif %}
     
-    <title>Home by LDavRoe</title>
+    <title>Resume</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
@@ -23,9 +23,7 @@
 <div class="wrapper">
   {% include header.html %}
   <section>
-    <h1>Lucas David-Roesler</h1>
-
-    <p>Welcome ... um more stuff to come.</p>
+    {{ content }}
   </section>
   {% include footer.html %}
 </div>

@@ -3,4 +3,4 @@ server:false
 markdown: rdiscount
 title: Lucas David-Roesler
 github_user:LDavRoe
-resume_dir:resume
+resumer_dir:resume
