@@ -1,3 +1,0 @@
-markdown: rdiscount 
-source: .
-destination: ./_site
