@@ -8,8 +8,6 @@
     {% else %}
         <title>{{ site.title }}</title>
     {% endif %}
-    
-    <title>Resume</title>
 
     <link rel="stylesheet" href="stylesheets/styles.css">
     <link rel="stylesheet" href="stylesheets/pygment_trac.css">
