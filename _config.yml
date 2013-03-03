@@ -1,4 +1,5 @@
+auto:  false
+server:  false
 markdown: rdiscount
-title: Lucas David-Roesler
+title:  Lucas David-Roesler
 github_user:  LDavRoe
-resume_dir:  Resume
