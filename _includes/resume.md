@@ -59,7 +59,7 @@ Lebanon, PA 17046
 
 **Visiting Instructor in Mathematics**, *Lebanon Valley College*, Annville, Pennsylvania **2012 -- Present**
 
-> *Finite Mathematics - Calculus 1 - Differential Equations *
+> *Finite Mathematics - Calculus 1 - Differential Equations*
 
 **Teaching Assistant**, *UConn*, Storrs, Connecticut - **2007 -- 2012**  
 
