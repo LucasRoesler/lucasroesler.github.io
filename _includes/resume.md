@@ -9,7 +9,7 @@ Lebanon, PA 17046
 ---
 
 ## Goal
-> I am currently a college professor at a small liberal arts school. I love teaching but I am looking to transition to a web developer position.  I am looking to learn and be challenged while continuing to improve my development skills.  
+> I am currently a college professor at a small liberal arts school. I love teaching but I am looking to transition to a software developer position.  I am looking to learn and be challenged while continuing to improve my development skills.  
 
 ---
 
