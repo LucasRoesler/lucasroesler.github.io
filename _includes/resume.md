@@ -26,12 +26,12 @@ Lebanon, PA 17046
 ---
 
 ## Professional Experience
-**Web developement**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
+**Web development**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
 
 >Designed, created, and managed the webpage, videos, surveys, and raw data reports for the Pedagogy in Large Lectures research project (see below in Academic Experience). Managed the transition to new developers.  
 > *PHP - MySQL - Javascript - LaTeX*  
 
-**Web developement**, *Mathematics Department*, UConn, Storrs, Connecticut - **2009 -- 2012**
+**Web development**, *Mathematics Department*, UConn, Storrs, Connecticut - **2009 -- 2012**
 
 >Created secure forms for administrative use. Updated and created new secure forms for student use. Implemented basic security for existing web forms. Created extensive user and developer documentation for each project in a pmwiki.  
 > *PHP - MySQL - Javascript*
