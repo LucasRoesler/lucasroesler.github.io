@@ -21,7 +21,7 @@ Lebanon, PA 17046
 
 **M.S. in Mathematics**, *University of Connecticut (UConn)*, Storrs, Connecticut - **May 2009**
 
-**B.A. in Mathematics** *Central Connecticut State University (CCSU)*, New Britain, Connecticut - **May 2007**
+**B.A. in Mathematics**, *Central Connecticut State University (CCSU)*, New Britain, Connecticut - **May 2007**
 
 ---
 
