@@ -3,8 +3,6 @@
 
 Lebanon, PA 17046  
 <roeser.lucas@gmail.com>  
-[Linkedin]  
-[BitBucket]  
 
 ---
 
