@@ -51,7 +51,7 @@ a small {
 }
 
 blockquote {
-  border-left:1px solid #e5e5e5;
+  border-left:0px solid #e5e5e5;
   margin:0;
   padding:0 0 0 20px;
   font-style:italic;

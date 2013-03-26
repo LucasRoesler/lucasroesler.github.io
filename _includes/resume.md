@@ -41,7 +41,8 @@ Lebanon, PA 17046
 **Implementation of Crystals of Generalized Young Walls**, a method to construct combinatorial mathematical objects called crystals in the computer algebras system Sage.
 
 > Source available at <http://bitbucket.org/LDavRoe/sage>  
-> Proposed for inclusion into the Sage combinat branch: <http://trac.sagemath.org/sage_trac/ticket/14130>  
+> Documentation at <http://www.sagemath.org/doc/reference/combinat/sage/combinat/crystals/generalized_young_walls.html>
+> Accepted for inclusion into the Sage combinat branch: <http://trac.sagemath.org/sage_trac/ticket/14130>  
 > *Python - Sage*
 
 **Gedit LaTeX plugin**, Contributed interface enhancements and general bug reporting.
