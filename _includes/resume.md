@@ -1,7 +1,7 @@
     
 # Lucas David-Roesler
 
-Lebanon, PA 17046  
+Tucson, AZ 85750
 <roeser.lucas@gmail.com>  
 
 ---
@@ -57,6 +57,8 @@ Lebanon, PA 17046
 >Integrated online videos and flashcards to improve learning in large lectures. Created content for, implemented, and maintained the web resources for displaying content and collecting survey data.  
 Part of: *The Provost General Education Course Enhancement Grant*.
 
+---
+
 ## Additional Experience
 ### Programming 
 **Implementation of Crystals of Generalized Young Walls**, a method to construct combinatorial mathematical objects called crystals in the computer algebras system Sage.
@@ -71,7 +73,6 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 >Inclusions: <http://git.gnome.org/browse/gedit-latex/log/?qt=author&q=Lucas>  
 > *Python*
 
----
 
 ### Papers
 
@@ -95,6 +96,8 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 ## Honors and Awards
 * UConn : Predoctoral Fellowship, **2011**; Connie Strand Service Award, **2010**.
 * CCSU : Graduated Magna Cum Laude; Departmental Honors in Mathematics, **2007**; Honors Program, **2007**; Golden Key Honor Society member, **2006**.
+
+---
 
 ## Interests
 * Rock climbing/bouldeirng, home brewing, long distance running (10k -- half marathon), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).
