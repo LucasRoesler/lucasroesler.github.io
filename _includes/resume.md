@@ -5,14 +5,16 @@ Lebanon, PA 17046
 <roeser.lucas@gmail.com>  
 
 ---
-
-## Goal
-> I am currently a college professor at a small liberal arts school. I love teaching but I am looking to transition to a software developer position.  I am looking to learn and be challenged while continuing to improve my development skills.  
-
+## Technical  Skills
+* Languages:  Python, PHP, MySQL, HTML, CSS, Javascript, jQuery, R, shell scripting  
+* Applications:  Git, Sage, Mathematica, LaTeX  
+* Operating Systems:  UNIX/Linux, Mac OS X, Windows
+ 
 ---
 
+
 ## Education
-**Ph.D. in Mathematicas**, *University of Connecticut (UConn)*, Storrs, Connecticut - **May 2012**
+** Ph.D. in Mathematicas**, *University of Connecticut (UConn)*, Storrs, Connecticut - **May 2012**
 
 >Dissertation Title: "Algebras from surfaces and their derived equivalences"  
 >Advisor: Dr. Ralf Schiffler
@@ -24,6 +26,10 @@ Lebanon, PA 17046
 ---
 
 ## Professional Experience
+### Technical
+**Software development**, SAIC, Tucson, Arizona - ** 2013 -- present**
+
+
 **Web development**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
 
 >Designed, created, and managed the webpage, videos, surveys, and raw data reports for the Pedagogy in Large Lectures research project (see below in Academic Experience). Managed the transition to new developers.  
@@ -32,31 +38,11 @@ Lebanon, PA 17046
 **Web development**, *Mathematics Department*, UConn, Storrs, Connecticut - **2009 -- 2012**
 
 >Created secure forms for administrative use. Updated and created new secure forms for student use. Implemented basic security for existing web forms. Created extensive user and developer documentation for each project in a pmwiki.  
-> *PHP - MySQL - Javascript*
-
----
-
-## Technical Experience
-
-**Implementation of Crystals of Generalized Young Walls**, a method to construct combinatorial mathematical objects called crystals in the computer algebras system Sage.
-
-> Source available at <http://bitbucket.org/LDavRoe/sage>  
-> Documentation at <http://www.sagemath.org/doc/reference/combinat/sage/combinat/crystals/generalized_young_walls.html>
-> Accepted for inclusion into the Sage combinat branch: <http://trac.sagemath.org/sage_trac/ticket/14130>  
-> *Python - Sage*
-
-**Gedit LaTeX plugin**, Contributed interface enhancements and general bug reporting.
-
->Inclusions: <http://git.gnome.org/browse/gedit-latex/log/?qt=author&q=Lucas>  
-> *Python*
-
----
-
-## Academic Experience
+>  *PHP - MySQL - Javascript*
 
 ### Teaching
 
-**Visiting Instructor in Mathematics**, *Lebanon Valley College*, Annville, Pennsylvania **2012 -- Present**
+**Visiting Instructor in Mathematics**, *Lebanon Valley College*, Annville, Pennsylvania **2012 -- 2013 **
 
 > *Finite Mathematics - Calculus 1 - Differential Equations*
 
@@ -71,22 +57,29 @@ Lebanon, PA 17046
 >Integrated online videos and flashcards to improve learning in large lectures. Created content for, implemented, and maintained the web resources for displaying content and collecting survey data.  
 Part of: *The Provost General Education Course Enhancement Grant*.
 
+## Additional Experience
+### Programming 
+**Implementation of Crystals of Generalized Young Walls**, a method to construct combinatorial mathematical objects called crystals in the computer algebras system Sage.
+
+> Source available at <http://bitbucket.org/LDavRoe/sage>  
+> Documentation at <http://www.sagemath.org/doc/reference/combinat/sage/combinat/crystals/generalized_young_walls.html>
+> Accepted for inclusion into the Sage combinat branch: <http://trac.sagemath.org/sage_trac/ticket/14130>  
+> *Python - Sage*
+
+**Gedit LaTeX plugin**, Contributed interface enhancements and general bug reporting.
+
+>Inclusions: <http://git.gnome.org/browse/gedit-latex/log/?qt=author&q=Lucas>  
+> *Python*
+
 ---
 
-## Papers
+### Papers
 
 1. L. David-Roesler. *The AG-invariant for m-angulations*, submitted, available online: [arXiv:1210.6087]
 
 2. L. David-Roesler. *Derived Equivalence in Surface Algebras via Graded Equivalence*, 30 pages, to appear in Algebr. Represent. Theory. [doi:10.1007/s10468-012-9384-9][].
 
 3. L. David-Roesler and R. Schiffler. *Algebras from surfaces without punctures*. J. Algebra 350 (2012). pp. 218-244. [doi:10.1016/j.jalgebra.2011.10.034].
-
----
-
-## Computer Skills
-* Languages:  PHP, MySQL, Python, HTML, CSS, Javascript, jQuery, R, shell scripting  
-* Applications:  Git, Sage, Mathematica, LaTeX  
-* Operating Systems:  UNIX/Linux, Mac OS X, Windows
 
 ---
 
@@ -104,7 +97,7 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 * CCSU : Graduated Magna Cum Laude; Departmental Honors in Mathematics, **2007**; Honors Program, **2007**; Golden Key Honor Society member, **2006**.
 
 ## Interests
-* Home brewing, long distance running (10k -- half marathon), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).
+* Rock climbing/bouldeirng, home brewing, long distance running (10k -- half marathon), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).
 
 
   [Linkedin]: http://www.linkedin.com/in/lucasdavroe/ "Linkedin"
