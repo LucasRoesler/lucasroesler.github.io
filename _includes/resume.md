@@ -7,7 +7,7 @@ Tucson, AZ 85750
 
 ---
 ## Technical  Skills
-* Languages:  Python, PHP, MySQL, HTML, CSS, Javascript, jQuery, R, shell scripting  
+* Languages:  Python, Django, PHP, MySQL, HTML, CSS, Javascript, jQuery, C++,  R, shell scripting  
 * Applications:  Git, Sage, Mathematica, LaTeX  
 * Operating Systems:  UNIX/Linux, Mac OS X, Windows
  
@@ -30,15 +30,23 @@ Tucson, AZ 85750
 ### Technical
 **Software development**, SAIC, Tucson, Arizona - ** 2013 -- present**
 
+> - Research and implement new feature detection algorithms in Python and C++ for digital image detection software.  
+> - Create and manage Git hooks to enforce commenting style guidelines and general workflow procedure.
+> - Implement new features for an active website. 
+> *Python - Django - C++ - Git*
 
 **Web development**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
 
->Designed, created, and managed the webpage, videos, surveys, and raw data reports for the Pedagogy in Large Lectures research project (see below in Academic Experience). Managed the transition to new developers.  
+> - Designed, created, and managed the webpage, videos, surveys, and raw data reports for the Pedagogy in Large Lectures research project (see below in Academic Experience). 
+> - Managed the transition to new developers.  
 > *PHP - MySQL - Javascript - LaTeX*  
 
 **Web development**, *Mathematics Department*, UConn, Storrs, Connecticut - **2009 -- 2012**
 
->Created secure forms for administrative use. Updated and created new secure forms for student use. Implemented basic security for existing web forms. Created extensive user and developer documentation for each project in a pmwiki.  
+> - Created secure forms for administrative use. 
+> - Updated and created new secure forms for student use. 
+> - Implemented basic security for existing web forms. 
+> - Created extensive user and developer documentation for each project in a pmwiki.  
 >  *PHP - MySQL - Javascript*
 
 ### Teaching
@@ -91,8 +99,7 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 * Organized the graduate student orientation - **2012**
 * Founding member of GAMMA - a graduate student committee for addressing student concerns with the math department - **2011 -- 2012**
 * Organized weekly graduate student social gatherings - **2011 -- 2012**
-* Graduate student mento - **2010 -- 2012**
-* Tresurer for Golden Key Honor Society (CCSU branch) - **2007**
+* Graduate student mentor- **2010 -- 2012**
 
 ## Honors and Awards
 * UConn : Predoctoral Fellowship, **2011**; Connie Strand Service Award, **2010**.
