@@ -32,7 +32,7 @@ Tucson, AZ 85750
 
 > - Research and implement new feature detection algorithms in Python and C++ for digital image detection software.  
 > - Create and manage Git hooks to enforce commenting style guidelines and general workflow procedure.
-> - Implement new features for an active website. 
+> - Implement new features for an active website.   
 > *Python - Django - C++ - Git*
 
 **Web development**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
