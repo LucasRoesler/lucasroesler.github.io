@@ -30,7 +30,7 @@ Tucson, AZ 85750
 ### Technical
 **Software development**, SAIC, Tucson, Arizona - ** 2013 -- present**
 
-> - Research and implement new feature detection algorithms in Python and C++ for digital image detection software.  
+> - Research and implement new feature detection algorithms in Python and C++.  
 > - Create and manage Git hooks to enforce commenting style guidelines and general workflow procedure.
 > - Implement new features for an active website.   
 > *Python - Django - C++ - Git*
