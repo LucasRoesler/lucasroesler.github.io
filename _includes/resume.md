@@ -108,7 +108,7 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 ---
 
 ## Interests
-* Rock climbing/bouldeirng, home brewing, long distance running (10k -- half marathon), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).
+* Rock climbing/bouldering, home brewing, long distance running (10k -- half marathon), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).
 
 
   [Linkedin]: http://www.linkedin.com/in/lucasdavroe/ "Linkedin"
