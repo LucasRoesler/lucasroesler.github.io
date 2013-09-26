@@ -7,7 +7,7 @@ Tucson, AZ 85750
 
 ---
 ## Technical  Skills
-* Languages:  Python, Django, PHP, MySQL, HTML, CSS, Javascript, jQuery, C++,  R, shell scripting  
+* Languages:  Python, Django, PHP, MySQL, HTML, CSS, Javascript, jQuery, R, Bash  
 * Applications:  Git, Sage, Mathematica, LaTeX  
 * Operating Systems:  UNIX/Linux, Mac OS X, Windows
  
@@ -32,7 +32,9 @@ Tucson, AZ 85750
 
 > - Research and implement new feature detection algorithms in Python and C++.  
 > - Create and manage Git hooks to enforce commenting style guidelines and general workflow procedure.
-> - Implement new features for an active website.   
+> - Manage the transition of projects from CVS and SVN to Git. 
+> - Implement new features for active websites in Django.
+> - Migrate PHP projects to Django.
 > *Python - Django - C++ - Git*
 
 **Web development**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
@@ -70,7 +72,7 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 
 ## Additional Experience
 ### Programming 
-**Implementation of Crystals of Generalized Young Walls**, a method to construct combinatorial mathematical objects called crystals in the computer algebras system Sage.
+**Implementation of Crystals of Generalized Young Walls**, a method to construct combinatorial mathematical objects called crystals in the open source computer algebras system [Sage].
 
 > Source available at <http://bitbucket.org/LDavRoe/sage>  
 > Documentation at <http://www.sagemath.org/doc/reference/combinat/sage/combinat/crystals/generalized_young_walls.html>
@@ -83,7 +85,7 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 > *Python*
 
 
-### Papers
+### Publications
 
 1. L. David-Roesler. *The AG-invariant for m-angulations*, submitted, available online: [arXiv:1210.6087]
 
@@ -93,24 +95,10 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 
 ---
 
-## Service
-* Senator in the UConn Graduate Student Senate (GSS) - **2009 -- 2012**
-* GSS Representative to the UConn Scholastic Standards Committee - **2011 -- 2012**
-* Organized the graduate student orientation - **2012**
-* Founding member of GAMMA - a graduate student committee for addressing student concerns with the math department - **2011 -- 2012**
-* Organized weekly graduate student social gatherings - **2011 -- 2012**
-* Graduate student mentor- **2010 -- 2012**
-
-## Honors and Awards
-* UConn : Predoctoral Fellowship, **2011**; Connie Strand Service Award, **2010**.
-* CCSU : Graduated Magna Cum Laude; Departmental Honors in Mathematics, **2007**; Honors Program, **2007**; Golden Key Honor Society member, **2006**.
-
----
-
 ## Interests
 * Rock climbing/bouldering, home brewing, long distance running (10k -- half marathon), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).
 
-
+  [Sage]: http://www.sagemath.org/ "Sage"
   [Linkedin]: http://www.linkedin.com/in/lucasdavroe/ "Linkedin"
   [BitBucket]: https://bitbucket.org/LDavRoe "BitBucket"
   [doi:10.1016/j.jalgebra.2011.10.034]: http://www.sciencedirect.com/science/article/pii/S0021869311006211 "doi:10.1016/j.jalgebra.2011.10.034"
