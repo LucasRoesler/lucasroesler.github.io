@@ -33,7 +33,7 @@ Tucson, AZ 85750
 > - Research and implement new feature detection algorithms in Python and C++.  
 > - Create and manage Git hooks to enforce commenting style guidelines and general workflow procedure.
 > - Manage the transition of projects from CVS and SVN to Git. 
-> - Implement new features for active websites in Django.
+> - Implement new features for active websites in Django.  
 > - Migrate PHP projects to Django.
 > *Python - Django - C++ - Git*
 
