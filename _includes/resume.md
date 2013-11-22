@@ -1,7 +1,7 @@
     
 # Lucas Roesler
 
-Tucson, AZ 85750
+Salt Lake City, UT 84107
 
 <roeser.lucas@gmail.com>  
 
@@ -28,7 +28,12 @@ Tucson, AZ 85750
 
 ## Professional Experience
 ### Technical
-**Software development**, SAIC, Tucson, Arizona - ** 2013 -- present**
+**Software developement**, JobDash, Salt Lake City, Utah - **2013 -- present**
+
+> - Django web development.
+> *Python - Django - LaTeX*
+
+**Software development**, SAIC, Tucson, Arizona - **2013**
 
 > - Research and implement new feature detection algorithms in Python and C++.  
 > - Create and manage Git hooks to enforce commenting style guidelines and general workflow procedure.
