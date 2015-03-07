@@ -46,7 +46,8 @@ Salt Lake City, UT 84047
 
 **Web development**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
 
-> - Designed, created, and managed the webpage, videos, surveys, and raw data reports for the Pedagogy in Large Lectures research project (see below in Academic Experience).
+> - Designed, created, and managed the webpage, videos, surveys, and raw data reports
+>   for the Pedagogy in Large Lectures research project (see below in Academic Experience).
 > - Managed the transition to new developers.
 > *PHP - MySQL - Javascript - LaTeX*
 
@@ -75,10 +76,6 @@ Salt Lake City, UT 84047
 >Integrated online videos and flashcards to improve learning in large lectures. Created content for, implemented, and maintained the web resources for displaying content and collecting survey data.
 Part of: *The Provost General Education Course Enhancement Grant*.
 
----
-
-## Additional Experience
-### Programming
 **Implementation of Crystals of Generalized Young Walls**, a method to construct combinatorial mathematical objects called crystals in the open source computer algebras system [Sage].
 
 > Source available at <http://bitbucket.org/LDavRoe/sage>
@@ -86,13 +83,8 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 > Accepted for inclusion into the Sage combinat branch: <http://trac.sagemath.org/sage_trac/ticket/14130>
 > *Python - Sage*
 
-**Gedit LaTeX plugin**, Contributed interface enhancements and general bug reporting.
 
->Inclusions: <http://git.gnome.org/browse/gedit-latex/log/?qt=author&q=Lucas>
-> *Python*
-
-
-### Publications
+#### Publications
 
 1. L. David-Roesler. *The AG-invariant for m-angulations*, submitted, available online: [arXiv:1210.6087]
 
