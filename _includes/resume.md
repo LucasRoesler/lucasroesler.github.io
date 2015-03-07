@@ -1,11 +1,13 @@
 
 ### Lucas Roesler
 Salt Lake City, UT 84047
+
 <roesler.lucas@gmail.com>
+
 <https://github.com/LucasRoesler>
 
 ---
-### Technical  Skills
+#### Technical  Skills
 * Languages:  Python, Django, AngularJS, MongoDB, PostgreSQL, PHP, MySQL, HTML, CSS, Javascript, jQuery, R, Bash
 * Applications:  Amazon Web Services (AWS), Git, Sage, Mathematica, LaTeX
 * Operating Systems:  UNIX/Linux, Mac OS X, Windows
@@ -13,7 +15,7 @@ Salt Lake City, UT 84047
 ---
 
 
-### Education
+#### Education
 **Ph.D. in Mathematics**, *University of Connecticut (UConn)*, Storrs, Connecticut - **May 2012**
 
 >Dissertation Title: "Algebras from surfaces and their derived equivalences"
@@ -25,7 +27,7 @@ Salt Lake City, UT 84047
 
 ---
 
-### Professional Experience
+#### Professional Experience
 **Lead Developer**, JobDash, Salt Lake City, Utah - **2013 -- present**
 
 > - AngularJS and Django web development.
@@ -62,7 +64,7 @@ Salt Lake City, UT 84047
 >
 >  *PHP - MySQL - Javascript*
 
-#### Teaching
+#### Other Experience
 
 **Visiting Instructor in Mathematics**, *Lebanon Valley College*, Annville, Pennsylvania **2012 -- 2013 **
 
@@ -72,22 +74,19 @@ Salt Lake City, UT 84047
 
 >*Discrete Mathematics - Mathematical Modeling - Calculus 1a - Calculus 1 - Calculus 2 - Business Calculus*
 
-#### Research
-
 **Research Assistant**, *Pedagogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
 
 >Integrated online videos and flashcards to improve learning in large lectures. Created content for, implemented, and maintained the web resources for displaying content and collecting survey data.
-Part of: *The Provost General Education Course Enhancement Grant*.
 
 **Implementation of Crystals of Generalized Young Walls**, a method to construct combinatorial mathematical objects called crystals in the open source computer algebras system [Sage].
 
 > Source available at <http://bitbucket.org/LDavRoe/sage>
-> Documentation at <http://www.sagemath.org/doc/reference/combinat/sage/combinat/crystals/generalized_young_walls.html>
 > Accepted for inclusion into the Sage combinat branch: <http://trac.sagemath.org/sage_trac/ticket/14130>
+>
 > *Python - Sage*
 
 
-##### Publications
+#### Publications
 
 1. L\. David-Roesler. *The AG-invariant for m-angulations*, submitted, available online: [arXiv:1210.6087]
 
