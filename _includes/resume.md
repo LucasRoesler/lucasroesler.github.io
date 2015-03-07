@@ -1,12 +1,11 @@
 
-# Lucas Roesler
-
+### Lucas Roesler
 Salt Lake City, UT 84047
-
-<roeser.lucas@gmail.com>
+<roesler.lucas@gmail.com>
+<https://github.com/LucasRoesler>
 
 ---
-## Technical  Skills
+### Technical  Skills
 * Languages:  Python, Django, AngularJS, MongoDB, PostgreSQL, PHP, MySQL, HTML, CSS, Javascript, jQuery, R, Bash
 * Applications:  Amazon Web Services (AWS), Git, Sage, Mathematica, LaTeX
 * Operating Systems:  UNIX/Linux, Mac OS X, Windows
@@ -14,8 +13,8 @@ Salt Lake City, UT 84047
 ---
 
 
-## Education
-** Ph.D. in Mathematics**, *University of Connecticut (UConn)*, Storrs, Connecticut - **May 2012**
+### Education
+**Ph.D. in Mathematics**, *University of Connecticut (UConn)*, Storrs, Connecticut - **May 2012**
 
 >Dissertation Title: "Algebras from surfaces and their derived equivalences"
 >Advisor: Dr. Ralf Schiffler
@@ -26,30 +25,30 @@ Salt Lake City, UT 84047
 
 ---
 
-## Professional Experience
-### Technical
+### Professional Experience
 **Lead Developer**, JobDash, Salt Lake City, Utah - **2013 -- present**
 
 > - AngularJS and Django web development.
 > - Designed and built an analytics system in PostgreSQL and MongoDB.
 > - Manage and implement development processes for a team of developers.
+> - Manage server uptime and deployment on AWS and DigitalOcean with Fabric.
+> - Decrease page load times by a factor of 10.
 >
 > *Python - Django - AngularJS - PostgreSQL - MongoDB - AWS - LaTeX*
 
 **Software development**, SAIC, Tucson, Arizona - **2013**
 
-> - Research and implement new feature detection algorithms in Python and C++.
-> - Create and manage Git hooks to enforce commenting style guidelines and general workflow procedure.
-> - Manage the transition of projects from CVS and SVN to Git.
-> - Implement new features for active websites in Django.
-> - Migrate PHP projects to Django.
+> - Researched and implemented new feature detection algorithms in Python and C++.
+> - Managed the transition of projects from CVS and SVN to Git.
+> - Implemented hooks to enforce guidelines and workflow procedure.
+> - Implemented new features for active websites in Django.
 >
 > *Python - Django - C++ - Git*
 
 **Web development**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
 
 > - Designed, created, and managed the webpage, videos, surveys, and raw data reports
->   for the Pedagogy in Large Lectures research project (see below in Academic Experience).
+>   for the Pedagogy in Large Lectures research project.
 > - Managed the transition to new developers.
 >
 > *PHP - MySQL - Javascript - LaTeX*
@@ -59,11 +58,11 @@ Salt Lake City, UT 84047
 > - Created secure forms for administrative use.
 > - Updated and created new secure forms for student use.
 > - Implemented basic security for existing web forms.
-> - Created extensive user and developer documentation for each project in a pmwiki.
+> - Created extensive user and developer documentation.
 >
 >  *PHP - MySQL - Javascript*
 
-### Teaching
+#### Teaching
 
 **Visiting Instructor in Mathematics**, *Lebanon Valley College*, Annville, Pennsylvania **2012 -- 2013 **
 
@@ -73,7 +72,7 @@ Salt Lake City, UT 84047
 
 >*Discrete Mathematics - Mathematical Modeling - Calculus 1a - Calculus 1 - Calculus 2 - Business Calculus*
 
-### Research
+#### Research
 
 **Research Assistant**, *Pedagogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
 
@@ -88,7 +87,7 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 > *Python - Sage*
 
 
-#### Publications
+##### Publications
 
 1. L\. David-Roesler. *The AG-invariant for m-angulations*, submitted, available online: [arXiv:1210.6087]
 
@@ -98,7 +97,7 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 
 ---
 
-## Interests
+#### Interests
 * Rock climbing/bouldering, home brewing, long distance running (10k -- half marathon), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).
 
   [Sage]: http://www.sagemath.org/ "Sage"
