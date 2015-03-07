@@ -33,6 +33,7 @@ Salt Lake City, UT 84047
 > - AngularJS and Django web development.
 > - Designed and built an analytics system in PostgreSQL and MongoDB.
 > - Manage and implement development processes for a team of developers.
+>
 > *Python - Django - AngularJS - PostgreSQL - MongoDB - AWS - LaTeX*
 
 **Software development**, SAIC, Tucson, Arizona - **2013**
@@ -42,6 +43,7 @@ Salt Lake City, UT 84047
 > - Manage the transition of projects from CVS and SVN to Git.
 > - Implement new features for active websites in Django.
 > - Migrate PHP projects to Django.
+>
 > *Python - Django - C++ - Git*
 
 **Web development**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
@@ -49,6 +51,7 @@ Salt Lake City, UT 84047
 > - Designed, created, and managed the webpage, videos, surveys, and raw data reports
 >   for the Pedagogy in Large Lectures research project (see below in Academic Experience).
 > - Managed the transition to new developers.
+>
 > *PHP - MySQL - Javascript - LaTeX*
 
 **Web development**, *Mathematics Department*, UConn, Storrs, Connecticut - **2009 -- 2012**
@@ -57,6 +60,7 @@ Salt Lake City, UT 84047
 > - Updated and created new secure forms for student use.
 > - Implemented basic security for existing web forms.
 > - Created extensive user and developer documentation for each project in a pmwiki.
+>
 >  *PHP - MySQL - Javascript*
 
 ### Teaching
