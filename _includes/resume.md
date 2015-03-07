@@ -90,11 +90,11 @@ Part of: *The Provost General Education Course Enhancement Grant*.
 
 #### Publications
 
-1. L. David-Roesler. *The AG-invariant for m-angulations*, submitted, available online: [arXiv:1210.6087]
+1. L\. David-Roesler. *The AG-invariant for m-angulations*, submitted, available online: [arXiv:1210.6087]
 
-2. L. David-Roesler. *Derived Equivalence in Surface Algebras via Graded Equivalence*, 30 pages, to appear in Algebr. Represent. Theory. [doi:10.1007/s10468-012-9384-9][].
+2. L\. David-Roesler. *Derived Equivalence in Surface Algebras via Graded Equivalence*, 30 pages, to appear in Algebr. Represent. Theory. [doi:10.1007/s10468-012-9384-9][].
 
-3. L. David-Roesler and R. Schiffler. *Algebras from surfaces without punctures*. J. Algebra 350 (2012). pp. 218-244. [doi:10.1016/j.jalgebra.2011.10.034].
+3. L\. David-Roesler and R. Schiffler. *Algebras from surfaces without punctures*. J. Algebra 350 (2012). pp. 218-244. [doi:10.1016/j.jalgebra.2011.10.034].
 
 ---
 
