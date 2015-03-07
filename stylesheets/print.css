@@ -33,4 +33,8 @@ p, ul, ol, table, pre, dl {
     p, ul, ol, table, pre, dl {
         margin:0 0 10px;
     }
+
+    hr {
+        display: none;
+    }
 }
