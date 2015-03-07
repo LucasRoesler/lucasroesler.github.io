@@ -15,12 +15,7 @@ p, ul, ol, table, pre, dl {
   margin:0 0 10px;
 }
 
-hr {
-    display: none;
-}
-
-
-@media print, screen {
+@media print {
     section {
         float: none;
     }
@@ -39,6 +34,9 @@ hr {
     }
 
     hr {
-        display: none !important;
+        border:0;
+        background:#e5e5e5;
+        height:1px;
+        margin:0 0 20px;
     }
 }
