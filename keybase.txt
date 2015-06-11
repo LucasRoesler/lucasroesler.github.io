@@ -1,0 +1,67 @@
+
+://keybase.io/theaxer
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://lucasroesler.com
+  * I am theaxer (https://keybase.io/theaxer) on keybase.
+  * I have a public key with fingerprint A62A A0E7 B9A9 CD22 CF1B  CAF4 2355 3DFF EDE5 F952
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "fingerprint": "a62aa0e7b9a9cd22cf1bcaf423553dffede5f952",
+            "host": "keybase.io",
+            "key_id": "23553dffede5f952",
+            "kid": "010173e20c4dc84324dfb9d7b717e989732547bdbb537a29e664ae0af9021c4120b00a",
+            "uid": "f63b7ac82eecb7c6f1b25f6a843db819",
+            "username": "theaxer"
+        },
+        "service": {
+            "hostname": "lucasroesler.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1434033844,
+    "expire_in": 157680000,
+    "prev": "eebbd946be9e23cea0c06bae0f09f163a957625b8376ed17a11c268ddeca54e0",
+    "seqno": 8,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.8
+Comment: https://keybase.io/crypto
+
+yMIdAnicbZJdbAxRFMd3UdINUjSpB0SmUrTV3vmeWSW+HiQiPhI0gnXvnTO7o+3M
+mJ1dNps+iBIhwcNqJI3veGgRknYREVmNBx9pE4Sikor4CBVCfCatuNPw5r7c3HP+
+/9895+TcmjA6FAlPjXW+yw7s2hi+d3NpKrQuc7wryxHHyHDRLNcAI5dp2XHwXM+y
+fS7KYUXAGIFKdKxTQxCoyROKTUkQZVk0TBMMkE1dFrhqLuEkAwfDEJyEGsthMfaI
+WQaL/kffMJJAPOJVEQREJYNqkihIhkl0QyUqr4Ku6aooyJJKDEJkUcWCDooiYUDY
+1JHAU4kXEEEIM1xqBGcqIlEx1QQASlSqsHIF2VQwIxtE4/VAmATPxk3A1H4C8E7w
+uOZqjgXTFoVgAkEjfwWNKYqTngPJRvBqqNPE7K7n+A51Glk24ftuNDD7GTdQ7wAS
++8uJEcs22CSZIQ1e0nJsLsozJfWtAMxLooREUZOkag52upYHMStQyKqiIXaCbyDN
+kACEGLqkENBBEClgRJFC2ABMpJu8ImKdWQSZaKKqgMGrmOepoGiGARTLEiAu6Gy7
+7XBRjZWJ4wyZtOI29lMecM3dhU1jQuFIaGzRqGAXQpHikn8bElo57je3TVt+JNK2
+vmyo0PnkwU98eULm6Pe+1jkfNg/Ov9ly2H2M/aq+s/1n3JKP9am68qo8PF9XmHdD
+OXBpTfha/uSpSfRS15Yu991c/Lko17HhbV1+sKJsSU6L461Xnv6YlQgVrs+QLn6q
+XbPCXttRWZWZPlBv7OvLzb5T5u2/2t3y8mvvr8Szga+39m59r985jiK2lR0/cU+7
+XLeo8vSyWsh1f2+beT9/6NnCntSHEto6S+8v3/3m7sNSebh5WdGuF6tbwPkx/Oha
+f7ptyvncsaEFDU2Tp30ZWim/Hi6/vaqydM7jAwufzjzclo7fNVd/O1h8oqL9laRf
+sHsGz/ZGznGTFv8BHsYv/A==
+=ZgTd
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/theaxer
+
+==================================================================
