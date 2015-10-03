@@ -1,9 +1,7 @@
 
 ### Lucas Roesler
 Salt Lake City, UT 84047
-
 <roesler.lucas@gmail.com>
-
 <https://github.com/LucasRoesler>
 
 ---
@@ -13,7 +11,6 @@ Salt Lake City, UT 84047
 * Operating Systems:  UNIX/Linux, Mac OS X, Windows
 
 ---
-
 
 #### Education
 **Ph.D. in Mathematics**, *University of Connecticut (UConn)*, Storrs, Connecticut - **May 2012**
@@ -28,7 +25,16 @@ Salt Lake City, UT 84047
 ---
 
 #### Professional Experience
-**Lead Developer**, JobDash, Salt Lake City, Utah - **2013 -- present**
+**Lead Developer**, EventBoard, Salt Lake City, Utah - **2015 -- present**
+> - Django web development.
+> - Designed and built user management and permissions systems.
+> - Designed API documentation system using Swagger.
+> - Manage backend development team.
+> - Increase database migration stability.
+>
+> *Python - Django - PostgresSQL - AWS*
+
+**Lead Developer**, JobDash, Salt Lake City, Utah - **2013 -- 2015**
 
 > - AngularJS and Django web development.
 > - Designed and built an analytics system in PostgreSQL and MongoDB.
@@ -64,6 +70,18 @@ Salt Lake City, UT 84047
 >
 >  *PHP - MySQL - Javascript*
 
+#### Public Projects
+
+**Django Encrypted Json Field** - https://github.com/LucasRoesler/django-encrypted-json
+
+> - Store JSON in Postgres with encrypted values and plain text keys. 
+> - Allows partial encryption, you can specify a list of keys to skip.
+
+**Django Cryptographic Fields** - https://github.com/foundertherapy/django-cryptographic-fields
+
+> - Contributions to allow key rotation and general improvements.
+
+
 #### Other Experience
 
 **Visiting Instructor in Mathematics**, *Lebanon Valley College*, Annville, Pennsylvania **2012 -- 2013 **
@@ -80,7 +98,7 @@ Salt Lake City, UT 84047
 
 **Implementation of Crystals of Generalized Young Walls**, a method to construct combinatorial mathematical objects called crystals in the open source computer algebras system [Sage].
 
-> Source available at <http://bitbucket.org/LDavRoe/sage>
+> Source available at <https://bitbucket.org/Theaxer/sage>
 > Accepted for inclusion into the Sage combinat branch: <http://trac.sagemath.org/sage_trac/ticket/14130>
 >
 > *Python - Sage*
