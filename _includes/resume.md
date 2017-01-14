@@ -25,12 +25,23 @@ Salt Lake City, UT 84047
 ---
 
 #### Professional Experience
-**Lead Developer**, EventBoard, Salt Lake City, Utah - **2015 -- present**
+**Director of Engineering**, Teem (formerly EventBoard), Salt Lake City, Utah - **2016 -- present**
+> - Manage the workflow of the engineering team and work with stakeholders to establish project priorities and timelines.
+> - Work with Support to troubleshoot and resolve or assign issues.
+> - Support and drive development and adoption of architectural, coding, and security standards/governance.
+> - Contribute to the development of the product roadmap to prioritize features/projects.
+> - Manage and grow our team of developers.
+> - Build and maintain dev tooling.
+> - Backend development.
+>
+> *Python - Django - PostgresSQL - AWS*
+
+**Lead Developer**, EventBoard, Salt Lake City, Utah - **2015 -- 2016**
 > - Django web development.
 > - Designed and built user management and permissions systems.
 > - Designed API documentation system using Swagger.
-> - Manage backend development team.
 > - Increase database migration stability.
+> - Manage development teams.
 >
 > *Python - Django - PostgresSQL - AWS*
 
@@ -74,7 +85,7 @@ Salt Lake City, UT 84047
 
 **Django Encrypted Json Field** - https://github.com/LucasRoesler/django-encrypted-json
 
-> - Store JSON in Postgres with encrypted values and plain text keys. 
+> - Store JSON in Postgres with encrypted values and plain text keys.
 > - Allows partial encryption, you can specify a list of keys to skip.
 
 **Django Cryptographic Fields** - https://github.com/foundertherapy/django-cryptographic-fields
