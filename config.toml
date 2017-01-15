@@ -34,24 +34,24 @@ canonifyurls = true
   name = "Home"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-home\"></i>"
   url = "/"
-[[menu.main]]
-  weight = 1
-  identifier = "blog"
-  name = "Blog"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-quote-right\"></i>"
-  url = "/post"
-[[menu.main]]
-  weight = 2
-  identifier = "tags"
-  name = "Tags"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-tags\"></i>"
-  url = "/tags"
-[[menu.main]]
-  weight = 3
-  identifier = "archives"
-  name = "Archives"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-archive\"></i>"
-  url = "/archives"
+# [[menu.main]]
+#   weight = 1
+#   identifier = "blog"
+#   name = "Blog"
+#   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-quote-right\"></i>"
+#   url = "/post"
+# [[menu.main]]
+#   weight = 2
+#   identifier = "tags"
+#   name = "Tags"
+#   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-tags\"></i>"
+#   url = "/tags"
+# [[menu.main]]
+#   weight = 3
+#   identifier = "archives"
+#   name = "Archives"
+#   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-archive\"></i>"
+#   url = "/archives"
 [[menu.main]]
   weight = 4
   identifier = "resume"
@@ -93,12 +93,12 @@ canonifyurls = true
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-linkedin\"></i>"
   url = "https://www.linkedin.com/in/lucasroesler"
 
-[[menu.misc]]
-  weight = 0
-  identifier = "rss"
-  name = "RSS"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-rss\"></i>"
-  url = "/index.xml"
+# [[menu.misc]]
+#   weight = 0
+#   identifier = "rss"
+#   name = "RSS"
+#   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-rss\"></i>"
+#   url = "/index.xml"
 
 [params]
   # Customize date format use to render blog post date, categories and other
