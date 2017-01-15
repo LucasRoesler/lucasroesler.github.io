@@ -135,7 +135,7 @@ Salt Lake City, UT 84047\\
 ---
 
 #### Interests
-* Rock climbing/bouldering, home brewing, long distance running (10k -- half marathon), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).
+* Rock climbing/bouldering, home brewing, music (bass guitar and listening), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).
 
   [Sage]: http://www.sagemath.org/ "Sage"
   [Linkedin]: http://www.linkedin.com/in/lucasroesler/ "Linkedin"
