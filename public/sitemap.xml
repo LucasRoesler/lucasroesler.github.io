@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  
+  <url>
+    <loc>http://lucasroesler.com/2017/01/hello/</loc>
+    <lastmod>2017-01-14T14:50:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://lucasroesler.com/</loc>
+    <lastmod>2017-01-14T14:50:49-07:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://lucasroesler.com/resume/</loc>
+    <lastmod>2013-06-21T11:27:27-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>http://lucasroesler.com/post/</loc>
+    <lastmod>2017-01-14T14:50:49-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lucasroesler.com/tags/</loc>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lucasroesler.com/tags/test/</loc>
+    <lastmod>2017-01-14T14:50:49-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lucasroesler.com/tags/welcome/</loc>
+    <lastmod>2017-01-14T14:50:49-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+</urlset>

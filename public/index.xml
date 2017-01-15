@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>home on Lucas Roesler</title>
+    <link>http://lucasroesler.com/index.xml</link>
+    <description>Recent content in home on Lucas Roesler</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 14 Jan 2017 14:50:49 -0700</lastBuildDate>
+    <atom:link href="http://lucasroesler.com/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>hello</title>
+      <link>http://lucasroesler.com/2017/01/hello/</link>
+      <pubDate>Sat, 14 Jan 2017 14:50:49 -0700</pubDate>
+      
+      <guid>http://lucasroesler.com/2017/01/hello/</guid>
+      <description>
+
+&lt;h1 id=&#34;welcome&#34;&gt;Welcome!&lt;/h1&gt;
+
+&lt;p&gt;Hello World!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Lucas Roesler</title>
+      <link>http://lucasroesler.com/resume/</link>
+      <pubDate>Fri, 21 Jun 2013 11:27:27 -0400</pubDate>
+      
+      <guid>http://lucasroesler.com/resume/</guid>
+      <description>
+
+&lt;h3 id=&#34;lucas-roesler&#34;&gt;Lucas Roesler&lt;/h3&gt;
+
+&lt;p&gt;Salt Lake City, UT 84047&lt;br /&gt;
+&lt;a href=&#34;mailto:roesler.lucas@gmail.com&#34;&gt;roesler.lucas@gmail.com&lt;/a&gt;&lt;br /&gt;
+&lt;a href=&#34;https://github.com/LucasRoesler&#34;&gt;https://github.com/LucasRoesler&lt;/a&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&#34;technical-skills&#34;&gt;Technical  Skills&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Languages:  Python, Django, AngularJS, MongoDB, PostgreSQL, PHP, MySQL, HTML, CSS, Javascript, jQuery, R, Bash&lt;/li&gt;
+&lt;li&gt;Applications:  Amazon Web Services (AWS), Git, Sage, Mathematica, LaTeX&lt;/li&gt;
+&lt;li&gt;Operating Systems:  UNIX/Linux, Mac OS X, Windows&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&#34;education&#34;&gt;Education&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Ph.D. in Mathematics&lt;/strong&gt;, &lt;em&gt;University of Connecticut (UConn)&lt;/em&gt;, Storrs, Connecticut - &lt;strong&gt;May 2012&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Dissertation Title: &amp;ldquo;Algebras from surfaces and their derived equivalences&amp;rdquo;
+Advisor: Dr. Ralf Schiffler&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;M.S. in Mathematics&lt;/strong&gt;, &lt;em&gt;University of Connecticut (UConn)&lt;/em&gt;, Storrs, Connecticut - &lt;strong&gt;May 2009&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;B.A. in Mathematics&lt;/strong&gt;, &lt;em&gt;Central Connecticut State University (CCSU)&lt;/em&gt;, New Britain, Connecticut - &lt;strong&gt;May 2007&lt;/strong&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&#34;professional-experience&#34;&gt;Professional Experience&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Director of Engineering&lt;/strong&gt;, Teem (formerly EventBoard), Salt Lake City, Utah - &lt;strong&gt;2016 &amp;ndash; present&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Manage the workflow of the engineering team and work with stakeholders to establish project priorities and timelines.&lt;/li&gt;
+&lt;li&gt;Work with Support to troubleshoot and resolve or assign issues.&lt;/li&gt;
+&lt;li&gt;Support and drive development and adoption of architectural, coding, and security standards/governance.&lt;/li&gt;
+&lt;li&gt;Contribute to the development of the product roadmap to prioritize features/projects.&lt;/li&gt;
+&lt;li&gt;Manage and grow our team of developers.&lt;/li&gt;
+&lt;li&gt;Build and maintain dev tooling.&lt;/li&gt;
+&lt;li&gt;Backend development.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Python - Django - PostgresSQL - AWS&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Lead Developer&lt;/strong&gt;, EventBoard, Salt Lake City, Utah - &lt;strong&gt;2015 &amp;ndash; 2016&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Django web development.&lt;/li&gt;
+&lt;li&gt;Designed and built user management and permissions systems.&lt;/li&gt;
+&lt;li&gt;Designed API documentation system using Swagger.&lt;/li&gt;
+&lt;li&gt;Increase database migration stability.&lt;/li&gt;
+&lt;li&gt;Manage development teams.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Python - Django - PostgresSQL - AWS&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Lead Developer&lt;/strong&gt;, JobDash, Salt Lake City, Utah - &lt;strong&gt;2013 &amp;ndash; 2015&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;AngularJS and Django web development.&lt;/li&gt;
+&lt;li&gt;Designed and built an analytics system in PostgreSQL and MongoDB.&lt;/li&gt;
+&lt;li&gt;Manage and implement development processes for a team of developers.&lt;/li&gt;
+&lt;li&gt;Manage server uptime and deployment on AWS and DigitalOcean with Fabric.&lt;/li&gt;
+&lt;li&gt;Decrease page load times by a factor of 10.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Python - Django - AngularJS - PostgreSQL - MongoDB - AWS - LaTeX&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Software development&lt;/strong&gt;, SAIC, Tucson, Arizona - &lt;strong&gt;2013&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Researched and implemented new feature detection algorithms in Python and C++.&lt;/li&gt;
+&lt;li&gt;Managed the transition of projects from CVS and SVN to Git.&lt;/li&gt;
+&lt;li&gt;Implemented hooks to enforce guidelines and workflow procedure.&lt;/li&gt;
+&lt;li&gt;Implemented new features for active websites in Django.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;Python - Django - C++ - Git&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Web development&lt;/strong&gt;, &lt;em&gt;Pedegogy in Large Lectures&lt;/em&gt;, UConn, Storrs, Connecticut - &lt;strong&gt;2011 &amp;ndash; 2012&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Designed, created, and managed the webpage, videos, surveys, and raw data reports
+for the Pedagogy in Large Lectures research project.&lt;/li&gt;
+&lt;li&gt;Managed the transition to new developers.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;PHP - MySQL - Javascript - LaTeX&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Web development&lt;/strong&gt;, &lt;em&gt;Mathematics Department&lt;/em&gt;, UConn, Storrs, Connecticut - &lt;strong&gt;2009 &amp;ndash; 2012&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Created secure forms for administrative use.&lt;/li&gt;
+&lt;li&gt;Updated and created new secure forms for student use.&lt;/li&gt;
+&lt;li&gt;Implemented basic security for existing web forms.&lt;/li&gt;
+&lt;li&gt;Created extensive user and developer documentation.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;em&gt;PHP - MySQL - Javascript&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;public-projects&#34;&gt;Public Projects&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Django Encrypted Json Field&lt;/strong&gt; - &lt;a href=&#34;https://github.com/LucasRoesler/django-encrypted-json&#34;&gt;https://github.com/LucasRoesler/django-encrypted-json&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Store JSON in Postgres with encrypted values and plain text keys.&lt;/li&gt;
+&lt;li&gt;Allows partial encryption, you can specify a list of keys to skip.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Django Cryptographic Fields&lt;/strong&gt; - &lt;a href=&#34;https://github.com/foundertherapy/django-cryptographic-fields&#34;&gt;https://github.com/foundertherapy/django-cryptographic-fields&lt;/a&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Contributions to allow key rotation and general improvements.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;other-experience&#34;&gt;Other Experience&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;Visiting Instructor in Mathematics&lt;/strong&gt;, &lt;em&gt;Lebanon Valley College&lt;/em&gt;, Annville, Pennsylvania **2012 &amp;ndash; 2013 **&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Finite Mathematics - Calculus 1 - Differential Equations&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Teaching Assistant&lt;/strong&gt;, &lt;em&gt;UConn&lt;/em&gt;, Storrs, Connecticut - &lt;strong&gt;2007 &amp;ndash; 2012&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;&lt;em&gt;Discrete Mathematics - Mathematical Modeling - Calculus 1a - Calculus 1 - Calculus 2 - Business Calculus&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Research Assistant&lt;/strong&gt;, &lt;em&gt;Pedagogy in Large Lectures&lt;/em&gt;, UConn, Storrs, Connecticut - &lt;strong&gt;2011 &amp;ndash; 2012&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Integrated online videos and flashcards to improve learning in large lectures. Created content for, implemented, and maintained the web resources for displaying content and collecting survey data.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;Implementation of Crystals of Generalized Young Walls&lt;/strong&gt;, a method to construct combinatorial mathematical objects called crystals in the open source computer algebras system &lt;a href=&#34;http://www.sagemath.org/&#34; title=&#34;Sage&#34;&gt;Sage&lt;/a&gt;.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Source available at &lt;a href=&#34;https://bitbucket.org/Theaxer/sage&#34;&gt;https://bitbucket.org/Theaxer/sage&lt;/a&gt;
+Accepted for inclusion into the Sage combinat branch: &lt;a href=&#34;http://trac.sagemath.org/sage_trac/ticket/14130&#34;&gt;http://trac.sagemath.org/sage_trac/ticket/14130&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;em&gt;Python - Sage&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&#34;publications&#34;&gt;Publications&lt;/h4&gt;
+
+&lt;ol&gt;
+&lt;li&gt;&lt;p&gt;L. David-Roesler. &lt;em&gt;The AG-invariant for m-angulations&lt;/em&gt;, submitted, available online: &lt;a href=&#34;http://arxiv.org/abs/1210.6087&#34; title=&#34;arXiv:1210.6087&#34;&gt;arXiv:1210.6087&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;L. David-Roesler. &lt;em&gt;Derived Equivalence in Surface Algebras via Graded Equivalence&lt;/em&gt;, 30 pages, to appear in Algebr. Represent. Theory. &lt;a href=&#34;http://link.springer.com/article/10.1007%2Fs10468-012-9384-9&#34; title=&#34;doi:10.1007/s10468-012-9384-9&#34;&gt;doi:10.1007/s10468-012-9384-9&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+
+&lt;li&gt;&lt;p&gt;L. David-Roesler and R. Schiffler. &lt;em&gt;Algebras from surfaces without punctures&lt;/em&gt;. J. Algebra 350 (2012). pp. 218-244. &lt;a href=&#34;http://www.sciencedirect.com/science/article/pii/S0021869311006211&#34; title=&#34;doi:10.1016/j.jalgebra.2011.10.034&#34;&gt;doi:10.1016/j.jalgebra.2011.10.034&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&#34;interests&#34;&gt;Interests&lt;/h4&gt;
+
+&lt;ul&gt;
+&lt;li&gt;Rock climbing/bouldering, home brewing, long distance running (10k &amp;ndash; half marathon), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>
