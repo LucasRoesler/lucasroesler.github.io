@@ -12,4 +12,4 @@ showPagination: false
 Welcome! This is just a test post, a proof of life.
 
 <!--more-->
-Future content will include a mix of technical and personal content including programming (a mix of Pyton, Javascript, and Postgres), management, product, homebrew beer, and motorcycle trips.
+Future content will include a mix of technical and personal content including programming (a mix of Python, JavaScript, and Postgres), management, product, homebrew beer, and motorcycle trips.
