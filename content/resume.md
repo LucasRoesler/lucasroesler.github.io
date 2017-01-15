@@ -64,7 +64,7 @@ Salt Lake City, UT 84047\\
 >
 > *Python - Django - AngularJS - PostgreSQL - MongoDB - AWS - LaTeX*
 
-**Software development**, SAIC, Tucson, Arizona - **2013**
+**Software developer**, SAIC, Tucson, Arizona - **2013**
 
 > - Researched and implemented new feature detection algorithms in Python and C++.
 > - Managed the transition of projects from CVS and SVN to Git.
@@ -73,7 +73,7 @@ Salt Lake City, UT 84047\\
 >
 > *Python - Django - C++ - Git*
 
-**Web development**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
+**Web developer**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
 
 > - Designed, created, and managed the webpage, videos, surveys, and raw data reports
 >   for the Pedagogy in Large Lectures research project.
@@ -81,7 +81,7 @@ Salt Lake City, UT 84047\\
 >
 > *PHP - MySQL - Javascript - LaTeX*
 
-**Web development**, *Mathematics Department*, UConn, Storrs, Connecticut - **2009 -- 2012**
+**Web developer**, *Mathematics Department*, UConn, Storrs, Connecticut - **2009 -- 2012**
 
 > - Created secure forms for administrative use.
 > - Updated and created new secure forms for student use.
