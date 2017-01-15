@@ -10,17 +10,71 @@
     <atom:link href="http://lucasroesler.com/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Spicy Winter Porter</title>
+      <link>http://lucasroesler.com/2017/01/spicy-winter-porter/</link>
+      <pubDate>Sun, 15 Jan 2017 13:48:19 -0700</pubDate>
+      
+      <guid>http://lucasroesler.com/2017/01/spicy-winter-porter/</guid>
+      <description>&lt;p&gt;I just finished my winter beer.  I usually do one dark spicy beer for the winter season. Last year was the &amp;ldquo;Better Not Pout Stout&amp;rdquo;, this year is the less excitingly named &amp;ldquo;Spicy Winter Porter&amp;rdquo;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;
+
+&lt;h3 id=&#34;the-recipe&#34;&gt;The recipe&lt;/h3&gt;
+
+&lt;p&gt;This is a partial mash recipe for a 5 gallon batch.&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;Grains:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;5 lbs Pale Malt, Maris Otter&lt;/li&gt;
+&lt;li&gt;1 lb Patagonia 190&lt;/li&gt;
+&lt;li&gt;9 lbs 12 oz Pilsner Liquid Extract&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Hops:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;1 oz Chinook for 60 mins&lt;/li&gt;
+&lt;li&gt;1 oz Goldings, East Kent for 30 mins&lt;/li&gt;
+&lt;li&gt;1 oz Centennial for 15 mins&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Spices:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;1 oz coriander for 5 mins&lt;/li&gt;
+&lt;li&gt;6 sticks cinnamon for 5 mins&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Yeast:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;2 pkg Safale American #US-05&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;At the end of the brew I recorded an original gravity of 1.068. I always use a secondary fermentation, which I switched to after 14 days.  When I moved from primary to secondary I recorded a gravity of 1.036.  I left it in secondary for about 4 weeks.  Unfortunately, I didn&amp;rsquo;t actually get any fermentation in secondary. Come bottling day I had a final gravity of 1.036.&lt;/p&gt;
+
+&lt;h3 id=&#34;the-result&#34;&gt;The result&lt;/h3&gt;
+
+&lt;p&gt;Drum roll please &amp;hellip; Today is the first tasting day and I am moderately happy with this batch. I will definitely have to retry the recipe later this year. This beer came out fairly sweet with a spicy flavor in the back of the mouth.  I was originally a little nervous about the cinnamon but it is not overly powerful.  The coriander is subtle.&lt;/p&gt;
+
+&lt;h3 id=&#34;bottom-line&#34;&gt;Bottom line&lt;/h3&gt;
+
+&lt;p&gt;Ultimately, I always look at my winter beers as a my big experiment and this year was a mixed result.  I think it is probably sweater than I would like.  About a month ago I finished a red ale and I think I prefer that one over this porter, but I wont be sad to drink it :)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>hello</title>
       <link>http://lucasroesler.com/2017/01/hello/</link>
-      <pubDate>Sat, 14 Jan 2017 14:50:49 -0700</pubDate>
+      <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
       
       <guid>http://lucasroesler.com/2017/01/hello/</guid>
-      <description>
+      <description>&lt;p&gt;Welcome! This is just a test post, a proof of life.&lt;/p&gt;
 
-&lt;h1 id=&#34;welcome&#34;&gt;Welcome!&lt;/h1&gt;
-
-&lt;p&gt;Hello World!&lt;/p&gt;
-</description>
+&lt;p&gt;
+Future content will include a mix of technical and personal content including programming (a mix of Pyton, Javascript, and Postgres), management, product, homebrew beer, and motorcycle trips.&lt;/p&gt;</description>
     </item>
     
     <item>

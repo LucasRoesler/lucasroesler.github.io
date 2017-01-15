@@ -15,6 +15,11 @@
             </div>
           </div>
         </article>
+        <section class="postShorten-group main-content-wrap">
+          {{ range first 1 (where .Data.Pages.ByPublishDate "Type" "post") }}
+            {{ .Render "latest" }}
+          {{ end }}
+        </section>
         {{ partial "footer.html" . }}
       </div>
     </div>

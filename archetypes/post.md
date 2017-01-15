@@ -1,15 +1,16 @@
 ---
-title: "New Post"
-date: 2015-05-28
+title: New Post
+summary: Put stuff here
 categories:
-- category
-- subcategory
+- programming
 tags:
-- tag1
-- tag2
+- python
+- django
 keywords:
-- tech
-#thumbnailImage: //example.com/image.jpg
+- python
+- django
+comments: false
+showPagination: false
 ---
 
-<!-- more /-->
+<!--more-->
