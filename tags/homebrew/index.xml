@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts on Lucas Roesler</title>
-    <link>http://lucasroesler.com/post/index.xml</link>
-    <description>Recent content in Posts on Lucas Roesler</description>
+    <title>Homebrew on Lucas Roesler</title>
+    <link>http://lucasroesler.com/tags/homebrew/index.xml</link>
+    <description>Recent content in Homebrew on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 15 Jan 2017 13:48:19 -0700</lastBuildDate>
-    <atom:link href="http://lucasroesler.com/post/index.xml" rel="self" type="application/rss+xml" />
+    <atom:link href="http://lucasroesler.com/tags/homebrew/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
       <title>Spicy Winter Porter</title>
@@ -63,18 +62,6 @@
 &lt;h3 id=&#34;bottom-line&#34;&gt;Bottom line&lt;/h3&gt;
 
 &lt;p&gt;Ultimately, I always look at my winter beers as a my big experiment and this year was a mixed result.  I think it is probably sweater than I would like.  About a month ago I finished a red ale and I think I prefer that one over this porter, but I wont be sad to drink it :)&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>hello</title>
-      <link>http://lucasroesler.com/2017/01/hello/</link>
-      <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
-      
-      <guid>http://lucasroesler.com/2017/01/hello/</guid>
-      <description>&lt;p&gt;Welcome! This is just a test post, a proof of life.&lt;/p&gt;
-
-&lt;p&gt;
-Future content will include a mix of technical and personal content including programming (a mix of Pyton, Javascript, and Postgres), management, product, homebrew beer, and motorcycle trips.&lt;/p&gt;</description>
     </item>
     
   </channel>

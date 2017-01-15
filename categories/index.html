@@ -1,6 +1,7 @@
 
 
 
+
   
 
 
@@ -13,21 +14,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.18.1">
-    <title>Tags</title>
+    <title>Categories</title>
     <meta name="author" content="Lucas Roesler">
     <meta name="keywords" content=", development, management, python, django">
 
     <link rel="icon" href="http://lucasroesler.com/favicon.png">
     
-      <link rel="alternate" type="application/rss+xml" title="RSS" href="http://lucasroesler.com/tags/index.xml">
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="http://lucasroesler.com/categories/index.xml">
     
 
     
     <meta name="description" content="Talkity talk by Lucas Roesler">
     <meta property="og:description" content="Talkity talk by Lucas Roesler">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Tags">
-    <meta property="og:url" content="/tags/">
+    <meta property="og:title" content="Categories">
+    <meta property="og:url" content="/categories/">
     <meta property="og:site_name" content="Lucas Roesler">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Lucas Roesler">
@@ -219,49 +220,42 @@ ga('send', 'pageview');
                hasCoverMetaIn
                ">
 
-        <div id="tags-archives" class="main-content-wrap">
-          <form id="filter-form" action="#">
-            <input name="tag" type="text" class="form-control input--xlarge" placeholder="" autofocus="autofocus">
+        <div id="categories-archives" class="main-content-wrap">
+          <form id="filter-form" action="##">
+            <input name="category" type="text" class="form-control input--xlarge"
+                   placeholder="" autofocus="autofocus">
           </form>
-          <h4 class="archive-result text-color-base text-xlarge"
+          <h5 class="archive-result text-color-base text-xlarge"
               data-message-zero=""
               data-message-one=""
-              data-message-other=""></h4>
-
-            <section>
+              data-message-other=""></h5>
+          <section class="boxes">
+            
               
-                <a class="tag tag--primary tag--small" href="#beer-list" data-tag="beer">
-                  beer
-                </a>
+                <div>
+                  <a href="#posts-list-beer" class="category-anchor" data-category="beer">beer</a>
+                </div>
               
-                <a class="tag tag--primary tag--small" href="#homebrew-list" data-tag="homebrew">
-                  homebrew
-                </a>
+                <div>
+                  <a href="#posts-list-misc" class="category-anchor" data-category="misc">misc</a>
+                </div>
               
-                <a class="tag tag--primary tag--small" href="#porter-list" data-tag="porter">
-                  porter
-                </a>
+            
+          </section>
+          <section class="boxes">
+            
               
-                <a class="tag tag--primary tag--small" href="#test-list" data-tag="test">
-                  test
-                </a>
-              
-            </section>
-            <section class="boxes">
-              
-                <div id="beer-list" class="archive box" data-tag="beer">
-                  <h4 class="archive-title">
-                    <a class="link-unstyled" href="beer">
-                      beer (1)
-                    </a>
-                  </h4>
-                  <ul class="archive-posts">
-                    
-                      <li class="archive-post">
-                        <a class="archive-post-title" href="http://lucasroesler.com/2017/01/spicy-winter-porter/">
-                          Spicy Winter Porter
-                        </a>
-                        <span class="archive-post-date"> - 
+              <div id="posts-list-beer" class="archive box" data-category="beer" style="display: block;">
+                <h4 class="archive-title text-xlarge">
+                  <a class="link-unstyled" href="beer">beer (1)</a>
+                </h4>
+                <ul class="archive-posts">
+                  
+                    <li class="archive-post">
+                      <a class="archive-post-title" href="http://lucasroesler.com/2017/01/spicy-winter-porter/">
+                        Spicy Winter Porter
+                      </a>
+                      <span class="archive-post-date"> - 
   
   
   
@@ -269,24 +263,22 @@ ga('send', 'pageview');
     2017-01-15
   
 </span>
-                      </li>
-                    
-                  </ul>
-                </div>
+                    </li>
+                  
+                </ul>
+              </div>
               
-                <div id="homebrew-list" class="archive box" data-tag="homebrew">
-                  <h4 class="archive-title">
-                    <a class="link-unstyled" href="homebrew">
-                      homebrew (1)
-                    </a>
-                  </h4>
-                  <ul class="archive-posts">
-                    
-                      <li class="archive-post">
-                        <a class="archive-post-title" href="http://lucasroesler.com/2017/01/spicy-winter-porter/">
-                          Spicy Winter Porter
-                        </a>
-                        <span class="archive-post-date"> - 
+              <div id="posts-list-misc" class="archive box" data-category="misc" style="display: block;">
+                <h4 class="archive-title text-xlarge">
+                  <a class="link-unstyled" href="misc">misc (1)</a>
+                </h4>
+                <ul class="archive-posts">
+                  
+                    <li class="archive-post">
+                      <a class="archive-post-title" href="http://lucasroesler.com/2017/01/hello/">
+                        hello
+                      </a>
+                      <span class="archive-post-date"> - 
   
   
   
@@ -294,63 +286,14 @@ ga('send', 'pageview');
     2017-01-15
   
 </span>
-                      </li>
-                    
-                  </ul>
-                </div>
+                    </li>
+                  
+                </ul>
+              </div>
               
-                <div id="porter-list" class="archive box" data-tag="porter">
-                  <h4 class="archive-title">
-                    <a class="link-unstyled" href="porter">
-                      porter (1)
-                    </a>
-                  </h4>
-                  <ul class="archive-posts">
-                    
-                      <li class="archive-post">
-                        <a class="archive-post-title" href="http://lucasroesler.com/2017/01/spicy-winter-porter/">
-                          Spicy Winter Porter
-                        </a>
-                        <span class="archive-post-date"> - 
-  
-  
-  
-  
-    2017-01-15
-  
-</span>
-                      </li>
-                    
-                  </ul>
-                </div>
-              
-                <div id="test-list" class="archive box" data-tag="test">
-                  <h4 class="archive-title">
-                    <a class="link-unstyled" href="test">
-                      test (1)
-                    </a>
-                  </h4>
-                  <ul class="archive-posts">
-                    
-                      <li class="archive-post">
-                        <a class="archive-post-title" href="http://lucasroesler.com/2017/01/hello/">
-                          hello
-                        </a>
-                        <span class="archive-post-date"> - 
-  
-  
-  
-  
-    2017-01-15
-  
-</span>
-                      </li>
-                    
-                  </ul>
-                </div>
-              
-           </section>
-         </div>
+            
+          </section>
+        </div>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2017 Lucas Roesler. 
