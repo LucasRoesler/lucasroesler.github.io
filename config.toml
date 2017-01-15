@@ -95,12 +95,12 @@ canonifyurls = true
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-linkedin\"></i>"
   url = "https://www.linkedin.com/in/lucasroesler"
 
-# [[menu.misc]]
-#   weight = 0
-#   identifier = "rss"
-#   name = "RSS"
-#   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-rss\"></i>"
-#   url = "/index.xml"
+[[menu.misc]]
+  weight = 0
+  identifier = "rss"
+  name = "RSS"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-rss\"></i>"
+  url = "/index.xml"
 
 [params]
   # Customize date format use to render blog post date, categories and other
