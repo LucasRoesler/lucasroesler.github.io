@@ -104,7 +104,7 @@ Salt Lake City, UT 84047\\
 
 #### Other Experience
 
-**Visiting Instructor in Mathematics**, *Lebanon Valley College*, Annville, Pennsylvania **2012 -- 2013 **
+**Visiting Instructor in Mathematics**, *Lebanon Valley College*, Annville, Pennsylvania **2012 -- 2013**
 
 > *Finite Mathematics - Calculus 1 - Differential Equations*
 
