@@ -1,7 +1,14 @@
++++
+date        = "2013-06-21T11:27:27-04:00"
+title       = "Lucas Roesler"
+description = "Resume for Lucas Roesler"
+slug        = "resume"
+type        = "resume"
++++
 
 ### Lucas Roesler
-Salt Lake City, UT 84047
-<roesler.lucas@gmail.com>
+Salt Lake City, UT 84047\\
+<roesler.lucas@gmail.com>\\
 <https://github.com/LucasRoesler>
 
 ---
@@ -26,6 +33,7 @@ Salt Lake City, UT 84047
 
 #### Professional Experience
 **Director of Engineering**, Teem (formerly EventBoard), Salt Lake City, Utah - **2016 -- present**
+
 > - Manage the workflow of the engineering team and work with stakeholders to establish project priorities and timelines.
 > - Work with Support to troubleshoot and resolve or assign issues.
 > - Support and drive development and adoption of architectural, coding, and security standards/governance.
@@ -37,6 +45,7 @@ Salt Lake City, UT 84047
 > *Python - Django - PostgresSQL - AWS*
 
 **Lead Developer**, EventBoard, Salt Lake City, Utah - **2015 -- 2016**
+
 > - Django web development.
 > - Designed and built user management and permissions systems.
 > - Designed API documentation system using Swagger.
