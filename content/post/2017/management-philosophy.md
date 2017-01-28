@@ -7,7 +7,7 @@ keywords:
 - python
 - django
 showPagination: false
-summary: It is a real job, be intentional with it.
+summary: It is a real job, be intentional with it, be a multiplier for your team, and finally reduce friction.
 draft: true
 tags:
 - management
