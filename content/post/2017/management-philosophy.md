@@ -24,7 +24,7 @@ __TL;DR: be a multiplier for your team and reduce friction.__
 
 <!--more-->
 
-## How to get better at managment
+## How to get better at management
 
 When I started answering my friend, I of course had some sort of a list and
 made a few suggestions, but immediately followed with this (or something
