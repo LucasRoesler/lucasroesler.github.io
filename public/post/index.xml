@@ -8,12 +8,12 @@
     <language>en-us</language>
     <lastBuildDate>Sun, 29 Jan 2017 20:00:00 -0700</lastBuildDate>
     <atom:link href="http://lucasroesler.com/post/index.xml" rel="self" type="application/rss+xml" />
-
+    
     <item>
       <title>My Management Philosophy</title>
       <link>http://lucasroesler.com/2017/01/my-management-philosophy/</link>
       <pubDate>Sun, 29 Jan 2017 20:00:00 -0700</pubDate>
-
+      
       <guid>http://lucasroesler.com/2017/01/my-management-philosophy/</guid>
       <description>&lt;p&gt;The other day I was having lunch with a friend when he asked what resources I
 use to learn about management and tech leadership in general. I will share
@@ -126,12 +126,12 @@ reading because they will make you think:&lt;/p&gt;
 don&amp;rsquo;t find myself revisiting them frequently.  This may have more to do with the
 format, books versus blogs or podcasts.&lt;/p&gt;</description>
     </item>
-
+    
     <item>
       <title>Spicy Winter Porter</title>
       <link>http://lucasroesler.com/2017/01/spicy-winter-porter/</link>
       <pubDate>Sun, 15 Jan 2017 13:48:19 -0700</pubDate>
-
+      
       <guid>http://lucasroesler.com/2017/01/spicy-winter-porter/</guid>
       <description>&lt;p&gt;I just finished my winter beer.  I usually do one dark spicy beer for the winter
 season. Last year was the &amp;ldquo;Better Not Pout Stout&amp;rdquo;, this year is the less
@@ -202,18 +202,18 @@ sweetness went away and the extra carbonation made a big difference for the
 mouth feel.  I am now willing to give this beer a hearty thumbs-up!  Just make
 sure you let it fully age before you crack one open.&lt;/p&gt;</description>
     </item>
-
+    
     <item>
       <title>hello</title>
       <link>http://lucasroesler.com/2017/01/hello/</link>
       <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
-
+      
       <guid>http://lucasroesler.com/2017/01/hello/</guid>
       <description>&lt;p&gt;Welcome! This is just a test post, a proof of life.&lt;/p&gt;
 
 &lt;p&gt;
 Future content will include a mix of technical and personal content including programming (a mix of Python, JavaScript, and Postgres), management, product, homebrew beer, and motorcycle trips.&lt;/p&gt;</description>
     </item>
-
+    
   </channel>
 </rss>
