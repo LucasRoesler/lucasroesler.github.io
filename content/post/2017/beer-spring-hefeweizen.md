@@ -18,7 +18,7 @@ title: A spring Hefe
 ---
 
 A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
-with a smooth mouthfeel and dense, whippedcream head.
+with a smooth mouth-feel and dense, whipped-cream head.
 
 <!--more-->
 
@@ -26,7 +26,7 @@ with a smooth mouthfeel and dense, whippedcream head.
 This is the full grain recipe for a 5 gallon batch
 
 > Grains:
-> - 5.5 lbs. Weyermann Pale Wheat malt
+> - 5.5 lbs Weyermann Pale Wheat malt
 > - 4 lbs German Pilsner malt
 >
 > Hops:
@@ -40,9 +40,9 @@ This is the full grain recipe for a 5 gallon batch
 I converted this to a partial mash using the following tweak
 
 > Grains:
-> - 3.5 lbs. Weyermann Pale Wheat malt
-> - 2 lbs German Pilsner malt
-> - 2.4 lbs dry malt extract
+> - 5.5 lbs Weyermann Pale Wheat malt
+> - 0.5 lbs 6 Row
+> - 3 lbs lbs dry malt extract
 >
 > Hops:
 > - 1 oz German Tettnang for 60 min
@@ -51,3 +51,5 @@ I converted this to a partial mash using the following tweak
 > - Fermentis Safbrew WB-06 Dry Yeast
 >
 > Target O.G: 1.049
+
+At the end of the brew I recorded an original gravity of 1.045.
