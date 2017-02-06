@@ -50,8 +50,9 @@ reasons this means we have database tables that looks sort of like this
 |- name                |    |- email               |
 +----------------------+    +----------------------+
 ```
+(_Note this is not how it is actually setup in production._)
 
-Now, you can be happy or upset with design for various reasons
+Now, you can be happy or upset with the design for various reasons
 but my biggest issue is how Django queries these tables for our API.  The
 simplest most direct way to serialize an Event including its calendar,
 organizer, and the participants cause what I call the "waterfall of doom",
@@ -61,14 +62,15 @@ internet, for example:
 * [Performance: N+1 Query Problem](https://secure.phabricator.com/book/phabcontrib/article/n_plus_one/)
 * [What is the n+1 selects problem?](http://stackoverflow.com/questions/97197/what-is-the-n1-selects-problem)
 
-so I won't focus on it here; but basically, every request for an Event results in 4 more requests
-(Organization, Calendar, Organizer, and the Participants).  Even worst if I request a list of Events,
-the simplest code for the API will do 4 database queries for each Event in the list.
-For a single event this isn't noticeable, but if I want to serialize all events in a calendar,
-it is a big performance problem.
+so I won't focus on it here; but basically, every request for an Event results
+in 4 more requests (_the waterfall_) for Organization, Calendar, Organizer, and
+the Participants respectively.  Even worst if I request a list of Events, the
+simplest code for the API will do 4 database queries for each Event in the list
+(_the waterfall of doom_). For a single event this isn't noticeable, but if I
+want to serialize all events in a calendar, it is a big performance problem.
 
-We use [Django Rest Framework](http://www.django-rest-framework.org/), so this bad serializer
-looks something like this:
+We use [Django Rest Framework](http://www.django-rest-framework.org/), so the
+bad Event serialization looks something like this:
 
 ```python
 class EventSerializer(ModelSerializer):
