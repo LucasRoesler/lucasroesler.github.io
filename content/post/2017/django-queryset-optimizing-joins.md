@@ -16,10 +16,13 @@ categories:
 showPagination: false
 ---
 
-How do we build a fast API against database models with foreign keys and
-many-to-many relationships?  If you do nothing you get the "waterfall of doom", but,
-Django provides a couple of options to avoid this.  Recently, I have found that
-when the database gets big enough sometimes the answer is to avoid the join altogether!
+How do we build a fast API against database models with foreign keys and many-
+to-many relationships?  If you do nothing you get what I call the "waterfall of
+doom". At some point in the past someone told me or I read that "joins are
+effectively free in Postgres".  While this might be somewhat true when you are
+writing all of the SQL and can control every part of your query; I have recently
+found that when the database gets big enough and you are using the Django ORM,
+joins aren't free and less can be more!
 
 Warning, I am not a DBA and mileage may vary.
 
@@ -90,8 +93,8 @@ class EventViewSet(ReadOnlyModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 ```
-It is worth noting that this is clearly now how our production API is currently designed; but,
-it demonstrates the core performance issue. Fortunately,
+It is worth noting that this is clearly now how our production API is currently
+designed; but, it demonstrates the core performance issue. Fortunately,
 [Django provides a couple tools](https://docs.djangoproject.com/en/1.10/topics/db/optimization/#retrieve-everything-at-once-if-you-know-you-will-need-it)
 out of the box to help us solve this performance issue: `prefetch_related`
 and  `select_related`.
@@ -217,11 +220,12 @@ SELECT COUNT(*) FROM (
 ) sub;
 ```
 
-For specific API queries, we actually using a similar query in product. But, I
-couldn't find a good general solution until I realized that trying to do
-everything at once might actually be too much to ask for.  While reading through
-the documentation to hunt down another bug, I [re-read the docs](https://docs.djangoproject.com/en/1.10/ref/models/querysets/#prefetch-related)
-on `prefetch_related` and it occurred to me that I could guarantee
+For specific API queries, we actually using a similar query in production. But,
+I couldn't find a good general solution until I realized that trying to do
+everything at once might actually be too much to ask for, especially since the
+API enforces relatively small pages. While reading through the documentation to
+hunt down another bug, I [re-read the docs](https://docs.djangoproject.com/en/1.10/ref/models/querysets/#prefetch-related)
+son `prefetch_related` and it occurred to me that I could guarantee
 exactly 4 fast queries to the db on every API call instead of one sporadically
 slow query.  With the following small change to our viewset definition, our
 slowest API call is an order of magnitude faster than the previous call with the
