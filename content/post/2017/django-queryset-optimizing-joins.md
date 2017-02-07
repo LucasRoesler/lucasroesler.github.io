@@ -1,6 +1,5 @@
 ---
-date: 2017-01-15T00:00:00Z
-draft: true
+date: 2017-02-06T20:00:00Z
 title: Postgres Joins and Django Querysets
 summary: Dealing with inefficient joins in Django's ORM
 keywords:
@@ -183,14 +182,13 @@ SELECT COUNT(*) FROM (
 ) sub;
 ```
 
-
 This query is fast in production, but ... it can not be produced using the
 Django ORM. Here, I explicitly made subqueries on indexed columns to speed it
-up. Now this is not exactly a problem and I promise to discuss how and when we
-use raw SQL so speed up some of our requests. But, for the general CRUD API
-endpoint, I want to use the ORM so that I can leverage the great filter
-framework provided by Django Rest Framework. After a lot of tinkering, the best
-ORM compatible query I could design is this
+up. In a future post, I promise to discuss how and when we use raw SQL so speed
+up some of our requests. But, for the general CRUD API endpoint, I want to use
+the ORM so that I can leverage the great filter framework provided by Django
+Rest Framework. After a lot of tinkering, the best ORM compatible query I could
+design is this
 
 ```sql
 SELECT COUNT(*) FROM (
