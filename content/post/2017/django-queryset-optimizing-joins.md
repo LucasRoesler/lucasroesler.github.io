@@ -29,7 +29,7 @@ Warning, I am not a DBA and mileage may vary.
 <!-- more /-->
 
 At [Teem](https://teem.com) we deal with a lot of calendar data.  For various
-reasons this means we have database tables that looks sort of like this
+reasons this means we have database tables that looks something like this
 
 ```
 +----------------------+    +----------------------+
@@ -67,13 +67,13 @@ internet, for example:
 
 so I won't focus on it here; but basically, every request for an Event results
 in 4 more requests (_the waterfall_) for Organization, Calendar, Organizer, and
-the Participants respectively.  Even worst if I request a list of Events, the
+the Participants respectively.  Even worse, if I request a list of Events the
 simplest code for the API will do 4 database queries for each Event in the list
 (_the waterfall of doom_). For a single event this isn't noticeable, but if I
 want to serialize all events in a calendar, it is a big performance problem.
 
 We use [Django Rest Framework](http://www.django-rest-framework.org/), so the
-bad Event serialization looks something like this:
+simple (and bad) Event serialization described above looks something like this:
 
 ```python
 class EventSerializer(ModelSerializer):
@@ -93,14 +93,14 @@ class EventViewSet(ReadOnlyModelViewSet):
     queryset = Event.objects.all()
     serializer_class = EventSerializer
 ```
-It is worth noting that this is clearly now how our production API is currently
+It is worth noting that this is clearly not how our production API is currently
 designed; but, it demonstrates the core performance issue. Fortunately,
 [Django provides a couple tools](https://docs.djangoproject.com/en/1.10/topics/db/optimization/#retrieve-everything-at-once-if-you-know-you-will-need-it)
 out of the box to help us solve this performance issue: `prefetch_related`
 and  `select_related`.
 
-If you are familiar with Django, then this is not news to you.  Given the setup above
-you would likely jump on `select_related` and call it a day
+If you are familiar with Django, then this is not news to you.  Given the setup
+above you would likely jump on `select_related` and call it a day, e.g.
 
 ```python
 class EventViewSet(ReadOnlyModelViewSet):
@@ -109,8 +109,9 @@ class EventViewSet(ReadOnlyModelViewSet):
     serializer_class = EventSerializer
 ```
 
-In fact, for a short time, this optimization worked for us; but a problem pops up
-when the database starts getting big.  The above ViewSet will generate SQL that
+In fact, for a short time, this optimization worked for us; but a problem pops
+up when the database starts getting big.  The above ViewSet will generate SQL
+like this
 
 ```sql
 SELECT COUNT(*) FROM (
@@ -246,4 +247,5 @@ relatively small per request. If you need to load a lot of data at once, I can
 foresee this solution being much worse than `select_related`.
 
 TL;DR: Monitor and analyze your production queries and `prefetch_related` can
-be a great solution if you can keep the number of queries small.
+be a great solution if you can keep the number of queries and the page size
+small.
