@@ -25,17 +25,17 @@ important things we must validate is that things will not break mid-deploy!
 The most sensitive step of the deploy process is the changes to our database.
 Prior to the automation I am about to describe, validation of the database
 migrations required specialized knowledge about Postgres, the changes to the
-applicaiton model, load on the database for that model, and a bit of general
-experience. This obviously slows down reviews and subsequently deploys. Worst,
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
 it was simply too easy to miss problem migrations when depending on only peer
 reviews. To make our lives easier we created a series of validation checks to
 ensure that each database migration will be backwards compatible. 
 
 <!--more-->
-## The What
+## The what
 The checks I am going to describe are simply a sequence of regex
 that we run on the migrations in the changelog. The process looks, roughly,
-like this
+like this:
 
 1. Using git, generate a list of new migrations in this release,
 1. Using Django's `sqlmigrate` manage command, generate the SQL for each
@@ -60,7 +60,7 @@ in your favorite language.
 ## The why
 The basic goal is to ensure that any applied migrations are backwards
 compatible with the model definitions in the currently deployed release. This
-is a requirement because our current deployment process looks like
+is a requirement because our current deployment process looks like:
 
 1. pull the new release code to a single server,
 1. run the migrations,
@@ -89,12 +89,13 @@ null otherwise Postgres will throw an error.
 
 Finally, the other change that we need to watch for is removing columns. This
 is a multi-step process. If you drop a column while the old models are still
-active you will have two possible errors (1) when Django tries to select on
-that column (which it will because it always explicitly names the columns
-selected) or (2) attempting to insert data to a column that doesn't exist
-anymore. To actually handle this type of model change you must deploy the model
-change prior to running the migration.  In our process, that means you must
-commit the model change in a release separate from the database migration.
+active you will get two possible errors (1) when Django tries to select on
+that column that no longer exists (which it will because it always explicitly 
+names the columns selected) or (2) attempting to insert data to a column that 
+doesn't exist anymore. To actually handle this type of model change you must 
+deploy the model change prior to running the migration.  In our process, that 
+means you must commit the model change in a release separate from the database 
+migration.
 
 There are certainly other cases to consider, but we have found these 3 cases to
 cover the vast majority of our migration concerns. Having put these checks into
@@ -168,4 +169,7 @@ of running a few regex tests. We have 3 core tests that we run:
 For each migration, we test those 3 regex and alert if they have any matches.
 As I mentioned earlier, there are certainly other cases that could be
 considered. Let me know if there are some additional checks I should add.
+Since we have implemented these checkes, I can't remember the last time we had
+a migration issue during a deploy so they seem to cover most of the use cases
+we run into. 
 
