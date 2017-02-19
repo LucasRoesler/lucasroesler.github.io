@@ -1,5 +1,9 @@
 
 
+  
+    
+  
+
 
   
 
@@ -13,23 +17,59 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.18.1">
-    <title>home</title>
+    <title>Zero downtime deploys: A tale of Django migrations</title>
     <meta name="author" content="Lucas Roesler">
-    <meta name="keywords" content=", development, management, python, django">
+    <meta name="keywords" content="python, django, automation, postgres, development, management, python, django">
 
     <link rel="icon" href="http://lucasroesler.com/favicon.png">
     
 
     
-    <meta name="description" content="Talkity talk by Lucas Roesler">
-    <meta property="og:description" content="Talkity talk by Lucas Roesler">
+    <meta name="description" content="At Teem, we aim for zero down-time deploys; so, the one of the most
+important things we must validate is that things will not break mid-deploy!
+
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible.
+
+">
+    <meta property="og:description" content="At Teem, we aim for zero down-time deploys; so, the one of the most
+important things we must validate is that things will not break mid-deploy!
+
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible.
+
+">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="home">
-    <meta property="og:url" content="/">
+    <meta property="og:title" content="Zero downtime deploys: A tale of Django migrations">
+    <meta property="og:url" content="/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/">
     <meta property="og:site_name" content="Lucas Roesler">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Lucas Roesler">
-    <meta name="twitter:description" content="Talkity talk by Lucas Roesler">
+    <meta name="twitter:description" content="At Teem, we aim for zero down-time deploys; so, the one of the most
+important things we must validate is that things will not break mid-deploy!
+
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible.
+
+">
     
       <meta name="twitter:creator" content="@theaxer">
     
@@ -75,7 +115,7 @@ ga('send', 'pageview');
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="http://lucasroesler.com/">Lucas Roesler</a>
@@ -95,7 +135,7 @@ ga('send', 'pageview');
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
@@ -222,57 +262,20 @@ ga('send', 'pageview');
 
       
 
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
                hasCoverMetaIn
                ">
-        <article class="post">
-          <div class="post-content markdown" itemprop="articleBody">
-            <div class="main-content-wrap">
-              
-
-<h2 id="me">Me</h2>
-
-<p>I am director of engineering at <a href="https://teem.com">Teem.com</a> and
-an ex-mathematician. I have worked on web applications, algorithms for
-image analysis, machine learning problems, and pure math research.</p>
-
-<p>At the <a href="http://www.math.uconn.edu">University of Connecticut</a> I
-completed my Ph.D. studying combinatorics, tilting theory, and cluster
-algebras with <a href="http://www.math.uconn.edu/~schiffler">Ralf Schiffler</a>.</p>
-
-<p>You can find a brief guide to my research <a href="http://lucasroesler.com/pdf/davroe_research_statement.pdf">here</a>.
-For all of the gory details, you can find all of my mathematical papers
-on the <a href="http://arxiv.org/find/math/1/au:+David_Roesler_L/0/1/0/all/0/1">arxiv</a>.
-You can find some of my coding projects on <a href="https://github.com/LucasRoesler">Github</a>.</p>
-
-            </div>
-          </div>
-        </article>
-        <section class="postShorten-group main-content-wrap">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
           
-            
+          
+            <div class="post-header main-content-wrap text-left">
   
-    
-      
-        
-      
-    
+    <h1 class="post-title" itemprop="headline">
+      Zero downtime deploys: A tale of Django migrations
+    </h1>
   
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h2 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/">
-          Latest Post: Zero downtime deploys: A tale of Django migrations
-        </a>
-      </h2>
-      <div class="postShorten-meta post-meta">
+  <div class="postShorten-meta post-meta">
   <time itemprop="datePublished" datetime="2017-02-20T00:00:00-07:00">
     
   
@@ -295,10 +298,11 @@ You can find some of my coding projects on <a href="https://github.com/LucasRoes
 
 </div>
 
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      <p>
-        At Teem, we aim for zero down-time deploys; so, the one of the most
+</div>
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>At Teem, we aim for zero down-time deploys; so, the one of the most
 important things we must validate is that things will not break mid-deploy!</p>
 
 <p>The most sensitive step of the deploy process is the changes to our database.
@@ -310,18 +314,220 @@ it was simply too easy to miss problem migrations when depending on only peer
 reviews. To make our lives easier we created a series of validation checks to
 ensure that each database migration will be backwards compatible.</p>
 
-<p>
-        <br>
-        <a href="http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/" class="postShorten-excerpt_link link"></a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
+<p></p>
 
-          
-        </section>
+<h2 id="the-what">The what</h2>
+
+<p>The checks I am going to describe are simply a sequence of regex
+that we run on the migrations in the changelog. The process looks, roughly,
+like this:</p>
+
+<ol>
+<li>Using git, generate a list of new migrations in this release,</li>
+<li>Using Django&rsquo;s <code>sqlmigrate</code> manage command, generate the SQL for each
+migration,</li>
+<li>Run a sequence of regex on each SQL command,</li>
+<li>Report the issues,</li>
+<li>Profit!</li>
+</ol>
+
+<p>We do this in a python script we internally call <code>octoeb</code> which uses
+<a href="http://click.pocoo.org/5/">Click</a> to create a commandline
+interface.  So, I can get a changelog along with an audit of the migrations
+in my current branch using:</p>
+
+<pre><code>$ ocotoeb changelog
+</code></pre>
+
+<p>I won&rsquo;t describe the specific python code, instead I will give you equivalent bash commands
+that you can run in your CLI and a simple description of the regex that we
+are using. This will give you all the pieces you need to build a similar script
+in your favorite language.</p>
+
+<h2 id="the-why">The why</h2>
+
+<p>The basic goal is to ensure that any applied migrations are backwards
+compatible with the model definitions in the currently deployed release. This
+is a requirement because our current deployment process looks like:</p>
+
+<ol>
+<li>pull the new release code to a single server,</li>
+<li>run the migrations,</li>
+<li>restart the application,</li>
+<li>check the application status,</li>
+<li>slowly roll the code to the rest of the servers.</li>
+</ol>
+
+<p>As a result, during a deploy we have a mix of old model definitions and new
+model definitions running simultaneously.  This means that the database must
+except both the old and the new for a short period of time and that any change we make
+to the database should not lock up an entire table.</p>
+
+<p>Probably the most common change we often want to make is simply adding a new
+column to an existing model.  This can present several issues.  First, your new
+column should not set a default.  In postgres, adding a column with a default will
+lock the table while it rewrites the existing rows with the default.  This can
+easily be avoided by adding the column first without the default, then adding
+the default, followed by a future backfill on the existing rows.  This will
+create the column and all future rows will have the default.</p>
+
+<p>Implicit in the above recommendation is that all new columns must be nullable.
+You can not add a column without a default unless you allow null. Additionally,
+while the old models are running against the new table definitions, the app
+will set a value for that column, so it must either have a default or allow
+null otherwise Postgres will throw an error.</p>
+
+<p>Finally, the other change that we need to watch for is removing columns. This
+is a multi-step process. If you drop a column while the old models are still
+active you will get two possible errors (1) when Django tries to select on
+that column that no longer exists (which it will because it always explicitly
+names the columns selected) or (2) attempting to insert data to a column that
+doesn&rsquo;t exist anymore. To actually handle this type of model change you must
+deploy the model change prior to running the migration.  In our process, that
+means you must commit the model change in a release separate from the database
+migration.</p>
+
+<p>There are certainly other cases to consider, but we have found these 3 cases to
+cover the vast majority of our migration concerns. Having put these checks into
+place, we rarely have any issues with database migrations during deploy.</p>
+
+<h2 id="the-how">The how</h2>
+
+<h3 id="getting-your-list-of-migrations">Getting your list of migrations</h3>
+
+<p>To find the new migrations you can run the following command</p>
+
+<pre><code>$ git log --name-status master.. | grep -e  &quot;^[MA].*migrations.*&quot;
+</code></pre>
+
+<p>Breaking this down, <code>git log --name-status master..</code> will print a log of the
+commits and the file changes in each commit between <code>master</code> and the current
+<code>HEAD</code>.  The <code>grep</code> returns only those lines that start with <code>A</code> or <code>M</code> and
+also contains the work <code>migrations</code>.  These are all of the new or modified
+migration files.  It will return something like this</p>
+
+<pre><code>A	apps/accounts/migrations/0019_auto_20170126_1830.py
+</code></pre>
+
+<h3 id="getting-your-sql">Getting your SQL</h3>
+
+<p>Once you have the list of migration files that you need to check, we need to
+get the actual SQL that is going to be run by Django.  Fortunately, Django
+provides a simple command to get this SQL,
+<a href="https://docs.djangoproject.com/en/1.10/ref/django-admin/#sqlmigrate"><code>sqlmigrate</code></a>.
+For example,</p>
+
+<pre><code>django-admin sqlmigrate account 0002
+</code></pre>
+
+<p>will print the sql for the second migration in the <code>accounts</code> app. In the
+pervious section the ouput contains all of the information that we need.
+Specifically, with a command like this</p>
+
+<pre><code>$ git log --name-status master.. | grep -e  &quot;^[AM].*migrations.*&quot; | cut -d / -f 2,4 | cut -d . -f 1
+</code></pre>
+
+<p>we would get back exactly the list of apps and the migration name for each
+migration that we need to check</p>
+
+<pre><code>accounts/0017_auto_20170126_1342
+</code></pre>
+
+<p>This still isn&rsquo;t quite what we need.  At the end of the day the following
+command will generate the SQL for you</p>
+
+<pre><code>$ git log --name-status master.. | grep -e  &quot;^[AM].*migrations.*&quot; | cut -d / -f 2,4 | cut -d . -f 1 | awk -F&quot;/&quot; '{ print $1,$2}' | xargs -t -L 1 django-admin sqlmigrate
+</code></pre>
+
+<p>We are using python for our scripting, so my script is actually a bit
+different, using the regex <code>apps/((.*)/migrations/(\d+[0-9a-z_]*))\.py</code> and a
+combination of a for loop and subprocess to generate the SQL.</p>
+
+<h3 id="regex-magic">Regex magic</h3>
+
+<p>Now that we have the actual SQL that needs to be tested, it is simply a matter
+of running a few regex tests. We have 3 core tests that we run:</p>
+
+<ul>
+<li><code>check_for_not_null</code> which we test using <code>/NOT NULL/</code></li>
+<li><code>check_for_dropped_columns</code> which we test using <code>/DROP COLUMN/</code>,
+and</li>
+<li><code>check_for_add_with_default</code> which we test using <code>/ADD COLUMN .* DEFAULT/</code>.</li>
+</ul>
+
+<p>For each migration, we test those 3 regex and alert if they have any matches.
+As I mentioned earlier, there are certainly other cases that could be
+considered. Let me know if there are some additional checks I should add.
+Since we have implemented these checkes, I can&rsquo;t remember the last time we had
+a migration issue during a deploy so they seem to cover most of the use cases
+we run into.</p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="http://lucasroesler.com//tags/python/">python</a>
+
+  <a class="tag tag--primary tag--small" href="http://lucasroesler.com//tags/django/">django</a>
+
+  <a class="tag tag--primary tag--small" href="http://lucasroesler.com//tags/automation/">automation</a>
+
+  <a class="tag tag--primary tag--small" href="http://lucasroesler.com//tags/postgres/">postgres</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http%3a%2f%2flucasroesler.com%2f2017%2f02%2fzero-downtime-deploys-a-tale-of-django-migrations%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flucasroesler.com%2f2017%2f02%2fzero-downtime-deploys-a-tale-of-django-migrations%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http%3a%2f%2flucasroesler.com%2f2017%2f02%2fzero-downtime-deploys-a-tale-of-django-migrations%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+            
+          </div>
+        </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
     &copy; 2017 Lucas Roesler. 
@@ -329,6 +535,69 @@ ensure that each database migration will be backwards compatible.</p>
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http%3a%2f%2flucasroesler.com%2f2017%2f02%2fzero-downtime-deploys-a-tale-of-django-migrations%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flucasroesler.com%2f2017%2f02%2fzero-downtime-deploys-a-tale-of-django-migrations%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http%3a%2f%2flucasroesler.com%2f2017%2f02%2fzero-downtime-deploys-a-tale-of-django-migrations%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http%3a%2f%2flucasroesler.com%2f2017%2f02%2fzero-downtime-deploys-a-tale-of-django-migrations%2f">
+        <i class="fa fa-google-plus"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flucasroesler.com%2f2017%2f02%2fzero-downtime-deploys-a-tale-of-django-migrations%2f">
+        <i class="fa fa-facebook-official"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http%3a%2f%2flucasroesler.com%2f2017%2f02%2fzero-downtime-deploys-a-tale-of-django-migrations%2f">
+        <i class="fa fa-twitter"></i><span></span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -533,6 +802,8 @@ $(document).ready(function() {
   });
 });
 </script>
+
+  
 
 
     
