@@ -18,7 +18,7 @@ tags:
 title: "Zero downtime deploys: A tale of Django migrations" 
 ---
 
-At Teem, we aim for zero down-time deploys; so, the one of the most 
+At Teem, we aim for zero down-time deploys; so, one of the most 
 important things we must validate is that things will not break mid-deploy!
 
 The most sensitive step of the deploy process is the changes to our database.
