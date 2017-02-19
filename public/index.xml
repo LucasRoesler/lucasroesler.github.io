@@ -15,7 +15,7 @@
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
       <guid>http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
-      <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, the one of the most
+      <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!&lt;/p&gt;
 
 &lt;p&gt;The most sensitive step of the deploy process is the changes to our database.
