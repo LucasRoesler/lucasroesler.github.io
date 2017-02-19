@@ -3,7 +3,6 @@ categories:
 - programming
 comments: false
 date: 2017-02-20T00:00:00-07:00
-draft: true
 keywords:
 - python
 - django
