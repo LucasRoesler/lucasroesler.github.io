@@ -104,7 +104,7 @@ place, we rarely have any issues with database migrations during deploy.
 To find the new migrations you can run the following command
 
 ```
-[$ git log --name-status master.. | grep -e  "^[MA].*migrations.*"
+$ git log --name-status master.. | grep -e  "^[MA].*migrations.*"
 ```
 
 Breaking this down, `git log --name-status master..` will print a log of the
