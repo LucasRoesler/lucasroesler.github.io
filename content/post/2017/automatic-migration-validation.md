@@ -19,16 +19,17 @@ tags:
 title: "Zero downtime deploys: A tale of Django migrations" 
 ---
 
-At Teem, we are slowly moving closer and closer to a continuous integration workflow.
-To get there we need to trust that the incoming changes are not going to break the deploy.
-We validate our releases in a number of ways: unit tests, code reviews, and
-pre-release QA to name a few. However, one of the areas that is hardest to
-ensure is safe are our database migrations. Validating these generally requires
-specialized knowledge about postgres, the changes to the application model, and
-a bit of experience. Obviously, we can and do review these changes during code 
-reviews, but it is easy to miss a small change that will cause significant
-problems during deploy. To make our lives easier we have started automating the 
-most obvious issues.
+At Teem, we aim for zero down-time deploys; so, the one of the most 
+important things we must validate is that things will not break mid-deploy!
+
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+applicaiton model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worst,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible. 
 
 <!--more-->
 ## The What
