@@ -48,12 +48,12 @@ canonifyurls = true
   name = "Tags"
   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-tags\"></i>"
   url = "/tags"
-# [[menu.main]]
-#   weight = 3
-#   identifier = "archives"
-#   name = "Archives"
-#   pre = "<i class=\"sidebar-button-icon fa fa-lg fa-archive\"></i>"
-#   url = "/archives"
+[[menu.main]]
+  weight = 3
+  identifier = "reading-list"
+  name = "Reading list"
+  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-book\"></i>"
+  url = "/reading-list/"
 [[menu.main]]
   weight = 4
   identifier = "resume"
