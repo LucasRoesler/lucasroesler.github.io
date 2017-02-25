@@ -10,6 +10,40 @@
     <atom:link href="http://lucasroesler.com/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Reading list</title>
+      <link>http://lucasroesler.com/reading-list/</link>
+      <pubDate>Sat, 25 Feb 2017 00:00:00 -0700</pubDate>
+      
+      <guid>http://lucasroesler.com/reading-list/</guid>
+      <description>
+
+&lt;h1 id=&#34;my-reading-list&#34;&gt;My Reading List&lt;/h1&gt;
+
+&lt;p&gt;A simple list of books that I am actively reading or have read recently.&lt;br /&gt;
+(Idea shamelessly stolen from &lt;a href=&#34;https://www.susanjfowler.com/reading-list/&#34;&gt;Susan J. Fowler&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&#34;currently-reading&#34;&gt;Currently Reading&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/2312-Kim-Stanley-Robinson-ebook/dp/B004RD8544/&#34;&gt;2312 by Kim Stanley Robinson&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;coming-soon&#34;&gt;Coming Soon&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/gp/product/B0082TAAMO/&#34;&gt;The Illiad trans. by Alexander Pope&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&#34;2017&#34;&gt;2017&lt;/h2&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/gp/product/B01CESQNQK/&#34;&gt;13.8: The Quest to Find the True Age of the Universe and the Theory of
+Everything by John Gibbin&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
       <link>http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
