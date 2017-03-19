@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://lucasroesler.com/2017/03/how-i-git/</loc>
+    <lastmod>2017-03-19T00:00:00-06:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://lucasroesler.com/2017/03/a-spring-hefe/</loc>
     <lastmod>2017-03-05T00:00:00-07:00</lastmod>
   </url>
@@ -76,6 +81,12 @@
   </url>
   
   <url>
+    <loc>http://lucasroesler.com/tags/git/</loc>
+    <lastmod>2017-03-19T00:00:00-06:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://lucasroesler.com/tags/hefeweizen/</loc>
     <lastmod>2017-03-05T00:00:00-07:00</lastmod>
     <priority>0</priority>
@@ -125,13 +136,13 @@
   
   <url>
     <loc>http://lucasroesler.com/post/</loc>
-    <lastmod>2017-03-05T00:00:00-07:00</lastmod>
+    <lastmod>2017-03-19T00:00:00-06:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://lucasroesler.com/categories/programming/</loc>
-    <lastmod>2017-02-20T00:00:00-07:00</lastmod>
+    <lastmod>2017-03-19T00:00:00-06:00</lastmod>
     <priority>0</priority>
   </url>
   
