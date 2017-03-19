@@ -7,15 +7,14 @@ keywords:
 - git
 showPagination: false
 summary: A little primer and tips from how I use Git.
-draft:true
 tags:
 - git
 title: How I Git
 ---
 
 Perhaps the one piece of ubiquitous technology that you will find at any new
-tech company is `git`.  There are a couple of other tech that you will likely
-find like AWS, but `git` is the only one I expect is truly ubiquitous. It is
+tech company is `git`.  There are a couple of other technologies that you will
+probably find, like AWS, but `git` is the only one I expect to find everywhere. It is
 also, surprisingly, many developers number one frienemy.  I want to share some
 of my favorite tips and tweaks that I have used over the years to make it all
 friend and never my enemy.
@@ -63,7 +62,7 @@ release, we merge the `release` branch into `master` and tag the HEAD. Backport
 `master` into `develop`, rinse and repeat.
 
 ## Branch names
-Please, for the love of all that is good use descriptive branch names. I
+Please, for the love of all that is good, use descriptive branch names. I
 suggest the following naming patterns
 
 ```
@@ -136,11 +135,11 @@ Note, it will not have any impact on specifying the commit message when using
 `git -m`.
 
 ## Commits
-Let's start with something that is probably not so contentious: I believe in 
+Something that is probably not so contentious: I believe in 
 committing frequently.  And now something slightly more contentious: I believe 
 in using rebase to create a sensible history that makes something like 
 `cherry-pick` simple to use. I generally believe that you should work on small
-chunks of code that can reasonable be described in a single commit with one or
+chunks of code that can be reasonably described in a single commit with one or
 two comments in the "What" section of my commit message. I also believe that
 you should break coding style fixes, e.g PEP8 fixes, into separate commits so
 that they can be reviewed separately. To actually make all of these ideas play
@@ -172,7 +171,7 @@ have also created an aliases called `git fixup` that will simply squash my
 staged changes into my previous commit. More on aliases later. 
 
 ## On rebasing
-I do not intend to give a full defense of rebasing here. I will say this, if
+I do not intend to give a full defense of rebasing here. I will say this; if
 you are not comfortable with `git`, then rebasing may not be for you.  Almost
 everything else you do in `git` is fairly safe, there is a way to recover from
 what you are doing, this is why I like and trust `git`.  However, `rebase` is
@@ -291,3 +290,7 @@ config file looks like
     clean-audit = "!git branch --merged | grep -v '\\*\\|master\\|develop\\|release-' | xargs -n 1 git branch -d"
  ```
 
+# Summary
+Git is a powerful tool, one of my favorites. I like a semantic git logs, so I
+use rebase. You don't have to do this. But, you better write good commit
+messages :) 
