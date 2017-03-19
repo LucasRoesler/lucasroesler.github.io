@@ -9,6 +9,300 @@
     <atom:link href="http://lucasroesler.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>How I Git</title>
+      <link>http://lucasroesler.com/2017/03/how-i-git/</link>
+      <pubDate>Sun, 19 Mar 2017 00:00:00 -0600</pubDate>
+      
+      <guid>http://lucasroesler.com/2017/03/how-i-git/</guid>
+      <description>&lt;p&gt;Perhaps the one piece of ubiquitous technology that you will find at any new
+tech company is &lt;code&gt;git&lt;/code&gt;.  There are a couple of other technologies that you will
+probably find, like AWS, but &lt;code&gt;git&lt;/code&gt; is the only one I expect to find everywhere. It is
+also, surprisingly, many developers number one frienemy.  I want to share some
+of my favorite tips and tweaks that I have used over the years to make it all
+friend and never my enemy.
+&lt;/p&gt;
+
+&lt;p&gt;First, let&amp;rsquo;s get this out of the way.  I like &lt;code&gt;git&lt;/code&gt;, a lot. I am one of the odd
+people that think it makes sense. I can&amp;rsquo;t defend how complex it can sometimes
+get, but I think that by and large the design and philosophy works for me and
+I can do a lot with it.&lt;/p&gt;
+
+&lt;h1 id=&#34;best-practices&#34;&gt;Best Practices&lt;/h1&gt;
+
+&lt;h2 id=&#34;branching&#34;&gt;Branching&lt;/h2&gt;
+
+&lt;p&gt;Use 2 permanent branches &lt;code&gt;master&lt;/code&gt; and &lt;code&gt;develop&lt;/code&gt; with ephemeral branches for
+&lt;code&gt;features&lt;/code&gt; and &lt;code&gt;hotfix&lt;/code&gt;es.  Many people will advocate for other branching
+strategies but I think that this model is easy to convey and easy to mentally
+track. All new code is merged into &lt;code&gt;develop&lt;/code&gt; and when you are ready to release
+something you merge &lt;code&gt;develop&lt;/code&gt; into &lt;code&gt;master&lt;/code&gt; and then tag the HEAD of &lt;code&gt;master&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Need to fix a bug in production? Create a &lt;code&gt;hotfix&lt;/code&gt; branch off of &lt;code&gt;master&lt;/code&gt;,
+merge that into &lt;code&gt;master&lt;/code&gt;, tag it, deploy, and then merge master back into
+&lt;code&gt;develop&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;Want to build the next cool feature? Create a &lt;code&gt;feature&lt;/code&gt; branch off of
+&lt;code&gt;develop&lt;/code&gt; and then merge that back into &lt;code&gt;develop&lt;/code&gt; when you are done and move on
+to the next hot thing.&lt;/p&gt;
+
+&lt;p&gt;I like this pattern because it is simple and gives you quite a bit of control
+over what happens when. I have seen many people advocate for a single &lt;code&gt;master&lt;/code&gt;
+branch that everything goes into. But, unless you have really good test
+coverage and are doing true continuous integration where every commit is
+deployable; the single branch policy will eventually breakdown on a team of any
+reasonable size. It simply requires a discipline that I haven&amp;rsquo;t seen larger
+teams maintain.&lt;/p&gt;
+
+&lt;p&gt;At Teem, we use one more semi-permanent branch we lovingly refer to as the
+&lt;code&gt;release&lt;/code&gt; branch.  For each release (we release weekly) we branch off of
+develop into a branch named &lt;code&gt;release-&amp;lt;version_num&amp;gt;&lt;/code&gt;.  We then deploy
+this to a staging server for QA to validate. Having this additional branch
+allows development of new features to keep going without causing a lot of
+headache or confusion about what is in the release and if QA finds an issue,
+how to merge the fix for that release.  Everything for that release is branched
+from and merged back into the &lt;code&gt;release&lt;/code&gt; branch. Finally, when it is time to
+release, we merge the &lt;code&gt;release&lt;/code&gt; branch into &lt;code&gt;master&lt;/code&gt; and tag the HEAD. Backport
+&lt;code&gt;master&lt;/code&gt; into &lt;code&gt;develop&lt;/code&gt;, rinse and repeat.&lt;/p&gt;
+
+&lt;h2 id=&#34;branch-names&#34;&gt;Branch names&lt;/h2&gt;
+
+&lt;p&gt;Please, for the love of all that is good, use descriptive branch names. I
+suggest the following naming patterns&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;feature-&amp;lt;ISSUE_ID&amp;gt;-short-summary-of-branch
+hotfix-&amp;lt;ISSUE_ID&amp;gt;-short-summary-of-branch
+releasefix-&amp;lt;ISSUE_ID&amp;gt;-short-summary-of-branch
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Doing this allows anyone that is reviewing that branch to have some idea of
+where that merge should be going, e.g. &lt;code&gt;feature&lt;/code&gt; branches merge into &lt;code&gt;develop&lt;/code&gt;
+not &lt;code&gt;master&lt;/code&gt;.  Having the issue id (we use JIRA, but this could be the id from
+any ticket tracker) allows people to reference what the branch should be
+addressing, be that a bug report or a user story.  And finally, a short summary
+makes the branch descriptive and easier to use. I also recommend this pattern
+because it then becomes easy to create a changelog from the git log of merges.&lt;/p&gt;
+
+&lt;h2 id=&#34;commit-messages&#34;&gt;Commit Messages&lt;/h2&gt;
+
+&lt;p&gt;Let&amp;rsquo;s get the less contentious piece of advice out of the way, commit messages
+should be informative and well structured.  I have generally followed the
+advice of
+&lt;a href=&#34;http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html&#34;&gt;tpope&lt;/a&gt;
+and the
+&lt;a href=&#34;https://www.git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines&#34;&gt;&lt;code&gt;git&lt;/code&gt; handbook&lt;/a&gt;
+but with a slight tweak. Here is a example commit message&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Capitalized, short (50 chars or less) summary
+
+**What**
+- Bullet pointed list of changes you made. 
+- Each line should be no longer than 72 characters.
+- For example:
+- Switch from o365 beta API to the v1 API
+
+**Why**
+- Again a bulleted list of reasons you made that change.
+- Again, no longer than 72 characters.
+- For example:
+- The v1 API is now stable and the beta API contains breaking changes with the
+v1 api.
+
+**Notes**
+- Any additional notes for peer reviewers or to add additional context. 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The most important thing to remember, this message is supposed to inform people
+about what is happening in the project without them needing to read every file.
+For peer review, it is important that they can recognize what is intended to be
+in the change set and what should not be there. One-line messages help no one.&lt;/p&gt;
+
+&lt;p&gt;To help ensure that you write a half-decent commit message, &lt;code&gt;git&lt;/code&gt; has a feature
+where called &lt;code&gt;.gitmessage&lt;/code&gt;.  Create a file called &lt;code&gt;.gitmessage&lt;/code&gt; in your home
+folder and put this in it&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Captialized, short (50 chars or less) summary
+
+**What**
+-
+
+**Why**
+-
+
+**Notes**
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;git&lt;/code&gt; will now use that as the template/initial text in all of your commit
+messages.&lt;/p&gt;
+
+&lt;p&gt;Note, it will not have any impact on specifying the commit message when using
+&lt;code&gt;git -m&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&#34;commits&#34;&gt;Commits&lt;/h2&gt;
+
+&lt;p&gt;Something that is probably not so contentious: I believe in
+committing frequently.  And now something slightly more contentious: I believe
+in using rebase to create a sensible history that makes something like
+&lt;code&gt;cherry-pick&lt;/code&gt; simple to use. I generally believe that you should work on small
+chunks of code that can be reasonably described in a single commit with one or
+two comments in the &amp;ldquo;What&amp;rdquo; section of my commit message. I also believe that
+you should break coding style fixes, e.g PEP8 fixes, into separate commits so
+that they can be reviewed separately. To actually make all of these ideas play
+nicely together I use rebase frequently. I squash my frequent small commit into
+larger (but still fairly small) semantic pieces of history, so my git log will
+go from something like this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sha1 - &amp;quot;Add new contact method&amp;quot;
+sha2 - &amp;quot;Fix typo in contact method&amp;quot;
+sha3 - &amp;quot;Add new unit test&amp;quot;
+sha4 - &amp;quot;Fix bug found by unit test&amp;quot;
+sha5 - &amp;quot;Fix PEP8 issues with imports&amp;quot;
+sha6 - &amp;quot;Fix PEP8 issues with line lengths&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;to something like this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sha1&#39; - &amp;quot;Add new contact method and unit test&amp;quot;
+sha2&#39; - &amp;quot;Fix PEP8 issues&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This history makes it easy to cherry-pick or revert the new feature and it
+makes it easier for peer reviewers to review the logic change in &lt;code&gt;sah1&#39;&lt;/code&gt;
+independently of the potentially noisy and distracting PEP8 changes in &lt;code&gt;sha2&#39;&lt;/code&gt;.
+To do this I make heavy use &lt;code&gt;git rebase -i&lt;/code&gt; to selectively squash commits.  I
+have also created an aliases called &lt;code&gt;git fixup&lt;/code&gt; that will simply squash my
+staged changes into my previous commit. More on aliases later.&lt;/p&gt;
+
+&lt;h2 id=&#34;on-rebasing&#34;&gt;On rebasing&lt;/h2&gt;
+
+&lt;p&gt;I do not intend to give a full defense of rebasing here. I will say this; if
+you are not comfortable with &lt;code&gt;git&lt;/code&gt;, then rebasing may not be for you.  Almost
+everything else you do in &lt;code&gt;git&lt;/code&gt; is fairly safe, there is a way to recover from
+what you are doing, this is why I like and trust &lt;code&gt;git&lt;/code&gt;.  However, &lt;code&gt;rebase&lt;/code&gt; is
+one of those commands that is not always recoverable and you often have to
+simply live with the end results. With that said, if you are using rebase
+especially if you are using &lt;code&gt;pull -r&lt;/code&gt;, which is a standard pull that uses
+rebase instead of merge, then you must enable and configure the &lt;code&gt;rerere&lt;/code&gt;
+feature. Quick, update your &lt;code&gt;~/.gitconfig&lt;/code&gt; to have&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[rerere]
+    enabled = 1
+    autoupdate = 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;you will thank me. From the &lt;a href=&#34;https://git-scm.com/blog/2010/03/08/rerere.html&#34;&gt;git
+book&lt;/a&gt;:&lt;/p&gt;
+
+&lt;blockquote&gt;
+&lt;p&gt;The name stands for &amp;ldquo;reuse recorded resolution&amp;rdquo; and as the name implies, it
+ allows you to ask Git to remember how you&amp;rsquo;ve resolved a hunk conflict so
+ that the next time it sees the same conflict, Git can automatically resolve
+ it for you.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Basically, while you are rebasing, if you have a conflict that you resolve, git
+will now remember that resolution and automatically apply it again in the
+future.  This is huge for &lt;code&gt;git pull -r&lt;/code&gt;, which will often replay the same
+section of your history and therefore run into the same conflict over and over.
+Honestly, I don&amp;rsquo;t think rebase is usable without enabling &lt;code&gt;rerere&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h1 id=&#34;aliases&#34;&gt;Aliases&lt;/h1&gt;
+
+&lt;p&gt;Any post on &lt;code&gt;git&lt;/code&gt; can not be complete without a list of handy-dandy aliases and
+commands.  So, here are mine.  I have roughly 3 categories of aliases: audit
+and cleanup, historical logging, and commit helpers.&lt;/p&gt;
+
+&lt;h2 id=&#34;audit-and-cleanup&#34;&gt;Audit and cleanup&lt;/h2&gt;
+
+&lt;p&gt;The following commands help me clean up old branches&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;audit = !git branch --merged | grep -v &#39;\*\|master\|develop\|release-&#39;
+clean-audit = !git branch --merged | grep -v &#39;\*\|master\|develop\|release-&#39; | xargs -n 1 git branch -d
+b = !git for-each-ref --sort=&#39;-authordate&#39; --format=&#39;%(authordate)%09%(objectname:short)%09%(refname)&#39; refs/heads | sed -e &#39;s-refs/heads/--&#39;
+trim = !git reflog expire --expire=now --all &amp;amp;&amp;amp; git gc --prune=now
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I use &lt;code&gt;audit&lt;/code&gt; and &lt;code&gt;clean-audit&lt;/code&gt; the most frequently.  &lt;code&gt;audit&lt;/code&gt; simply lists my
+local branches that have already been merged (except for &lt;code&gt;master&lt;/code&gt;, &lt;code&gt;develop&lt;/code&gt;,
+and the &lt;code&gt;release&lt;/code&gt; branches) and hence are not needed anymore. &lt;code&gt;clean-audit&lt;/code&gt;
+simply extends that command to delete the listed branches.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;b&lt;/code&gt; alias prints a summary of all local branches, it looks likes this&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Fri Mar 17 16:19:24 2017 -0600	4d2a351	master
+Fri Mar 17 15:08:31 2017 -0600	d9ce23e	release-17.12.01
+Fri Mar 17 13:21:34 2017 -0600	a5d5f73	develop
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;I use &lt;code&gt;trim&lt;/code&gt; pretty sparingly. It simply cleans up old branch pointers that are
+not being used as of &amp;ldquo;now&amp;rdquo;.  This can be useful to reclaim some space after you
+do &lt;code&gt;clean-audit&lt;/code&gt;.  I only recommend this command if you have OCD.&lt;/p&gt;
+
+&lt;h2 id=&#34;historical-logging&#34;&gt;Historical Logging&lt;/h2&gt;
+
+&lt;p&gt;The following commands will print your &lt;code&gt;git log&lt;/code&gt; in fun, potentially
+informative, ways:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;graph = log --graph --oneline --decorate --all
+l = log --pretty=format:%C(yellow)%h\ %ad%Cred%d\ %Creset%s%Cblue\ [%cn] --decorate --date=short
+ll = log --pretty=format:%C(yellow)%h%Cred%d\ %Creset%s%Cblue\ [%cn] --decorate --numstat
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Assuming that you and your team are writing good summary lines in your commit
+messages, these commands can be used to quickly find when a certain commit
+happened.  I don&amp;rsquo;t use these frequently, but they have been useful when trying
+to find when something happened in the repo.  &lt;code&gt;git l&lt;/code&gt; is great a really short
+summary of the history, e.g.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;af1f3ec 2017-03-05 (HEAD -&amp;gt; source-hugo, origin/source-hugo) Site rebuild Sun Mar  5 13:53:22 MST 2017 [Lucas Roesler]
+ddfdd9d 2017-03-05 Post new spring hefe beer post [Lucas Roesler]
+e5bd906 2017-02-25 Site rebuild Sat Feb 25 13:33:12 MST 2017 [Lucas Roesler]
+bd21f27 2017-02-25 Add a reading list page [Lucas Roesler]
+dad0fbb 2017-02-18 Site rebuild Sat Feb 18 20:20:50 MST 2017 [Lucas Roesler]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you need a little more detail, &lt;code&gt;git ll&lt;/code&gt; will show you the change stats as
+well as the summary that you get in &lt;code&gt;git l&lt;/code&gt;, e.g.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;af1f3ec (HEAD -&amp;gt; source-hugo, origin/source-hugo) Site rebuild Sun Mar  5 13:53:22 MST 2017 [Lucas Roesler]
+21      1       public/2017/01/hello/index.html
+21      1       public/2017/01/my-management-philosophy/index.html
+21      1       public/2017/01/spicy-winter-porter/index.html
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&#34;commit-helpers&#34;&gt;Commit helpers&lt;/h2&gt;
+
+&lt;p&gt;I only have one alias related to commits &lt;code&gt;fixup&lt;/code&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;fixup=!git commit --amend
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This command will take your staged changes and immediately squash them into the
+previous commit.  This is great for fixing small typos and simply reduces the
+amount of time I need to spend in &lt;code&gt;rebase&lt;/code&gt;. This is by far my most frequently
+used alias.&lt;/p&gt;
+
+&lt;h2 id=&#34;adding-aliases&#34;&gt;Adding aliases&lt;/h2&gt;
+
+&lt;p&gt;Adding these aliases to your system is pretty simple. In your &lt;code&gt;~/.gitconfig&lt;/code&gt;
+file, add or update the &lt;code&gt;[alias]&lt;/code&gt; section with the snippets I shared above. My
+config file looks like&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[alias]
+    fixup=!git commit --amend
+
+    # cleanup old branches
+    audit = &amp;quot;!git branch --merged | grep -v &#39;\\*\\|master\\|develop\\|release-&#39;&amp;quot;
+    clean-audit = &amp;quot;!git branch --merged | grep -v &#39;\\*\\|master\\|develop\\|release-&#39; | xargs -n 1 git branch -d&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h1 id=&#34;summary&#34;&gt;Summary&lt;/h1&gt;
+
+&lt;p&gt;Git is a powerful tool, one of my favorites. I like a semantic git logs, so I
+use rebase. You don&amp;rsquo;t have to do this. But, you better write good commit
+messages :)&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
       <link>http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
