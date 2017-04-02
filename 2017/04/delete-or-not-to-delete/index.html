@@ -1,6 +1,8 @@
 
 
   
+    
+  
 
 
   
@@ -15,23 +17,23 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="generator" content="Hugo 0.18.1">
-    <title>Lucas Roesler</title>
+    <title>Delete or not to delete</title>
     <meta name="author" content="Lucas Roesler">
-    <meta name="keywords" content=", development, management, python, django">
+    <meta name="keywords" content="python, django, development, management, python, django">
 
     <link rel="icon" href="http://lucasroesler.com/favicon.png">
     
 
     
-    <meta name="description" content="Resume for Lucas Roesler">
-    <meta property="og:description" content="Resume for Lucas Roesler">
+    <meta name="description" content="Should you remove data from the database or simply mark it as deleted? At Teem we have a lot of data that we need to manage and often &ldquo;physically&rdquo; deleting the data from disk can be problematic. Either the users simply wants to undelete something or the deletion would cause problems for a log. The generic solution to this problem is to soft delete/archive the data by adding a deleted_at timestamp field to the table and then filter all queries to hide rows that have been marked as deleted.">
+    <meta property="og:description" content="Should you remove data from the database or simply mark it as deleted? At Teem we have a lot of data that we need to manage and often &ldquo;physically&rdquo; deleting the data from disk can be problematic. Either the users simply wants to undelete something or the deletion would cause problems for a log. The generic solution to this problem is to soft delete/archive the data by adding a deleted_at timestamp field to the table and then filter all queries to hide rows that have been marked as deleted.">
     <meta property="og:type" content="blog">
-    <meta property="og:title" content="Lucas Roesler">
-    <meta property="og:url" content="/resume/">
+    <meta property="og:title" content="Delete or not to delete">
+    <meta property="og:url" content="/2017/04/delete-or-not-to-delete/">
     <meta property="og:site_name" content="Lucas Roesler">
     <meta name="twitter:card" content="summary">
     <meta name="twitter:title" content="Lucas Roesler">
-    <meta name="twitter:description" content="Resume for Lucas Roesler">
+    <meta name="twitter:description" content="Should you remove data from the database or simply mark it as deleted? At Teem we have a lot of data that we need to manage and often &ldquo;physically&rdquo; deleting the data from disk can be problematic. Either the users simply wants to undelete something or the deletion would cause problems for a log. The generic solution to this problem is to soft delete/archive the data by adding a deleted_at timestamp field to the table and then filter all queries to hide rows that have been marked as deleted.">
     
       <meta name="twitter:creator" content="@theaxer">
     
@@ -77,7 +79,7 @@ ga('send', 'pageview');
 
   <body>
     <div id="blog">
-      <header id="header" data-behavior="1">
+      <header id="header" data-behavior="4">
   <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
   <div class="header-title">
     <a class="header-title-link" href="http://lucasroesler.com/">Lucas Roesler</a>
@@ -97,7 +99,7 @@ ga('send', 'pageview');
   
 </header>
 
-      <nav id="sidebar" data-behavior="1">
+      <nav id="sidebar" data-behavior="4">
   <div class="sidebar-container">
     
       <div class="sidebar-profile">
@@ -234,199 +236,239 @@ ga('send', 'pageview');
 
       
 
-      <div id="main" data-behavior="1"
+      <div id="main" data-behavior="4"
         class="
                hasCoverMetaIn
                ">
-        <article class="post">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+            <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Delete or not to delete
+    </h1>
+  
+  <div class="postShorten-meta post-meta">
+  <time itemprop="datePublished" datetime="2017-04-02T00:00:00-07:00">
+    
+  
+  
+  
+  
+    2017-04-02
+  
+
+  </time>
+  
+  
+  
+    <span></span>
+    
+      <a class="category-link" href="http://lucasroesler.com/categories/programming">programming</a>
+    
+  
+
+
+</div>
+
+</div>
+          
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
+              <p>Should you remove data from the database or simply mark it as deleted?
+At Teem we have a lot of data that we need to manage and often &ldquo;physically&rdquo;
+deleting the data from disk can be problematic. Either the users simply wants
+to undelete something or the deletion would cause problems for a log. The
+generic solution to this problem is to soft delete/archive the data by adding
+a <code>deleted_at</code> timestamp field to the table and then filter all queries to
+hide rows that have been marked as deleted.</p>
+
+<!-- more /-->
+
+<p>This simple approach can take you a long way but doesn&rsquo;t fully cover all the
+required scenarios. More specifically, what do you do with related objects?
+About a year ago, I realized that we really needed to address the
+entire problem. There are several pieces of data that we never want to delete,
+e.g. devices and visitors among others. At the time I couldn&rsquo;t find a really
+good solution so I wrote my own:
+<a href="https://github.com/LucasRoesler/django-archive-mixin">django-archive-mixin</a>.</p>
+
+<p>As of today, there are at least two other options that cover this situation as
+well and you should checkout too:</p>
+
+<ul>
+<li><a href="https://github.com/scoursen/django-softdelete">django-softdelete</a>, and</li>
+<li><a href="https://github.com/makinacorpus/django-safedelete">django-safedelete</a>.</li>
+</ul>
+
+<p>The biggest distinction between our project and the ones above is that I tried
+to stay as close to the delete logic used in the original Django source code as
+possible.  In particular, this means  mimicking Django&rsquo;s <code>collector</code> code that
+implements the ORM cascade delete.  It is interesting to note that Django does
+not rely on the database&rsquo;s cascade functionality but instead manages the delete
+process itself. The benefit of doing this is that you can then specify behavior
+at delete time via the <code>on_delete</code> argument to the model field.  For example:</p>
+
+<pre><code>class Car(models.Model):
+    manufacturer = models.ForeignKey(
+        'production.Manufacturer',
+        blank=True, null=True
+        on_delete=models.SET_NULL,
+    )
+</code></pre>
+
+<p>will cause the manufacturer field to be set to <code>None</code> when you delete the
+related manufacture. The default behavior would be to delete the car instance
+as well.</p>
+
+<p><a href="https://docs.djangoproject.com/en/1.10/ref/models/fields/#django.db.models.ForeignKey.on_delete">Django provides 6 on_delete
+options</a>:
+<code>CASCADE</code>, <code>PROTECT</code>, <code>SET_NULL</code>, <code>SET_DEFAULT</code>, <code>SET()</code>, and <code>DO_NOTHING</code>.
+At delete, the Django <code>collector</code> crawls the relationships and
+buckets each object found into different lists depending on the <code>on_delete</code>
+configuration for that specific relationship.  <code>CASCADE</code> puts the object in a
+bucket to be deleted, <code>PROTECT</code> will cause an exception to be thrown,
+<code>SET_NULL</code>, <code>SET_DEFAULT</code>, and <code>SET()</code> each cause and update to that instance,
+and <code>DO_NOTHING</code> is a no-op. Once I understood this process, I decided to
+piggyback on the process and add an additional piece of logic to put more
+objects into the update bucket. Essentially, I allow Django to do all of the
+collection for me and then I go through the list of objects to inspect if it
+should be archived instead, if it is, I move it to the update bucket and move
+on.</p>
+
+<pre><code>def cascade_archive(inst_or_qs, using, keep_parents=False):
+    &quot;&quot;&quot;
+    Return collector instance that has marked ArchiveMixin instances for
+    archive (i.e. update) instead of actual delete.
+
+    Arguments:
+        inst_or_qs (models.Model or models.QuerySet): the instance(s) that
+            are to be deleted.
+        using (db connection/router): the db to delete from.
+        keep_parents (bool): defaults to False.  Determine if cascade is true.
+
+    Returns:
+        models.deletion.Collector: this is a standard Collector instance but
+            the ArchiveMixin instances are in the fields for update list.
+    &quot;&quot;&quot;
+    from .mixins import ArchiveMixin
+
+    if not isinstance(inst_or_qs, models.QuerySet):
+        instances = [inst_or_qs]
+    else:
+        instances = inst_or_qs
+
+    deleted_ts = timezone.now()
+
+    # The collector will iteratively crawl the relationships and
+    # create a list of models and instances that are connected to
+    # this instance.
+    collector = models.deletion.Collector(using=using)
+    if StrictVersion(django.get_version()) &lt; StrictVersion('1.9.0'):
+        collector.collect(instances)
+    else:
+        collector.collect(instances, keep_parents=keep_parents)
+    collector.sort()
+
+    for model, instances in collector.data.iteritems():
+        # remove archive mixin models from the delete list and put
+        # them in the update list.  If we do this, we can just call
+        # the collector.delete method.
+        inst_list = list(instances)
+
+        if issubclass(model, ArchiveMixin):
+            deleted_on_field = get_field_by_name(model, 'deleted_on')
+            collector.add_field_update(
+                deleted_on_field, deleted_ts, inst_list)
+
+            del collector.data[model]
+
+    for i, qs in enumerate(collector.fast_deletes):
+        # make sure that we do archive on fast deletable models as
+        # well.
+        model = qs.model
+
+        if issubclass(model, ArchiveMixin):
+            deleted_on_field = get_field_by_name(model, 'deleted_on')
+            collector.add_field_update(deleted_on_field, deleted_ts, qs)
+
+            collector.fast_deletes[i] = qs.none()
+
+    return collector
+</code></pre>
+
+<p>What I love about this logic is that is is a fairly small change to how
+deletion works while also being fairly low-level enough that it covers all of
+the deletion cases that the Django ORM handles.</p>
+
+<p>We have been using this mixin for about a year now with no hiccups. It works as
+expected and hasn&rsquo;t really needed much attention. If you are using Django and
+have been looking for a safe delete/archive utility
+<a href="https://github.com/LucasRoesler/django-archive-mixin">check it out</a> and let me
+know what you think.</p>
+
               
-
-<h3 id="lucas-roesler">Lucas Roesler</h3>
-
-<p>Salt Lake City, UT 84047<br />
-<a href="mailto:roesler.lucas@gmail.com">roesler.lucas@gmail.com</a><br />
-<a href="https://github.com/LucasRoesler">https://github.com/LucasRoesler</a></p>
-
-<hr />
-
-<h4 id="technical-skills">Technical  Skills</h4>
-
-<ul>
-<li>Languages:  Python, Django, AngularJS, MongoDB, PostgreSQL, PHP, MySQL, HTML, CSS, Javascript, jQuery, R, Bash</li>
-<li>Applications:  Amazon Web Services (AWS), Git, Sage, Mathematica, LaTeX</li>
-<li>Operating Systems:  UNIX/Linux, Mac OS X, Windows</li>
-</ul>
-
-<hr />
-
-<h4 id="education">Education</h4>
-
-<p><strong>Ph.D. in Mathematics</strong>, <em>University of Connecticut (UConn)</em>, Storrs, Connecticut - <strong>May 2012</strong></p>
-
-<blockquote>
-<p>Dissertation Title: &ldquo;Algebras from surfaces and their derived equivalences&rdquo;
-Advisor: Dr. Ralf Schiffler</p>
-</blockquote>
-
-<p><strong>M.S. in Mathematics</strong>, <em>University of Connecticut (UConn)</em>, Storrs, Connecticut - <strong>May 2009</strong></p>
-
-<p><strong>B.A. in Mathematics</strong>, <em>Central Connecticut State University (CCSU)</em>, New Britain, Connecticut - <strong>May 2007</strong></p>
-
-<hr />
-
-<h4 id="professional-experience">Professional Experience</h4>
-
-<p><strong>Director of Engineering</strong>, Teem (formerly EventBoard), Salt Lake City, Utah - <strong>2016 &ndash; present</strong></p>
-
-<blockquote>
-<ul>
-<li>Manage the workflow of the engineering team and work with stakeholders to establish project priorities and timelines.</li>
-<li>Work with Support to troubleshoot and resolve or assign issues.</li>
-<li>Support and drive development and adoption of architectural, coding, and security standards/governance.</li>
-<li>Contribute to the development of the product roadmap to prioritize features/projects.</li>
-<li>Manage and grow our team of developers.</li>
-<li>Build and maintain dev tooling.</li>
-<li>Backend development.</li>
-</ul>
-
-<p><em>Python - Django - PostgresSQL - AWS</em></p>
-</blockquote>
-
-<p><strong>Lead Developer</strong>, EventBoard, Salt Lake City, Utah - <strong>2015 &ndash; 2016</strong></p>
-
-<blockquote>
-<ul>
-<li>Django web development.</li>
-<li>Designed and built user management and permissions systems.</li>
-<li>Designed API documentation system using Swagger.</li>
-<li>Increase database migration stability.</li>
-<li>Manage development teams.</li>
-</ul>
-
-<p><em>Python - Django - PostgresSQL - AWS</em></p>
-</blockquote>
-
-<p><strong>Lead Developer</strong>, JobDash, Salt Lake City, Utah - <strong>2013 &ndash; 2015</strong></p>
-
-<blockquote>
-<ul>
-<li>AngularJS and Django web development.</li>
-<li>Designed and built an analytics system in PostgreSQL and MongoDB.</li>
-<li>Manage and implement development processes for a team of developers.</li>
-<li>Manage server uptime and deployment on AWS and DigitalOcean with Fabric.</li>
-<li>Decrease page load times by a factor of 10.</li>
-</ul>
-
-<p><em>Python - Django - AngularJS - PostgreSQL - MongoDB - AWS - LaTeX</em></p>
-</blockquote>
-
-<p><strong>Software developer</strong>, SAIC, Tucson, Arizona - <strong>2013</strong></p>
-
-<blockquote>
-<ul>
-<li>Researched and implemented new feature detection algorithms in Python and C++.</li>
-<li>Managed the transition of projects from CVS and SVN to Git.</li>
-<li>Implemented hooks to enforce guidelines and workflow procedure.</li>
-<li>Implemented new features for active websites in Django.</li>
-</ul>
-
-<p><em>Python - Django - C++ - Git</em></p>
-</blockquote>
-
-<p><strong>Web developer</strong>, <em>Pedegogy in Large Lectures</em>, UConn, Storrs, Connecticut - <strong>2011 &ndash; 2012</strong></p>
-
-<blockquote>
-<ul>
-<li>Designed, created, and managed the webpage, videos, surveys, and raw data reports
-for the Pedagogy in Large Lectures research project.</li>
-<li>Managed the transition to new developers.</li>
-</ul>
-
-<p><em>PHP - MySQL - Javascript - LaTeX</em></p>
-</blockquote>
-
-<p><strong>Web developer</strong>, <em>Mathematics Department</em>, UConn, Storrs, Connecticut - <strong>2009 &ndash; 2012</strong></p>
-
-<blockquote>
-<ul>
-<li>Created secure forms for administrative use.</li>
-<li>Updated and created new secure forms for student use.</li>
-<li>Implemented basic security for existing web forms.</li>
-<li>Created extensive user and developer documentation.</li>
-</ul>
-
-<p><em>PHP - MySQL - Javascript</em></p>
-</blockquote>
-
-<h4 id="public-projects">Public Projects</h4>
-
-<p><strong>Django Encrypted Json Field</strong> - <a href="https://github.com/LucasRoesler/django-encrypted-json">https://github.com/LucasRoesler/django-encrypted-json</a></p>
-
-<blockquote>
-<ul>
-<li>Store JSON in Postgres with encrypted values and plain text keys.</li>
-<li>Allows partial encryption, you can specify a list of keys to skip.</li>
-</ul>
-</blockquote>
-
-<p><strong>Django Cryptographic Fields</strong> - <a href="https://github.com/foundertherapy/django-cryptographic-fields">https://github.com/foundertherapy/django-cryptographic-fields</a></p>
-
-<blockquote>
-<ul>
-<li>Contributions to allow key rotation and general improvements.</li>
-</ul>
-</blockquote>
-
-<h4 id="other-experience">Other Experience</h4>
-
-<p><strong>Visiting Instructor in Mathematics</strong>, <em>Lebanon Valley College</em>, Annville, Pennsylvania <strong>2012 &ndash; 2013</strong></p>
-
-<blockquote>
-<p><em>Finite Mathematics - Calculus 1 - Differential Equations</em></p>
-</blockquote>
-
-<p><strong>Teaching Assistant</strong>, <em>UConn</em>, Storrs, Connecticut - <strong>2007 &ndash; 2012</strong></p>
-
-<blockquote>
-<p><em>Discrete Mathematics - Mathematical Modeling - Calculus 1a - Calculus 1 - Calculus 2 - Business Calculus</em></p>
-</blockquote>
-
-<p><strong>Research Assistant</strong>, <em>Pedagogy in Large Lectures</em>, UConn, Storrs, Connecticut - <strong>2011 &ndash; 2012</strong></p>
-
-<blockquote>
-<p>Integrated online videos and flashcards to improve learning in large lectures. Created content for, implemented, and maintained the web resources for displaying content and collecting survey data.</p>
-</blockquote>
-
-<p><strong>Implementation of Crystals of Generalized Young Walls</strong>, a method to construct combinatorial mathematical objects called crystals in the open source computer algebras system <a href="http://www.sagemath.org/" title="Sage">Sage</a>.</p>
-
-<blockquote>
-<p>Source available at <a href="https://bitbucket.org/Theaxer/sage">https://bitbucket.org/Theaxer/sage</a>
-Accepted for inclusion into the Sage combinat branch: <a href="http://trac.sagemath.org/sage_trac/ticket/14130">http://trac.sagemath.org/sage_trac/ticket/14130</a></p>
-
-<p><em>Python - Sage</em></p>
-</blockquote>
-
-<h4 id="publications">Publications</h4>
-
-<ol>
-<li><p>L. David-Roesler. <em>The AG-invariant for m-angulations</em>, submitted, available online: <a href="http://arxiv.org/abs/1210.6087" title="arXiv:1210.6087">arXiv:1210.6087</a></p></li>
-
-<li><p>L. David-Roesler. <em>Derived Equivalence in Surface Algebras via Graded Equivalence</em>, 30 pages, to appear in Algebr. Represent. Theory. <a href="http://link.springer.com/article/10.1007%2Fs10468-012-9384-9" title="doi:10.1007/s10468-012-9384-9">doi:10.1007/s10468-012-9384-9</a>.</p></li>
-
-<li><p>L. David-Roesler and R. Schiffler. <em>Algebras from surfaces without punctures</em>. J. Algebra 350 (2012). pp. 218-244. <a href="http://www.sciencedirect.com/science/article/pii/S0021869311006211" title="doi:10.1016/j.jalgebra.2011.10.034">doi:10.1016/j.jalgebra.2011.10.034</a>.</p></li>
-</ol>
-
-<hr />
-
-<h4 id="interests">Interests</h4>
-
-<ul>
-<li>Rock climbing/bouldering, home brewing, music (bass guitar and listening), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).</li>
-</ul>
-
             </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="http://lucasroesler.com//tags/python/">python</a>
+
+  <a class="tag tag--primary tag--small" href="http://lucasroesler.com//tags/django/">django</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http%3a%2f%2flucasroesler.com%2f2017%2f04%2fdelete-or-not-to-delete%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flucasroesler.com%2f2017%2f04%2fdelete-or-not-to-delete%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http%3a%2f%2flucasroesler.com%2f2017%2f04%2fdelete-or-not-to-delete%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+            
           </div>
         </article>
         <footer id="footer" class="main-content-wrap">
@@ -436,6 +478,69 @@ Accepted for inclusion into the Sage combinat branch: <a href="http://trac.sagem
 </footer>
 
       </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  <nav>
+    <ul class="post-actions post-action-nav">
+      
+    </ul>
+  </nav>
+  <ul class="post-actions post-action-share">
+    
+      <li class="post-action hide-lg hide-md hide-sm">
+        <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+          <i class="fa fa-share-alt"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://plus.google.com/share?url=http%3a%2f%2flucasroesler.com%2f2017%2f04%2fdelete-or-not-to-delete%2f">
+          <i class="fa fa-google-plus"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flucasroesler.com%2f2017%2f04%2fdelete-or-not-to-delete%2f">
+          <i class="fa fa-facebook-official"></i>
+        </a>
+      </li>
+      <li class="post-action hide-xs">
+        <a class="post-action-btn btn btn--default" target="new" href="https://twitter.com/intent/tweet?text=http%3a%2f%2flucasroesler.com%2f2017%2f04%2fdelete-or-not-to-delete%2f">
+          <i class="fa fa-twitter"></i>
+        </a>
+      </li>
+    
+    
+    <li class="post-action">
+      
+        <a class="post-action-btn btn btn--default" href="#">
+      
+        <i class="fa fa-list"></i>
+      </a>
+    </li>
+  </ul>
+</div>
+
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <ul class="share-options">
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://plus.google.com/share?url=http%3a%2f%2flucasroesler.com%2f2017%2f04%2fdelete-or-not-to-delete%2f">
+        <i class="fa fa-google-plus"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://www.facebook.com/sharer/sharer.php?u=http%3a%2f%2flucasroesler.com%2f2017%2f04%2fdelete-or-not-to-delete%2f">
+        <i class="fa fa-facebook-official"></i><span></span>
+      </a>
+    </li>
+    <li class="share-option">
+      <a class="share-option-btn" target="new" href="https://twitter.com/intent/tweet?text=http%3a%2f%2flucasroesler.com%2f2017%2f04%2fdelete-or-not-to-delete%2f">
+        <i class="fa fa-twitter"></i><span></span>
+      </a>
+    </li>
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
     </div>
     
     <div id="about">
@@ -701,8 +806,6 @@ $(document).ready(function() {
 });
 </script>
 
-  
-    
   
 
 
