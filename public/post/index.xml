@@ -6,8 +6,148 @@
     <description>Recent content in Posts on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 19 Mar 2017 00:00:00 -0600</lastBuildDate>
+    <lastBuildDate>Sun, 02 Apr 2017 00:00:00 -0700</lastBuildDate>
     <atom:link href="http://lucasroesler.com/post/index.xml" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>Delete or not to delete</title>
+      <link>http://lucasroesler.com/2017/04/delete-or-not-to-delete/</link>
+      <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
+      
+      <guid>http://lucasroesler.com/2017/04/delete-or-not-to-delete/</guid>
+      <description>&lt;p&gt;Should you remove data from the database or simply mark it as deleted?
+At Teem we have a lot of data that we need to manage and often &amp;ldquo;physically&amp;rdquo;
+deleting the data from disk can be problematic. Either the users simply wants
+to undelete something or the deletion would cause problems for a log. The
+generic solution to this problem is to soft delete/archive the data by adding
+a &lt;code&gt;deleted_at&lt;/code&gt; timestamp field to the table and then filter all queries to
+hide rows that have been marked as deleted.&lt;/p&gt;
+
+&lt;!-- more /--&gt;
+
+&lt;p&gt;This simple approach can take you a long way but doesn&amp;rsquo;t fully cover all the
+required scenarios. More specifically, what do you do with related objects?
+About a year ago, I realized that we really needed to address the
+entire problem. There are several pieces of data that we never want to delete,
+e.g. devices and visitors among others. At the time I couldn&amp;rsquo;t find a really
+good solution so I wrote my own:
+&lt;a href=&#34;https://github.com/LucasRoesler/django-archive-mixin&#34;&gt;django-archive-mixin&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;As of today, there are at least two other options that cover this situation as
+well and you should checkout too:&lt;/p&gt;
+
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/scoursen/django-softdelete&#34;&gt;django-softdelete&lt;/a&gt;, and&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/makinacorpus/django-safedelete&#34;&gt;django-safedelete&lt;/a&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The biggest distinction between our project and the ones above is that I tried
+to stay as close to the delete logic used in the original Django source code as
+possible.  In particular, this means  mimicking Django&amp;rsquo;s &lt;code&gt;collector&lt;/code&gt; code that
+implements the ORM cascade delete.  It is interesting to note that Django does
+not rely on the database&amp;rsquo;s cascade functionality but instead manages the delete
+process itself. The benefit of doing this is that you can then specify behavior
+at delete time via the &lt;code&gt;on_delete&lt;/code&gt; argument to the model field.  For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Car(models.Model):
+    manufacturer = models.ForeignKey(
+        &#39;production.Manufacturer&#39;,
+        blank=True, null=True
+        on_delete=models.SET_NULL,
+    )
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;will cause the manufacturer field to be set to &lt;code&gt;None&lt;/code&gt; when you delete the
+related manufacture. The default behavior would be to delete the car instance
+as well.&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&#34;https://docs.djangoproject.com/en/1.10/ref/models/fields/#django.db.models.ForeignKey.on_delete&#34;&gt;Django provides 6 on_delete
+options&lt;/a&gt;:
+&lt;code&gt;CASCADE&lt;/code&gt;, &lt;code&gt;PROTECT&lt;/code&gt;, &lt;code&gt;SET_NULL&lt;/code&gt;, &lt;code&gt;SET_DEFAULT&lt;/code&gt;, &lt;code&gt;SET()&lt;/code&gt;, and &lt;code&gt;DO_NOTHING&lt;/code&gt;.
+At delete, the Django &lt;code&gt;collector&lt;/code&gt; crawls the relationships and
+buckets each object found into different lists depending on the &lt;code&gt;on_delete&lt;/code&gt;
+configuration for that specific relationship.  &lt;code&gt;CASCADE&lt;/code&gt; puts the object in a
+bucket to be deleted, &lt;code&gt;PROTECT&lt;/code&gt; will cause an exception to be thrown,
+&lt;code&gt;SET_NULL&lt;/code&gt;, &lt;code&gt;SET_DEFAULT&lt;/code&gt;, and &lt;code&gt;SET()&lt;/code&gt; each cause and update to that instance,
+and &lt;code&gt;DO_NOTHING&lt;/code&gt; is a no-op. Once I understood this process, I decided to
+piggyback on the process and add an additional piece of logic to put more
+objects into the update bucket. Essentially, I allow Django to do all of the
+collection for me and then I go through the list of objects to inspect if it
+should be archived instead, if it is, I move it to the update bucket and move
+on.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;def cascade_archive(inst_or_qs, using, keep_parents=False):
+    &amp;quot;&amp;quot;&amp;quot;
+    Return collector instance that has marked ArchiveMixin instances for
+    archive (i.e. update) instead of actual delete.
+
+    Arguments:
+        inst_or_qs (models.Model or models.QuerySet): the instance(s) that
+            are to be deleted.
+        using (db connection/router): the db to delete from.
+        keep_parents (bool): defaults to False.  Determine if cascade is true.
+
+    Returns:
+        models.deletion.Collector: this is a standard Collector instance but
+            the ArchiveMixin instances are in the fields for update list.
+    &amp;quot;&amp;quot;&amp;quot;
+    from .mixins import ArchiveMixin
+
+    if not isinstance(inst_or_qs, models.QuerySet):
+        instances = [inst_or_qs]
+    else:
+        instances = inst_or_qs
+
+    deleted_ts = timezone.now()
+
+    # The collector will iteratively crawl the relationships and
+    # create a list of models and instances that are connected to
+    # this instance.
+    collector = models.deletion.Collector(using=using)
+    if StrictVersion(django.get_version()) &amp;lt; StrictVersion(&#39;1.9.0&#39;):
+        collector.collect(instances)
+    else:
+        collector.collect(instances, keep_parents=keep_parents)
+    collector.sort()
+
+    for model, instances in collector.data.iteritems():
+        # remove archive mixin models from the delete list and put
+        # them in the update list.  If we do this, we can just call
+        # the collector.delete method.
+        inst_list = list(instances)
+
+        if issubclass(model, ArchiveMixin):
+            deleted_on_field = get_field_by_name(model, &#39;deleted_on&#39;)
+            collector.add_field_update(
+                deleted_on_field, deleted_ts, inst_list)
+
+            del collector.data[model]
+
+    for i, qs in enumerate(collector.fast_deletes):
+        # make sure that we do archive on fast deletable models as
+        # well.
+        model = qs.model
+
+        if issubclass(model, ArchiveMixin):
+            deleted_on_field = get_field_by_name(model, &#39;deleted_on&#39;)
+            collector.add_field_update(deleted_on_field, deleted_ts, qs)
+
+            collector.fast_deletes[i] = qs.none()
+
+    return collector
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;What I love about this logic is that is is a fairly small change to how
+deletion works while also being fairly low-level enough that it covers all of
+the deletion cases that the Django ORM handles.&lt;/p&gt;
+
+&lt;p&gt;We have been using this mixin for about a year now with no hiccups. It works as
+expected and hasn&amp;rsquo;t really needed much attention. If you are using Django and
+have been looking for a safe delete/archive utility
+&lt;a href=&#34;https://github.com/LucasRoesler/django-archive-mixin&#34;&gt;check it out&lt;/a&gt; and let me
+know what you think.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>How I Git</title>
