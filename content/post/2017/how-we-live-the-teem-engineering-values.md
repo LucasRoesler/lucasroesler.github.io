@@ -47,20 +47,19 @@ their positive impact by
 1. having a **focus on the user**. Our users are everything; without them,
    there would be no Teem.  We are creating products that change how people
    live and interact with their work environment and ultimately with each
-   other. Every engineer should actively understand  the user, empowering them
-   to build impactful products. Thanks to brilliant leadership on the product
-   team every person at Teem has access to the data, research, and recorded
-   sessions with our users; read the summaries and watch the sessions. Better
-   yet, ask to join the calls! Finally, talk to sales and support to understand
-   our user throughout their entire experience with Teem. Focus on the user and
-   the rest will fall into place.
+   other. Every engineer should strive to understand the user and the problems
+   that they experience in the workplace. Thanks to brilliant leadership on the
+   product team, every person at Teem has access to the data, research, and
+   recorded sessions with our users. Read the summaries and watch these
+   sessions. Better yet, ask to join the calls! Focus on the user and the rest
+   will fall into place.
 2. having a **bias towards action**. If you see a problem, fix it. Have a new
    idea, build a prototype. Communicate, but don't rely on consensus
    before acting. Seek others’ input, but be decisive. Ultimately, we would
    rather test a hypothesis cheaply than be paralyzed by over analysis.
 3. understanding that **shipping beats perfection**. We want and need to
-   ship quickly, learning from our users, and iterating. This is not an excuse
-   for low quality nor skipping user research. In fact it requires all both
+   ship quickly, learning from our users and iterating. This is not an excuse
+   for low quality nor skipping user research. In fact, it requires both
    high quality and research so that we are building the right thing from the
    start and so that we can quickly build on top of our previous work.
 
