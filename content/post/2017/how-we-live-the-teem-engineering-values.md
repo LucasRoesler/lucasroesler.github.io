@@ -1,7 +1,7 @@
 ---
 categories:
 - leadership
-draft: true
+draft: false
 comments: false
 date: 2017-04-22T12:16:11-06:00
 keywords:
