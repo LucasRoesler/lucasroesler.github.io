@@ -10,6 +10,8 @@ A simple list of books that I am actively reading or have read recently.
 (Idea shamelessly stolen from [Susan J. Fowler](https://www.susanjfowler.com/reading-list/))
 
 ## Currently Reading
+- [Spymaster by Margaret Weis and Robert
+    Krammes](https://www.amazon.com/gp/product/B01L7B9VG4/)
 - [The Player of Games by Iain M. Banks](https://www.amazon.com/dp/B002WM3HC2/ref=r_soa_w_d)
 
 ## Coming Soon
@@ -17,6 +19,8 @@ A simple list of books that I am actively reading or have read recently.
 - [The Illiad trans. by Alexander Pope](https://www.amazon.com/gp/product/B0082TAAMO/)
 
 ## 2017
+- [New Earth by Ben
+    Bova](https://www.amazon.com/New-Earth-Grand-Tour-Book-ebook/dp/B00BCFXPZ4/)
 - [13.8: The Quest to Find the True Age of the Universe and the Theory of
     Everything by John Gibbin](https://www.amazon.com/gp/product/B01CESQNQK/)
 - [2312 by Kim Stanley Robinson](https://www.amazon.com/2312-Kim-Stanley-Robinson-ebook/dp/B004RD8544/)
