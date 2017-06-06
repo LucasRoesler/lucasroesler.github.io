@@ -258,6 +258,64 @@ ga('send', 'pageview');
     
     <div class="postShorten-header">
       <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="http://lucasroesler.com/2017/02/postgres-joins-and-django-querysets/">
+          Postgres Joins and Django Querysets
+        </a>
+      </h1>
+      <div class="postShorten-meta post-meta">
+  <time itemprop="datePublished" datetime="2017-02-06T20:00:00Z">
+    
+  
+  
+  
+  
+    2017-02-06
+  
+
+  </time>
+  
+  
+  
+    <span></span>
+    
+      <a class="category-link" href="http://lucasroesler.com/categories/programming">programming</a>
+    
+  
+
+
+</div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      <p>
+        How do we build a fast API against database models with foreign keys and many- to-many relationships? If you do nothing you get what I call the &ldquo;waterfall of doom&rdquo;. At some point in the past someone told me or I read that &ldquo;joins are effectively free in Postgres&rdquo;. While this might be somewhat true when you are writing all of the SQL and can control every part of your query; I have recently found that when the database gets big enough and you are using the Django ORM, joins aren&rsquo;t free and less can be more!
+        <br>
+        <a href="http://lucasroesler.com/2017/02/postgres-joins-and-django-querysets/" class="postShorten-excerpt_link link"></a>
+        
+      </p>
+    </div>
+  </div>
+  
+</article>
+
+          
+            
+  
+    
+      
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-bottom" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
         <a class="link-unstyled" href="http://lucasroesler.com/2017/01/my-management-philosophy/">
           My Management Philosophy
         </a>
@@ -512,6 +570,29 @@ excitingly named &ldquo;Spicy Winter Porter&rdquo;.</p>
           <div class="media">
             
             <div class="media-body">
+              <a class="link-unstyled" href="http://lucasroesler.com/2017/06/your-apis-rat-nest/">
+                <h3 class="media-heading">Your API&#39;s rat nest</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Recently, I have seen several articles talking about RESTful API design.  Of
+course this is also a common topic of discussion for the engineers at Teem.  I
+want to use (and write) APIs that are easy to understand and explain and the
+fastest way to complicate your API is nested routes. Just don&rsquo;t do it! Do not
+create nested routes in your API.  Let&rsquo;s keep our APIs simple and create one
+endpoint per resource and if filters are needs, use GET parameters. This is
+simpler to document and simpler to maintain and ultimately, easier to use.</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
               <a class="link-unstyled" href="http://lucasroesler.com/2017/05/take-care-of-your-people/">
                 <h3 class="media-heading">Take Care of Your People</h3>
               </a>
@@ -719,23 +800,6 @@ excitingly named &ldquo;Spicy Winter Porter&rdquo;.</p>
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="http://lucasroesler.com/2017/01/hello/">
-                <h3 class="media-heading">hello</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Welcome! This is just a test post, a proof of life.</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -743,7 +807,7 @@ excitingly named &ldquo;Spicy Winter Porter&rdquo;.</p>
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         10 posts found
+         11 posts found
       </p>
     </div>
   </div>
