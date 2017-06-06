@@ -9,6 +9,52 @@
     <atom:link href="http://lucasroesler.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
     <item>
+      <title>Your API&#39;s rat nest</title>
+      <link>http://lucasroesler.com/2017/06/your-apis-rat-nest/</link>
+      <pubDate>Mon, 05 Jun 2017 21:22:00 -0600</pubDate>
+      
+      <guid>http://lucasroesler.com/2017/06/your-apis-rat-nest/</guid>
+      <description>&lt;p&gt;Recently, I have seen several articles talking about RESTful API design.  Of
+course this is also a common topic of discussion for the engineers at Teem.  I
+want to use (and write) APIs that are easy to understand and explain and the
+fastest way to complicate your API is nested routes. Just don&amp;rsquo;t do it! Do not
+create nested routes in your API.  Let&amp;rsquo;s keep our APIs simple and create one
+endpoint per resource and if filters are needs, use GET parameters. This is
+simpler to document and simpler to maintain and ultimately, easier to use.&lt;/p&gt;
+
+&lt;p&gt;
+In a RESTful API urls identify resources and identifiers should change
+as infrequently as possible [&lt;a href=&#34;https://www.ics.uci.edu/
+~fielding/pubs/dissertation/fielding_dissertation.pdf&#34;&gt;Fielding pg. 110&lt;/a&gt;].  The natural
+consequence is that urls should contain the minimal information needed
+to access a resource. For example, in an API with Users and Companies,
+&lt;code&gt;/users/:userId&lt;/code&gt; is better than &lt;code&gt;/companies/:companyId/users/:userId&lt;/code&gt;.
+If your user changes companies, then the identifier must change.  This is also
+more complicated than it needs to be. The user&amp;rsquo;s &lt;code&gt;id&lt;/code&gt; should be enough to
+access it from the database.&lt;/p&gt;
+
+&lt;p&gt;Some people will argue that you solve the above problem by implementing
+&lt;em&gt;both&lt;/em&gt; endpoints.  However, if you pair this with the Unix philosophy
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well&#34;&gt;&amp;ldquo;Do One Thing and Do It Well&amp;rdquo;&lt;/a&gt;,
+then you simply shouldn&amp;rsquo;t use nested routes. It is simpler to understand
+an API that has only one way to access any given resource. Additionally,
+any request that you can do with nested routes you can do with a non-nested
+route and query parameters. This also reduces the complexity of
+managing and testing endpoints because there is only one code path that
+users/developers can use.  Basically, the non-nested endpoint is works
+it works well, so why create another endpoint to clutter up the API?&lt;/p&gt;
+
+&lt;p&gt;At the end of the day, APIs without nested routes are easier to build, easier
+to maintain, and easier to consume.  This leads to happy devs and ultimately
+happy users.&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Thank you to
+&lt;a data-flickr-embed=&#34;true&#34;  href=&#34;https://www.flickr.com/photos/dookington/8445504396/in/photolist-dSiqdL-HoMKRm-a5BWuE-cQJcpj-5aQHDt-61PKYd-8kEUCJ-9psndx-2MYpnV-J8kzFb-dvmSjb-RCLYho-FiCvSu-6CMKpd-5xAM4H-3XTBB6-CGS8y3-CuucdJ-RfW4Pp-So3x7N-s1Vh8-m7cCmc-o92Zw4-b3SSGX-528Fwg-a3DqaD-8j9o5t-fy12R9-7xYWoU-dBJ3Gj-prjyoB-bY6Cdy-68bcuk-6Qkn9E-dSPirj-7Gyme1-fFTbHv-3cJ73y-bsKUze-svnwP6-7uH8S-RrmYp1-o29b6m-TcXH28-tfbf-4orsJt-ehk6kN-4pYNoQ-5Sw1iK-cxkJs7&#34; title=&#34;Wired&#34;&gt;Tom Ducat-White&lt;/a&gt; for the CC BY-NC-ND image I used as the cover on this post.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Delete or not to delete</title>
       <link>http://lucasroesler.com/2017/04/delete-or-not-to-delete/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
