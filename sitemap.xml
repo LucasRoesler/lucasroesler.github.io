@@ -2,6 +2,11 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>http://lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/</loc>
+    <lastmod>2017-06-24T00:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</loc>
     <lastmod>2017-06-11T11:00:00-06:00</lastmod>
   </url>
@@ -102,7 +107,7 @@
   
   <url>
     <loc>http://lucasroesler.com/tags/beer/</loc>
-    <lastmod>2017-03-05T00:00:00-07:00</lastmod>
+    <lastmod>2017-06-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -143,7 +148,7 @@
   
   <url>
     <loc>http://lucasroesler.com/tags/homebrew/</loc>
-    <lastmod>2017-03-05T00:00:00-07:00</lastmod>
+    <lastmod>2017-06-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -184,6 +189,12 @@
   </url>
   
   <url>
+    <loc>http://lucasroesler.com/tags/orange/</loc>
+    <lastmod>2017-06-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://lucasroesler.com/tags/porter/</loc>
     <lastmod>2017-01-15T13:48:19-07:00</lastmod>
     <priority>0</priority>
@@ -197,7 +208,7 @@
   
   <url>
     <loc>http://lucasroesler.com/post/</loc>
-    <lastmod>2017-06-11T11:00:00-06:00</lastmod>
+    <lastmod>2017-06-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -244,6 +255,12 @@
   </url>
   
   <url>
+    <loc>http://lucasroesler.com/tags/summer/</loc>
+    <lastmod>2017-06-24T00:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://lucasroesler.com/tags/</loc>
     <priority>0</priority>
   </url>
@@ -251,6 +268,12 @@
   <url>
     <loc>http://lucasroesler.com/tags/test/</loc>
     <lastmod>2017-01-15T00:00:00-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lucasroesler.com/tags/wheat/</loc>
+    <lastmod>2017-06-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

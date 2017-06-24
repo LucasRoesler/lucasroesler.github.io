@@ -1,0 +1,646 @@
+
+
+
+  
+
+
+  
+
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="generator" content="Hugo 0.18.1">
+    <title>Orange</title>
+    <meta name="author" content="Lucas Roesler">
+    <meta name="keywords" content=", development, management, python, django">
+
+    <link rel="icon" href="http://lucasroesler.com/favicon.png">
+    
+      <link rel="alternate" type="application/rss+xml" title="RSS" href="http://lucasroesler.com/tags/orange/index.xml">
+    
+
+    
+    <meta name="description" content="Talkity talk by Lucas Roesler">
+    <meta property="og:description" content="Talkity talk by Lucas Roesler">
+    <meta property="og:type" content="blog">
+    <meta property="og:title" content="Orange">
+    <meta property="og:url" content="/tags/orange/">
+    <meta property="og:site_name" content="Lucas Roesler">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:title" content="Lucas Roesler">
+    <meta name="twitter:description" content="Talkity talk by Lucas Roesler">
+    
+      <meta name="twitter:creator" content="@theaxer">
+    
+    
+
+    
+    
+
+    
+      <meta property="og:image" content="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
+    
+
+    
+    
+    
+
+    
+
+    
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.css" />
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" />
+    
+    
+    <link rel="stylesheet" href="http://lucasroesler.com/css/style-gwlo24d2hxipxk8bi1sxik0zhlpn9t7ebcmgp9kubmmcjfzlavuyhvbqumhn.min.css" />
+    
+    
+    
+      
+<script>
+(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+ga('create', 'UA-90384590-1', 'auto');
+ga('send', 'pageview');
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="1">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="http://lucasroesler.com/">Lucas Roesler</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="http://lucasroesler.com/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=90" alt="" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="1">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="http://lucasroesler.com/#about">
+          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+        </a>
+        <h4 class="sidebar-profile-name">Lucas Roesler</h4>
+        
+          <h5 class="sidebar-profile-bio">I am director of engineering at <a href='https://teem.com'>teem.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://lucasroesler.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://lucasroesler.com/post">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-quote-right"></i>
+      
+      <span class="sidebar-button-desc">Blog</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://lucasroesler.com/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://lucasroesler.com/reading-list/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-book"></i>
+      
+      <span class="sidebar-button-desc">Reading list</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://lucasroesler.com/resume/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-file-text-o"></i>
+      
+      <span class="sidebar-button-desc">Resume</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://lucasroesler.com/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/lucasroesler" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/826102/theaxer" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/theaxer" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/lucasroesler" target="_blank">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="http://lucasroesler.com/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+    </ul>
+  </div>
+</nav>
+
+      
+        
+
+      
+      <div id="main" data-behavior="1"
+        class="
+               hasCoverMetaIn
+               ">
+        
+          <section class="postShorten-group main-content-wrap">
+            
+            
+              
+  
+    
+      
+        
+          
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="http://lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/">
+          Salt City Brew Supply Orange Honey Wheat
+        </a>
+      </h1>
+      <div class="postShorten-meta post-meta">
+  <time itemprop="datePublished" datetime="2017-06-24T00:00:00Z">
+    
+  
+  
+  
+  
+    2017-06-24
+  
+
+  </time>
+  
+
+</div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      <p>
+        I just finished my first official &ldquo;summer beer&rdquo; of the year, an Orange Honey Wheat.  This one was inspire by my wife while at the store &ldquo;you should do this one, it uses Utah honey!&rdquo;, thank you <a href="http://techlady.ninja">tech lady ninja</a>.</p>
+
+<p>The recipe below will give you a hazy wheat beer that uses local Utah honey and orange peel to create a medium-sweet beer balanced with German hops. It has a light wheat flavor , the honey helps this beer finish dryer than other wheat beers. The Mandarina Bavaria hops are light and help reflect the orange citrus flavor of the peel. It is easy drinking, meant for a hot summer day.</p>
+
+<p>
+        <br>
+        <a href="http://lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/" class="postShorten-excerpt_link link"></a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="http://lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://c1.staticflickr.com/5/4267/34268608063_26cfc4d575_z.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+            
+            
+
+          </section>
+        
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2017 Lucas Roesler. 
+  </span>
+</footer>
+
+      </div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+    
+    <h4 id="about-card-name">Lucas Roesler</h4>
+    
+      <div id="about-card-bio">I am director of engineering at <a href='https://teem.com'>teem.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Director of Engineering
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Utah, USA
+      </div>
+    
+  </div>
+</div>
+
+    <div id="algolia-search-modal" class="modal-container">
+  <div class="modal">
+    <div class="modal-header">
+      <span class="close-button"><i class="fa fa-close"></i></span>
+      <a href="https://algolia.com" target="_blank" class="searchby-algolia text-color-light link-unstyled">
+        <span class="searchby-algolia-text text-color-light text-small">by</span>
+      </a>
+      <i class="search-icon fa fa-search"></i>
+      <form id="algolia-search-form">
+        <input type="text" id="algolia-search-input" name="search"
+          class="form-control input--large search-input" placeholder="" />
+      </form>
+    </div>
+    <div class="modal-body">
+      <div class="no-result text-color-light text-center"></div>
+      <div class="results">
+        
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/">
+                <h3 class="media-heading">Salt City Brew Supply Orange Honey Wheat</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>I just finished my first official &ldquo;summer beer&rdquo; of the year, an Orange Honey Wheat.  This one was inspire by my wife while at the store &ldquo;you should do this one, it uses Utah honey!&rdquo;, thank you <a href="http://techlady.ninja">tech lady ninja</a>.</p>
+
+<p>The recipe below will give you a hazy wheat beer that uses local Utah honey and orange peel to create a medium-sweet beer balanced with German hops. It has a light wheat flavor , the honey helps this beer finish dryer than other wheat beers. The Mandarina Bavaria hops are light and help reflect the orange citrus flavor of the peel. It is easy drinking, meant for a hot summer day.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/">
+                <h3 class="media-heading">SSL Expiry Quick and Simple</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like <a href="https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58">Instagram</a> and <a href="http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html">Google</a>, at <a href="http://status.teem.com/incidents/ddtys5ss4mw5">Teem recently</a>, and of course for myself with my own home server.
+</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://lucasroesler.com/2017/06/your-apis-rat-nest/">
+                <h3 class="media-heading">Your API&#39;s rat nest</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jun 6, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Recently, I have seen several articles talking about RESTful API design.  Of
+course this is also a common topic of discussion for the engineers at Teem.  I
+want to use (and write) APIs that are easy to understand and explain and the
+fastest way to complicate your API is nested routes. Just don&rsquo;t do it! Do not
+create nested routes in your API.  Let&rsquo;s keep our APIs simple and create one
+endpoint per resource and if filters are needs, use GET parameters. This is
+simpler to document and simpler to maintain and ultimately, easier to use.</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://lucasroesler.com/2017/05/take-care-of-your-people/">
+                <h3 class="media-heading">Take Care of Your People</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  May 5, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>When I first started this blog, I started with <a href="http://lucasroesler.com/2017/01/my-management-philosophy/">My Management Philosophy</a>.  In short,</p>
+
+<blockquote>
+<p>be a multiplier for your team and reduce friction&hellip;
+Successful managers make other people better at their jobs, “multiplying”
+their productivity.</p>
+</blockquote>
+
+<p>When I wrote this, I was focusing on the ideas as a guide. &ldquo;Should I do X?
+Does it multiply my team&rsquo;s effort?  Does it simplify their job?&rdquo; Underlying
+this is that good leadership requires <em>empathy</em> and <em>trust</em>.
+</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://lucasroesler.com/2017/04/living-our-culture-at-teem-via-peer-reviews/">
+                <h3 class="media-heading">Living Our Culture at Teem via Peer Reviews</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>About a year ago we set down to document the core values of the engineering at
+Teem. After a lot of discussion we narrowed it to three core ideas</p>
+
+<ol>
+<li>maximize positive impact</li>
+<li>communicate</li>
+<li>be a good friend</li>
+</ol>
+
+<p>I would add one more unofficial value: mentorship and continuous learning.
+About the same time we also started thinking about how we describe/define an
+engineers career path and we quickly realized that measuring progress is hard
+and that measuring commitment to our core values is even harder.
+</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://lucasroesler.com/2017/04/delete-or-not-to-delete/">
+                <h3 class="media-heading">Delete or not to delete</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Apr 4, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">Should you remove data from the database or simply mark it as deleted? At Teem we have a lot of data that we need to manage and often &ldquo;physically&rdquo; deleting the data from disk can be problematic. Either the users simply wants to undelete something or the deletion would cause problems for a log. The generic solution to this problem is to soft delete/archive the data by adding a deleted_at timestamp field to the table and then filter all queries to hide rows that have been marked as deleted.</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://lucasroesler.com/2017/03/how-i-git/">
+                <h3 class="media-heading">How I Git</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>Perhaps the one piece of ubiquitous technology that you will find at any new
+tech company is <code>git</code>.  There are a couple of other technologies that you will
+probably find, like AWS, but <code>git</code> is the only one I expect to find everywhere. It is
+also, surprisingly, many developers number one frienemy.  I want to share some
+of my favorite tips and tweaks that I have used over the years to make it all
+friend and never my enemy.
+</p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://lucasroesler.com/2017/03/a-spring-hefe/">
+                <h3 class="media-heading">A spring Hefe</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Mar 3, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
+with a smooth mouth-feel and dense, whipped-cream head.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/">
+                <h3 class="media-heading">Zero downtime deploys: A tale of Django migrations</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>At Teem, we aim for zero down-time deploys; so, one of the most
+important things we must validate is that things will not break mid-deploy!</p>
+
+<p>The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible.</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="http://lucasroesler.com/2017/02/postgres-joins-and-django-querysets/">
+                <h3 class="media-heading">Postgres Joins and Django Querysets</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Feb 2, 2017
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather">How do we build a fast API against database models with foreign keys and many- to-many relationships? If you do nothing you get what I call the &ldquo;waterfall of doom&rdquo;. At some point in the past someone told me or I read that &ldquo;joins are effectively free in Postgres&rdquo;. While this might be somewhat true when you are writing all of the SQL and can control every part of your query; I have recently found that when the database gets big enough and you are using the Django ORM, joins aren&rsquo;t free and less can be more!</div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
+        
+      </div>
+    </div>
+    <div class="modal-footer">
+      <p class="results-count text-medium"
+         data-message-zero=""
+         data-message-one=""
+         data-message-other="">
+         13 posts found
+      </p>
+    </div>
+  </div>
+</div>
+    
+  
+    
+    <div id="cover" style="background-image:url('https://lh3.googleusercontent.com/PslKucVYOkAlYGCTgtwtRcZ24kjQk15UFUhndHkavGffrwrEx3yb2sJOS48NfFsEHPuKCUpoWOnkHkIdz4MdQCWdLk6zYF241LT8xCA7bBY1eaBPOH16g-xlj8WV_aiWrqvll_9eV5QN_X2Zt06b8FuPSto5Tq26S4HLBl-4PVmcJLFyEg54ooUP0s2XYklsqcv6kVwHOMVDe4sOS1rZp2ecfcoknC4mWQYLYT2Nlcx2Q6I-eDTZHmu8uw__19lx8HQJHVLamHImCko8jgAlXpl5x6CTNmwtPdM1CUNiiSrWkajKuEMPMvieiK6NvcGPYZsVL2W14W3xrjS4mzY4iCT11qw2DlBnCDYv_e4Evl8mjuydEulInbHS3Bmw4dBK1En-wlc7bIP7LZ3VsmGGUCzgnARAneCTcrNtcxndSqWJI_8wZT1GAU5pmQhWz8J9kBOWryLtEtPDNQcO-bpMZbZWPO6y4_MISwyMm9VwIb_RPqu5v-peYPDfLCrXtvtzlcnIjpACRRT09Ze6R4U5zXTPVNfUXWX9OY0S_qxur7AEOzfWTFgJA625Gh0Fk9vtSBUVUpj9FKHoAPTsofftPBJHeZ3bkd8pOL3OquFgy0jw4uIpUGb5UIT42V6zAY3uVVLmcIpGubjbohRcXy0JSYAeUcAMxFLrtAu3MjxdMQ=w2856-h1606-no');"></div>
+  
+
+
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.8.0/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.js"></script>
+
+
+<script src="http://lucasroesler.com/js/script-wl33z0n6ocaypepiqrazthtivfrliqijej4rq8ek8gvrv1awftmgjuv8k4zc.min.js"></script>
+
+<script>
+$(document).ready(function() {
+  hljs.configure({ classPrefix: '', useBR: false });
+  $('pre.code-highlight').each(function(i, block) {
+    var code = "";
+    hljs.highlightAuto(block.innerText).value.split(/\r\n|\r|\n/).forEach(function(line) {
+      code += "<span class=\"line\">" + line + "</span><br>";
+    });
+    if (code.length > 0) {
+      block.innerHTML = code;  
+    }
+  });
+  $('pre > code').each(function(i, block) {
+    $(this).addClass('codeblock');
+    hljs.highlightBlock(block);
+  });
+});
+</script>
+
+
+    
+  </body>
+</html>
+
