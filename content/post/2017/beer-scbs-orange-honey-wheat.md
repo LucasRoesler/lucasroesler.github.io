@@ -1,6 +1,6 @@
 ---
-date: 2017-06-17T00:00:00Z
-draft: true
+date: 2017-06-24T00:00:00Z
+draft: false
 title: Salt City Brew Supply Orange Honey Wheat
 keywords:
 - beer
@@ -45,4 +45,15 @@ This is a partial mash recipe for a 5 gallon batch
 >
 > Target O.G: 1.050
 
-I ended with a 1.041 OG, below the target, but I had 5.5 gallons which is a little high. It is worth noting that my original recipe for this beer included a warning that it would aggressively ferment, which it did! I was glad that I used a blow off tube instead of a standard airlock.  As of this writing, I have 7 days until I bottle and another 14 before I will taste it.
+I ended with a 1.041 OG, below the target, but I had 5.5 gallons which is a little high. It is worth noting that my original recipe for this beer included a warning that it would aggressively ferment, which it did! I was glad that I used a blow off tube instead of a standard airlock.
+
+## Results
+Tasting day has finally arrived! As promised, the recipe resulted in a nice light beer with a moderate sweetness.  The citrus flavor is very light as well.  Perfect for a summer day.  I was really happy with the color and mouth feel of the beer. The last several beers I have made have had a little too much left over sediment, these came out perfectly.
+
+{{< image
+ classes="center"
+ src="https://c1.staticflickr.com/5/4290/35337276232_82ffec1617.jpg"
+ title="Honey Wheat First Taste">}}
+
+
+ I will definitely re-try this recipe later this year or next.  The only tweak I might consider is adding just a little bit more hops, perhaps another 0.5 oz at the 30 mins, I wouldn't mind it being slightly spicier.
