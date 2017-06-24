@@ -20,10 +20,8 @@ coverImage: https://c1.staticflickr.com/5/4267/34268608063_26cfc4d575_z.jpg
 thumbnailImagePosition: left
 ---
 I just finished my first official "summer beer" of the year, an Orange Honey Wheat.  This one was inspire by my wife while at the store "you should do this one, it uses Utah honey!", thank you [tech lady ninja](http://techlady.ninja).
-
-The recipe below will give you a hazy wheat beer that uses local Utah honey and orange peel to create a medium-sweet beer balanced with German hops. It has a light wheat flavor , the honey helps this beer finish dryer than other wheat beers. The Mandarina Bavaria hops are light and help reflect the orange citrus flavor of the peel. It is easy drinking, meant for a hot summer day.
-
 <!--more-->
+The recipe below will give you a hazy wheat beer that uses local Utah honey and orange peel to create a medium-sweet beer balanced with German hops. It has a light wheat flavor , the honey helps this beer finish dryer than other wheat beers. The Mandarina Bavaria hops are light and help reflect the orange citrus flavor of the peel. It is easy drinking, meant for a hot summer day.
 
 ## Recipe
 This is a partial mash recipe for a 5 gallon batch
