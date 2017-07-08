@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Management on Lucas Roesler</title>
-    <link>http://lucasroesler.com/tags/management/index.xml</link>
+    <link>http://lucasroesler.com/tags/management/</link>
     <description>Recent content in Management on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://lucasroesler.com/tags/management/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 21 May 2017 22:00:00 -0600</lastBuildDate>
+    
+	<atom:link href="http://lucasroesler.com/tags/management/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Take Care of Your People</title>
@@ -25,36 +28,7 @@ their productivity.&lt;/p&gt;
 &lt;p&gt;When I wrote this, I was focusing on the ideas as a guide. &amp;ldquo;Should I do X?
 Does it multiply my team&amp;rsquo;s effort?  Does it simplify their job?&amp;rdquo; Underlying
 this is that good leadership requires &lt;em&gt;empathy&lt;/em&gt; and &lt;em&gt;trust&lt;/em&gt;.
-&lt;/p&gt;
-
-&lt;p&gt;First and foremost, do one-on-ones. People rarely trust people they never talk
-to and conversely you can never build empathy for people you ignore.  If you
-can not do this, then none of the remaining ideas will work.&lt;/p&gt;
-
-&lt;p&gt;Once you are talking to your team, you need to do something good for them.
-Reducing friction is not just answering questions or simplifying process, take
-care of your people and they will work hard for you. This is not always easy,
-so here is a non-definitive list of things a good leader will do:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Be honest.&lt;/li&gt;
-&lt;li&gt;Always do what you say.&lt;/li&gt;
-&lt;li&gt;Take risks for your team.&lt;/li&gt;
-&lt;li&gt;Standup for them.&lt;/li&gt;
-&lt;li&gt;Celebrate their wins.&lt;/li&gt;
-&lt;li&gt;Help them with their struggles.&lt;/li&gt;
-&lt;li&gt;Get them what they need.&lt;/li&gt;
-&lt;li&gt;Understand why they are here.&lt;/li&gt;
-&lt;li&gt;Understand where they want to be.&lt;/li&gt;
-&lt;li&gt;Have some fun.&lt;/li&gt;
-&lt;li&gt;Say thank you.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;A lot of this requires time.  This is the most valuable resource you have and
-there will be times that you feel like you are wasting it. But, every moment
-you spend taking care of your team will pay dividends.&lt;/p&gt;
-
-&lt;p&gt;In short, be a decent person and care.&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -71,108 +45,7 @@ want to share here.&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;TL;DR: be a multiplier for your team and reduce friction.&lt;/strong&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;how-to-get-better-at-management&#34;&gt;How to get better at management&lt;/h2&gt;
-
-&lt;p&gt;When I started answering my friend, I of course had some sort of a list and
-made a few suggestions, but immediately followed with this (or something
-roughly paraphrased as such):&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;I don&amp;rsquo;t think reading these is particularly that important, instead
-find stuff that makes you think about how and what it means to be a leader
-and to manage a team.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Obviously reading good content with solid concrete suggestions is a good thing,
-but, the core of what I am trying to convey and my philosophy
-about how to succeed in management (especially in tech) is this:&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;It is a real job, be intentional about it, care about it, and don&amp;rsquo;t
-cut corners.  Your are here to help other people get &lt;strong&gt;their&lt;/strong&gt; jobs done.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Often we take senior developers and slowly (or abruptly) move them in leadership
-roles that they don&amp;rsquo;t want.  If I had to choose between a very good senior dev
-that doesn&amp;rsquo;t want the job and a mid-to-senior dev that does, I would take the
-latter because ultimately the job is about helping other people and if you don&amp;rsquo;t
-care about it, then you aren&amp;rsquo;t going to be much help.  The job is hard work
-and taking shortcuts or ignoring it will create minor issues out of nothing
-and turn minor issues into major issues.&lt;/p&gt;
-
-&lt;h2 id=&#34;what-is-management&#34;&gt;What is management&lt;/h2&gt;
-
-&lt;p&gt;At &lt;a href=&#34;https://teem.com&#34;&gt;Teem&lt;/a&gt; I have the dubious role of lead cat herder, a.k.a.
-director of engineering. I am not directly managing a group of engineers on a
-specific project or in a specific skill group, instead I have to guide leaders
-for those in how to organize and manage their teams. My one guiding principle
-that I give to them (and myself) is that&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;the management/leadership role is a service role with one primary objective:
-&lt;strong&gt;be a multiplier for your team&lt;/strong&gt;. At the end of the day you are a success if
-&lt;strong&gt;you reduce friction&lt;/strong&gt; so that your team is able to get more done because of
-you.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Successful managers make other people better at their jobs, &amp;ldquo;multiplying&amp;rdquo; their
-productivity.  This can be getting more work done, getting the right work done,
-or simply producing better, more stable end results. But it is important not to
-focus only on being a &amp;ldquo;multiplier&amp;rdquo;. As a manager, it is the pair of
-&lt;strong&gt;be a multiplier for your team&lt;/strong&gt; and &lt;strong&gt;reduce friction&lt;/strong&gt; combined that produces
-the real magic. You can have the appearance of a multiplier by being a bottleneck
-or inserting yourself as a dependency even where you don&amp;rsquo;t need to be.
-&lt;em&gt;Look at all this work they couldn&amp;rsquo;t have done without me!&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Beyond &lt;strong&gt;be a multiplier&lt;/strong&gt; and &lt;strong&gt;reduce friction&lt;/strong&gt; my only other
-commandment is that you must hold regular one-on-ones! To reduce the friction
-for your team you have to know what they are doing, how they are doing it, and
-why they are frustrated.  The fastest, easiest way to understand what
-is happening is through frequent and private time to talk. In the future, I will
-go through my one-on-one process.&lt;/p&gt;
-
-&lt;h2 id=&#34;my-resource-list&#34;&gt;My Resource List&lt;/h2&gt;
-
-&lt;p&gt;Without further ado, here are a couple suggestions for learning about leadership:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;http://randsinrepose.com/&#34;&gt;Rands in Repose&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;The blog has simply great content on leading tech teams fueled by direct
-experience.&lt;/li&gt;
-&lt;li&gt;His book &lt;a href=&#34;https://www.amazon.com/Managing-Humans-Humorous-Software-Engineering/dp/1484221575/&#34;&gt;Managing Humans&lt;/a&gt;
-is a must read that provides a ton of food for thought with great examples
-and advice.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.manager-tools.com/&#34;&gt;Manager Tools&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Great podcast that focuses on the gritty details of management.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://twitter.com/PicardTips&#34;&gt;@PicardTips&lt;/a&gt;
-
-&lt;ul&gt;
-&lt;li&gt;This is mostly a fun suggestion. It almost always makes me stop
-for a moment and think, &amp;ldquo;what is good leadership?&amp;rdquo;  Which is great to get
-in tiny frequent doses in my Twitter timeline.&lt;/li&gt;
-&lt;/ul&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Here are some other books (suggested by many people) that I think are worth
-reading because they will make you think:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Hard-Thing-About-Things-Building/dp/0062273205/&#34;&gt;The Hard Thing About Hard Things&lt;/a&gt; by Ben Horowitz&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/How-Google-Works-Eric-Schmidt/dp/1455582344/&#34;&gt;How Google Works&lt;/a&gt; by Eric Schmidt&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.amazon.com/Zero-One-Notes-Startups-Future/dp/0804139296/&#34;&gt;Zero to One&lt;/a&gt; by Peter Thiel&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;I split these out from the previous list because while they are good reads, I
-don&amp;rsquo;t find myself revisiting them frequently.  This may have more to do with the
-format, books versus blogs or podcasts.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

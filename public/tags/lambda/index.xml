@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Lambda on Lucas Roesler</title>
-    <link>http://lucasroesler.com/tags/lambda/index.xml</link>
+    <link>http://lucasroesler.com/tags/lambda/</link>
     <description>Recent content in Lambda on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://lucasroesler.com/tags/lambda/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Jun 2017 11:00:00 -0600</lastBuildDate>
+    
+	<atom:link href="http://lucasroesler.com/tags/lambda/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>SSL Expiry Quick and Simple</title>
@@ -15,185 +18,7 @@
       
       <guid>http://lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</guid>
       <description>&lt;p&gt;Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&amp;rsquo;t last forever, we know this when we setup SSL but that doesn&amp;rsquo;t stop it from sneaking up on us.  It has happened to the big guys like &lt;a href=&#34;https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58&#34;&gt;Instagram&lt;/a&gt; and &lt;a href=&#34;http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html&#34;&gt;Google&lt;/a&gt;, at &lt;a href=&#34;http://status.teem.com/incidents/ddtys5ss4mw5&#34;&gt;Teem recently&lt;/a&gt;, and of course for myself with my own home server.
-&lt;/p&gt;
-
-
- 
-  
-  
-  
-  
-    
-      
-    
-  
-    
-      
-    
-  
-    
-  
-
- 
-  
-  
-  
-  
-    
-  
-    
-      
-    
-  
-
-&lt;div class=&#34;figure center&#34; &gt;
-  
-    &lt;a class=&#34;fancybox&#34; href=&#34;https://media.giphy.com/media/joV1k1sNOT5xC/giphy.gif&#34; title=&#34;Everything is fine&#34; data-fancybox-group=&#34;&#34;&gt;
-  
-    &lt;img class=&#34;fig-img&#34; src=&#34;https://media.giphy.com/media/joV1k1sNOT5xC/giphy.gif&#34;  alt=&#34;Everything is fine&#34;&gt;
-  
-    &lt;/a&gt;
-  
-   
-    &lt;span class=&#34;caption&#34;&gt;Everything is fine&lt;/span&gt;
-  
-&lt;/div&gt;
-
-  &lt;div style=&#34;clear:both;&#34;&gt;&lt;/div&gt;
-
-
-&lt;p&gt;I got tired of this and hacked together a tool to warn when a cert is going to expire: &lt;a href=&#34;https://github.com/LucasRoesler/ssl-expiry-check&#34;&gt;ssl-expiry-check&lt;/a&gt;.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-script&#34;&gt;The script&lt;/h2&gt;
-
-&lt;p&gt;Checking SSL expiration is actually relatively simple, all of the information is public, you just need to grab it and validate it. My little project is a Python 3 project and uses only the standard library so that it is easy to use in any Python 3 environment, in particular AWS Lambda.&lt;/p&gt;
-
-&lt;p&gt;So, what does it take to validate an SSL cert?&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;import datetime
-import logging
-import socket
-import ssl
-
-
-logger = logging.getLogger(&#39;SSLVerify&#39;)
-
-
-def ssl_expiry_datetime(hostname: str) -&amp;gt; datetime.datetime:
-    ssl_date_fmt = r&#39;%b %d %H:%M:%S %Y %Z&#39;
-
-    context = ssl.create_default_context()
-    conn = context.wrap_socket(
-        socket.socket(socket.AF_INET),
-        server_hostname=hostname,
-    )
-    # 3 second timeout because Lambda has runtime limitations
-    conn.settimeout(3.0)
-
-    logger.debug(&#39;Connect to {}&#39;.format(hostname))
-    conn.connect((hostname, 443))
-    ssl_info = conn.getpeercert()
-    # parse the string from the certificate into a Python datetime object
-    return datetime.datetime.strptime(ssl_info[&#39;notAfter&#39;], ssl_date_fmt)
-
-
-def ssl_valid_time_remaining(hostname: str) -&amp;gt; datetime.timedelta:
-    &amp;quot;&amp;quot;&amp;quot;Get the number of days left in a cert&#39;s lifetime.&amp;quot;&amp;quot;&amp;quot;
-    expires = ssl_expiry_datetime(hostname)
-    logger.debug(
-        &#39;SSL cert for {} expires at {}&#39;.format(
-            hostname, expires.isoformat()
-        )
-    )
-    return expires - datetime.datetime.utcnow()
-
-
-def test_host(hostname: str, buffer_days: int=30) -&amp;gt; str:
-    &amp;quot;&amp;quot;&amp;quot;Return test message for hostname cert expiration.&amp;quot;&amp;quot;&amp;quot;
-    try:
-        will_expire_in = ssl_valid_time_remaining(hostname)
-    except ssl.CertificateError as e:
-        return f&#39;{hostname} cert error {e}&#39;
-    except ssl.SSLError as e:
-        return f&#39;{hostname} cert error {e}&#39;
-    except socket.timeout as e:
-        return f&#39;{hostname} could not connect&#39;
-    else:
-        if will_expire_in &amp;lt; datetime.timedelta(days=0):
-            return f&#39;{hostname} cert will expired&#39;
-        elif will_expire_in &amp;lt; datetime.timedelta(days=buffer_days):
-            return f&#39;{hostname} cert will expire in {will_expire_in}&#39;
-        else:
-            return f&#39;{hostname} cert is fine&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;At the core of this script is the &lt;code&gt;SSLSocket.getpeercert&lt;/code&gt; method, using Python&amp;rsquo;s &lt;code&gt;ssl&lt;/code&gt; and &lt;code&gt;socket&lt;/code&gt; modules, we connect to the provided &lt;code&gt;hostname&lt;/code&gt; on port 443 and then &lt;code&gt;getpeercert&lt;/code&gt; returns the SSL certificate as a dictionary. At this point you want the &lt;code&gt;notAfter&lt;/code&gt; value.&lt;/p&gt;
-
-&lt;p&gt;For the &lt;code&gt;ssl-expiry&lt;/code&gt; tool, we parse the &lt;code&gt;notAfter&lt;/code&gt; value into a &lt;code&gt;timedelta&lt;/code&gt; object because we want to know if the certificate will expire soon (defaults to 30 days).&lt;/p&gt;
-
-&lt;p&gt;If you checkout the source for &lt;code&gt;ssl-expiry&lt;/code&gt; you can quickly check if a certificate is expiring soon using&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ echo &amp;quot;google.com\nfacebook.com&amp;quot; | python ssl_expiry.py
-&amp;gt; google.com cert is fine
-&amp;gt; facebook.com cert is fine
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Depending on your environment, you may need to explicitly call to &lt;code&gt;python3&lt;/code&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ echo &amp;quot;google.com\nfacebook.com&amp;quot; | python3 ssl_expiry.py
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&#34;ssl-expiry-in-action&#34;&gt;SSL Expiry in Action&lt;/h2&gt;
-
-&lt;p&gt;At this point, you could easily create a &lt;code&gt;cron&lt;/code&gt; job to run this regularly and notify you if the output contains &lt;code&gt;&amp;quot;expire&amp;quot;&lt;/code&gt;.  This is what I did for my home server. At Teem we use &lt;a href=&#34;https://newrelic.com/&#34;&gt;New Relic&lt;/a&gt; which provides an awesome tool called &lt;a href=&#34;https://newrelic.com/synthetics&#34;&gt;Synthetics&lt;/a&gt; that provides a cron-like tool that allows you to ping or GET against an API on regular intervals.  It will then trigger alerts that can be forwarded to your favorite on-call to (:cough:PagerDuty:cough:) if the request fails or the response does not contain an expected sub-string. With this tool available, I decided to deploy &lt;code&gt;ssl-expiry&lt;/code&gt; as an AWS Lambda function an expose it via an AWS API Gateway api.&lt;/p&gt;
-
-&lt;p&gt;To simplify this deployment, I created a script specifically for Lambda, cleverly called &lt;a href=&#34;https://github.com/LucasRoesler/ssl-expiry-check/blob/master/ssl_expiry_lambda.py&#34;&gt;&lt;code&gt;ssl-expiry-lambda&lt;/code&gt;&lt;/a&gt; This script simply wraps &lt;code&gt;ssl-expiry&lt;/code&gt; so that the output is specialized to the format that Lambda and Gateway need so that I can&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;Return a 200 if all of the requested hosts are valid for the next 30 days, or&lt;/li&gt;
-&lt;li&gt;Return a 400 and the list of certificate test strings if at least one of the requested hosts is expired, will expire in the next 30 days, or is in some other way currently invalid.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;With this setup, it is very easy to use New Relic Synthetics to alert the on-call developers to any SSL certificate issues.  This also implicitly alerts us if any of the domains are inaccessible.&lt;/p&gt;
-
-&lt;p&gt;I should note that New Relic Synthetics does have a &amp;ldquo;Validate SSL&amp;rdquo; option for any ping type checks that you configure.  However, this option does not include the preemptive &amp;ldquo;will expire soon&amp;rdquo; validation that I am looking for.&lt;/p&gt;
-
-&lt;p&gt;Configuring Lambda and API Gateway was actually more time consuming that writing the script, mostly due to trying to get the API response just right. To deploy to Lambda, create a zip that contains &lt;code&gt;ssl_expiry.py&lt;/code&gt; and &lt;code&gt;ssl_expiry_lambda.py&lt;/code&gt; and then follow the normal instructions to setup and configure a Lambda function. The &lt;code&gt;ssl_expiry_lambda&lt;/code&gt; will use, if they exist, two env parameters:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;HOSTLIST&lt;/code&gt;: a comma separated string of &lt;code&gt;hostnames&lt;/code&gt; to validate, and&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;EXPIRY_BUFFER&lt;/code&gt;: an int that represents the days prior to expiration that the script will alert for, i.e. alert if the expiration is within &lt;code&gt;EXPIRY_BUFFER&lt;/code&gt; days.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The entry point for the Lambda will be &lt;code&gt;ssl_expiry_lambda.main&lt;/code&gt;.  Set the &lt;code&gt;HOSTLIST&lt;/code&gt; env variable and you now have a default list of hostnames that will always be checked when calling this Lambda.&lt;/p&gt;
-
-&lt;p&gt;AWS API Gateway was the trickiest to configure. The important parts that are not obvious from the API Gateway admin UI are as follows:&lt;/p&gt;
-
-&lt;p&gt;You will need to create a new &amp;ldquo;Integration Response&amp;rdquo; for the exception that is raised when the check finds a failing or soon to fail certificate.&lt;/p&gt;
-
-&lt;p&gt;I configured this new Integration Response with a regex of&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;.*Cert Errors.*
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;and a &amp;ldquo;Body Mapping Template&amp;rdquo; with content type &lt;code&gt;application/json&lt;/code&gt; and the template:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#set($inputRoot = $input.path(&#39;$&#39;))
-$input.path(&#39;$.errorMessage&#39;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;With this configuration, the exception raised by the &lt;code&gt;main&lt;/code&gt; method will be parsed and returned as the body of the response. The HTTP status code will be a 400.&lt;/p&gt;
-
-&lt;p&gt;Additionally, in the &amp;ldquo;Method Request&amp;rdquo; section, I declared URL Query String Parameters for &lt;code&gt;host_list&lt;/code&gt; and &lt;code&gt;expiry_buffer&lt;/code&gt;.  This is helpful for testing the API, since the AWS UI will provide form fields for setting these parameters while testing it.&lt;/p&gt;
-
-&lt;p&gt;Finally, you should also define a &amp;ldquo;Method Response&amp;rdquo; for the 400 status. This can be left with all for the default empty values for response headers and response body.&lt;/p&gt;
-
-&lt;p&gt;With all of this in place, you now have an API that with a simple GET request, will validate the SSL certificates for a list of hostnames, including a warning for when certificates are about to expire. You can now sit back and relax knowing that you will be abruptly alerted as soon as any of your certificates are even close to expiring.&lt;/p&gt;
-
-&lt;hr /&gt;
-
-&lt;p&gt;Thank you to
-&lt;a data-flickr-embed=&#34;true&#34;  href=&#34;https://www.flickr.com/photos/cleanslatephotography/7899423426/in/photolist-d33BnC-5osrTL-9cuiGG-ehWXkg-nRdREH-ey8CR5-nRacoG-4qDmXP-a25CPx-8MqVJU-qmXRpL-dU81E6-oicDNZ-fu8kkk-2fvgQ1-qBtgR4-pEgwwC-hdKjjd-9Z4bzn-4kMSQK-qvyyF9-q3EyRX-9A6kY9-p5vhpk-TiDVoG-obiQrS-9uKVDe-fFjqjy-8z7vh2-o1ApPq-6vaRSf-e14EyV-cqWEpd-cvgD9f-cavamS-oKiPxn-9qeT5j-9ZMc4V-e6k5Ak-bD1SrM-qxMZWj-dJBsh9-c1Q6Fj-9oQTJP-jvWBA7-65A1Yh-qdLuiW-bq7vVh-brsYNu-bkuUnp&#34; title=&#34;Unlocked&#34;&gt;Sam Stockton&lt;/a&gt; for the CC BY 2.0 image I used as the cover on this post.&lt;/p&gt;</description>
+&lt;/p&gt;</description>
     </item>
     
   </channel>
