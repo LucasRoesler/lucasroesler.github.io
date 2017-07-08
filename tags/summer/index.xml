@@ -2,11 +2,25 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Summer on Lucas Roesler</title>
-    <link>http://lucasroesler.com/tags/summer/index.xml</link>
+    <link>http://lucasroesler.com/tags/summer/</link>
     <description>Recent content in Summer on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://lucasroesler.com/tags/summer/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 08 Jul 2017 00:00:00 +0000</lastBuildDate>
+    
+	<atom:link href="http://lucasroesler.com/tags/summer/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Home Brewers Association Ruthless Rye Clone</title>
+      <link>http://lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/</link>
+      <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
+      
+      <guid>http://lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/</guid>
+      <description>&lt;p&gt;This recipe is inspired by the &lt;a href=&#34;https://www.homebrewersassociation.org/homebrew-recipe/sierra-nevada-ruthless-rye-clone/&#34;&gt;Seirra Nevada Ruthless Rye Clone&lt;/a&gt; written up by the Home Brewers Association.  I have adjusted it to be a partial mash recipe with about 8 lbs of grains.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Salt City Brew Supply Orange Honey Wheat</title>
@@ -14,53 +28,9 @@
       <pubDate>Sat, 24 Jun 2017 00:00:00 +0000</pubDate>
       
       <guid>http://lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/</guid>
-      <description>&lt;p&gt;I just finished my first official &amp;ldquo;summer beer&amp;rdquo; of the year, an Orange Honey Wheat.  This one was inspire by my wife while at the store &amp;ldquo;you should do this one, it uses Utah honey!&amp;rdquo;, thank you &lt;a href=&#34;http://techlady.ninja&#34;&gt;tech lady ninja&lt;/a&gt;.
+      <description>&lt;p&gt;I just finished my first official &amp;ldquo;summer beer&amp;rdquo; of the year, an Orange Honey Wheat.  This one was inspire by my wife while at the store &amp;ldquo;you should do this one, it uses Utah honey!&amp;rdquo;, thank you &lt;a href=&#34;http://techlady.ninja&#34;&gt;tech lady ninja&lt;/a&gt;.&lt;/p&gt;
 
-The recipe below will give you a hazy wheat beer that uses local Utah honey and orange peel to create a medium-sweet beer balanced with German hops. It has a light wheat flavor , the honey helps this beer finish dryer than other wheat beers. The Mandarina Bavaria hops are light and help reflect the orange citrus flavor of the peel. It is easy drinking, meant for a hot summer day.&lt;/p&gt;
-
-&lt;h2 id=&#34;recipe&#34;&gt;Recipe&lt;/h2&gt;
-
-&lt;p&gt;This is a partial mash recipe for a 5 gallon batch&lt;/p&gt;
-
-&lt;blockquote&gt;
-&lt;p&gt;Grains:
-- 2.5 lbs 2 Row
-- 2.5 lbs Flaked wheat
-- 1 lb Pilsen Dry malt extract&lt;/p&gt;
-
-&lt;p&gt;Hops:
-- 0.75 oz Mandarina Bavaria Hops for 60 mins
-- 0.25 oz Mandarina Bavaria Hops for 5 mins&lt;/p&gt;
-
-&lt;p&gt;Extras:
-- 1 oz Sweet Orange peel for 5 mins&lt;/p&gt;
-
-&lt;p&gt;Yeast:
-- Safale K-97&lt;/p&gt;
-
-&lt;p&gt;Target O.G: 1.050&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;I ended with a 1.041 OG, below the target, but I had 5.5 gallons which is a little high. It is worth noting that my original recipe for this beer included a warning that it would aggressively ferment, which it did! I was glad that I used a blow off tube instead of a standard airlock.&lt;/p&gt;
-
-&lt;h2 id=&#34;results&#34;&gt;Results&lt;/h2&gt;
-
-&lt;p&gt;Tasting day has finally arrived! As promised, the recipe resulted in a nice light beer with a moderate sweetness.  The citrus flavor is very light as well.  Perfect for a summer day.  I was really happy with the color and mouth feel of the beer. The last several beers I have made have had a little too much left over sediment, these came out perfectly.&lt;/p&gt;
-
-
-
-
-&lt;div class=&#34;figure center&#34; &gt;
-  
-    &lt;img class=&#34;fig-img&#34; src=&#34;https://c1.staticflickr.com/5/4290/35337276232_82ffec1617.jpg&#34;  alt=&#34;Honey Wheat First Taste&#34;&gt;
-  
-   
-    &lt;span class=&#34;caption&#34;&gt;Honey Wheat First Taste&lt;/span&gt;
-  
-&lt;/div&gt;
-
-
-&lt;p&gt;I will definitely re-try this recipe later this year or next.  The only tweak I might consider is adding just a little bit more hops, perhaps another 0.5 oz at the 30 mins, I wouldn&amp;rsquo;t mind it being slightly spicier.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>

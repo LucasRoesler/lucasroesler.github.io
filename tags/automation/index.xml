@@ -2,11 +2,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Automation on Lucas Roesler</title>
-    <link>http://lucasroesler.com/tags/automation/index.xml</link>
+    <link>http://lucasroesler.com/tags/automation/</link>
     <description>Recent content in Automation on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <atom:link href="http://lucasroesler.com/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Mon, 20 Feb 2017 00:00:00 -0700</lastBuildDate>
+    
+	<atom:link href="http://lucasroesler.com/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+    
     
     <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
@@ -26,153 +29,7 @@ it was simply too easy to miss problem migrations when depending on only peer
 reviews. To make our lives easier we created a series of validation checks to
 ensure that each database migration will be backwards compatible.&lt;/p&gt;
 
-&lt;p&gt;&lt;/p&gt;
-
-&lt;h2 id=&#34;the-what&#34;&gt;The what&lt;/h2&gt;
-
-&lt;p&gt;The checks I am going to describe are simply a sequence of regex
-that we run on the migrations in the changelog. The process looks, roughly,
-like this:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;Using git, generate a list of new migrations in this release,&lt;/li&gt;
-&lt;li&gt;Using Django&amp;rsquo;s &lt;code&gt;sqlmigrate&lt;/code&gt; manage command, generate the SQL for each
-migration,&lt;/li&gt;
-&lt;li&gt;Run a sequence of regex on each SQL command,&lt;/li&gt;
-&lt;li&gt;Report the issues,&lt;/li&gt;
-&lt;li&gt;Profit!&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;We do this in a python script we internally call &lt;code&gt;octoeb&lt;/code&gt; which uses
-&lt;a href=&#34;http://click.pocoo.org/5/&#34;&gt;Click&lt;/a&gt; to create a commandline
-interface.  So, I can get a changelog along with an audit of the migrations
-in my current branch using:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ ocotoeb changelog
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;I won&amp;rsquo;t describe the specific python code, instead I will give you equivalent bash commands
-that you can run in your CLI and a simple description of the regex that we
-are using. This will give you all the pieces you need to build a similar script
-in your favorite language.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-why&#34;&gt;The why&lt;/h2&gt;
-
-&lt;p&gt;The basic goal is to ensure that any applied migrations are backwards
-compatible with the model definitions in the currently deployed release. This
-is a requirement because our current deployment process looks like:&lt;/p&gt;
-
-&lt;ol&gt;
-&lt;li&gt;pull the new release code to a single server,&lt;/li&gt;
-&lt;li&gt;run the migrations,&lt;/li&gt;
-&lt;li&gt;restart the application,&lt;/li&gt;
-&lt;li&gt;check the application status,&lt;/li&gt;
-&lt;li&gt;slowly roll the code to the rest of the servers.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;As a result, during a deploy we have a mix of old model definitions and new
-model definitions running simultaneously.  This means that the database must
-except both the old and the new for a short period of time and that any change we make
-to the database should not lock up an entire table.&lt;/p&gt;
-
-&lt;p&gt;Probably the most common change we often want to make is simply adding a new
-column to an existing model.  This can present several issues.  First, your new
-column should not set a default.  In postgres, adding a column with a default will
-lock the table while it rewrites the existing rows with the default.  This can
-easily be avoided by adding the column first without the default, then adding
-the default, followed by a future backfill on the existing rows.  This will
-create the column and all future rows will have the default.&lt;/p&gt;
-
-&lt;p&gt;Implicit in the above recommendation is that all new columns must be nullable.
-You can not add a column without a default unless you allow null. Additionally,
-while the old models are running against the new table definitions, the app
-will set a value for that column, so it must either have a default or allow
-null otherwise Postgres will throw an error.&lt;/p&gt;
-
-&lt;p&gt;Finally, the other change that we need to watch for is removing columns. This
-is a multi-step process. If you drop a column while the old models are still
-active you will get two possible errors (1) when Django tries to select on
-that column that no longer exists (which it will because it always explicitly
-names the columns selected) or (2) attempting to insert data to a column that
-doesn&amp;rsquo;t exist anymore. To actually handle this type of model change you must
-deploy the model change prior to running the migration.  In our process, that
-means you must commit the model change in a release separate from the database
-migration.&lt;/p&gt;
-
-&lt;p&gt;There are certainly other cases to consider, but we have found these 3 cases to
-cover the vast majority of our migration concerns. Having put these checks into
-place, we rarely have any issues with database migrations during deploy.&lt;/p&gt;
-
-&lt;h2 id=&#34;the-how&#34;&gt;The how&lt;/h2&gt;
-
-&lt;h3 id=&#34;getting-your-list-of-migrations&#34;&gt;Getting your list of migrations&lt;/h3&gt;
-
-&lt;p&gt;To find the new migrations you can run the following command&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git log --name-status master.. | grep -e  &amp;quot;^[MA].*migrations.*&amp;quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Breaking this down, &lt;code&gt;git log --name-status master..&lt;/code&gt; will print a log of the
-commits and the file changes in each commit between &lt;code&gt;master&lt;/code&gt; and the current
-&lt;code&gt;HEAD&lt;/code&gt;.  The &lt;code&gt;grep&lt;/code&gt; returns only those lines that start with &lt;code&gt;A&lt;/code&gt; or &lt;code&gt;M&lt;/code&gt; and
-also contains the work &lt;code&gt;migrations&lt;/code&gt;.  These are all of the new or modified
-migration files.  It will return something like this&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;A	apps/accounts/migrations/0019_auto_20170126_1830.py
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&#34;getting-your-sql&#34;&gt;Getting your SQL&lt;/h3&gt;
-
-&lt;p&gt;Once you have the list of migration files that you need to check, we need to
-get the actual SQL that is going to be run by Django.  Fortunately, Django
-provides a simple command to get this SQL,
-&lt;a href=&#34;https://docs.djangoproject.com/en/1.10/ref/django-admin/#sqlmigrate&#34;&gt;&lt;code&gt;sqlmigrate&lt;/code&gt;&lt;/a&gt;.
-For example,&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;django-admin sqlmigrate account 0002
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;will print the sql for the second migration in the &lt;code&gt;accounts&lt;/code&gt; app. In the
-pervious section the ouput contains all of the information that we need.
-Specifically, with a command like this&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git log --name-status master.. | grep -e  &amp;quot;^[AM].*migrations.*&amp;quot; | cut -d / -f 2,4 | cut -d . -f 1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;we would get back exactly the list of apps and the migration name for each
-migration that we need to check&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;accounts/0017_auto_20170126_1342
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This still isn&amp;rsquo;t quite what we need.  At the end of the day the following
-command will generate the SQL for you&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git log --name-status master.. | grep -e  &amp;quot;^[AM].*migrations.*&amp;quot; | cut -d / -f 2,4 | cut -d . -f 1 | awk -F&amp;quot;/&amp;quot; &#39;{ print $1,$2}&#39; | xargs -t -L 1 django-admin sqlmigrate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;We are using python for our scripting, so my script is actually a bit
-different, using the regex &lt;code&gt;apps/((.*)/migrations/(\d+[0-9a-z_]*))\.py&lt;/code&gt; and a
-combination of a for loop and subprocess to generate the SQL.&lt;/p&gt;
-
-&lt;h3 id=&#34;regex-magic&#34;&gt;Regex magic&lt;/h3&gt;
-
-&lt;p&gt;Now that we have the actual SQL that needs to be tested, it is simply a matter
-of running a few regex tests. We have 3 core tests that we run:&lt;/p&gt;
-
-&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;check_for_not_null&lt;/code&gt; which we test using &lt;code&gt;/NOT NULL/&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;check_for_dropped_columns&lt;/code&gt; which we test using &lt;code&gt;/DROP COLUMN/&lt;/code&gt;,
-and&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;check_for_add_with_default&lt;/code&gt; which we test using &lt;code&gt;/ADD COLUMN .* DEFAULT/&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;For each migration, we test those 3 regex and alert if they have any matches.
-As I mentioned earlier, there are certainly other cases that could be
-considered. Let me know if there are some additional checks I should add.
-Since we have implemented these checkes, I can&amp;rsquo;t remember the last time we had
-a migration issue during a deploy so they seem to cover most of the use cases
-we run into.&lt;/p&gt;</description>
+&lt;p&gt;&lt;/p&gt;</description>
     </item>
     
   </channel>
