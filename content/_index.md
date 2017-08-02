@@ -1,11 +1,11 @@
 +++
-date = "2017-01-14T14:50:49-07:00"
+date = "2017-08-02T11:00:00-04:00"
 title = "home"
 +++
 
 ## Me
 
-I am director of engineering at [Teem.com](https://teem.com) and
+I am a senior engineer at [Contiamo](https://contiamo.com) and
 an ex-mathematician. I have worked on web applications, algorithms for
 image analysis, machine learning problems, and pure math research.
 

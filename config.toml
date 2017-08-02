@@ -19,9 +19,9 @@ canonifyurls = true
 
 [author]
   name = "Lucas Roesler"
-  bio = "I am director of engineering at <a href='https://teem.com'>teem.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research."
-  job = "Director of Engineering"
-  location = "Utah, USA"
+  bio = "I am senior engineer at <a href='https://contiamo.com'>contiamo.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research."
+  job = "Senior Engineer"
+  location = "Berlin, DE"
   # Your Gravatar email. Overwrite `author.picture` everywhere in the blog
   gravatarEmail = "roesler.lucas@gmail.com"
   # Overwritten by your gravatar image if `author.gravatarEmail` is filled
