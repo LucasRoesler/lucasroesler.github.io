@@ -6,10 +6,21 @@
     <description>Recent content in Programming on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Jun 2017 11:00:00 -0600</lastBuildDate>
+    <lastBuildDate>Wed, 02 Aug 2017 11:00:00 -0400</lastBuildDate>
     
 	<atom:link href="http://lucasroesler.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Berlin and Golang</title>
+      <link>http://lucasroesler.com/2017/08/berlin-and-golang/</link>
+      <pubDate>Wed, 02 Aug 2017 11:00:00 -0400</pubDate>
+      
+      <guid>http://lucasroesler.com/2017/08/berlin-and-golang/</guid>
+      <description>&lt;p&gt;At the beginning of the month I left &lt;a href=&#34;https://teem.com/&#34;&gt;Teem&lt;/a&gt; I was Directory of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at &lt;a href=&#34;https://www.contiamo.com/&#34;&gt;Contiamo&lt;/a&gt; and will be working on the &lt;a href=&#34;https://docs.contiamo.com/en/labs/&#34;&gt;Labs feature&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>SSL Expiry Quick and Simple</title>

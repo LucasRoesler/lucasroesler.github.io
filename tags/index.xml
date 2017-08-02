@@ -57,6 +57,15 @@
     </item>
     
     <item>
+      <title>Berlin</title>
+      <link>http://lucasroesler.com/tags/berlin/</link>
+      <pubDate>Wed, 02 Aug 2017 11:00:00 -0400</pubDate>
+      
+      <guid>http://lucasroesler.com/tags/berlin/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Culture</title>
       <link>http://lucasroesler.com/tags/culture/</link>
       <pubDate>Sat, 22 Apr 2017 12:16:11 -0600</pubDate>
@@ -80,6 +89,15 @@
       <pubDate>Sun, 19 Mar 2017 00:00:00 -0600</pubDate>
       
       <guid>http://lucasroesler.com/tags/git/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang</title>
+      <link>http://lucasroesler.com/tags/golang/</link>
+      <pubDate>Wed, 02 Aug 2017 11:00:00 -0400</pubDate>
+      
+      <guid>http://lucasroesler.com/tags/golang/</guid>
       <description></description>
     </item>
     
