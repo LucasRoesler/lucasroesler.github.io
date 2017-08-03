@@ -21,7 +21,7 @@ coverImage: https://farm1.staticflickr.com/217/522864770_f0eab013e7_b.jpg
 thumbnailImagePosition: left
 ---
 
-At the beginning of the month I left [Teem](https://teem.com/) I was Directory of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at [Contiamo](https://www.contiamo.com/) and will be working on the [Labs feature](https://docs.contiamo.com/en/labs/).
+At the beginning of the month I left [Teem](https://teem.com/) I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at [Contiamo](https://www.contiamo.com/) and will be working on the [Labs feature](https://docs.contiamo.com/en/labs/).
 
 <!--more-->
 
