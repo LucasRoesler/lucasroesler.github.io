@@ -11,6 +11,8 @@ keywords:
 - django
 comments: false
 showPagination: false
+draft: true
+date: {{ .Date }}
 ---
 
 <!--more-->
