@@ -1,5 +1,7 @@
 ---
-title: New Post
+draft: true
+date: {{ .Date }}
+title: "{{ replace .TranslationBaseName "-" " " | title }}"
 summary: Put stuff here
 categories:
 - programming
@@ -11,8 +13,9 @@ keywords:
 - django
 comments: false
 showPagination: false
-draft: true
-date: {{ .Date }}
+#thumbnailImage: //example.com/image.jpg
+#coverImage: //example.com/image.jpg
+#coverSize: partia
 ---
 
 <!--more-->

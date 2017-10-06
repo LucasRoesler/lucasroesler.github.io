@@ -20,6 +20,7 @@ autoThumbnailImage: true
 thumbnailImage: https://docs.google.com/drawings/d/e/2PACX-1vTBlHxSJLzjUG4EA9n8CLdmWfbUDBus2kHOlDt4KuVpVYCGzn6FTMAehfd7VaMx_uujOy3wp-zR_lOl/pub?w=422&h=160
 coverImage: https://docs.google.com/drawings/d/e/2PACX-1vTBlHxSJLzjUG4EA9n8CLdmWfbUDBus2kHOlDt4KuVpVYCGzn6FTMAehfd7VaMx_uujOy3wp-zR_lOl/pub?w=1267&h=479
 coverSize: partial
+#canonicalLink: https://blog.contiamo.com
 ---
 
 At [Contiamo](https://contiamo.com) I am currently working a project that will eventually integrate with [OpenFaaS](https://www.openfaas.com/).  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.
