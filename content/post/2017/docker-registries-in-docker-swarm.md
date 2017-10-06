@@ -22,11 +22,11 @@ coverImage: https://docs.google.com/drawings/d/e/2PACX-1vTBlHxSJLzjUG4EA9n8CLdmW
 coverSize: partial
 ---
 
-At [Contiamo](https://contiamo.com) I am currently working a project that eventually integrate with [OpenFaaS](https://www.openfaas.com/).  I am really excited about this project because we will soon bring some serverless magic to data scientist that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.
+At [Contiamo](https://contiamo.com) I am currently working a project that will eventually integrate with [OpenFaaS](https://www.openfaas.com/).  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.
 
 <!--more-->
 
-Ultimately, we will be deploying with [Kubernetes](https://kubernetes.io/) in production, but this is not exactly trivial to setup or simple to use as a dev environment. Yes there is [minikube](https://github.com/kubernetes/minikube), but I ultimately had a lot of headaches during my initial experimentation. Docker Swarm, on the otherhand, is baked right into Docker for Mac and I find that debugging Docker Services is simplier than K8 Pods. So, it should be an easy target for a simple dev environment.
+Ultimately, we will be deploying with [Kubernetes](https://kubernetes.io/) in production, but this is not exactly trivial to setup or simple to use as a dev environment. Yes there is [minikube](https://github.com/kubernetes/minikube), but I ultimately had a lot of headaches during my initial experimentation. Docker Swarm, on the other hand, is baked right into Docker for Mac and I find that debugging Docker Services is simplier than K8 Pods. So, it should be an easy target for a simple dev environment.
 
 For this post I have created a sample project called [builderpoc](https://github.com/LucasRoesler/builderpoc).  The basic idea is to have a "build server" that will build and tag an image, push it to a private repo, and then create an OpenFaaS function based on that image.  In this project, for simplicity, it is simply pulling the example `functions/wordcount` image and retagging it as `privatefunc/wordcount`.  There is no actual build step.  If you follow the [README in the repo](https://github.com/LucasRoesler/builderpoc/blob/master/README.md), the final configuration will result in the following diagram
 
