@@ -14,8 +14,7 @@ keywords:
 - swarm
 comments: false
 showPagination: false
-date: 2017-10-05T12:00:00Z
-draft: true
+date: 2017-10-09T12:00:00Z
 autoThumbnailImage: true
 thumbnailImage: https://docs.google.com/drawings/d/e/2PACX-1vTBlHxSJLzjUG4EA9n8CLdmWfbUDBus2kHOlDt4KuVpVYCGzn6FTMAehfd7VaMx_uujOy3wp-zR_lOl/pub?w=422&h=160
 coverImage: https://docs.google.com/drawings/d/e/2PACX-1vTBlHxSJLzjUG4EA9n8CLdmWfbUDBus2kHOlDt4KuVpVYCGzn6FTMAehfd7VaMx_uujOy3wp-zR_lOl/pub?w=1267&h=479
