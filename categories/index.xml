@@ -21,6 +21,15 @@
     </item>
     
     <item>
+      <title>Docker</title>
+      <link>http://lucasroesler.com/categories/docker/</link>
+      <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
+      
+      <guid>http://lucasroesler.com/categories/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Golang</title>
       <link>http://lucasroesler.com/categories/golang/</link>
       <pubDate>Wed, 02 Aug 2017 11:00:00 -0400</pubDate>
@@ -59,7 +68,7 @@
     <item>
       <title>Programming</title>
       <link>http://lucasroesler.com/categories/programming/</link>
-      <pubDate>Wed, 02 Aug 2017 11:00:00 -0400</pubDate>
+      <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
       
       <guid>http://lucasroesler.com/categories/programming/</guid>
       <description></description>

@@ -6,10 +6,21 @@
     <description>Recent content in Programming on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Wed, 02 Aug 2017 11:00:00 -0400</lastBuildDate>
+    <lastBuildDate>Mon, 09 Oct 2017 12:00:00 +0000</lastBuildDate>
     
 	<atom:link href="http://lucasroesler.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Deploying a private registry in Docker Swarm</title>
+      <link>http://lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</link>
+      <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
+      
+      <guid>http://lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</guid>
+      <description>&lt;p&gt;At &lt;a href=&#34;https://contiamo.com&#34;&gt;Contiamo&lt;/a&gt; I am currently working a project that will eventually integrate with &lt;a href=&#34;https://www.openfaas.com/&#34;&gt;OpenFaaS&lt;/a&gt;.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Berlin and Golang</title>

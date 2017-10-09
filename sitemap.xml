@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>http://lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</loc>
+    <lastmod>2017-10-09T12:00:00+00:00</lastmod>
+  </url>
+  
+  <url>
     <loc>http://lucasroesler.com/2017/08/berlin-and-golang/</loc>
     <lastmod>2017-08-02T11:00:00-04:00</lastmod>
   </url>
@@ -158,6 +163,24 @@
   </url>
   
   <url>
+    <loc>http://lucasroesler.com/tags/docker/</loc>
+    <lastmod>2017-10-09T12:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lucasroesler.com/categories/docker/</loc>
+    <lastmod>2017-10-09T12:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>http://lucasroesler.com/tags/docker-swarm/</loc>
+    <lastmod>2017-10-09T12:00:00+00:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>http://lucasroesler.com/tags/git/</loc>
     <lastmod>2017-03-19T00:00:00-06:00</lastmod>
     <priority>0</priority>
@@ -165,7 +188,7 @@
   
   <url>
     <loc>http://lucasroesler.com/tags/golang/</loc>
-    <lastmod>2017-08-02T11:00:00-04:00</lastmod>
+    <lastmod>2017-10-09T12:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -249,13 +272,13 @@
   
   <url>
     <loc>http://lucasroesler.com/post/</loc>
-    <lastmod>2017-08-02T11:00:00-04:00</lastmod>
+    <lastmod>2017-10-09T12:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>http://lucasroesler.com/categories/programming/</loc>
-    <lastmod>2017-08-02T11:00:00-04:00</lastmod>
+    <lastmod>2017-10-09T12:00:00+00:00</lastmod>
     <priority>0</priority>
   </url>
   

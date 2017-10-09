@@ -84,6 +84,24 @@
     </item>
     
     <item>
+      <title>Docker</title>
+      <link>http://lucasroesler.com/tags/docker/</link>
+      <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
+      
+      <guid>http://lucasroesler.com/tags/docker/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Docker Swarm</title>
+      <link>http://lucasroesler.com/tags/docker-swarm/</link>
+      <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
+      
+      <guid>http://lucasroesler.com/tags/docker-swarm/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Git</title>
       <link>http://lucasroesler.com/tags/git/</link>
       <pubDate>Sun, 19 Mar 2017 00:00:00 -0600</pubDate>
@@ -95,7 +113,7 @@
     <item>
       <title>Golang</title>
       <link>http://lucasroesler.com/tags/golang/</link>
-      <pubDate>Wed, 02 Aug 2017 11:00:00 -0400</pubDate>
+      <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
       
       <guid>http://lucasroesler.com/tags/golang/</guid>
       <description></description>
