@@ -10,13 +10,15 @@ A simple list of books that I am actively reading or have read recently.
 (Idea shamelessly stolen from [Susan J. Fowler](https://www.susanjfowler.com/reading-list/))
 
 ## Currently Reading
-- [Schismatrix Plus by Bruce Sterling](https://www.amazon.com/gp/product/B00PDDKVW6/)
+- [The Forever War by Joe Haldeman](https://www.amazon.com/Forever-War-ebook/dp/B00PI184XG) 
 
 ## Coming Soon
 - [The Handmaid's Tale by Margaret Atwood](https://www.amazon.com/dp/B003JFJHTS/)
 - [The Illiad trans. by Alexander Pope](https://www.amazon.com/gp/product/B0082TAAMO/)
 
 ## 2017
+- [Revenger by Alastair Reynolds](https://www.amazon.com/dp/B01LXW2IUQ)
+- [Schismatrix Plus by Bruce Sterling](https://www.amazon.com/gp/product/B00PDDKVW6/)
 - [The Player of Games by Iain M. Banks](https://www.amazon.com/dp/B002WM3HC2/ref=r_soa_w_d)
 - [Spymaster by Margaret Weis and Robert
     Krammes](https://www.amazon.com/gp/product/B01L7B9VG4/)
