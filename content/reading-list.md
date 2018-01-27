@@ -1,5 +1,5 @@
 ---
-date: 2017-02-25T00:00:00-07:00
+date: 2018-01-27T00:00:00-07:00
 draft: false
 title: Reading list
 type: reading-list
@@ -10,13 +10,15 @@ A simple list of books that I am actively reading or have read recently.
 (Idea shamelessly stolen from [Susan J. Fowler](https://www.susanjfowler.com/reading-list/))
 
 ## Currently Reading
-- [The Forever War by Joe Haldeman](https://www.amazon.com/Forever-War-ebook/dp/B00PI184XG) 
+- [The Rise and Fall of D.O.D.O. by  Neal Stephenson and  Nicole Galland](https://www.amazon.com/gp/product/B01M0HPHR6)
+- [Meditations by Marcus Aurelius](https://www.amazon.com/gp/product/B000FC1JAI)
 
 ## Coming Soon
 - [The Handmaid's Tale by Margaret Atwood](https://www.amazon.com/dp/B003JFJHTS/)
 - [The Illiad trans. by Alexander Pope](https://www.amazon.com/gp/product/B0082TAAMO/)
 
 ## 2017
+- [The Forever War by Joe Haldeman](https://www.amazon.com/Forever-War-ebook/dp/B00PI184XG)
 - [Revenger by Alastair Reynolds](https://www.amazon.com/dp/B01LXW2IUQ)
 - [Schismatrix Plus by Bruce Sterling](https://www.amazon.com/gp/product/B00PDDKVW6/)
 - [The Player of Games by Iain M. Banks](https://www.amazon.com/dp/B002WM3HC2/ref=r_soa_w_d)
