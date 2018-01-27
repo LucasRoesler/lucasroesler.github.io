@@ -16,7 +16,7 @@
           </div>
         </article>
         <section class="postShorten-group main-content-wrap">
-          {{ range first 1 (where .Data.Pages.ByPublishDate "Type" "post") }}
+          {{ range last 1 (where .Data.Pages.ByPublishDate "Type" "post") }}
             {{ .Render "latest" }}
           {{ end }}
         </section>
