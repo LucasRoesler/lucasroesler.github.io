@@ -12,6 +12,29 @@
     
     
     <item>
+      <title>Reading list</title>
+      <link>http://lucasroesler.com/reading-list/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 -0700</pubDate>
+      
+      <guid>http://lucasroesler.com/reading-list/</guid>
+      <description>My Reading List A simple list of books that I am actively reading or have read recently. (Idea shamelessly stolen from Susan J. Fowler)
+Currently Reading  The Rise and Fall of D.O.D.O. by Neal Stephenson and Nicole Galland Meditations by Marcus Aurelius  Coming Soon  The Handmaid&amp;rsquo;s Tale by Margaret Atwood The Illiad trans. by Alexander Pope  2017  The Forever War by Joe Haldeman Revenger by Alastair Reynolds Schismatrix Plus by Bruce Sterling The Player of Games by Iain M.</description>
+    </item>
+    
+    <item>
+      <title>Struct embedding for custom dev responses</title>
+      <link>http://lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 -0600</pubDate>
+      
+      <guid>http://lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</guid>
+      <description>&lt;p&gt;I had to learn about Go struct embedding the other day and I wanted to document my
+fix. In my use case I wanted to add some extra information to an API response to include
+some meta data from kubernetes cluster and/or some extra error information.&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>Deploying a private registry in Docker Swarm</title>
       <link>http://lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</link>
       <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
@@ -156,16 +179,6 @@ friend and never my enemy.
 with a smooth mouth-feel and dense, whipped-cream head.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Reading list</title>
-      <link>http://lucasroesler.com/reading-list/</link>
-      <pubDate>Sat, 25 Feb 2017 00:00:00 -0700</pubDate>
-      
-      <guid>http://lucasroesler.com/reading-list/</guid>
-      <description>My Reading List A simple list of books that I am actively reading or have read recently. (Idea shamelessly stolen from Susan J. Fowler)
-Currently Reading  The Forever War by Joe Haldeman  Coming Soon  The Handmaid&amp;rsquo;s Tale by Margaret Atwood The Illiad trans. by Alexander Pope  2017  Revenger by Alastair Reynolds Schismatrix Plus by Bruce Sterling The Player of Games by Iain M. Banks Spymaster by Margaret Weis and Robert Krammes New Earth by Ben Bova 13.</description>
     </item>
     
     <item>
