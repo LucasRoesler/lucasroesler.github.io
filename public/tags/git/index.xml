@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Git on Lucas Roesler</title>
-    <link>http://lucasroesler.com/tags/git/</link>
+    <link>//lucasroesler.com/tags/git/</link>
     <description>Recent content in Git on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 19 Mar 2017 00:00:00 -0600</lastBuildDate>
     
-	<atom:link href="http://lucasroesler.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//lucasroesler.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>How I Git</title>
-      <link>http://lucasroesler.com/2017/03/how-i-git/</link>
+      <link>//lucasroesler.com/2017/03/how-i-git/</link>
       <pubDate>Sun, 19 Mar 2017 00:00:00 -0600</pubDate>
       
-      <guid>http://lucasroesler.com/2017/03/how-i-git/</guid>
+      <guid>//lucasroesler.com/2017/03/how-i-git/</guid>
       <description>&lt;p&gt;Perhaps the one piece of ubiquitous technology that you will find at any new
 tech company is &lt;code&gt;git&lt;/code&gt;.  There are a couple of other technologies that you will
 probably find, like AWS, but &lt;code&gt;git&lt;/code&gt; is the only one I expect to find everywhere. It is

@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Rye on Lucas Roesler</title>
-    <link>http://lucasroesler.com/tags/rye/</link>
+    <link>//lucasroesler.com/tags/rye/</link>
     <description>Recent content in Rye on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 08 Jul 2017 00:00:00 +0000</lastBuildDate>
     
-	<atom:link href="http://lucasroesler.com/tags/rye/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//lucasroesler.com/tags/rye/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Home Brewers Association Ruthless Rye Clone</title>
-      <link>http://lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/</link>
+      <link>//lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/</link>
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/</guid>
+      <guid>//lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/</guid>
       <description>&lt;p&gt;This recipe is inspired by the &lt;a href=&#34;https://www.homebrewersassociation.org/homebrew-recipe/sierra-nevada-ruthless-rye-clone/&#34;&gt;Seirra Nevada Ruthless Rye Clone&lt;/a&gt; written up by the Home Brewers Association.  I have adjusted it to be a partial mash recipe with about 8 lbs of grains.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>

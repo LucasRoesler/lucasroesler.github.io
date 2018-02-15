@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Misc on Lucas Roesler</title>
-    <link>http://lucasroesler.com/categories/misc/</link>
+    <link>//lucasroesler.com/categories/misc/</link>
     <description>Recent content in Misc on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 15 Jan 2017 00:00:00 -0700</lastBuildDate>
     
-	<atom:link href="http://lucasroesler.com/categories/misc/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//lucasroesler.com/categories/misc/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>hello</title>
-      <link>http://lucasroesler.com/2017/01/hello/</link>
+      <link>//lucasroesler.com/2017/01/hello/</link>
       <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/01/hello/</guid>
+      <guid>//lucasroesler.com/2017/01/hello/</guid>
       <description>&lt;p&gt;Welcome! This is just a test post, a proof of life.&lt;/p&gt;</description>
     </item>
     
