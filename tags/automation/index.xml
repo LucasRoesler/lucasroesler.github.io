@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Automation on Lucas Roesler</title>
-    <link>http://lucasroesler.com/tags/automation/</link>
+    <link>//lucasroesler.com/tags/automation/</link>
     <description>Recent content in Automation on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 20 Feb 2017 00:00:00 -0700</lastBuildDate>
     
-	<atom:link href="http://lucasroesler.com/tags/automation/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//lucasroesler.com/tags/automation/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
-      <link>http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
+      <link>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
+      <guid>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
       <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!&lt;/p&gt;
 

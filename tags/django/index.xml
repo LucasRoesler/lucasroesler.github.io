@@ -2,30 +2,30 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Django on Lucas Roesler</title>
-    <link>http://lucasroesler.com/tags/django/</link>
+    <link>//lucasroesler.com/tags/django/</link>
     <description>Recent content in Django on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 02 Apr 2017 00:00:00 -0700</lastBuildDate>
     
-	<atom:link href="http://lucasroesler.com/tags/django/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//lucasroesler.com/tags/django/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Delete or not to delete</title>
-      <link>http://lucasroesler.com/2017/04/delete-or-not-to-delete/</link>
+      <link>//lucasroesler.com/2017/04/delete-or-not-to-delete/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/04/delete-or-not-to-delete/</guid>
+      <guid>//lucasroesler.com/2017/04/delete-or-not-to-delete/</guid>
       <description>Should you remove data from the database or simply mark it as deleted? At Teem we have a lot of data that we need to manage and often &amp;ldquo;physically&amp;rdquo; deleting the data from disk can be problematic. Either the users simply wants to undelete something or the deletion would cause problems for a log. The generic solution to this problem is to soft delete/archive the data by adding a deleted_at timestamp field to the table and then filter all queries to hide rows that have been marked as deleted.</description>
     </item>
     
     <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
-      <link>http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
+      <link>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
+      <guid>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
       <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!&lt;/p&gt;
 
@@ -43,10 +43,10 @@ ensure that each database migration will be backwards compatible.&lt;/p&gt;
     
     <item>
       <title>Postgres Joins and Django Querysets</title>
-      <link>http://lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</link>
+      <link>//lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</link>
       <pubDate>Mon, 06 Feb 2017 20:00:00 +0000</pubDate>
       
-      <guid>http://lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</guid>
+      <guid>//lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</guid>
       <description>How do we build a fast API against database models with foreign keys and many- to-many relationships? If you do nothing you get what I call the &amp;ldquo;waterfall of doom&amp;rdquo;. At some point in the past someone told me or I read that &amp;ldquo;joins are effectively free in Postgres&amp;rdquo;. While this might be somewhat true when you are writing all of the SQL and can control every part of your query; I have recently found that when the database gets big enough and you are using the Django ORM, joins aren&amp;rsquo;t free and less can be more!</description>
     </item>
     

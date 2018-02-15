@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Programming on Lucas Roesler</title>
-    <link>http://lucasroesler.com/categories/programming/</link>
+    <link>//lucasroesler.com/categories/programming/</link>
     <description>Recent content in Programming on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 27 Jan 2018 00:00:00 -0600</lastBuildDate>
     
-	<atom:link href="http://lucasroesler.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//lucasroesler.com/categories/programming/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Struct embedding for custom dev responses</title>
-      <link>http://lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</link>
+      <link>//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 -0600</pubDate>
       
-      <guid>http://lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</guid>
+      <guid>//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</guid>
       <description>&lt;p&gt;I had to learn about Go struct embedding the other day and I wanted to document my
 fix. In my use case I wanted to add some extra information to an API response to include
 some meta data from kubernetes cluster and/or some extra error information.&lt;/p&gt;
@@ -26,10 +26,10 @@ some meta data from kubernetes cluster and/or some extra error information.&lt;/
     
     <item>
       <title>Deploying a private registry in Docker Swarm</title>
-      <link>http://lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</link>
+      <link>//lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</link>
       <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
       
-      <guid>http://lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</guid>
+      <guid>//lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</guid>
       <description>&lt;p&gt;At &lt;a href=&#34;https://contiamo.com&#34;&gt;Contiamo&lt;/a&gt; I am currently working a project that will eventually integrate with &lt;a href=&#34;https://www.openfaas.com/&#34;&gt;OpenFaaS&lt;/a&gt;.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -37,10 +37,10 @@ some meta data from kubernetes cluster and/or some extra error information.&lt;/
     
     <item>
       <title>Berlin and Golang</title>
-      <link>http://lucasroesler.com/2017/08/berlin-and-golang/</link>
+      <link>//lucasroesler.com/2017/08/berlin-and-golang/</link>
       <pubDate>Wed, 02 Aug 2017 11:00:00 -0400</pubDate>
       
-      <guid>http://lucasroesler.com/2017/08/berlin-and-golang/</guid>
+      <guid>//lucasroesler.com/2017/08/berlin-and-golang/</guid>
       <description>&lt;p&gt;At the beginning of the month I left &lt;a href=&#34;https://teem.com/&#34;&gt;Teem&lt;/a&gt; I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at &lt;a href=&#34;https://www.contiamo.com/&#34;&gt;Contiamo&lt;/a&gt; and will be working on the &lt;a href=&#34;https://docs.contiamo.com/en/labs/&#34;&gt;Labs feature&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -48,20 +48,20 @@ some meta data from kubernetes cluster and/or some extra error information.&lt;/
     
     <item>
       <title>SSL Expiry Quick and Simple</title>
-      <link>http://lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</link>
+      <link>//lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</link>
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
-      <guid>http://lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</guid>
+      <guid>//lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</guid>
       <description>&lt;p&gt;Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&amp;rsquo;t last forever, we know this when we setup SSL but that doesn&amp;rsquo;t stop it from sneaking up on us.  It has happened to the big guys like &lt;a href=&#34;https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58&#34;&gt;Instagram&lt;/a&gt; and &lt;a href=&#34;http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html&#34;&gt;Google&lt;/a&gt;, at &lt;a href=&#34;http://status.teem.com/incidents/ddtys5ss4mw5&#34;&gt;Teem recently&lt;/a&gt;, and of course for myself with my own home server.
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Your API&#39;s rat nest</title>
-      <link>http://lucasroesler.com/2017/06/your-apis-rat-nest/</link>
+      <link>//lucasroesler.com/2017/06/your-apis-rat-nest/</link>
       <pubDate>Mon, 05 Jun 2017 21:22:00 -0600</pubDate>
       
-      <guid>http://lucasroesler.com/2017/06/your-apis-rat-nest/</guid>
+      <guid>//lucasroesler.com/2017/06/your-apis-rat-nest/</guid>
       <description>&lt;p&gt;Recently, I have seen several articles talking about RESTful API design.  Of
 course this is also a common topic of discussion for the engineers at Teem.  I
 want to use (and write) APIs that are easy to understand and explain and the
@@ -73,19 +73,19 @@ simpler to document and simpler to maintain and ultimately, easier to use.&lt;/p
     
     <item>
       <title>Delete or not to delete</title>
-      <link>http://lucasroesler.com/2017/04/delete-or-not-to-delete/</link>
+      <link>//lucasroesler.com/2017/04/delete-or-not-to-delete/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/04/delete-or-not-to-delete/</guid>
+      <guid>//lucasroesler.com/2017/04/delete-or-not-to-delete/</guid>
       <description>Should you remove data from the database or simply mark it as deleted? At Teem we have a lot of data that we need to manage and often &amp;ldquo;physically&amp;rdquo; deleting the data from disk can be problematic. Either the users simply wants to undelete something or the deletion would cause problems for a log. The generic solution to this problem is to soft delete/archive the data by adding a deleted_at timestamp field to the table and then filter all queries to hide rows that have been marked as deleted.</description>
     </item>
     
     <item>
       <title>How I Git</title>
-      <link>http://lucasroesler.com/2017/03/how-i-git/</link>
+      <link>//lucasroesler.com/2017/03/how-i-git/</link>
       <pubDate>Sun, 19 Mar 2017 00:00:00 -0600</pubDate>
       
-      <guid>http://lucasroesler.com/2017/03/how-i-git/</guid>
+      <guid>//lucasroesler.com/2017/03/how-i-git/</guid>
       <description>&lt;p&gt;Perhaps the one piece of ubiquitous technology that you will find at any new
 tech company is &lt;code&gt;git&lt;/code&gt;.  There are a couple of other technologies that you will
 probably find, like AWS, but &lt;code&gt;git&lt;/code&gt; is the only one I expect to find everywhere. It is
@@ -97,10 +97,10 @@ friend and never my enemy.
     
     <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
-      <link>http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
+      <link>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
+      <guid>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
       <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!&lt;/p&gt;
 
@@ -118,10 +118,10 @@ ensure that each database migration will be backwards compatible.&lt;/p&gt;
     
     <item>
       <title>Postgres Joins and Django Querysets</title>
-      <link>http://lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</link>
+      <link>//lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</link>
       <pubDate>Mon, 06 Feb 2017 20:00:00 +0000</pubDate>
       
-      <guid>http://lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</guid>
+      <guid>//lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</guid>
       <description>How do we build a fast API against database models with foreign keys and many- to-many relationships? If you do nothing you get what I call the &amp;ldquo;waterfall of doom&amp;rdquo;. At some point in the past someone told me or I read that &amp;ldquo;joins are effectively free in Postgres&amp;rdquo;. While this might be somewhat true when you are writing all of the SQL and can control every part of your query; I have recently found that when the database gets big enough and you are using the Django ORM, joins aren&amp;rsquo;t free and less can be more!</description>
     </item>
     

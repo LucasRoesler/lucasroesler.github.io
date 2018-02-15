@@ -2,21 +2,21 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Beer on Lucas Roesler</title>
-    <link>http://lucasroesler.com/categories/beer/</link>
+    <link>//lucasroesler.com/categories/beer/</link>
     <description>Recent content in Beer on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 05 Mar 2017 00:00:00 -0700</lastBuildDate>
     
-	<atom:link href="http://lucasroesler.com/categories/beer/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//lucasroesler.com/categories/beer/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>A spring Hefe</title>
-      <link>http://lucasroesler.com/2017/03/a-spring-hefe/</link>
+      <link>//lucasroesler.com/2017/03/a-spring-hefe/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/03/a-spring-hefe/</guid>
+      <guid>//lucasroesler.com/2017/03/a-spring-hefe/</guid>
       <description>&lt;p&gt;A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
 with a smooth mouth-feel and dense, whipped-cream head.&lt;/p&gt;
 
@@ -25,10 +25,10 @@ with a smooth mouth-feel and dense, whipped-cream head.&lt;/p&gt;
     
     <item>
       <title>Spicy Winter Porter</title>
-      <link>http://lucasroesler.com/2017/01/spicy-winter-porter/</link>
+      <link>//lucasroesler.com/2017/01/spicy-winter-porter/</link>
       <pubDate>Sun, 15 Jan 2017 13:48:19 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/01/spicy-winter-porter/</guid>
+      <guid>//lucasroesler.com/2017/01/spicy-winter-porter/</guid>
       <description>&lt;p&gt;I just finished my winter beer.  I usually do one dark spicy beer for the winter
 season. Last year was the &amp;ldquo;Better Not Pout Stout&amp;rdquo;, this year is the less
 excitingly named &amp;ldquo;Spicy Winter Porter&amp;rdquo;.&lt;/p&gt;

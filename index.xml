@@ -2,31 +2,31 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>home on Lucas Roesler</title>
-    <link>http://lucasroesler.com/</link>
+    <link>//lucasroesler.com/</link>
     <description>Recent content in home on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Wed, 02 Aug 2017 11:00:00 -0400</lastBuildDate>
     
-	<atom:link href="http://lucasroesler.com/index.xml" rel="self" type="application/rss+xml" />
+	<atom:link href="//lucasroesler.com/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
       <title>Reading list</title>
-      <link>http://lucasroesler.com/reading-list/</link>
+      <link>//lucasroesler.com/reading-list/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/reading-list/</guid>
+      <guid>//lucasroesler.com/reading-list/</guid>
       <description>My Reading List A simple list of books that I am actively reading or have read recently. (Idea shamelessly stolen from Susan J. Fowler)
 Currently Reading  The Rise and Fall of D.O.D.O. by Neal Stephenson and Nicole Galland Meditations by Marcus Aurelius  Coming Soon  The Handmaid&amp;rsquo;s Tale by Margaret Atwood The Illiad trans. by Alexander Pope  2017  The Forever War by Joe Haldeman Revenger by Alastair Reynolds Schismatrix Plus by Bruce Sterling The Player of Games by Iain M.</description>
     </item>
     
     <item>
       <title>Struct embedding for custom dev responses</title>
-      <link>http://lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</link>
+      <link>//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 -0600</pubDate>
       
-      <guid>http://lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</guid>
+      <guid>//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</guid>
       <description>&lt;p&gt;I had to learn about Go struct embedding the other day and I wanted to document my
 fix. In my use case I wanted to add some extra information to an API response to include
 some meta data from kubernetes cluster and/or some extra error information.&lt;/p&gt;
@@ -36,10 +36,10 @@ some meta data from kubernetes cluster and/or some extra error information.&lt;/
     
     <item>
       <title>Deploying a private registry in Docker Swarm</title>
-      <link>http://lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</link>
+      <link>//lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</link>
       <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
       
-      <guid>http://lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</guid>
+      <guid>//lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</guid>
       <description>&lt;p&gt;At &lt;a href=&#34;https://contiamo.com&#34;&gt;Contiamo&lt;/a&gt; I am currently working a project that will eventually integrate with &lt;a href=&#34;https://www.openfaas.com/&#34;&gt;OpenFaaS&lt;/a&gt;.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -47,10 +47,10 @@ some meta data from kubernetes cluster and/or some extra error information.&lt;/
     
     <item>
       <title>Berlin and Golang</title>
-      <link>http://lucasroesler.com/2017/08/berlin-and-golang/</link>
+      <link>//lucasroesler.com/2017/08/berlin-and-golang/</link>
       <pubDate>Wed, 02 Aug 2017 11:00:00 -0400</pubDate>
       
-      <guid>http://lucasroesler.com/2017/08/berlin-and-golang/</guid>
+      <guid>//lucasroesler.com/2017/08/berlin-and-golang/</guid>
       <description>&lt;p&gt;At the beginning of the month I left &lt;a href=&#34;https://teem.com/&#34;&gt;Teem&lt;/a&gt; I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at &lt;a href=&#34;https://www.contiamo.com/&#34;&gt;Contiamo&lt;/a&gt; and will be working on the &lt;a href=&#34;https://docs.contiamo.com/en/labs/&#34;&gt;Labs feature&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -58,10 +58,10 @@ some meta data from kubernetes cluster and/or some extra error information.&lt;/
     
     <item>
       <title>Home Brewers Association Ruthless Rye Clone</title>
-      <link>http://lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/</link>
+      <link>//lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/</link>
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/</guid>
+      <guid>//lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/</guid>
       <description>&lt;p&gt;This recipe is inspired by the &lt;a href=&#34;https://www.homebrewersassociation.org/homebrew-recipe/sierra-nevada-ruthless-rye-clone/&#34;&gt;Seirra Nevada Ruthless Rye Clone&lt;/a&gt; written up by the Home Brewers Association.  I have adjusted it to be a partial mash recipe with about 8 lbs of grains.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -69,10 +69,10 @@ some meta data from kubernetes cluster and/or some extra error information.&lt;/
     
     <item>
       <title>Salt City Brew Supply Orange Honey Wheat</title>
-      <link>http://lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/</link>
+      <link>//lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/</link>
       <pubDate>Sat, 24 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>http://lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/</guid>
+      <guid>//lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/</guid>
       <description>&lt;p&gt;I just finished my first official &amp;ldquo;summer beer&amp;rdquo; of the year, an Orange Honey Wheat.  This one was inspire by my wife while at the store &amp;ldquo;you should do this one, it uses Utah honey!&amp;rdquo;, thank you &lt;a href=&#34;http://techlady.ninja&#34;&gt;tech lady ninja&lt;/a&gt;.&lt;/p&gt;
 
 &lt;p&gt;&lt;/p&gt;</description>
@@ -80,20 +80,20 @@ some meta data from kubernetes cluster and/or some extra error information.&lt;/
     
     <item>
       <title>SSL Expiry Quick and Simple</title>
-      <link>http://lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</link>
+      <link>//lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</link>
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
-      <guid>http://lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</guid>
+      <guid>//lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</guid>
       <description>&lt;p&gt;Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&amp;rsquo;t last forever, we know this when we setup SSL but that doesn&amp;rsquo;t stop it from sneaking up on us.  It has happened to the big guys like &lt;a href=&#34;https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58&#34;&gt;Instagram&lt;/a&gt; and &lt;a href=&#34;http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html&#34;&gt;Google&lt;/a&gt;, at &lt;a href=&#34;http://status.teem.com/incidents/ddtys5ss4mw5&#34;&gt;Teem recently&lt;/a&gt;, and of course for myself with my own home server.
 &lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Your API&#39;s rat nest</title>
-      <link>http://lucasroesler.com/2017/06/your-apis-rat-nest/</link>
+      <link>//lucasroesler.com/2017/06/your-apis-rat-nest/</link>
       <pubDate>Mon, 05 Jun 2017 21:22:00 -0600</pubDate>
       
-      <guid>http://lucasroesler.com/2017/06/your-apis-rat-nest/</guid>
+      <guid>//lucasroesler.com/2017/06/your-apis-rat-nest/</guid>
       <description>&lt;p&gt;Recently, I have seen several articles talking about RESTful API design.  Of
 course this is also a common topic of discussion for the engineers at Teem.  I
 want to use (and write) APIs that are easy to understand and explain and the
@@ -105,11 +105,11 @@ simpler to document and simpler to maintain and ultimately, easier to use.&lt;/p
     
     <item>
       <title>Take Care of Your People</title>
-      <link>http://lucasroesler.com/2017/05/take-care-of-your-people/</link>
+      <link>//lucasroesler.com/2017/05/take-care-of-your-people/</link>
       <pubDate>Sun, 21 May 2017 22:00:00 -0600</pubDate>
       
-      <guid>http://lucasroesler.com/2017/05/take-care-of-your-people/</guid>
-      <description>&lt;p&gt;When I first started this blog, I started with &lt;a href=&#34;http://lucasroesler.com/2017/01/my-management-philosophy/&#34;&gt;My Management Philosophy&lt;/a&gt;.  In short,&lt;/p&gt;
+      <guid>//lucasroesler.com/2017/05/take-care-of-your-people/</guid>
+      <description>&lt;p&gt;When I first started this blog, I started with &lt;a href=&#34;//lucasroesler.com/2017/01/my-management-philosophy/&#34;&gt;My Management Philosophy&lt;/a&gt;.  In short,&lt;/p&gt;
 
 &lt;blockquote&gt;
 &lt;p&gt;be a multiplier for your team and reduce friction&amp;hellip;
@@ -125,10 +125,10 @@ this is that good leadership requires &lt;em&gt;empathy&lt;/em&gt; and &lt;em&gt
     
     <item>
       <title>Living Our Culture at Teem via Peer Reviews</title>
-      <link>http://lucasroesler.com/2017/04/living-our-culture-at-teem-via-peer-reviews/</link>
+      <link>//lucasroesler.com/2017/04/living-our-culture-at-teem-via-peer-reviews/</link>
       <pubDate>Sat, 22 Apr 2017 12:16:11 -0600</pubDate>
       
-      <guid>http://lucasroesler.com/2017/04/living-our-culture-at-teem-via-peer-reviews/</guid>
+      <guid>//lucasroesler.com/2017/04/living-our-culture-at-teem-via-peer-reviews/</guid>
       <description>&lt;p&gt;About a year ago we set down to document the core values of the engineering at
 Teem. After a lot of discussion we narrowed it to three core ideas&lt;/p&gt;
 
@@ -147,19 +147,19 @@ and that measuring commitment to our core values is even harder.
     
     <item>
       <title>Delete or not to delete</title>
-      <link>http://lucasroesler.com/2017/04/delete-or-not-to-delete/</link>
+      <link>//lucasroesler.com/2017/04/delete-or-not-to-delete/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/04/delete-or-not-to-delete/</guid>
+      <guid>//lucasroesler.com/2017/04/delete-or-not-to-delete/</guid>
       <description>Should you remove data from the database or simply mark it as deleted? At Teem we have a lot of data that we need to manage and often &amp;ldquo;physically&amp;rdquo; deleting the data from disk can be problematic. Either the users simply wants to undelete something or the deletion would cause problems for a log. The generic solution to this problem is to soft delete/archive the data by adding a deleted_at timestamp field to the table and then filter all queries to hide rows that have been marked as deleted.</description>
     </item>
     
     <item>
       <title>How I Git</title>
-      <link>http://lucasroesler.com/2017/03/how-i-git/</link>
+      <link>//lucasroesler.com/2017/03/how-i-git/</link>
       <pubDate>Sun, 19 Mar 2017 00:00:00 -0600</pubDate>
       
-      <guid>http://lucasroesler.com/2017/03/how-i-git/</guid>
+      <guid>//lucasroesler.com/2017/03/how-i-git/</guid>
       <description>&lt;p&gt;Perhaps the one piece of ubiquitous technology that you will find at any new
 tech company is &lt;code&gt;git&lt;/code&gt;.  There are a couple of other technologies that you will
 probably find, like AWS, but &lt;code&gt;git&lt;/code&gt; is the only one I expect to find everywhere. It is
@@ -171,10 +171,10 @@ friend and never my enemy.
     
     <item>
       <title>A spring Hefe</title>
-      <link>http://lucasroesler.com/2017/03/a-spring-hefe/</link>
+      <link>//lucasroesler.com/2017/03/a-spring-hefe/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/03/a-spring-hefe/</guid>
+      <guid>//lucasroesler.com/2017/03/a-spring-hefe/</guid>
       <description>&lt;p&gt;A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
 with a smooth mouth-feel and dense, whipped-cream head.&lt;/p&gt;
 
@@ -183,10 +183,10 @@ with a smooth mouth-feel and dense, whipped-cream head.&lt;/p&gt;
     
     <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
-      <link>http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
+      <link>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
+      <guid>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
       <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!&lt;/p&gt;
 
@@ -204,19 +204,19 @@ ensure that each database migration will be backwards compatible.&lt;/p&gt;
     
     <item>
       <title>Postgres Joins and Django Querysets</title>
-      <link>http://lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</link>
+      <link>//lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</link>
       <pubDate>Mon, 06 Feb 2017 20:00:00 +0000</pubDate>
       
-      <guid>http://lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</guid>
+      <guid>//lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</guid>
       <description>How do we build a fast API against database models with foreign keys and many- to-many relationships? If you do nothing you get what I call the &amp;ldquo;waterfall of doom&amp;rdquo;. At some point in the past someone told me or I read that &amp;ldquo;joins are effectively free in Postgres&amp;rdquo;. While this might be somewhat true when you are writing all of the SQL and can control every part of your query; I have recently found that when the database gets big enough and you are using the Django ORM, joins aren&amp;rsquo;t free and less can be more!</description>
     </item>
     
     <item>
       <title>My Management Philosophy</title>
-      <link>http://lucasroesler.com/2017/01/my-management-philosophy/</link>
+      <link>//lucasroesler.com/2017/01/my-management-philosophy/</link>
       <pubDate>Sun, 29 Jan 2017 20:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/01/my-management-philosophy/</guid>
+      <guid>//lucasroesler.com/2017/01/my-management-philosophy/</guid>
       <description>&lt;p&gt;The other day I was having lunch with a friend when he asked what resources I
 use to learn about management and tech leadership in general. I will share
 some recommendations at the end, but my answer to him got me thinking about
@@ -230,10 +230,10 @@ want to share here.&lt;/p&gt;
     
     <item>
       <title>Spicy Winter Porter</title>
-      <link>http://lucasroesler.com/2017/01/spicy-winter-porter/</link>
+      <link>//lucasroesler.com/2017/01/spicy-winter-porter/</link>
       <pubDate>Sun, 15 Jan 2017 13:48:19 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/01/spicy-winter-porter/</guid>
+      <guid>//lucasroesler.com/2017/01/spicy-winter-porter/</guid>
       <description>&lt;p&gt;I just finished my winter beer.  I usually do one dark spicy beer for the winter
 season. Last year was the &amp;ldquo;Better Not Pout Stout&amp;rdquo;, this year is the less
 excitingly named &amp;ldquo;Spicy Winter Porter&amp;rdquo;.&lt;/p&gt;
@@ -243,19 +243,19 @@ excitingly named &amp;ldquo;Spicy Winter Porter&amp;rdquo;.&lt;/p&gt;
     
     <item>
       <title>hello</title>
-      <link>http://lucasroesler.com/2017/01/hello/</link>
+      <link>//lucasroesler.com/2017/01/hello/</link>
       <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
       
-      <guid>http://lucasroesler.com/2017/01/hello/</guid>
+      <guid>//lucasroesler.com/2017/01/hello/</guid>
       <description>&lt;p&gt;Welcome! This is just a test post, a proof of life.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Lucas Roesler</title>
-      <link>http://lucasroesler.com/resume/</link>
+      <link>//lucasroesler.com/resume/</link>
       <pubDate>Fri, 21 Jun 2013 11:27:27 -0400</pubDate>
       
-      <guid>http://lucasroesler.com/resume/</guid>
+      <guid>//lucasroesler.com/resume/</guid>
       <description>Lucas Roesler Salt Lake City, UT 84047
 roesler.lucas@gmail.com
 https://github.com/LucasRoesler
