@@ -289,20 +289,20 @@ You can find some of my coding projects on <a href="https://github.com/LucasRoes
     
     <div class="postShorten-header">
       <h2 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/">
-          Latest Post: Struct embedding for custom dev responses
+        <a class="link-unstyled" href="//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/">
+          Latest Post: Golang long-polling: a tale of server timeouts
         </a>
       </h2>
       
   <div class="postShorten-meta post-meta">
     
-      <time itemprop="datePublished" datetime="2018-01-27T00:00:00-06:00">
+      <time itemprop="datePublished" datetime="2018-07-29T00:00:00&#43;02:00">
         
   
   
   
   
-    2018-01-27
+    2018-07-29
   
 
       </time>
@@ -314,7 +314,11 @@ You can find some of my coding projects on <a href="https://github.com/LucasRoes
     
       <a class="category-link" href="//lucasroesler.com/categories/programming">programming</a>, 
     
-      <a class="category-link" href="//lucasroesler.com/categories/golang">golang</a>
+      <a class="category-link" href="//lucasroesler.com/categories/golang">golang</a>, 
+    
+      <a class="category-link" href="//lucasroesler.com/categories/server">server</a>, 
+    
+      <a class="category-link" href="//lucasroesler.com/categories/http">http</a>
     
   
 
@@ -323,14 +327,14 @@ You can find some of my coding projects on <a href="https://github.com/LucasRoes
     </div>
     <div class="postShorten-excerpt" itemprop="articleBody">
       <p>
-        <p>I had to learn about Go struct embedding the other day and I wanted to document my
-fix. In my use case I wanted to add some extra information to an API response to include
-some meta data from kubernetes cluster and/or some extra error information.</p>
+        <p>I recently had a week long battle implementing HTTP long-polling. As so often
+happens in long debugging session in software development, my final fix was
+one line!</p>
 
 <p></p>
 
         <br>
-        <a href="//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/" class="postShorten-excerpt_link link"></a>
+        <a href="//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/" class="postShorten-excerpt_link link"></a>
         
       </p>
     </div>
@@ -396,6 +400,27 @@ some meta data from kubernetes cluster and/or some extra error information.</p>
       <div class="no-result text-color-light text-center"></div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/">
+                <h3 class="media-heading">Golang long-polling: a tale of server timeouts</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>I recently had a week long battle implementing HTTP long-polling. As so often
+happens in long debugging session in software development, my final fix was
+one line!</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -593,23 +618,6 @@ and that measuring commitment to our core values is even harder.
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/04/delete-or-not-to-delete/">
-                <h3 class="media-heading">Delete or not to delete</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Should you remove data from the database or simply mark it as deleted? At Teem we have a lot of data that we need to manage and often &ldquo;physically&rdquo; deleting the data from disk can be problematic. Either the users simply wants to undelete something or the deletion would cause problems for a log. The generic solution to this problem is to soft delete/archive the data by adding a deleted_at timestamp field to the table and then filter all queries to hide rows that have been marked as deleted.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -617,7 +625,7 @@ and that measuring commitment to our core values is even harder.
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         17 posts found
+         18 posts found
       </p>
     </div>
   </div>
