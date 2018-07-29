@@ -255,6 +255,81 @@ ga('send', 'pageview');
     
       
         
+          
+        
+      
+    
+  
+
+
+  
+
+<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="postShorten-wrap">
+    
+    <div class="postShorten-header">
+      <h1 class="postShorten-title" itemprop="headline">
+        <a class="link-unstyled" href="//lucasroesler.com/2017/06/your-apis-rat-nest/">
+          Your API&#39;s rat nest
+        </a>
+      </h1>
+      
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2017-06-05T21:22:00-06:00">
+        
+  
+  
+  
+  
+    2017-06-05
+  
+
+      </time>
+    
+    
+  
+  
+    <span></span>
+    
+      <a class="category-link" href="//lucasroesler.com/categories/programming">programming</a>, 
+    
+      <a class="category-link" href="//lucasroesler.com/categories/rest">rest</a>
+    
+  
+
+  </div>
+
+    </div>
+    <div class="postShorten-excerpt" itemprop="articleBody">
+      <p>Recently, I have seen several articles talking about RESTful API design.  Of
+course this is also a common topic of discussion for the engineers at Teem.  I
+want to use (and write) APIs that are easy to understand and explain and the
+fastest way to complicate your API is nested routes. Just don&rsquo;t do it! Do not
+create nested routes in your API.  Let&rsquo;s keep our APIs simple and create one
+endpoint per resource and if filters are needs, use GET parameters. This is
+simpler to document and simpler to maintain and ultimately, easier to use.</p>
+      <p>
+        <a href="//lucasroesler.com/2017/06/your-apis-rat-nest/" class="postShorten-excerpt_link link"></a>
+        
+      </p>
+    </div>
+  </div>
+  
+    <a href="//lucasroesler.com/2017/06/your-apis-rat-nest/">
+      <div class="postShorten-thumbnailimg">
+        <img alt="" itemprop="image" src="https://c1.staticflickr.com/9/8196/8445504396_4fd22ef25e_c.jpg"/>
+      </div>
+    </a>
+  
+</article>
+
+          
+            
+  
+    
+      
+        
       
     
   
@@ -661,65 +736,6 @@ ensure that each database migration will be backwards compatible.</p>
 </article>
 
           
-            
-  
-    
-      
-        
-      
-    
-  
-
-
-  
-
-<article class="postShorten postShorten--thumbnailimg-left" itemscope itemType="http://schema.org/BlogPosting">
-  <div class="postShorten-wrap">
-    
-    <div class="postShorten-header">
-      <h1 class="postShorten-title" itemprop="headline">
-        <a class="link-unstyled" href="//lucasroesler.com/2017/02/postgres-joins-and-django-querysets/">
-          Postgres Joins and Django Querysets
-        </a>
-      </h1>
-      
-  <div class="postShorten-meta post-meta">
-    
-      <time itemprop="datePublished" datetime="2017-02-06T20:00:00Z">
-        
-  
-  
-  
-  
-    2017-02-06
-  
-
-      </time>
-    
-    
-  
-  
-    <span></span>
-    
-      <a class="category-link" href="//lucasroesler.com/categories/programming">programming</a>
-    
-  
-
-  </div>
-
-    </div>
-    <div class="postShorten-excerpt" itemprop="articleBody">
-      How do we build a fast API against database models with foreign keys and many- to-many relationships? If you do nothing you get what I call the &ldquo;waterfall of doom&rdquo;. At some point in the past someone told me or I read that &ldquo;joins are effectively free in Postgres&rdquo;. While this might be somewhat true when you are writing all of the SQL and can control every part of your query; I have recently found that when the database gets big enough and you are using the Django ORM, joins aren&rsquo;t free and less can be more!
-      <p>
-        <a href="//lucasroesler.com/2017/02/postgres-joins-and-django-querysets/" class="postShorten-excerpt_link link"></a>
-        
-      </p>
-    </div>
-  </div>
-  
-</article>
-
-          
           
   <div class="pagination-bar">
     <ul class="pagination">
@@ -803,6 +819,27 @@ ensure that each database migration will be backwards compatible.</p>
       <div class="no-result text-color-light text-center"></div>
       <div class="results">
         
+        
+          <div class="media">
+            
+            <div class="media-body">
+              <a class="link-unstyled" href="//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/">
+                <h3 class="media-heading">Golang long-polling: a tale of server timeouts</h3>
+              </a>
+              <span class="media-meta">
+                <span class="media-date text-small">
+                  Jul 7, 2018
+                </span>
+              </span>
+              <div class="media-content hide-xs font-merryweather"><p>I recently had a week long battle implementing HTTP long-polling. As so often
+happens in long debugging session in software development, my final fix was
+one line!</p>
+
+<p></p></div>
+            </div>
+            <div style="clear:both;"></div>
+            <hr>
+          </div>
         
           <div class="media">
             
@@ -1000,23 +1037,6 @@ and that measuring commitment to our core values is even harder.
             <hr>
           </div>
         
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/04/delete-or-not-to-delete/">
-                <h3 class="media-heading">Delete or not to delete</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Should you remove data from the database or simply mark it as deleted? At Teem we have a lot of data that we need to manage and often &ldquo;physically&rdquo; deleting the data from disk can be problematic. Either the users simply wants to undelete something or the deletion would cause problems for a log. The generic solution to this problem is to soft delete/archive the data by adding a deleted_at timestamp field to the table and then filter all queries to hide rows that have been marked as deleted.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
       </div>
     </div>
     <div class="modal-footer">
@@ -1024,7 +1044,7 @@ and that measuring commitment to our core values is even harder.
          data-message-zero=""
          data-message-one=""
          data-message-other="">
-         17 posts found
+         18 posts found
       </p>
     </div>
   </div>

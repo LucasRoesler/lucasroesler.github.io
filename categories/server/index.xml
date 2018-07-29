@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Server on Lucas Roesler</title>
+    <link>//lucasroesler.com/categories/server/</link>
+    <description>Recent content in Server on Lucas Roesler</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 29 Jul 2018 00:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="//lucasroesler.com/categories/server/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Golang long-polling: a tale of server timeouts</title>
+      <link>//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/</guid>
+      <description>&lt;p&gt;I recently had a week long battle implementing HTTP long-polling. As so often
+happens in long debugging session in software development, my final fix was
+one line!&lt;/p&gt;
+
+&lt;p&gt;&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

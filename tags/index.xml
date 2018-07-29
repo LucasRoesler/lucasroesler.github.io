@@ -113,7 +113,7 @@
     <item>
       <title>Golang</title>
       <link>//lucasroesler.com/tags/golang/</link>
-      <pubDate>Sat, 27 Jan 2018 00:00:00 -0600</pubDate>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
       
       <guid>//lucasroesler.com/tags/golang/</guid>
       <description></description>
@@ -161,6 +161,15 @@
       <pubDate>Sun, 21 May 2017 22:00:00 -0600</pubDate>
       
       <guid>//lucasroesler.com/tags/leadership/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Long Polling</title>
+      <link>//lucasroesler.com/tags/long-polling/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/tags/long-polling/</guid>
       <description></description>
     </item>
     
