@@ -1,16 +1,19 @@
 ---
 title: "Python in OpenFaaS with submodules"
 summary: "Tidy python in an OpenFaaS world: or, what happens when you want to split your Python function into multiple modules?"
-date: 2019-01-19T00:00:00+02:00
+permalink: "https://google.com/test"
+date: 2219-01-20T00:00:00+02:00
 categories:
   - programming
   - openfaas
   - serverless
   - http
+  - examples
 tags:
   - openfaas
   - python
   - serverless
+  - examples
 keywords:
   - openfaas
   - python
@@ -18,6 +21,7 @@ keywords:
 comments: false
 showPagination: false
 autoThumbnailImage: true
+draft: true
 ---
 
 As a core contributor to [OpenFaaS][openfaas-hopepage], I hangout in the OpenFaaS Slack a lot, you can [join us here][openfaas-slack-singnup]. Most recently that meant trying to answer this question
@@ -37,8 +41,8 @@ I will assume some familiarity with OpenFaaS and that you may have even started/
 This project uses Python 3 and I like to use Conda for my development environments:
 
 ```sh
-$ conda create --name faaswordcloud  python=3.7.2 black autopep8 flake8 pylint mypy flask gevent
-$ conda source activate faaswordcloud
+$ conda create --name faaswordcount  python=3.7.2 black autopep8 flake8 pylint mypy flask gevent
+$ conda source activate faaswordcount
 ```
 
 Or from my example repo: `conda env create -f environment.yml`.
@@ -50,12 +54,11 @@ Creating a local environment like this will allow your editor/ide to lint/hint/a
 Next, to start a new Python 3 function, I like to use the flask template because I am going to load a static list of "stop words" into memory when the function starts. Using the flask templates allows the function to do this only once instead of on each invocation.
 
 ```sh
-$ faas-cli template pull https://github.com/openfaas-incubator/python-flask-template
+$ faas-cli template store pull python3-flask
 Fetch templates from repository: https://github.com/openfaas-incubator/python-flask-template at master
 2019/01/19 10:55:34 Attempting to expand templates from https://github.com/openfaas-incubator/python-flask-template
 2019/01/19 10:55:35 Fetched 3 template(s) : [python27-flask python3-flask python3-flask-armhf] from https://github.com/openfaas-incubator/python-flask-template
-$ faas-cli new wordcloud --lang python3-flask
-$ mv wordcloud.yml stack.yml
+$ faas-cli new wordcount --lang python3-flask
 ```
 
 The project should now look like
@@ -70,7 +73,7 @@ The project should now look like
 │   │   ├ ...
 │   └── python3-flask-armhf
 │       ├ ...
-└── wordcloud
+└── wordcount
     ├── __init__.py
     ├── handler.py
     └── requirements.txt
@@ -81,8 +84,8 @@ The project should now look like
 We are going to add two more files to our function:
 
 ```sh
-touch wordcloud/stopwords
-touch wordcloud/wordcloud.py
+touch wordcount/stopwords
+touch wordcount/wordcount.py
 ```
 
 The project now looks like
@@ -92,20 +95,20 @@ The project now looks like
 ├── stack.yml
 ├── template
 │   ├── ...
-└── wordcloud
+└── wordcount
     ├── __init__.py
     ├── handler.py
     ├── requirements.txt
     ├── stopwords
-    └── wordcloud.py
+    └── wordcount.py
 ```
 
-The `stopwords` is a plain text file of words that will be excluded in the wordcount. These are short common words that you would not want to include in a wordcloud visualization such as: `a`, `an`, `him`, `her`, and so on. This list of words will depend on your use case, adjust as you see fit.
+The `stopwords` is a plain text file of words that will be excluded in the wordcount. These are short common words that you would not want to include in a wordcount visualization such as: `a`, `an`, `him`, `her`, and so on. This list of words will depend on your use case, adjust as you see fit.
 
-All of the real fun happens in `wordcloud.py`:
+All of the real fun happens in `wordcount.py`:
 
 ```py
-# modified wordcloud.py
+# modified wordcount.py
 import unicodedata
 import os
 from typing import Dict, List
@@ -160,7 +163,7 @@ Using an explicit relative import, we can very easily use the `process_text` met
 ```py
 # handler.py
 import json
-from .wordcloud import process_text
+from .wordcount import process_text
 
 
 def handle(req):
@@ -204,16 +207,15 @@ This gives me an OpenFaaS installation with auth disabled and it will use my loc
 ## Deploy and test the function
 
 ```sh
-$ faas-cli build
-$ faas-cli deploy
-Deploying: wordcloud.
+$ faas-cli up -f wordcount.yml --skip-push
+# Docker build output ...
+Deploying: wordcount.
 
 Deployed. 202 Accepted.
-URL: http://127.0.0.1:31112/function/wordcloud
+URL: http://127.0.0.1:31112/function/wordcount
 
-$ curl -X POST http://127.0.0.1:31112/function/wordcloud \
-  -d 'This is some example text that we want to see a frequency response for.  It has text like apple, apples, apple tree, etc'
-{"example": 1, "text": 2, "want": 1, "see": 1, "frequency": 1, "response": 1, "for": 1, "apple": 3, "tree": 1, "etc": 1}
+$ echo 'This is some example text that we want to see a frequency response for.  It has text like apple, apples, apple tree, etc' | faas-cli -f wordcount.yml invoke wordcount
+{"example": 1, "text": 2, "want": 1, "see": 1, "frequency": 1, "response": 1, "apple": 3, "tree": 1, "etc": 1}
 ```
 
 ## Wrapping up
