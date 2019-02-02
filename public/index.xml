@@ -12,6 +12,15 @@
     
     
     <item>
+      <title>When sequential tests aren&#39;t</title>
+      <link>//lucasroesler.com/2019/02/when-sequential-tests-arent/</link>
+      <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/2019/02/when-sequential-tests-arent/</guid>
+      <description>At work we have been expanding the testing coverage of our auth service and have discovered the perfect storm of edge cases around test caching and Go&amp;rsquo;s test building. In short, we had tests that looked like they were passing locally but would fail sporadically in CI because Go will run the tests inside of a package sequentially but build and test each package in parallel (up to the number of CPU cores).</description>
+    </item>
+    
+    <item>
       <title>Golang long-polling: a tale of server timeouts</title>
       <link>//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>

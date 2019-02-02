@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>//lucasroesler.com/2019/02/when-sequential-tests-arent/</loc>
+    <lastmod>2019-02-02T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/</loc>
     <lastmod>2018-07-29T00:00:00+02:00</lastmod>
   </url>
@@ -198,7 +203,7 @@
   
   <url>
     <loc>//lucasroesler.com/tags/golang/</loc>
-    <lastmod>2018-07-29T00:00:00+02:00</lastmod>
+    <lastmod>2019-02-02T00:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -294,7 +299,13 @@
   
   <url>
     <loc>//lucasroesler.com/post/</loc>
-    <lastmod>2018-07-29T00:00:00+02:00</lastmod>
+    <lastmod>2019-02-02T00:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//lucasroesler.com/tags/programming/</loc>
+    <lastmod>2019-02-02T00:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
@@ -367,6 +378,12 @@
   <url>
     <loc>//lucasroesler.com/tags/test/</loc>
     <lastmod>2017-01-15T00:00:00-07:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//lucasroesler.com/tags/testing/</loc>
+    <lastmod>2019-02-02T00:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
