@@ -75,6 +75,15 @@
     </item>
     
     <item>
+      <title>Development</title>
+      <link>//lucasroesler.com/tags/development/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/tags/development/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Django</title>
       <link>//lucasroesler.com/tags/django/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
@@ -147,6 +156,24 @@
     </item>
     
     <item>
+      <title>Kind</title>
+      <link>//lucasroesler.com/tags/kind/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/tags/kind/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Kubernetes</title>
+      <link>//lucasroesler.com/tags/kubernetes/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/tags/kubernetes/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Lambda</title>
       <link>//lucasroesler.com/tags/lambda/</link>
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
@@ -183,6 +210,15 @@
     </item>
     
     <item>
+      <title>Openfaas</title>
+      <link>//lucasroesler.com/tags/openfaas/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/tags/openfaas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Orange</title>
       <link>//lucasroesler.com/tags/orange/</link>
       <pubDate>Sat, 24 Jun 2017 00:00:00 +0000</pubDate>
@@ -212,7 +248,7 @@
     <item>
       <title>Programming</title>
       <link>//lucasroesler.com/tags/programming/</link>
-      <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
       
       <guid>//lucasroesler.com/tags/programming/</guid>
       <description></description>

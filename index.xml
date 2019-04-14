@@ -12,6 +12,16 @@
     
     
     <item>
+      <title>Developing OpenFaaS KinD-ly</title>
+      <link>//lucasroesler.com/2019/04/developing-openfaas-kind-ly/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/2019/04/developing-openfaas-kind-ly/</guid>
+      <description>There are several ways to run small Kubernetes clusters: k3s and k3d, minikube, and microk8s to name a few. Currently, my favorite is the Kubernetes provided by Docker Desktop for Mac. But this doesn&amp;rsquo;t help my friends (or myself) when I am on a Linux laptop. It would be nice to have one lightweight and shared environment for Kubernetes.
+Luckily, one of the Kubernetes groups has released KinD - Kubernetes in Docker.</description>
+    </item>
+    
+    <item>
       <title>When sequential tests aren&#39;t</title>
       <link>//lucasroesler.com/2019/02/when-sequential-tests-arent/</link>
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
