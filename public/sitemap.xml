@@ -3,6 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>//lucasroesler.com/2019/04/developing-openfaas-kind-ly/</loc>
+    <lastmod>2019-04-14T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>//lucasroesler.com/2019/02/when-sequential-tests-arent/</loc>
     <lastmod>2019-02-02T00:00:00+02:00</lastmod>
   </url>
@@ -172,6 +177,12 @@
   </url>
   
   <url>
+    <loc>//lucasroesler.com/tags/development/</loc>
+    <lastmod>2019-04-14T00:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>//lucasroesler.com/tags/django/</loc>
     <lastmod>2017-04-02T00:00:00-07:00</lastmod>
     <priority>0</priority>
@@ -238,6 +249,18 @@
   </url>
   
   <url>
+    <loc>//lucasroesler.com/tags/kind/</loc>
+    <lastmod>2019-04-14T00:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
+    <loc>//lucasroesler.com/tags/kubernetes/</loc>
+    <lastmod>2019-04-14T00:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>//lucasroesler.com/tags/lambda/</loc>
     <lastmod>2017-06-11T11:00:00-06:00</lastmod>
     <priority>0</priority>
@@ -280,6 +303,12 @@
   </url>
   
   <url>
+    <loc>//lucasroesler.com/tags/openfaas/</loc>
+    <lastmod>2019-04-14T00:00:00+02:00</lastmod>
+    <priority>0</priority>
+  </url>
+  
+  <url>
     <loc>//lucasroesler.com/tags/orange/</loc>
     <lastmod>2017-06-24T00:00:00+00:00</lastmod>
     <priority>0</priority>
@@ -299,13 +328,13 @@
   
   <url>
     <loc>//lucasroesler.com/post/</loc>
-    <lastmod>2019-02-02T00:00:00+02:00</lastmod>
+    <lastmod>2019-04-14T00:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   
   <url>
     <loc>//lucasroesler.com/tags/programming/</loc>
-    <lastmod>2019-02-02T00:00:00+02:00</lastmod>
+    <lastmod>2019-04-14T00:00:00+02:00</lastmod>
     <priority>0</priority>
   </url>
   

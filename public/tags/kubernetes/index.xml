@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Kubernetes on Lucas Roesler</title>
+    <link>//lucasroesler.com/tags/kubernetes/</link>
+    <description>Recent content in Kubernetes on Lucas Roesler</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="//lucasroesler.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Developing OpenFaaS KinD-ly</title>
+      <link>//lucasroesler.com/2019/04/developing-openfaas-kind-ly/</link>
+      <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/2019/04/developing-openfaas-kind-ly/</guid>
+      <description>There are several ways to run small Kubernetes clusters: k3s and k3d, minikube, and microk8s to name a few. Currently, my favorite is the Kubernetes provided by Docker Desktop for Mac. But this doesn&amp;rsquo;t help my friends (or myself) when I am on a Linux laptop. It would be nice to have one lightweight and shared environment for Kubernetes.
+Luckily, one of the Kubernetes groups has released KinD - Kubernetes in Docker.</description>
+    </item>
+    
+  </channel>
+</rss>
