@@ -19,7 +19,7 @@ showPagination: false
 autoThumbnailImage: true
 thumbnailImagePosition: left
 coverSize: partial
-coverImage: /images/tools-498202_1280.jpg
+coverImage: /images/openfaas-github-actions/kapow-1601675_1920.png
 ---
 
 Last month, GitHub announced new [improved CI/CD with GitHub Actions][github-actions-announcement].  Since then, I have experimented with the new Action workflows and created [an Action][openfaas-actions-repo] that wraps the `faas-cli` so that you can easily build and deploy your functions directly from GitHub.
