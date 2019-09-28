@@ -6,10 +6,20 @@
     <description>Recent content in Posts on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="//lucasroesler.com/post/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Action Packed Functions</title>
+      <link>//lucasroesler.com/2019/09/action-packed-functions/</link>
+      <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/2019/09/action-packed-functions/</guid>
+      <description>Last month, GitHub announced new improved CI/CD with GitHub Actions. Since then, I have experimented with the new Action workflows and created an Action that wraps the faas-cli so that you can easily build and deploy your functions directly from GitHub.
+My initial interactions with the new GitHub Actions were not great, they really meant it when they said &amp;ldquo;public beta&amp;rdquo;. BUT!!! Having said that, there is clearly a lot of promise in GitHub Actions.</description>
+    </item>
     
     <item>
       <title>Developing OpenFaaS KinD-ly</title>
