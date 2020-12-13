@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    
+    <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Lucas Roesler">
+<meta name="keywords" content="multipass, docker, development, management, python, django">
+<meta name="description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&rsquo; fault,my good old friend Docker was eating up a decent chunk of my disk too.
+If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.">
+
+
+<meta property="og:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&rsquo; fault,my good old friend Docker was eating up a decent chunk of my disk too.
+If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Moving the data directory of Multipass and Docker">
+<meta name="twitter:title" content="Moving the data directory of Multipass and Docker">
+<meta property="og:url" content="//lucasroesler.com/2020/12/moving-the-data-directory-of-multipass-and-docker/">
+<meta property="twitter:url" content="//lucasroesler.com/2020/12/moving-the-data-directory-of-multipass-and-docker/">
+<meta property="og:site_name" content="Lucas Roesler">
+<meta property="og:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&rsquo; fault,my good old friend Docker was eating up a decent chunk of my disk too.
+If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.">
+<meta name="twitter:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&rsquo; fault,my good old friend Docker was eating up a decent chunk of my disk too.
+If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.">
+<meta property="og:locale" content="en">
+
+  
+    <meta property="article:published_time" content="2020-12-13T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2020-12-13T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="programming">
+    
+      <meta property="article:section" content="multipass">
+    
+      <meta property="article:section" content="docker">
+    
+  
+  
+    
+      <meta property="article:tag" content="multipass">
+    
+      <meta property="article:tag" content="docker">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@theaxer">
+
+
+  <meta name="twitter:creator" content="@theaxer">
+
+
+
+
+
+
+
+  <meta property="og:image" content="//lucasroesler.com/images/library-898333_640.jpg">
+  <meta property="twitter:image" content="//lucasroesler.com/images/library-898333_640.jpg">
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
+
+
+    <title>Moving the data directory of Multipass and Docker</title>
+
+    <link rel="icon" href="//lucasroesler.com/favicon.png">
+    
+
+    
+
+    <link rel="canonical" href="//lucasroesler.com/2020/12/moving-the-data-directory-of-multipass-and-docker/">
+
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/jquery.fancybox.min.css" integrity="sha256-vuXZ9LGmmwtjqFX1F+EKin1ThZMub58gKULUyf0qECk=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
+    
+    
+    <link rel="stylesheet" href="//lucasroesler.com/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
+    
+    
+
+    
+      
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-90384590-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+
+    
+    
+  </head>
+
+  <body>
+    <div id="blog">
+      <header id="header" data-behavior="4">
+  <i id="btn-open-sidebar" class="fa fa-lg fa-bars"></i>
+  <div class="header-title">
+    <a class="header-title-link" href="//lucasroesler.com/">Lucas Roesler</a>
+  </div>
+  
+    
+      <a class="header-right-picture "
+         href="//lucasroesler.com/#about">
+    
+    
+    
+      
+        <img class="header-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=90" alt="" />
+      
+    
+    </a>
+  
+</header>
+
+      <nav id="sidebar" data-behavior="4">
+  <div class="sidebar-container">
+    
+      <div class="sidebar-profile">
+        <a href="//lucasroesler.com/#about">
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+        </a>
+        <h4 class="sidebar-profile-name">Lucas Roesler</h4>
+        
+          <h5 class="sidebar-profile-bio">I am senior engineer at <!-- raw HTML omitted -->contiamo.com<!-- raw HTML omitted --> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</h5>
+        
+      </div>
+    
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="//lucasroesler.com/post">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-quote-right"></i>
+      
+      <span class="sidebar-button-desc">Blog</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="//lucasroesler.com/tags">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-tags"></i>
+      
+      <span class="sidebar-button-desc">Tags</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="//lucasroesler.com/reading-list/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-book"></i>
+      
+      <span class="sidebar-button-desc">Reading list</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="//lucasroesler.com/resume/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-file-text-o"></i>
+      
+      <span class="sidebar-button-desc">Resume</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="//lucasroesler.com/#about">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-question"></i>
+      
+      <span class="sidebar-button-desc">About</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="//lucasroesler.com/">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-home"></i>
+      
+      <span class="sidebar-button-desc">Home</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://stackoverflow.com/users/826102/theaxer" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-stack-overflow"></i>
+      
+      <span class="sidebar-button-desc">Stack Overflow</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://twitter.com/theaxer" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-twitter"></i>
+      
+      <span class="sidebar-button-desc">Twitter</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://www.linkedin.com/in/lucasroesler" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-linkedin"></i>
+      
+      <span class="sidebar-button-desc">LinkedIn</span>
+    </a>
+  </li>
+
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="https://github.com/lucasroesler" target="_blank" rel="noopener">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-github"></i>
+      
+      <span class="sidebar-button-desc">GitHub</span>
+    </a>
+  </li>
+
+
+    </ul>
+    <ul class="sidebar-buttons">
+      
+  <li class="sidebar-button">
+    
+      <a class="sidebar-button-link " href="//lucasroesler.com/index.xml">
+    
+      <i class="sidebar-button-icon fa fa-lg fa-rss"></i>
+      
+      <span class="sidebar-button-desc">RSS</span>
+    </a>
+  </li>
+
+
+    </ul>
+  </div>
+</nav>
+
+      
+  <div class="post-header-cover
+              text-left
+              post-header-cover--partial"
+       style="background-image:url('/images/library-898333_640.jpg')"
+       data-behavior="4">
+    
+      <div class="post-header main-content-wrap text-left">
+  
+    <h1 class="post-title" itemprop="headline">
+      Moving the data directory of Multipass and Docker
+    </h1>
+  
+  
+  <div class="postShorten-meta post-meta">
+    
+      <time itemprop="datePublished" datetime="2020-12-13T00:00:00&#43;02:00">
+        
+  
+  
+  
+  
+    2020-12-13
+  
+
+      </time>
+    
+    
+  
+  
+    <span></span>
+    
+      <a class="category-link" href="//lucasroesler.com/categories/programming">programming</a>, 
+    
+      <a class="category-link" href="//lucasroesler.com/categories/multipass">multipass</a>, 
+    
+      <a class="category-link" href="//lucasroesler.com/categories/docker">docker</a>
+    
+  
+
+  </div>
+
+</div>
+    
+  </div>
+
+
+      <div id="main" data-behavior="4"
+        class="hasCover
+               hasCoverMetaIn
+               ">
+        <article class="post" itemscope itemType="http://schema.org/BlogPosting">
+          
+          
+          <div class="post-content markdown" itemprop="articleBody">
+            <div class="main-content-wrap">
+              <p>This weekend was my first adventure in <a href="https://snapcraft.io/">Snaps</a>. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&rsquo; fault,my good old friend Docker was eating up a decent chunk of my disk too.</p>
+<p>If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.</p>
+<h1 id="getting-my-laptop">Getting my laptop</h1>
+<p>Earlier this year we got my wife a new computer. Originally, it was supposed to be a simple &ldquo;web and netflix&rdquo; machine. However, being American expats in Germany, the &ldquo;market&rdquo; had a different plan for us. Most budget computers in Germany <em>only</em> come with German keyboard layouts. Very natural, no real complaint. But this means we had to buy something at the professional level. We choose a Dell XPS 13.</p>
+<p>The bad news is that my wife ultimately didn&rsquo;t like the laptop. Primarily, she didn&rsquo;t liek the keyboard. The good news is that it means <em>I</em> got a new laptop this year.</p>
+<h2 id="setting-up-my-laptop">Setting up my laptop</h2>
+<p>For the past 10 years I have been a Mac user due it being offered at work. But I have been itching to get back to Linux. So I installed Ubuntu 20.20 :)</p>
+<p>In the past I have always used 2 or 3 partitions, one for the OS, one for data, and optionally one for a second OS. On the XPs I have a separate <code>/home</code> mount which contains almost all of my disk space 230GB and a root <code>/</code> partition with just 37GB.</p>
+<p>I thought this would be enough space for the OS, until I tried to compile a snap. 5 mins later and a notification pops up &ldquo;You are almost out of disk space, 1 GB remaining&rdquo;. Now this is shocking since I don&rsquo;t remember installing any massive pieces of software.</p>
+<p>After several iterations of <code>df -h</code>, <code>du -h</code>, <code>lsof</code>, etc. I pin point the problem to: Docker and Multipass saving every image, vm, and data mount to my <code>/var</code> folder. After recovering my disk space, I set out to move the data locations for docker and multipass to my <code>/home</code> partition, which has plenty of space.</p>
+<h1 id="using-the-data-partition">Using the data partition</h1>
+<h2 id="setting-up-docker">Setting up docker</h2>
+<p>Docker is the easy one, it has a configuration specifically for this use case.</p>
+<ol>
+<li>First I cleaned up the existing Docker data,</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">docker system prune -f --volumes --all
+</code></pre></div><p>You can probably skip this, but I prefer fresh starts.</p>
+<ol start="2">
+<li>Then, stop the docker daemon:</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo service docker stop 
+</code></pre></div><ol start="3">
+<li>Next, create your new data folder</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir -p /home/docker/data
+</code></pre></div><p>the folder will be owned by root, but this is ok.</p>
+<ol start="4">
+<li>Now add or edit the configuration file <code>/etc/docker/daemon.json</code> so that it contains</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ 
+  <span style="color:#f92672">&#34;data-root&#34;</span>: <span style="color:#e6db74">&#34;/home/docker/data&#34;</span> 
+}
+</code></pre></div><ol start="5">
+<li>Now you can copy and remaining Docker metadata to the new location</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo rsync -aP /var/lib/docker/ /home/docker/data
+</code></pre></div><p>If you are being cautious, rename the old data folder so that you can safely revert if anything goes wrong</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mv /var/lib/docker /var/lib/docker.old
+</code></pre></div><ol start="6">
+<li>Resart the docker daemon and test everything is work</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo service docker start
+docker run --rm hello-world
+</code></pre></div><ol start="7">
+<li>Cleanup the old data</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo rm -rf /var/lib/docker.old
+</code></pre></div><h2 id="setting-up-multipass">Setting up multipass</h2>
+<p>Multipass is a bit harder than Docker. It <em>can</em> be done, but the feature is much newer. It was <a href="https://github.com/canonical/multipass/pull/1789">just merged in October 2020</a></p>
+<p>The author <a href="https://github.com/Saviq">Michał</a> has kindly (provided instructions)[https://github.com/canonical/multipass/pull/1789#issuecomment-704991752] that I have adapted and extended below</p>
+<ol>
+<li>First I want to safely clear any cached multipass data, the simplest way to do this is the uninstall and reinstall multipass</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap remove multipass
+sudo snap install multipass
+</code></pre></div><ol start="2">
+<li>Make the new data directory</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir /home/multipass
+</code></pre></div><ol start="3">
+<li>I created a new group for my user and <code>root</code>, so that I would have simpler access to the data directory</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo groupadd multipass
+sudo usermod -a G root multipass
+sudo usermod -a -G multipass $USER
+sudo chown -R root:multipass /home/multipass
+</code></pre></div><ol start="4">
+<li>Stop you multipass daemon and enable the required volumn plugins for snap</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap stop multipass
+sudo snap connect multipass:removable-media  <span style="color:#75715e"># for /mnt /media https://snapcraft.io/docs/removable-media-interface</span>
+sudo snap connect multipass:all-home  <span style="color:#75715e"># for /home/* https://snapcraft.io/docs/home-interface</span>
+</code></pre></div><ol start="5">
+<li>Update the multipass service definition to set the required <code>MULTIPASS_STORAGE</code> environment variable.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir /etc/systemd/system/snap.multipass.multipassd.service.d/
+sudo tee /etc/systemd/system/snap.multipass.multipassd.service.d/override.conf <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">[Service]
+</span><span style="color:#e6db74">Environment=MULTIPASS_STORAGE=/home/multipass
+</span><span style="color:#e6db74">EOF</span>
+</code></pre></div><ol start="6">
+<li>Reload the service defitions</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo  systemctl daemon-reload
+</code></pre></div><ol start="7">
+<li>Restart the multipass daemon</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap start multipass
+</code></pre></div><ol start="8">
+<li>Check that things are working</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ls -al /home/multipass
+total 16K
+drwxrwxr-x <span style="color:#ae81ff">4</span> root multipass 4,0K Dez <span style="color:#ae81ff">13</span> 16:00 .
+drwxr-xr-x <span style="color:#ae81ff">6</span> root root      4,0K Dez <span style="color:#ae81ff">12</span> 21:58 ..
+drwxr-xr-x <span style="color:#ae81ff">3</span> root root      4,0K Dez <span style="color:#ae81ff">13</span> 16:00 cache
+drwxr-xr-x <span style="color:#ae81ff">6</span> root root      4,0K Dez <span style="color:#ae81ff">13</span> 16:00 data
+</code></pre></div><p>If you start a new vm, e.g. using <code>multipass shell</code>, then you will
+start seeing data in the <code>/home/multipass/cache/vault/images</code>, for example.</p>
+<h2 id="a-networking-hiccup">A networking hiccup</h2>
+<p>Doing all of that, I now have a workign Docker and (I thought) a working Multipass with images and other data stored in my data partition. But this is a premature victory.</p>
+<p>Within the last couple days, it seems that Docker changed the way it uses iptables. The consequence is that the <code>iptables</code> Multipass needs are disabled and the VMs have <em>no network access</em>.  See this <a href="https://github.com/canonical/multipass/issues/1866">Github issue</a>.</p>
+<p>Networking questions are generally above my paygrade, but the summary seems to be that the Multipass snap uses legacy <code>iptables</code> while Docker switched to <code>nftables</code>. Once <code>nftables</code> are used, the legacy tables are ignored.</p>
+<p>This looks like</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo iptables -S
+<span style="color:#75715e"># Warning: iptables-legacy tables present, use iptables-legacy to see them</span>
+-P INPUT ACCEPT
+-P FORWARD DROP
+-P OUTPUT ACCEPT
+-N DOCKER
+-N DOCKER-ISOLATION-STAGE-1
+-N DOCKER-USER
+-N DOCKER-ISOLATION-STAGE-2
+-A FORWARD -j DOCKER-USER
+-A FORWARD -j DOCKER-ISOLATION-STAGE-1
+-A FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -o docker0 -j DOCKER
+-A FORWARD -i docker0 ! -o docker0 -j ACCEPT
+-A FORWARD -i docker0 -o docker0 -j ACCEPT
+-A DOCKER-ISOLATION-STAGE-1 -i docker0 ! -o docker0 -j DOCKER-ISOLATION-STAGE-2
+-A DOCKER-ISOLATION-STAGE-1 -j RETURN
+-A DOCKER-USER -j RETURN
+-A DOCKER-ISOLATION-STAGE-2 -o docker0 -j DROP
+-A DOCKER-ISOLATION-STAGE-2 -j RETURN
+</code></pre></div><p>The solution is to update the iptables/nftables. At this time, I am still researching how to do this without breaking my laptop.  If you already <em>know</em> iptables and nftables, please let me know on <a href="https://twitter.com/TheAxeR">Twitter</a></p>
+              
+            </div>
+          </div>
+          <div id="post-footer" class="post-footer main-content-wrap">
+            
+              
+                
+                
+                  <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br/>
+                    
+  <a class="tag tag--primary tag--small" href="//lucasroesler.com/tags/multipass/">multipass</a>
+
+  <a class="tag tag--primary tag--small" href="//lucasroesler.com/tags/docker/">docker</a>
+
+                  </div>
+                
+              
+            
+            <div class="post-actions-wrap">
+  
+      <nav style="visibility: hidden">
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="//lucasroesler.com/2019/09/action-packed-functions/" data-tooltip="Action Packed Functions">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+            
+          </div>
+        </article>
+        <footer id="footer" class="main-content-wrap">
+  <span class="copyrights">
+    &copy; 2020 Lucas Roesler. 
+  </span>
+</footer>
+
+      </div>
+      <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
+        <div class="post-actions-wrap">
+  
+      <nav style="visibility: hidden">
+        <ul class="post-actions post-action-nav">
+          
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--disabled">
+              
+                  <i class="fa fa-angle-left"></i>
+                  <span class="hide-xs hide-sm text-small icon-ml"></span>
+                </a>
+            </li>
+            <li class="post-action">
+              
+                <a class="post-action-btn btn btn--default tooltip--top" href="//lucasroesler.com/2019/09/action-packed-functions/" data-tooltip="Action Packed Functions">
+              
+                  <span class="hide-xs hide-sm text-small icon-mr"></span>
+                  <i class="fa fa-angle-right"></i>
+                </a>
+            </li>
+          
+        </ul>
+      </nav>
+    <ul class="post-actions post-action-share" >
+      
+        <li class="post-action hide-lg hide-md hide-sm">
+          <a class="post-action-btn btn btn--default btn-open-shareoptions" href="#btn-open-shareoptions">
+            <i class="fa fa-share-alt"></i>
+          </a>
+        </li>
+        
+      
+      
+      <li class="post-action">
+        
+          <a class="post-action-btn btn btn--default" href="#">
+        
+          <i class="fa fa-list"></i>
+        </a>
+      </li>
+    </ul>
+  
+</div>
+
+      </div>
+      <div id="share-options-bar" class="share-options-bar" data-behavior="4">
+  <i id="btn-close-shareoptions" class="fa fa-close"></i>
+  <ul class="share-options">
+    
+  </ul>
+</div>
+<div id="share-options-mask" class="share-options-mask"></div>
+    </div>
+    
+    <div id="about">
+  <div id="about-card">
+    <div id="about-btn-close">
+      <i class="fa fa-remove"></i>
+    </div>
+    
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+    
+    <h4 id="about-card-name">Lucas Roesler</h4>
+    
+      <div id="about-card-bio">I am senior engineer at <!-- raw HTML omitted -->contiamo.com<!-- raw HTML omitted --> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</div>
+    
+    
+      <div id="about-card-job">
+        <i class="fa fa-briefcase"></i>
+        <br/>
+        Senior Engineer
+      </div>
+    
+    
+      <div id="about-card-location">
+        <i class="fa fa-map-marker"></i>
+        <br/>
+        Berlin, DE
+      </div>
+    
+  </div>
+</div>
+
+    
+
+    
+  
+    <div id="cover" style="background-image:url('https://lh3.googleusercontent.com/PslKucVYOkAlYGCTgtwtRcZ24kjQk15UFUhndHkavGffrwrEx3yb2sJOS48NfFsEHPuKCUpoWOnkHkIdz4MdQCWdLk6zYF241LT8xCA7bBY1eaBPOH16g-xlj8WV_aiWrqvll_9eV5QN_X2Zt06b8FuPSto5Tq26S4HLBl-4PVmcJLFyEg54ooUP0s2XYklsqcv6kVwHOMVDe4sOS1rZp2ecfcoknC4mWQYLYT2Nlcx2Q6I-eDTZHmu8uw__19lx8HQJHVLamHImCko8jgAlXpl5x6CTNmwtPdM1CUNiiSrWkajKuEMPMvieiK6NvcGPYZsVL2W14W3xrjS4mzY4iCT11qw2DlBnCDYv_e4Evl8mjuydEulInbHS3Bmw4dBK1En-wlc7bIP7LZ3VsmGGUCzgnARAneCTcrNtcxndSqWJI_8wZT1GAU5pmQhWz8J9kBOWryLtEtPDNQcO-bpMZbZWPO6y4_MISwyMm9VwIb_RPqu5v-peYPDfLCrXtvtzlcnIjpACRRT09Ze6R4U5zXTPVNfUXWX9OY0S_qxur7AEOzfWTFgJA625Gh0Fk9vtSBUVUpj9FKHoAPTsofftPBJHeZ3bkd8pOL3OquFgy0jw4uIpUGb5UIT42V6zAY3uVVLmcIpGubjbohRcXy0JSYAeUcAMxFLrtAu3MjxdMQ=w2856-h1606-no');"></div>
+  
+
+
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js" integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44=" crossorigin="anonymous"></script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
+
+
+<script src="//lucasroesler.com/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
+
+
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
+
+
+  
+
+
+
+
+    
+  </body>
+</html>
+

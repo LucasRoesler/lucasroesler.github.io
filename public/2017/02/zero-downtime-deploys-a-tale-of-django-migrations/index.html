@@ -1,97 +1,116 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-  
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.34 with theme Tranquilpeak 0.4.3-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Lucas Roesler">
+<meta name="keywords" content="python, django, automation, postgres, development, management, python, django">
+<meta name="description" content="At Teem, we aim for zero down-time deploys; so, one of the most
+important things we must validate is that things will not break mid-deploy!
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible.">
+
+
+<meta property="og:description" content="At Teem, we aim for zero down-time deploys; so, one of the most
+important things we must validate is that things will not break mid-deploy!
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Zero downtime deploys: A tale of Django migrations">
+<meta name="twitter:title" content="Zero downtime deploys: A tale of Django migrations">
+<meta property="og:url" content="//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/">
+<meta property="twitter:url" content="//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/">
+<meta property="og:site_name" content="Lucas Roesler">
+<meta property="og:description" content="At Teem, we aim for zero down-time deploys; so, one of the most
+important things we must validate is that things will not break mid-deploy!
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible.">
+<meta name="twitter:description" content="At Teem, we aim for zero down-time deploys; so, one of the most
+important things we must validate is that things will not break mid-deploy!
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible.">
+<meta property="og:locale" content="en">
+
+  
+    <meta property="article:published_time" content="2017-02-20T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2017-02-20T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="programming">
+    
+  
+  
+    
+      <meta property="article:tag" content="python">
+    
+      <meta property="article:tag" content="django">
+    
+      <meta property="article:tag" content="automation">
+    
+      <meta property="article:tag" content="postgres">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@theaxer">
+
+
+  <meta name="twitter:creator" content="@theaxer">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
+
+
     <title>Zero downtime deploys: A tale of Django migrations</title>
-    <meta name="author" content="Lucas Roesler">
-    <meta name="keywords" content="python, django, automation, postgres, development, management, python, django">
 
     <link rel="icon" href="//lucasroesler.com/favicon.png">
     
 
     
-    <meta name="description" content="At Teem, we aim for zero down-time deploys; so, one of the most
-important things we must validate is that things will not break mid-deploy!
 
-The most sensitive step of the deploy process is the changes to our database.
-Prior to the automation I am about to describe, validation of the database
-migrations required specialized knowledge about Postgres, the changes to the
-application model, load on the database for that model, and a bit of general
-experience. This obviously slows down reviews and subsequently deploys. Worse,
-it was simply too easy to miss problem migrations when depending on only peer
-reviews. To make our lives easier we created a series of validation checks to
-ensure that each database migration will be backwards compatible.
-
-">
-    <meta property="og:description" content="At Teem, we aim for zero down-time deploys; so, one of the most
-important things we must validate is that things will not break mid-deploy!
-
-The most sensitive step of the deploy process is the changes to our database.
-Prior to the automation I am about to describe, validation of the database
-migrations required specialized knowledge about Postgres, the changes to the
-application model, load on the database for that model, and a bit of general
-experience. This obviously slows down reviews and subsequently deploys. Worse,
-it was simply too easy to miss problem migrations when depending on only peer
-reviews. To make our lives easier we created a series of validation checks to
-ensure that each database migration will be backwards compatible.
-
-">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Zero downtime deploys: A tale of Django migrations">
-    <meta property="og:url" content="/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/">
-    <meta property="og:site_name" content="Lucas Roesler">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Lucas Roesler">
-    <meta name="twitter:description" content="At Teem, we aim for zero down-time deploys; so, one of the most
-important things we must validate is that things will not break mid-deploy!
-
-The most sensitive step of the deploy process is the changes to our database.
-Prior to the automation I am about to describe, validation of the database
-migrations required specialized knowledge about Postgres, the changes to the
-application model, load on the database for that model, and a bit of general
-experience. This obviously slows down reviews and subsequently deploys. Worse,
-it was simply too easy to miss problem migrations when depending on only peer
-reviews. To make our lives easier we created a series of validation checks to
-ensure that each database migration will be backwards compatible.
-
-">
-    
-      <meta name="twitter:creator" content="@theaxer">
-    
-    
-
-    
-    
-
-    
-      <meta property="og:image" content="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
-    
-
-    
-    
-    
-
-    
+    <link rel="canonical" href="//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -99,20 +118,23 @@ ensure that each database migration will be backwards compatible.
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="//lucasroesler.com/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    <link rel="stylesheet" href="//lucasroesler.com/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90384590-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-90384590-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -134,7 +156,7 @@ ga('send', 'pageview');
     
     
       
-        <img class="header-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=90" alt="" />
+        <img class="header-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=90" alt="" />
       
     
     </a>
@@ -146,11 +168,11 @@ ga('send', 'pageview');
     
       <div class="sidebar-profile">
         <a href="//lucasroesler.com/#about">
-          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
         </a>
         <h4 class="sidebar-profile-name">Lucas Roesler</h4>
         
-          <h5 class="sidebar-profile-bio">I am senior engineer at <a href='https://contiamo.com'>contiamo.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</h5>
+          <h5 class="sidebar-profile-bio">I am senior engineer at <!-- raw HTML omitted -->contiamo.com<!-- raw HTML omitted --> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</h5>
         
       </div>
     
@@ -325,7 +347,6 @@ ga('send', 'pageview');
             <div class="main-content-wrap">
               <p>At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!</p>
-
 <p>The most sensitive step of the deploy process is the changes to our database.
 Prior to the automation I am about to describe, validation of the database
 migrations required specialized knowledge about Postgres, the changes to the
@@ -334,15 +355,10 @@ experience. This obviously slows down reviews and subsequently deploys. Worse,
 it was simply too easy to miss problem migrations when depending on only peer
 reviews. To make our lives easier we created a series of validation checks to
 ensure that each database migration will be backwards compatible.</p>
-
-<p></p>
-
 <h2 id="the-what">The what</h2>
-
 <p>The checks I am going to describe are simply a sequence of regex
 that we run on the migrations in the changelog. The process looks, roughly,
 like this:</p>
-
 <ol>
 <li>Using git, generate a list of new migrations in this release,</li>
 <li>Using Django&rsquo;s <code>sqlmigrate</code> manage command, generate the SQL for each
@@ -351,26 +367,19 @@ migration,</li>
 <li>Report the issues,</li>
 <li>Profit!</li>
 </ol>
-
 <p>We do this in a python script we internally call <code>octoeb</code> which uses
 <a href="http://click.pocoo.org/5/">Click</a> to create a commandline
 interface.  So, I can get a changelog along with an audit of the migrations
 in my current branch using:</p>
-
 <pre><code>$ ocotoeb changelog
-</code></pre>
-
-<p>I won&rsquo;t describe the specific python code, instead I will give you equivalent bash commands
+</code></pre><p>I won&rsquo;t describe the specific python code, instead I will give you equivalent bash commands
 that you can run in your CLI and a simple description of the regex that we
 are using. This will give you all the pieces you need to build a similar script
 in your favorite language.</p>
-
 <h2 id="the-why">The why</h2>
-
 <p>The basic goal is to ensure that any applied migrations are backwards
 compatible with the model definitions in the currently deployed release. This
 is a requirement because our current deployment process looks like:</p>
-
 <ol>
 <li>pull the new release code to a single server,</li>
 <li>run the migrations,</li>
@@ -378,12 +387,10 @@ is a requirement because our current deployment process looks like:</p>
 <li>check the application status,</li>
 <li>slowly roll the code to the rest of the servers.</li>
 </ol>
-
 <p>As a result, during a deploy we have a mix of old model definitions and new
 model definitions running simultaneously.  This means that the database must
 except both the old and the new for a short period of time and that any change we make
 to the database should not lock up an entire table.</p>
-
 <p>Probably the most common change we often want to make is simply adding a new
 column to an existing model.  This can present several issues.  First, your new
 column should not set a default.  In postgres, adding a column with a default will
@@ -391,13 +398,11 @@ lock the table while it rewrites the existing rows with the default.  This can
 easily be avoided by adding the column first without the default, then adding
 the default, followed by a future backfill on the existing rows.  This will
 create the column and all future rows will have the default.</p>
-
 <p>Implicit in the above recommendation is that all new columns must be nullable.
 You can not add a column without a default unless you allow null. Additionally,
 while the old models are running against the new table definitions, the app
 will set a value for that column, so it must either have a default or allow
 null otherwise Postgres will throw an error.</p>
-
 <p>Finally, the other change that we need to watch for is removing columns. This
 is a multi-step process. If you drop a column while the old models are still
 active you will get two possible errors (1) when Django tries to select on
@@ -407,75 +412,48 @@ doesn&rsquo;t exist anymore. To actually handle this type of model change you mu
 deploy the model change prior to running the migration.  In our process, that
 means you must commit the model change in a release separate from the database
 migration.</p>
-
 <p>There are certainly other cases to consider, but we have found these 3 cases to
 cover the vast majority of our migration concerns. Having put these checks into
 place, we rarely have any issues with database migrations during deploy.</p>
-
 <h2 id="the-how">The how</h2>
-
 <h3 id="getting-your-list-of-migrations">Getting your list of migrations</h3>
-
 <p>To find the new migrations you can run the following command</p>
-
 <pre><code>$ git log --name-status master.. | grep -e  &quot;^[MA].*migrations.*&quot;
-</code></pre>
-
-<p>Breaking this down, <code>git log --name-status master..</code> will print a log of the
+</code></pre><p>Breaking this down, <code>git log --name-status master..</code> will print a log of the
 commits and the file changes in each commit between <code>master</code> and the current
 <code>HEAD</code>.  The <code>grep</code> returns only those lines that start with <code>A</code> or <code>M</code> and
 also contains the work <code>migrations</code>.  These are all of the new or modified
 migration files.  It will return something like this</p>
-
 <pre><code>A	apps/accounts/migrations/0019_auto_20170126_1830.py
-</code></pre>
-
-<h3 id="getting-your-sql">Getting your SQL</h3>
-
+</code></pre><h3 id="getting-your-sql">Getting your SQL</h3>
 <p>Once you have the list of migration files that you need to check, we need to
 get the actual SQL that is going to be run by Django.  Fortunately, Django
 provides a simple command to get this SQL,
 <a href="https://docs.djangoproject.com/en/1.10/ref/django-admin/#sqlmigrate"><code>sqlmigrate</code></a>.
 For example,</p>
-
 <pre><code>django-admin sqlmigrate account 0002
-</code></pre>
-
-<p>will print the sql for the second migration in the <code>accounts</code> app. In the
+</code></pre><p>will print the sql for the second migration in the <code>accounts</code> app. In the
 pervious section the ouput contains all of the information that we need.
 Specifically, with a command like this</p>
-
 <pre><code>$ git log --name-status master.. | grep -e  &quot;^[AM].*migrations.*&quot; | cut -d / -f 2,4 | cut -d . -f 1
-</code></pre>
-
-<p>we would get back exactly the list of apps and the migration name for each
+</code></pre><p>we would get back exactly the list of apps and the migration name for each
 migration that we need to check</p>
-
 <pre><code>accounts/0017_auto_20170126_1342
-</code></pre>
-
-<p>This still isn&rsquo;t quite what we need.  At the end of the day the following
+</code></pre><p>This still isn&rsquo;t quite what we need.  At the end of the day the following
 command will generate the SQL for you</p>
-
 <pre><code>$ git log --name-status master.. | grep -e  &quot;^[AM].*migrations.*&quot; | cut -d / -f 2,4 | cut -d . -f 1 | awk -F&quot;/&quot; '{ print $1,$2}' | xargs -t -L 1 django-admin sqlmigrate
-</code></pre>
-
-<p>We are using python for our scripting, so my script is actually a bit
+</code></pre><p>We are using python for our scripting, so my script is actually a bit
 different, using the regex <code>apps/((.*)/migrations/(\d+[0-9a-z_]*))\.py</code> and a
 combination of a for loop and subprocess to generate the SQL.</p>
-
 <h3 id="regex-magic">Regex magic</h3>
-
 <p>Now that we have the actual SQL that needs to be tested, it is simply a matter
 of running a few regex tests. We have 3 core tests that we run:</p>
-
 <ul>
 <li><code>check_for_not_null</code> which we test using <code>/NOT NULL/</code></li>
 <li><code>check_for_dropped_columns</code> which we test using <code>/DROP COLUMN/</code>,
 and</li>
 <li><code>check_for_add_with_default</code> which we test using <code>/ADD COLUMN .* DEFAULT/</code>.</li>
 </ul>
-
 <p>For each migration, we test those 3 regex and alert if they have any matches.
 As I mentioned earlier, there are certainly other cases that could be
 considered. Let me know if there are some additional checks I should add.
@@ -505,8 +483,8 @@ we run into.</p>
                 
               
             
-            
-  <div class="post-actions-wrap">
+            <div class="post-actions-wrap">
+  
       <nav style="visibility: hidden">
         <ul class="post-actions post-action-nav">
           
@@ -547,22 +525,22 @@ we run into.</p>
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
             
           </div>
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 Lucas Roesler. 
+    &copy; 2020 Lucas Roesler. 
   </span>
 </footer>
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
-        
-  <div class="post-actions-wrap">
+        <div class="post-actions-wrap">
+  
       <nav style="visibility: hidden">
         <ul class="post-actions post-action-nav">
           
@@ -603,8 +581,8 @@ we run into.</p>
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
@@ -622,11 +600,11 @@ we run into.</p>
       <i class="fa fa-remove"></i>
     </div>
     
-      <img id="about-card-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
     
     <h4 id="about-card-name">Lucas Roesler</h4>
     
-      <div id="about-card-bio">I am senior engineer at <a href='https://contiamo.com'>contiamo.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</div>
+      <div id="about-card-bio">I am senior engineer at <!-- raw HTML omitted -->contiamo.com<!-- raw HTML omitted --> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</div>
     
     
       <div id="about-card-job">
@@ -645,229 +623,10 @@ we run into.</p>
   </div>
 </div>
 
-    <div id="algolia-search-modal" class="modal-container">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="close-button"><i class="fa fa-close"></i></span>
-      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
-        <span class="searchby-algolia-text text-color-light text-small">by</span>
-        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-      </a>
-      <i class="search-icon fa fa-search"></i>
-      <form id="algolia-search-form">
-        <input type="text" id="algolia-search-input" name="search"
-          class="form-control input--large search-input" placeholder="" />
-      </form>
-    </div>
-    <div class="modal-body">
-      <div class="no-result text-color-light text-center"></div>
-      <div class="results">
-        
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/09/action-packed-functions/">
-                <h3 class="media-heading">Action Packed Functions</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Last month, GitHub announced new improved CI/CD with GitHub Actions. Since then, I have experimented with the new Action workflows and created an Action that wraps the faas-cli so that you can easily build and deploy your functions directly from GitHub.
-My initial interactions with the new GitHub Actions were not great, they really meant it when they said &ldquo;public beta&rdquo;. BUT!!! Having said that, there is clearly a lot of promise in GitHub Actions.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/04/developing-openfaas-kind-ly/">
-                <h3 class="media-heading">Developing OpenFaaS KinD-ly</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">There are several ways to run small Kubernetes clusters: k3s and k3d, minikube, and microk8s to name a few. Currently, my favorite is the Kubernetes provided by Docker Desktop for Mac. But this doesn&rsquo;t help my friends (or myself) when I am on a Linux laptop. It would be nice to have one lightweight and shared environment for Kubernetes.
-Luckily, one of the Kubernetes groups has released KinD - Kubernetes in Docker.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/02/when-sequential-tests-arent/">
-                <h3 class="media-heading">When sequential tests aren&#39;t</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Feb 2, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">At work we have been expanding the testing coverage of our auth service and have discovered the perfect storm of edge cases around test caching and Go&rsquo;s test building. In short, we had tests that looked like they were passing locally but would fail sporadically in CI because Go will run the tests inside of a package sequentially but build and test each package in parallel (up to the number of CPU cores).</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/">
-                <h3 class="media-heading">Golang long-polling: a tale of server timeouts</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I recently had a week long battle implementing HTTP long-polling. As so often
-happens in long debugging session in software development, my final fix was
-one line!</p>
+    
 
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/">
-                <h3 class="media-heading">Struct embedding for custom dev responses</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I had to learn about Go struct embedding the other day and I wanted to document my
-fix. In my use case I wanted to add some extra information to an API response to include
-some meta data from kubernetes cluster and/or some extra error information.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/">
-                <h3 class="media-heading">Deploying a private registry in Docker Swarm</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>At <a href="https://contiamo.com">Contiamo</a> I am currently working a project that will eventually integrate with <a href="https://www.openfaas.com/">OpenFaaS</a>.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/08/berlin-and-golang/">
-                <h3 class="media-heading">Berlin and Golang</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>At the beginning of the month I left <a href="https://teem.com/">Teem</a> I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at <a href="https://www.contiamo.com/">Contiamo</a> and will be working on the <a href="https://docs.contiamo.com/en/labs/">Labs feature</a>.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/">
-                <h3 class="media-heading">Home Brewers Association Ruthless Rye Clone</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This recipe is inspired by the <a href="https://www.homebrewersassociation.org/homebrew-recipe/sierra-nevada-ruthless-rye-clone/">Seirra Nevada Ruthless Rye Clone</a> written up by the Home Brewers Association.  I have adjusted it to be a partial mash recipe with about 8 lbs of grains.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/">
-                <h3 class="media-heading">Salt City Brew Supply Orange Honey Wheat</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I just finished my first official &ldquo;summer beer&rdquo; of the year, an Orange Honey Wheat.  This one was inspire by my wife while at the store &ldquo;you should do this one, it uses Utah honey!&rdquo;, thank you <a href="http://techlady.ninja">tech lady ninja</a>.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/">
-                <h3 class="media-heading">SSL Expiry Quick and Simple</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like <a href="https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58">Instagram</a> and <a href="http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html">Google</a>, at <a href="http://status.teem.com/incidents/ddtys5ss4mw5">Teem recently</a>, and of course for myself with my own home server.
-</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-      </div>
-    </div>
-    <div class="modal-footer">
-      <p class="results-count text-medium"
-         data-message-zero=""
-         data-message-one=""
-         data-message-other="">
-         21 posts found
-      </p>
-    </div>
-  </div>
-</div>
     
   
-    
     <div id="cover" style="background-image:url('https://lh3.googleusercontent.com/PslKucVYOkAlYGCTgtwtRcZ24kjQk15UFUhndHkavGffrwrEx3yb2sJOS48NfFsEHPuKCUpoWOnkHkIdz4MdQCWdLk6zYF241LT8xCA7bBY1eaBPOH16g-xlj8WV_aiWrqvll_9eV5QN_X2Zt06b8FuPSto5Tq26S4HLBl-4PVmcJLFyEg54ooUP0s2XYklsqcv6kVwHOMVDe4sOS1rZp2ecfcoknC4mWQYLYT2Nlcx2Q6I-eDTZHmu8uw__19lx8HQJHVLamHImCko8jgAlXpl5x6CTNmwtPdM1CUNiiSrWkajKuEMPMvieiK6NvcGPYZsVL2W14W3xrjS4mzY4iCT11qw2DlBnCDYv_e4Evl8mjuydEulInbHS3Bmw4dBK1En-wlc7bIP7LZ3VsmGGUCzgnARAneCTcrNtcxndSqWJI_8wZT1GAU5pmQhWz8J9kBOWryLtEtPDNQcO-bpMZbZWPO6y4_MISwyMm9VwIb_RPqu5v-peYPDfLCrXtvtzlcnIjpACRRT09Ze6R4U5zXTPVNfUXWX9OY0S_qxur7AEOzfWTFgJA625Gh0Fk9vtSBUVUpj9FKHoAPTsofftPBJHeZ3bkd8pOL3OquFgy0jw4uIpUGb5UIT42V6zAY3uVVLmcIpGubjbohRcXy0JSYAeUcAMxFLrtAu3MjxdMQ=w2856-h1606-no');"></div>
   
 
@@ -878,12 +637,27 @@ some meta data from kubernetes cluster and/or some extra error information.</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="//lucasroesler.com/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="//lucasroesler.com/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
 
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
 
 
   
+
 
 
 

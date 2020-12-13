@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Leadership on Lucas Roesler</title>
+    <title>leadership on Lucas Roesler</title>
     <link>//lucasroesler.com/categories/leadership/</link>
-    <description>Recent content in Leadership on Lucas Roesler</description>
+    <description>Recent content in leadership on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 21 May 2017 22:00:00 -0600</lastBuildDate>
@@ -18,17 +18,14 @@
       
       <guid>//lucasroesler.com/2017/05/take-care-of-your-people/</guid>
       <description>&lt;p&gt;When I first started this blog, I started with &lt;a href=&#34;//lucasroesler.com/2017/01/my-management-philosophy/&#34;&gt;My Management Philosophy&lt;/a&gt;.  In short,&lt;/p&gt;
-
 &lt;blockquote&gt;
 &lt;p&gt;be a multiplier for your team and reduce friction&amp;hellip;
 Successful managers make other people better at their jobs, “multiplying”
 their productivity.&lt;/p&gt;
 &lt;/blockquote&gt;
-
 &lt;p&gt;When I wrote this, I was focusing on the ideas as a guide. &amp;ldquo;Should I do X?
 Does it multiply my team&amp;rsquo;s effort?  Does it simplify their job?&amp;rdquo; Underlying
-this is that good leadership requires &lt;em&gt;empathy&lt;/em&gt; and &lt;em&gt;trust&lt;/em&gt;.
-&lt;/p&gt;</description>
+this is that good leadership requires &lt;em&gt;empathy&lt;/em&gt; and &lt;em&gt;trust&lt;/em&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -39,18 +36,15 @@ this is that good leadership requires &lt;em&gt;empathy&lt;/em&gt; and &lt;em&gt
       <guid>//lucasroesler.com/2017/04/living-our-culture-at-teem-via-peer-reviews/</guid>
       <description>&lt;p&gt;About a year ago we set down to document the core values of the engineering at
 Teem. After a lot of discussion we narrowed it to three core ideas&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;maximize positive impact&lt;/li&gt;
 &lt;li&gt;communicate&lt;/li&gt;
 &lt;li&gt;be a good friend&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;I would add one more unofficial value: mentorship and continuous learning.
 About the same time we also started thinking about how we describe/define an
 engineers career path and we quickly realized that measuring progress is hard
-and that measuring commitment to our core values is even harder.
-&lt;/p&gt;</description>
+and that measuring commitment to our core values is even harder.&lt;/p&gt;</description>
     </item>
     
   </channel>

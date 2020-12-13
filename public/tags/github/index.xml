@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Github on Lucas Roesler</title>
+    <title>github on Lucas Roesler</title>
     <link>//lucasroesler.com/tags/github/</link>
-    <description>Recent content in Github on Lucas Roesler</description>
+    <description>Recent content in github on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0200</lastBuildDate>
@@ -17,8 +17,7 @@
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
       
       <guid>//lucasroesler.com/2019/09/action-packed-functions/</guid>
-      <description>Last month, GitHub announced new improved CI/CD with GitHub Actions. Since then, I have experimented with the new Action workflows and created an Action that wraps the faas-cli so that you can easily build and deploy your functions directly from GitHub.
-My initial interactions with the new GitHub Actions were not great, they really meant it when they said &amp;ldquo;public beta&amp;rdquo;. BUT!!! Having said that, there is clearly a lot of promise in GitHub Actions.</description>
+      <description>A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions</description>
     </item>
     
   </channel>

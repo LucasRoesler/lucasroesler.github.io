@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Lambda on Lucas Roesler</title>
+    <title>lambda on Lucas Roesler</title>
     <link>//lucasroesler.com/tags/lambda/</link>
-    <description>Recent content in Lambda on Lucas Roesler</description>
+    <description>Recent content in lambda on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 11 Jun 2017 11:00:00 -0600</lastBuildDate>
@@ -17,8 +17,7 @@
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
       <guid>//lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</guid>
-      <description>&lt;p&gt;Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&amp;rsquo;t last forever, we know this when we setup SSL but that doesn&amp;rsquo;t stop it from sneaking up on us.  It has happened to the big guys like &lt;a href=&#34;https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58&#34;&gt;Instagram&lt;/a&gt; and &lt;a href=&#34;http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html&#34;&gt;Google&lt;/a&gt;, at &lt;a href=&#34;http://status.teem.com/incidents/ddtys5ss4mw5&#34;&gt;Teem recently&lt;/a&gt;, and of course for myself with my own home server.
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&amp;rsquo;t last forever, we know this when we setup SSL but that doesn&amp;rsquo;t stop it from sneaking up on us.  It has happened to the big guys like &lt;a href=&#34;https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58&#34;&gt;Instagram&lt;/a&gt; and &lt;a href=&#34;http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html&#34;&gt;Google&lt;/a&gt;, at &lt;a href=&#34;http://status.teem.com/incidents/ddtys5ss4mw5&#34;&gt;Teem recently&lt;/a&gt;, and of course for myself with my own home server.&lt;/p&gt;</description>
     </item>
     
   </channel>

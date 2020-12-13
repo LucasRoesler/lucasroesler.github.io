@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Categories on Lucas Roesler</title>
@@ -6,31 +6,40 @@
     <description>Recent content in Categories on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 05 Mar 2017 00:00:00 -0700</lastBuildDate>
+    <lastBuildDate>Sun, 13 Dec 2020 00:00:00 +0200</lastBuildDate>
     
 	<atom:link href="//lucasroesler.com/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>Beer</title>
-      <link>//lucasroesler.com/categories/beer/</link>
-      <pubDate>Sun, 05 Mar 2017 00:00:00 -0700</pubDate>
-      
-      <guid>//lucasroesler.com/categories/beer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Docker</title>
+      <title>docker</title>
       <link>//lucasroesler.com/categories/docker/</link>
-      <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
+      <pubDate>Sun, 13 Dec 2020 00:00:00 +0200</pubDate>
       
       <guid>//lucasroesler.com/categories/docker/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Golang</title>
+      <title>multipass</title>
+      <link>//lucasroesler.com/categories/multipass/</link>
+      <pubDate>Sun, 13 Dec 2020 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/categories/multipass/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>//lucasroesler.com/categories/programming/</link>
+      <pubDate>Sun, 13 Dec 2020 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/categories/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>golang</title>
       <link>//lucasroesler.com/categories/golang/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
       
@@ -39,7 +48,7 @@
     </item>
     
     <item>
-      <title>Http</title>
+      <title>http</title>
       <link>//lucasroesler.com/categories/http/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
       
@@ -48,43 +57,16 @@
     </item>
     
     <item>
-      <title>Leadership</title>
-      <link>//lucasroesler.com/categories/leadership/</link>
-      <pubDate>Sun, 21 May 2017 22:00:00 -0600</pubDate>
-      
-      <guid>//lucasroesler.com/categories/leadership/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Management</title>
-      <link>//lucasroesler.com/categories/management/</link>
-      <pubDate>Sun, 21 May 2017 22:00:00 -0600</pubDate>
-      
-      <guid>//lucasroesler.com/categories/management/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Misc</title>
-      <link>//lucasroesler.com/categories/misc/</link>
-      <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
-      
-      <guid>//lucasroesler.com/categories/misc/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Programming</title>
-      <link>//lucasroesler.com/categories/programming/</link>
+      <title>server</title>
+      <link>//lucasroesler.com/categories/server/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/categories/programming/</guid>
+      <guid>//lucasroesler.com/categories/server/</guid>
       <description></description>
     </item>
     
     <item>
-      <title>Rest</title>
+      <title>rest</title>
       <link>//lucasroesler.com/categories/rest/</link>
       <pubDate>Mon, 05 Jun 2017 21:22:00 -0600</pubDate>
       
@@ -93,11 +75,38 @@
     </item>
     
     <item>
-      <title>Server</title>
-      <link>//lucasroesler.com/categories/server/</link>
-      <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
+      <title>leadership</title>
+      <link>//lucasroesler.com/categories/leadership/</link>
+      <pubDate>Sun, 21 May 2017 22:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/categories/server/</guid>
+      <guid>//lucasroesler.com/categories/leadership/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>management</title>
+      <link>//lucasroesler.com/categories/management/</link>
+      <pubDate>Sun, 21 May 2017 22:00:00 -0600</pubDate>
+      
+      <guid>//lucasroesler.com/categories/management/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>beer</title>
+      <link>//lucasroesler.com/categories/beer/</link>
+      <pubDate>Sun, 05 Mar 2017 00:00:00 -0700</pubDate>
+      
+      <guid>//lucasroesler.com/categories/beer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>misc</title>
+      <link>//lucasroesler.com/categories/misc/</link>
+      <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
+      
+      <guid>//lucasroesler.com/categories/misc/</guid>
       <description></description>
     </item>
     

@@ -1,66 +1,81 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-  
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.34 with theme Tranquilpeak 0.4.3-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Lucas Roesler">
+<meta name="keywords" content="programming, openfaas, development, github, github actions, development, management, python, django">
+<meta name="description" content="A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions">
+
+
+<meta property="og:description" content="A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Action Packed Functions">
+<meta name="twitter:title" content="Action Packed Functions">
+<meta property="og:url" content="//lucasroesler.com/2019/09/action-packed-functions/">
+<meta property="twitter:url" content="//lucasroesler.com/2019/09/action-packed-functions/">
+<meta property="og:site_name" content="Lucas Roesler">
+<meta property="og:description" content="A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions">
+<meta name="twitter:description" content="A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions">
+<meta property="og:locale" content="en">
+
+  
+    <meta property="article:published_time" content="2019-09-28T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2019-09-28T00:00:00">
+  
+  
+  
+  
+    
+      <meta property="article:tag" content="programming">
+    
+      <meta property="article:tag" content="openfaas">
+    
+      <meta property="article:tag" content="development">
+    
+      <meta property="article:tag" content="github">
+    
+      <meta property="article:tag" content="github actions">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@theaxer">
+
+
+  <meta name="twitter:creator" content="@theaxer">
+
+
+
+
+
+
+
+  <meta property="og:image" content="//lucasroesler.com/images/openfaas-github-actions/kapow-1601675_1920.png">
+  <meta property="twitter:image" content="//lucasroesler.com/images/openfaas-github-actions/kapow-1601675_1920.png">
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
+
+
     <title>Action Packed Functions</title>
-    <meta name="author" content="Lucas Roesler">
-    <meta name="keywords" content="programming, openfaas, development, github, github actions, development, management, python, django">
 
     <link rel="icon" href="//lucasroesler.com/favicon.png">
     
 
     
-    <meta name="description" content="Last month, GitHub announced new improved CI/CD with GitHub Actions. Since then, I have experimented with the new Action workflows and created an Action that wraps the faas-cli so that you can easily build and deploy your functions directly from GitHub.
-My initial interactions with the new GitHub Actions were not great, they really meant it when they said &ldquo;public beta&rdquo;. BUT!!! Having said that, there is clearly a lot of promise in GitHub Actions.">
-    <meta property="og:description" content="Last month, GitHub announced new improved CI/CD with GitHub Actions. Since then, I have experimented with the new Action workflows and created an Action that wraps the faas-cli so that you can easily build and deploy your functions directly from GitHub.
-My initial interactions with the new GitHub Actions were not great, they really meant it when they said &ldquo;public beta&rdquo;. BUT!!! Having said that, there is clearly a lot of promise in GitHub Actions.">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Action Packed Functions">
-    <meta property="og:url" content="/2019/09/action-packed-functions/">
-    <meta property="og:site_name" content="Lucas Roesler">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Lucas Roesler">
-    <meta name="twitter:description" content="Last month, GitHub announced new improved CI/CD with GitHub Actions. Since then, I have experimented with the new Action workflows and created an Action that wraps the faas-cli so that you can easily build and deploy your functions directly from GitHub.
-My initial interactions with the new GitHub Actions were not great, they really meant it when they said &ldquo;public beta&rdquo;. BUT!!! Having said that, there is clearly a lot of promise in GitHub Actions.">
-    
-      <meta name="twitter:creator" content="@theaxer">
-    
-    
 
-    
-    
-
-    
-      <meta property="og:image" content="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
-    
-
-    
-    
-      <meta property="og:image" content="//lucasroesler.com/images/openfaas-github-actions/kapow-1601675_1920.png">
-    
-    
-
-    
+    <link rel="canonical" href="//lucasroesler.com/2019/09/action-packed-functions/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -68,20 +83,23 @@ My initial interactions with the new GitHub Actions were not great, they really 
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="//lucasroesler.com/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    <link rel="stylesheet" href="//lucasroesler.com/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90384590-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-90384590-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -103,7 +121,7 @@ ga('send', 'pageview');
     
     
       
-        <img class="header-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=90" alt="" />
+        <img class="header-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=90" alt="" />
       
     
     </a>
@@ -115,11 +133,11 @@ ga('send', 'pageview');
     
       <div class="sidebar-profile">
         <a href="//lucasroesler.com/#about">
-          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
         </a>
         <h4 class="sidebar-profile-name">Lucas Roesler</h4>
         
-          <h5 class="sidebar-profile-bio">I am senior engineer at <a href='https://contiamo.com'>contiamo.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</h5>
+          <h5 class="sidebar-profile-bio">I am senior engineer at <!-- raw HTML omitted -->contiamo.com<!-- raw HTML omitted --> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</h5>
         
       </div>
     
@@ -292,55 +310,43 @@ ga('send', 'pageview');
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              
-
-<p>Last month, GitHub announced new <a href="https://github.blog/2019-08-08-github-actions-now-supports-ci-cd/">improved CI/CD with GitHub Actions</a>.  Since then, I have experimented with the new Action workflows and created <a href="https://github.com/LucasRoesler/openfaas-action">an Action</a> that wraps the <code>faas-cli</code> so that you can easily build and deploy your functions directly from GitHub.</p>
-
-<hr />
-
+              <p>Last month, GitHub announced new <a href="https://github.blog/2019-08-08-github-actions-now-supports-ci-cd/">improved CI/CD with GitHub Actions</a>.  Since then, I have experimented with the new Action workflows and created <a href="https://github.com/LucasRoesler/openfaas-action">an Action</a> that wraps the <code>faas-cli</code> so that you can easily build and deploy your functions directly from GitHub.</p>
+<hr>
 <p>My initial interactions with the new GitHub Actions were not great, they really meant it when they said &ldquo;public beta&rdquo;. BUT!!! Having said that, there is clearly a lot of promise in GitHub Actions. People <a href="https://twitter.com/search?q=github%20actions&amp;src=typed_query">seem to love it</a>. The integration into the UI is great. And, while the first week was tough, the documentation and <a href="https://twitter.com/TheAxeR/status/1163014894117163009?s=20">starter workflows have seen a lot of improvements</a>.  Today, I want to introduce the OpenFaaS Actions that I wrote and show you how to set up a simple &ldquo;build &amp; deploy&rdquo; workflow for your OpenFaaS functions.</p>
-
 <p>Back at the beginning of the year, I wrote a short walk-through on the OpenFaaS blog showing how to cleanly <a href="https://www.openfaas.com/blog/multifile-python-functions/">split Python functions into multiple modules</a>. Today, we will extend that <a href="https://github.com/LucasRoesler/openfaas-multifile-example">example repo</a> with a <a href="https://github.com/LucasRoesler/openfaas-multifile-example/pull/2/checks?check_run_id=202252631">GitHub Action Workflow</a> to make sure that the latest version of the function is <a href="https://cloud.docker.com/repository/docker/theaxer/wordcount">available to deploy</a>.</p>
-
-<h2 id="tl-dr">TL;DR</h2>
-
+<h2 id="tldr">TL;DR</h2>
 <p>If you are a GitHub Actions expert already and just want to see the workflow files:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">name</span>: CI
 
-<pre><code class="language-yaml">name: CI
+<span style="color:#66d9ef">on</span>: [push]
 
-on: [push]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Login to Docker Hub
-      uses: actions/docker/login@master
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-    - uses: LucasRoesler/openfaas-action/template_store_pull@v0.1.0
-      name: Fetch Template
-      with:
-        name: &quot;python3-flask&quot;
-    - uses: LucasRoesler/openfaas-action/build@v0.1.0
-      name: Build
-      with:
-        path: &quot;wordcount.yml&quot;
-        tag: &quot;sha&quot;
-    - uses: LucasRoesler/openfaas-action/push@v0.1.0
-      name: Push image
-      if: &quot;success() &amp;&amp; github.ref == 'refs/heads/master' &quot;
-      with:
-        path: &quot;wordcount.yml&quot;
-        tag: &quot;sha&quot;
-</code></pre>
-
-<h2 id="the-openfaas-actions">The OpenFaaS Actions</h2>
-
+<span style="color:#66d9ef">jobs</span>:
+  <span style="color:#66d9ef">build</span>:
+    <span style="color:#66d9ef">runs-on</span>: ubuntu-latest
+    <span style="color:#66d9ef">steps</span>:
+    - <span style="color:#66d9ef">uses</span>: actions/checkout@v1
+    - <span style="color:#66d9ef">name</span>: Login to Docker Hub
+      <span style="color:#66d9ef">uses</span>: actions/docker/login@master
+      <span style="color:#66d9ef">env</span>:
+        <span style="color:#66d9ef">DOCKER_USERNAME</span>: ${{ secrets.DOCKER_USERNAME }}
+        <span style="color:#66d9ef">DOCKER_PASSWORD</span>: ${{ secrets.DOCKER_PASSWORD }}
+    - <span style="color:#66d9ef">uses</span>: LucasRoesler/openfaas-action/template_store_pull@v0<span style="color:#ae81ff">.1.0</span>
+      <span style="color:#66d9ef">name</span>: Fetch Template
+      <span style="color:#66d9ef">with</span>:
+        <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;python3-flask&#34;</span>
+    - <span style="color:#66d9ef">uses</span>: LucasRoesler/openfaas-action/build@v0<span style="color:#ae81ff">.1.0</span>
+      <span style="color:#66d9ef">name</span>: Build
+      <span style="color:#66d9ef">with</span>:
+        <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;wordcount.yml&#34;</span>
+        <span style="color:#66d9ef">tag</span>: <span style="color:#e6db74">&#34;sha&#34;</span>
+    - <span style="color:#66d9ef">uses</span>: LucasRoesler/openfaas-action/push@v0<span style="color:#ae81ff">.1.0</span>
+      <span style="color:#66d9ef">name</span>: Push image
+      <span style="color:#66d9ef">if</span>: <span style="color:#e6db74">&#34;success() &amp;&amp; github.ref == &#39;refs/heads/master&#39; &#34;</span>
+      <span style="color:#66d9ef">with</span>:
+        <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;wordcount.yml&#34;</span>
+        <span style="color:#66d9ef">tag</span>: <span style="color:#e6db74">&#34;sha&#34;</span>
+</code></pre></div><h2 id="the-openfaas-actions">The OpenFaaS Actions</h2>
 <p>Currently, the <a href="https://github.com/LucasRoesler/openfaas-action">OpenFaaS Action repo</a> defines 6 common actions that expose the <code>faas-cli</code> commands of the same name:</p>
-
 <ol>
 <li><code>login</code> - login to an OpenFaaS cluster</li>
 <li><code>build</code> - build the functions in the named function stack configuration</li>
@@ -349,13 +355,9 @@ jobs:
 <li><code>template store pull</code> - pull the named function template from the template store</li>
 <li><code>push</code> - push the built function docker image to a docker registry</li>
 </ol>
-
 <p>It also provides a generic <code>cli</code> action that allows you to pass any command to the <code>faas-cli</code>.  This is the escape hatch that allows you to use the <code>faas-cli</code> directly instead of via the pre-defined actions described above.</p>
-
 <h2 id="what-is-an-action">What is an Action?</h2>
-
 <p>Each step in the above workflow &ldquo;uses&rdquo; a different GitHub Action.  These are predefined &hellip; well&hellip; actions that can be performed, in this cases</p>
-
 <ol>
 <li>clone the project,</li>
 <li>login to docker hub,</li>
@@ -363,34 +365,26 @@ jobs:
 <li>build the function, and</li>
 <li>push the function image.</li>
 </ol>
-
 <p>Each of these actions is effectively a Docker image, a command, and some optional metadata. For example, the template pull Action is just this bit of yaml</p>
-
-<pre><code class="language-yaml">name: 'OpenFaaS CLI Template Repo Pull Action'
-description: 'Pull templates from a remote repository'
-author: 'Lucas Roesler'
-inputs:
-  repository_url:
-    description: 'repository to pull templates from, defaults to the core templates'
-    required: false
-runs:
-  using: 'docker'
-  image: 'docker://openfaas/faas-cli:0.9.2'
-  args:
-    - 'faas-cli'
-    - 'template'
-    - 'pull'
-    - '${{ inputs.repository_url }}'
-</code></pre>
-
-<p>In which I specify that it runs the <code>faas-cli template pull</code> command in the prebuilt  <code>openfaas/faas-cli:0.9.2</code> image.</p>
-
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#39;OpenFaaS CLI Template Repo Pull Action&#39;</span>
+<span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&#39;Pull templates from a remote repository&#39;</span>
+<span style="color:#66d9ef">author</span>: <span style="color:#e6db74">&#39;Lucas Roesler&#39;</span>
+<span style="color:#66d9ef">inputs</span>:
+  <span style="color:#66d9ef">repository_url</span>:
+    <span style="color:#66d9ef">description</span>: <span style="color:#e6db74">&#39;repository to pull templates from, defaults to the core templates&#39;</span>
+    <span style="color:#66d9ef">required</span>: <span style="color:#66d9ef">false</span>
+<span style="color:#66d9ef">runs</span>:
+  <span style="color:#66d9ef">using</span>: <span style="color:#e6db74">&#39;docker&#39;</span>
+  <span style="color:#66d9ef">image</span>: <span style="color:#e6db74">&#39;docker://openfaas/faas-cli:0.9.2&#39;</span>
+  <span style="color:#66d9ef">args</span>:
+    - <span style="color:#e6db74">&#39;faas-cli&#39;</span>
+    - <span style="color:#e6db74">&#39;template&#39;</span>
+    - <span style="color:#e6db74">&#39;pull&#39;</span>
+    - <span style="color:#e6db74">&#39;${{ inputs.repository_url }}&#39;</span>
+</code></pre></div><p>In which I specify that it runs the <code>faas-cli template pull</code> command in the prebuilt  <code>openfaas/faas-cli:0.9.2</code> image.</p>
 <h2 id="setup-the-workflow">Setup the workflow</h2>
-
 <h3 id="configure-you-repo-secrets">Configure you repo secrets</h3>
-
 <p>Before we dive into the GitHub Action Workflow, we need to configure two <a href="https://help.github.com/en/articles/virtual-environments-for-github-actions#creating-and-using-secrets-encrypted-variables">secrets for the repo</a> <code>DOCKER_USERNAME</code> and <code>DOCKER_PASSWORD</code>.  This is done in the Secrets section of the Settings tab, like this:</p>
-
 
 
 
@@ -403,9 +397,7 @@ runs:
   
 </div>
 
-
 <h3 id="write-the-workflow">Write the workflow</h3>
-
 <p>In your GitHub repo, select the Actions tab to get started. If you do not have any actions yet, it will look just like this
 
 
@@ -420,7 +412,6 @@ runs:
 </div>
 
 If you have already setup some actions, it will show the previous workflow runs. But, <a href="https://github.blog/changelog/2019-09-26-the-actions-tab-gets-a-new-look/">as of Sept 26</a> GitHub has add a &ldquo;New Workflow&rdquo; button that brings you back to that welcome screen.</p>
-
 <p>This is a custom workflow, so select &ldquo;Setup a workflow yourself&rdquo;, which brings you to an editor
 
 
@@ -434,104 +425,92 @@ If you have already setup some actions, it will show the previous workflow runs.
   
 </div>
 </p>
-
 <p>Now we simply need to update the steps to use the new OpenFaaS Actions.</p>
-
 <p>For this example, we want the workflow to</p>
-
 <ol>
-<li><p>&ldquo;clone the project&rdquo;,</p>
-
+<li>
+<p>&ldquo;clone the project&rdquo;,</p>
 <p>This step is the simplest and uses an the official GitHub action</p>
-
-<pre><code>- uses: actions/checkout@v1
-</code></pre></li>
-
-<li><p>&ldquo;login to docker hub&rdquo;,</p>
-
+<pre><code> - uses: actions/checkout@v1
+</code></pre>
+</li>
+<li>
+<p>&ldquo;login to docker hub&rdquo;,</p>
 <p>this again uses an official Action, but requires some secret parameters which are passed via the env, which we configure in the next section,</p>
-
-<pre><code>- name: Login to Docker Hub
-  uses: actions/docker/login@master
-  env:
-    DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-    DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-</code></pre></li>
-
-<li><p>&ldquo;fetch the python function template&rdquo;,</p>
-
+<pre><code> - name: Login to Docker Hub
+   uses: actions/docker/login@master
+   env:
+     DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
+     DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+</code></pre>
+</li>
+<li>
+<p>&ldquo;fetch the python function template&rdquo;,</p>
 <p>This is the first OpenFaaS step and calls the <code>faas-cli template store pull</code> command, but is as simple as the docker login. This time we need to specify the name of the template we want to pull. Unlike the docker login action, these are passed by the <code>with</code> section because the OpenFaaS <a href="https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepswith">action has predefined input parameters</a></p>
-
-<pre><code>- uses: LucasRoesler/openfaas-action/template_store_pull@v0.1.0
-  name: Fetch Template
-  with:
-    name: &quot;python3-flask&quot;
+<pre><code> - uses: LucasRoesler/openfaas-action/template_store_pull@v0.1.0
+   name: Fetch Template
+   with:
+     name: &quot;python3-flask&quot;
 </code></pre>
-
-<p>Before going further, the action name specifies a folder/action <code>template_store_pull</code> in my action repo <code>LucasRoesler/openfaas-action</code> at a specific SHA/tag <code>v0.1.0</code>. All actions have this structure, which makes it easy to find and review what the code is actually going to do before you use it or to find inspiration for your own actions.</p></li>
-
-<li><p>&ldquo;build the function&rdquo;,</p>
-
-<p>The <code>faas-cli build</code> action requires the relative path to the stack YAML file and it also accepts the tag flag for the build command:
-  &gt; Override latest tag on function Docker image, accepts &lsquo;latest&rsquo;, &lsquo;sha&rsquo;, or &lsquo;branch&rsquo; (default &ldquo;latest&rdquo;)</p>
-
-<pre><code>- uses: LucasRoesler/openfaas-action/build@v0.1.0
-  name: Build
-  with:
-    path: &quot;wordcount.yml&quot;
-    tag: &quot;sha&quot;
-</code></pre></li>
-
-<li><p>&ldquo;push the function image&rdquo;,</p>
-
+<p>Before going further, the action name specifies a folder/action <code>template_store_pull</code> in my action repo <code>LucasRoesler/openfaas-action</code> at a specific SHA/tag <code>v0.1.0</code>. All actions have this structure, which makes it easy to find and review what the code is actually going to do before you use it or to find inspiration for your own actions.</p>
+</li>
+<li>
+<p>&ldquo;build the function&rdquo;,</p>
+<p>The <code>faas-cli build</code> action requires the relative path to the stack YAML file and it also accepts the tag flag for the build command:</p>
+<blockquote>
+<p>Override latest tag on function Docker image, accepts &lsquo;latest&rsquo;, &lsquo;sha&rsquo;, or &lsquo;branch&rsquo; (default &ldquo;latest&rdquo;)</p>
+</blockquote>
+<pre><code> - uses: LucasRoesler/openfaas-action/build@v0.1.0
+   name: Build
+   with:
+     path: &quot;wordcount.yml&quot;
+     tag: &quot;sha&quot;
+</code></pre>
+</li>
+<li>
+<p>&ldquo;push the function image&rdquo;,</p>
 <p>Finally, with the the functions built, we can also push them to the Docker Hub using the <code>faas-cli push</code>.  This step also uses the <a href="https://help.github.com/en/articles/workflow-syntax-for-github-actions#jobsjob_idstepsif">step conditional statement</a> to ensure that it only runs when the build step was success <em>AND</em> when the workflow is running on the master branch.</p>
-
-<pre><code>- uses: LucasRoesler/openfaas-action/push@v0.1.0
-  name: Push image
-  if: &quot;success() &amp;&amp; github.ref == 'refs/heads/master' &quot;
-  with:
-    path: &quot;wordcount.yml&quot;
-    tag: &quot;sha&quot;
-</code></pre></li>
-</ol>
-
-<p>Altogether, the workflow should look like</p>
-
-<pre><code class="language-yaml">name: CI
-
-on: [push]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Login to Docker Hub
-      uses: actions/docker/login@master
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-    - uses: LucasRoesler/openfaas-action/template_store_pull@v0.1.0
-      name: Fetch Template
-      with:
-        name: &quot;python3-flask&quot;
-    - uses: LucasRoesler/openfaas-action/build@v0.1.0
-      name: Build
-      with:
-        path: &quot;wordcount.yml&quot;
-        tag: &quot;sha&quot;
-    - uses: LucasRoesler/openfaas-action/push@v0.1.0
-      name: Push image
-      if: &quot;success() &amp;&amp; github.ref == 'refs/heads/master' &quot;
-      with:
-        path: &quot;wordcount.yml&quot;
-        tag: &quot;sha&quot;
+<pre><code> - uses: LucasRoesler/openfaas-action/push@v0.1.0
+   name: Push image
+   if: &quot;success() &amp;&amp; github.ref == 'refs/heads/master' &quot;
+   with:
+     path: &quot;wordcount.yml&quot;
+     tag: &quot;sha&quot;
 </code></pre>
+</li>
+</ol>
+<p>Altogether, the workflow should look like</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">name</span>: CI
 
-<h3 id="save-and-run-the-workflow">Save and Run the Workflow</h3>
+<span style="color:#66d9ef">on</span>: [push]
 
+<span style="color:#66d9ef">jobs</span>:
+  <span style="color:#66d9ef">build</span>:
+    <span style="color:#66d9ef">runs-on</span>: ubuntu-latest
+    <span style="color:#66d9ef">steps</span>:
+    - <span style="color:#66d9ef">uses</span>: actions/checkout@v1
+    - <span style="color:#66d9ef">name</span>: Login to Docker Hub
+      <span style="color:#66d9ef">uses</span>: actions/docker/login@master
+      <span style="color:#66d9ef">env</span>:
+        <span style="color:#66d9ef">DOCKER_USERNAME</span>: ${{ secrets.DOCKER_USERNAME }}
+        <span style="color:#66d9ef">DOCKER_PASSWORD</span>: ${{ secrets.DOCKER_PASSWORD }}
+    - <span style="color:#66d9ef">uses</span>: LucasRoesler/openfaas-action/template_store_pull@v0<span style="color:#ae81ff">.1.0</span>
+      <span style="color:#66d9ef">name</span>: Fetch Template
+      <span style="color:#66d9ef">with</span>:
+        <span style="color:#66d9ef">name</span>: <span style="color:#e6db74">&#34;python3-flask&#34;</span>
+    - <span style="color:#66d9ef">uses</span>: LucasRoesler/openfaas-action/build@v0<span style="color:#ae81ff">.1.0</span>
+      <span style="color:#66d9ef">name</span>: Build
+      <span style="color:#66d9ef">with</span>:
+        <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;wordcount.yml&#34;</span>
+        <span style="color:#66d9ef">tag</span>: <span style="color:#e6db74">&#34;sha&#34;</span>
+    - <span style="color:#66d9ef">uses</span>: LucasRoesler/openfaas-action/push@v0<span style="color:#ae81ff">.1.0</span>
+      <span style="color:#66d9ef">name</span>: Push image
+      <span style="color:#66d9ef">if</span>: <span style="color:#e6db74">&#34;success() &amp;&amp; github.ref == &#39;refs/heads/master&#39; &#34;</span>
+      <span style="color:#66d9ef">with</span>:
+        <span style="color:#66d9ef">path</span>: <span style="color:#e6db74">&#34;wordcount.yml&#34;</span>
+        <span style="color:#66d9ef">tag</span>: <span style="color:#e6db74">&#34;sha&#34;</span>
+</code></pre></div><h3 id="save-and-run-the-workflow">Save and Run the Workflow</h3>
 <p>Save the workflow using the &ldquo;Start Commit&rdquo; button, if you are feeling brave you can commit the workflow directly to <code>master</code>, but you can also easily test the workflow from any branch</p>
-
 
 
 
@@ -544,9 +523,7 @@ jobs:
   
 </div>
 
-
 <p>Once it is committed, you can see the workflow results and logs in the Actions tab</p>
-
 
 
 
@@ -559,44 +536,36 @@ jobs:
   
 </div>
 
-
 <h2 id="next-steps">Next Steps</h2>
-
 <p>This is just an experiment while GitHub Actions is in beta. But the next step will of course be a GitHub Action to keep the OpenFaaS action up-to-date with the <code>faas-cli</code> releases.</p>
-
 <p>Additionally, there is some <a href="https://github.com/openfaas/faas-cli/pull/668">interesting work currently going on</a> that should help simplify this workflow even more. We want to add the ability to save the template dependencies to the project repository so that we can pull all of the dependencies with a single command <code>faas-cli template pull stack</code>.  For a standard OpenFaaS project using the default <code>stack.yml</code>, the basic workflow will be completely standardized and require almost no configuration, like this</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#66d9ef">name</span>: CI
 
-<pre><code class="language-yaml">name: CI
+<span style="color:#66d9ef">on</span>: [push]
 
-on: [push]
-
-jobs:
-  build:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - name: Login to Docker Hub
-      uses: actions/docker/login@master
-      env:
-        DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-    - uses: LucasRoesler/openfaas-action/template_pull_stack@v0.1.0
-      name: Fetch Template
-    - uses: LucasRoesler/openfaas-action/build@v0.1.0
-      name: Build
-      with:
-        tag: &quot;sha&quot;
-    - uses: LucasRoesler/openfaas-action/push@v0.1.0
-      name: Push image
-      if: &quot;success() &amp;&amp; github.ref == 'refs/heads/master'&quot;
-      with:
-        tag: &quot;sha&quot;
-</code></pre>
-
-<p>Ultimately, I want to make the OpenFaaS experience on GitHub as easy as possible.</p>
-
+<span style="color:#66d9ef">jobs</span>:
+  <span style="color:#66d9ef">build</span>:
+    <span style="color:#66d9ef">runs-on</span>: ubuntu-latest
+    <span style="color:#66d9ef">steps</span>:
+    - <span style="color:#66d9ef">uses</span>: actions/checkout@v1
+    - <span style="color:#66d9ef">name</span>: Login to Docker Hub
+      <span style="color:#66d9ef">uses</span>: actions/docker/login@master
+      <span style="color:#66d9ef">env</span>:
+        <span style="color:#66d9ef">DOCKER_USERNAME</span>: ${{ secrets.DOCKER_USERNAME }}
+        <span style="color:#66d9ef">DOCKER_PASSWORD</span>: ${{ secrets.DOCKER_PASSWORD }}
+    - <span style="color:#66d9ef">uses</span>: LucasRoesler/openfaas-action/template_pull_stack@v0<span style="color:#ae81ff">.1.0</span>
+      <span style="color:#66d9ef">name</span>: Fetch Template
+    - <span style="color:#66d9ef">uses</span>: LucasRoesler/openfaas-action/build@v0<span style="color:#ae81ff">.1.0</span>
+      <span style="color:#66d9ef">name</span>: Build
+      <span style="color:#66d9ef">with</span>:
+        <span style="color:#66d9ef">tag</span>: <span style="color:#e6db74">&#34;sha&#34;</span>
+    - <span style="color:#66d9ef">uses</span>: LucasRoesler/openfaas-action/push@v0<span style="color:#ae81ff">.1.0</span>
+      <span style="color:#66d9ef">name</span>: Push image
+      <span style="color:#66d9ef">if</span>: <span style="color:#e6db74">&#34;success() &amp;&amp; github.ref == &#39;refs/heads/master&#39;&#34;</span>
+      <span style="color:#66d9ef">with</span>:
+        <span style="color:#66d9ef">tag</span>: <span style="color:#e6db74">&#34;sha&#34;</span>
+</code></pre></div><p>Ultimately, I want to make the OpenFaaS experience on GitHub as easy as possible.</p>
 <p>If you have any questions, feedback, or you want to help:</p>
-
 <ul>
 <li>Open an <a href="https://github.com/LucasRoesler/openfaas-action/issues">issue or PR on the OpenFaaS Actions repo</a>, or</li>
 <li>Join the OpenFaaS <a href="https://docs.openfaas.com/community">Slack community</a></li>
@@ -627,14 +596,14 @@ jobs:
                 
               
             
-            
-  <div class="post-actions-wrap">
+            <div class="post-actions-wrap">
+  
       <nav style="visibility: hidden">
         <ul class="post-actions post-action-nav">
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="//lucasroesler.com/2020/12/moving-the-data-directory-of-multipass-and-docker/" data-tooltip="Moving the data directory of Multipass and Docker">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -669,28 +638,28 @@ jobs:
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
             
           </div>
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 Lucas Roesler. 
+    &copy; 2020 Lucas Roesler. 
   </span>
 </footer>
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
-        
-  <div class="post-actions-wrap">
+        <div class="post-actions-wrap">
+  
       <nav style="visibility: hidden">
         <ul class="post-actions post-action-nav">
           
             <li class="post-action">
               
-                <a class="post-action-btn btn btn--disabled">
+                <a class="post-action-btn btn btn--default tooltip--top" href="//lucasroesler.com/2020/12/moving-the-data-directory-of-multipass-and-docker/" data-tooltip="Moving the data directory of Multipass and Docker">
               
                   <i class="fa fa-angle-left"></i>
                   <span class="hide-xs hide-sm text-small icon-ml"></span>
@@ -725,8 +694,8 @@ jobs:
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
@@ -744,11 +713,11 @@ jobs:
       <i class="fa fa-remove"></i>
     </div>
     
-      <img id="about-card-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
     
     <h4 id="about-card-name">Lucas Roesler</h4>
     
-      <div id="about-card-bio">I am senior engineer at <a href='https://contiamo.com'>contiamo.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</div>
+      <div id="about-card-bio">I am senior engineer at <!-- raw HTML omitted -->contiamo.com<!-- raw HTML omitted --> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</div>
     
     
       <div id="about-card-job">
@@ -767,229 +736,10 @@ jobs:
   </div>
 </div>
 
-    <div id="algolia-search-modal" class="modal-container">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="close-button"><i class="fa fa-close"></i></span>
-      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
-        <span class="searchby-algolia-text text-color-light text-small">by</span>
-        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-      </a>
-      <i class="search-icon fa fa-search"></i>
-      <form id="algolia-search-form">
-        <input type="text" id="algolia-search-input" name="search"
-          class="form-control input--large search-input" placeholder="" />
-      </form>
-    </div>
-    <div class="modal-body">
-      <div class="no-result text-color-light text-center"></div>
-      <div class="results">
-        
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/09/action-packed-functions/">
-                <h3 class="media-heading">Action Packed Functions</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Last month, GitHub announced new improved CI/CD with GitHub Actions. Since then, I have experimented with the new Action workflows and created an Action that wraps the faas-cli so that you can easily build and deploy your functions directly from GitHub.
-My initial interactions with the new GitHub Actions were not great, they really meant it when they said &ldquo;public beta&rdquo;. BUT!!! Having said that, there is clearly a lot of promise in GitHub Actions.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/04/developing-openfaas-kind-ly/">
-                <h3 class="media-heading">Developing OpenFaaS KinD-ly</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">There are several ways to run small Kubernetes clusters: k3s and k3d, minikube, and microk8s to name a few. Currently, my favorite is the Kubernetes provided by Docker Desktop for Mac. But this doesn&rsquo;t help my friends (or myself) when I am on a Linux laptop. It would be nice to have one lightweight and shared environment for Kubernetes.
-Luckily, one of the Kubernetes groups has released KinD - Kubernetes in Docker.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/02/when-sequential-tests-arent/">
-                <h3 class="media-heading">When sequential tests aren&#39;t</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Feb 2, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">At work we have been expanding the testing coverage of our auth service and have discovered the perfect storm of edge cases around test caching and Go&rsquo;s test building. In short, we had tests that looked like they were passing locally but would fail sporadically in CI because Go will run the tests inside of a package sequentially but build and test each package in parallel (up to the number of CPU cores).</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/">
-                <h3 class="media-heading">Golang long-polling: a tale of server timeouts</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I recently had a week long battle implementing HTTP long-polling. As so often
-happens in long debugging session in software development, my final fix was
-one line!</p>
+    
 
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/">
-                <h3 class="media-heading">Struct embedding for custom dev responses</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I had to learn about Go struct embedding the other day and I wanted to document my
-fix. In my use case I wanted to add some extra information to an API response to include
-some meta data from kubernetes cluster and/or some extra error information.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/">
-                <h3 class="media-heading">Deploying a private registry in Docker Swarm</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>At <a href="https://contiamo.com">Contiamo</a> I am currently working a project that will eventually integrate with <a href="https://www.openfaas.com/">OpenFaaS</a>.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/08/berlin-and-golang/">
-                <h3 class="media-heading">Berlin and Golang</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>At the beginning of the month I left <a href="https://teem.com/">Teem</a> I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at <a href="https://www.contiamo.com/">Contiamo</a> and will be working on the <a href="https://docs.contiamo.com/en/labs/">Labs feature</a>.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/">
-                <h3 class="media-heading">Home Brewers Association Ruthless Rye Clone</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This recipe is inspired by the <a href="https://www.homebrewersassociation.org/homebrew-recipe/sierra-nevada-ruthless-rye-clone/">Seirra Nevada Ruthless Rye Clone</a> written up by the Home Brewers Association.  I have adjusted it to be a partial mash recipe with about 8 lbs of grains.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/">
-                <h3 class="media-heading">Salt City Brew Supply Orange Honey Wheat</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I just finished my first official &ldquo;summer beer&rdquo; of the year, an Orange Honey Wheat.  This one was inspire by my wife while at the store &ldquo;you should do this one, it uses Utah honey!&rdquo;, thank you <a href="http://techlady.ninja">tech lady ninja</a>.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/">
-                <h3 class="media-heading">SSL Expiry Quick and Simple</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like <a href="https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58">Instagram</a> and <a href="http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html">Google</a>, at <a href="http://status.teem.com/incidents/ddtys5ss4mw5">Teem recently</a>, and of course for myself with my own home server.
-</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-      </div>
-    </div>
-    <div class="modal-footer">
-      <p class="results-count text-medium"
-         data-message-zero=""
-         data-message-one=""
-         data-message-other="">
-         21 posts found
-      </p>
-    </div>
-  </div>
-</div>
     
   
-    
     <div id="cover" style="background-image:url('https://lh3.googleusercontent.com/PslKucVYOkAlYGCTgtwtRcZ24kjQk15UFUhndHkavGffrwrEx3yb2sJOS48NfFsEHPuKCUpoWOnkHkIdz4MdQCWdLk6zYF241LT8xCA7bBY1eaBPOH16g-xlj8WV_aiWrqvll_9eV5QN_X2Zt06b8FuPSto5Tq26S4HLBl-4PVmcJLFyEg54ooUP0s2XYklsqcv6kVwHOMVDe4sOS1rZp2ecfcoknC4mWQYLYT2Nlcx2Q6I-eDTZHmu8uw__19lx8HQJHVLamHImCko8jgAlXpl5x6CTNmwtPdM1CUNiiSrWkajKuEMPMvieiK6NvcGPYZsVL2W14W3xrjS4mzY4iCT11qw2DlBnCDYv_e4Evl8mjuydEulInbHS3Bmw4dBK1En-wlc7bIP7LZ3VsmGGUCzgnARAneCTcrNtcxndSqWJI_8wZT1GAU5pmQhWz8J9kBOWryLtEtPDNQcO-bpMZbZWPO6y4_MISwyMm9VwIb_RPqu5v-peYPDfLCrXtvtzlcnIjpACRRT09Ze6R4U5zXTPVNfUXWX9OY0S_qxur7AEOzfWTFgJA625Gh0Fk9vtSBUVUpj9FKHoAPTsofftPBJHeZ3bkd8pOL3OquFgy0jw4uIpUGb5UIT42V6zAY3uVVLmcIpGubjbohRcXy0JSYAeUcAMxFLrtAu3MjxdMQ=w2856-h1606-no');"></div>
   
 
@@ -1000,12 +750,27 @@ some meta data from kubernetes cluster and/or some extra error information.</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="//lucasroesler.com/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="//lucasroesler.com/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
 
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
 
 
   
+
 
 
 

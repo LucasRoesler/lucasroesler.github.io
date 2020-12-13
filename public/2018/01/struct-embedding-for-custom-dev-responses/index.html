@@ -1,73 +1,84 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-  
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.34 with theme Tranquilpeak 0.4.3-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Lucas Roesler">
+<meta name="keywords" content="golang, development, management, python, django">
+<meta name="description" content="I had to learn about Go struct embedding the other day and I wanted to document my
+fix. In my use case I wanted to add some extra information to an API response to include
+some meta data from kubernetes cluster and/or some extra error information.">
+
+
+<meta property="og:description" content="I had to learn about Go struct embedding the other day and I wanted to document my
+fix. In my use case I wanted to add some extra information to an API response to include
+some meta data from kubernetes cluster and/or some extra error information.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Struct embedding for custom dev responses">
+<meta name="twitter:title" content="Struct embedding for custom dev responses">
+<meta property="og:url" content="//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/">
+<meta property="twitter:url" content="//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/">
+<meta property="og:site_name" content="Lucas Roesler">
+<meta property="og:description" content="I had to learn about Go struct embedding the other day and I wanted to document my
+fix. In my use case I wanted to add some extra information to an API response to include
+some meta data from kubernetes cluster and/or some extra error information.">
+<meta name="twitter:description" content="I had to learn about Go struct embedding the other day and I wanted to document my
+fix. In my use case I wanted to add some extra information to an API response to include
+some meta data from kubernetes cluster and/or some extra error information.">
+<meta property="og:locale" content="en">
+
+  
+    <meta property="article:published_time" content="2018-01-27T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2018-01-27T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="programming">
+    
+      <meta property="article:section" content="golang">
+    
+  
+  
+    
+      <meta property="article:tag" content="golang">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@theaxer">
+
+
+  <meta name="twitter:creator" content="@theaxer">
+
+
+
+
+
+
+
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
+
+
     <title>Struct embedding for custom dev responses</title>
-    <meta name="author" content="Lucas Roesler">
-    <meta name="keywords" content="golang, development, management, python, django">
 
     <link rel="icon" href="//lucasroesler.com/favicon.png">
     
 
     
-    <meta name="description" content="I had to learn about Go struct embedding the other day and I wanted to document my
-fix. In my use case I wanted to add some extra information to an API response to include
-some meta data from kubernetes cluster and/or some extra error information.
 
-">
-    <meta property="og:description" content="I had to learn about Go struct embedding the other day and I wanted to document my
-fix. In my use case I wanted to add some extra information to an API response to include
-some meta data from kubernetes cluster and/or some extra error information.
-
-">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="Struct embedding for custom dev responses">
-    <meta property="og:url" content="/2018/01/struct-embedding-for-custom-dev-responses/">
-    <meta property="og:site_name" content="Lucas Roesler">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Lucas Roesler">
-    <meta name="twitter:description" content="I had to learn about Go struct embedding the other day and I wanted to document my
-fix. In my use case I wanted to add some extra information to an API response to include
-some meta data from kubernetes cluster and/or some extra error information.
-
-">
-    
-      <meta name="twitter:creator" content="@theaxer">
-    
-    
-
-    
-    
-
-    
-      <meta property="og:image" content="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
-    
-
-    
-    
-    
-
-    
+    <link rel="canonical" href="//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -75,20 +86,23 @@ some meta data from kubernetes cluster and/or some extra error information.
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="//lucasroesler.com/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    <link rel="stylesheet" href="//lucasroesler.com/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90384590-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-90384590-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -110,7 +124,7 @@ ga('send', 'pageview');
     
     
       
-        <img class="header-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=90" alt="" />
+        <img class="header-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=90" alt="" />
       
     
     </a>
@@ -122,11 +136,11 @@ ga('send', 'pageview');
     
       <div class="sidebar-profile">
         <a href="//lucasroesler.com/#about">
-          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
         </a>
         <h4 class="sidebar-profile-name">Lucas Roesler</h4>
         
-          <h5 class="sidebar-profile-bio">I am senior engineer at <a href='https://contiamo.com'>contiamo.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</h5>
+          <h5 class="sidebar-profile-bio">I am senior engineer at <!-- raw HTML omitted -->contiamo.com<!-- raw HTML omitted --> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</h5>
         
       </div>
     
@@ -304,107 +318,93 @@ ga('send', 'pageview');
               <p>I had to learn about Go struct embedding the other day and I wanted to document my
 fix. In my use case I wanted to add some extra information to an API response to include
 some meta data from kubernetes cluster and/or some extra error information.</p>
-
-<p></p>
-
 <p>When I first implemented this particular API I was just learning Go and for simplicity
 <em>to get things done</em> I just used two structs.  For example:</p>
-
-<pre><code class="language-go">    dev := true
-    type APIResponse struct {
-        ID string `json:&quot;id&quot;`
-        Name string `json:&quot;name&quot;`
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    <span style="color:#a6e22e">dev</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">true</span>
+    <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">APIResponse</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">ID</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;id&#34;`</span>
+        <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;name&#34;`</span>
     }
 
-    type DevAPIResponse struct {
-        ID string `json:&quot;id&quot;`
-        Name string `json:&quot;name&quot;`
-        DevData string `json:&quot;devData&quot;`
+    <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">DevAPIResponse</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">ID</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;id&#34;`</span>
+        <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;name&#34;`</span>
+        <span style="color:#a6e22e">DevData</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;devData&#34;`</span>
     }
 
-    var payloadBytes []byte
-    payload := APIResponse{ID: &quot;1&quot;, Name: &quot;sample&quot;}
-    if dev {
-        devPayload := DevAPIResponse {
-            ID: payload.ID,
-            Name: payload.Name,
-            DevData: &quot;some special internal value, e.g. a k8s object id&quot;,
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">payloadBytes</span> []<span style="color:#66d9ef">byte</span>
+    <span style="color:#a6e22e">payload</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">APIResponse</span>{<span style="color:#a6e22e">ID</span>: <span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;sample&#34;</span>}
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">dev</span> {
+        <span style="color:#a6e22e">devPayload</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">DevAPIResponse</span> {
+            <span style="color:#a6e22e">ID</span>: <span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">ID</span>,
+            <span style="color:#a6e22e">Name</span>: <span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">Name</span>,
+            <span style="color:#a6e22e">DevData</span>: <span style="color:#e6db74">&#34;some special internal value, e.g. a k8s object id&#34;</span>,
         }
 
-        payloadBytes, _ = json.Marshal(devPayload)
-    } else {
-        payloadBytes, _ = json.Marshal(payload)
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">devPayload</span>)
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">payload</span>)
     }
-    fmt.Printf(&quot;%s\n&quot;, payloadBytes)
-</code></pre>
-
-<p>You can run this at <a href="https://play.golang.com/p/WAT2OKkxVq-">https://play.golang.com/p/WAT2OKkxVq-</a></p>
-
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s\n&#34;</span>, <span style="color:#a6e22e">payloadBytes</span>)
+</code></pre></div><p>You can run this at <a href="https://play.golang.com/p/WAT2OKkxVq-">https://play.golang.com/p/WAT2OKkxVq-</a></p>
 <p>But, I was recently refactoring the original code and I could not stand the idea of is basically
 a duplicated struct and the need to keep them in sync.  I struggled to find a good example of
 extending a struct like this.  Plenty of toy examples that involve Dogs or Balls, but no actual
 practical  examples. So, I spent time to learn and play with Go struct embedding and ended up
 with something that looks like this</p>
-
-<pre><code class="language-go">    dev := true
-    type APIResponse struct {
-        ID string `json:&quot;id&quot;`
-        Name string `json:&quot;name&quot;`
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    <span style="color:#a6e22e">dev</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">true</span>
+    <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">APIResponse</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">ID</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;id&#34;`</span>
+        <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;name&#34;`</span>
     }
 
-    var payloadBytes []byte
-    payload := APIResponse{ID: &quot;1&quot;, Name: &quot;sample&quot;}
-    if dev {
-        devPayload := struct {
-            APIResponse  // embedded
-            DevData  string `json:&quot;devData&quot;`
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">payloadBytes</span> []<span style="color:#66d9ef">byte</span>
+    <span style="color:#a6e22e">payload</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">APIResponse</span>{<span style="color:#a6e22e">ID</span>: <span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;sample&#34;</span>}
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">dev</span> {
+        <span style="color:#a6e22e">devPayload</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">struct</span> {
+            <span style="color:#a6e22e">APIResponse</span>  <span style="color:#75715e">// embedded
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">DevData</span>  <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;devData&#34;`</span>
         }{
-            DevData: &quot;some special internal value, e.g. a k8s object id&quot;,
+            <span style="color:#a6e22e">DevData</span>: <span style="color:#e6db74">&#34;some special internal value, e.g. a k8s object id&#34;</span>,
         }
-        devPayload.APIResponse = payload
+        <span style="color:#a6e22e">devPayload</span>.<span style="color:#a6e22e">APIResponse</span> = <span style="color:#a6e22e">payload</span>
 
-        payloadBytes, _ = json.Marshal(devPayload)
-    } else {
-        payloadBytes, _ = json.Marshal(payload)
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">devPayload</span>)
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">payload</span>)
     }
 
-    fmt.Println(payloadBytes)
-</code></pre>
-
-<p><a href="https://play.golang.org/p/V-qqsGazbAW">https://play.golang.org/p/V-qqsGazbAW</a></p>
-
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">payloadBytes</span>)
+</code></pre></div><p><a href="https://play.golang.org/p/V-qqsGazbAW">https://play.golang.org/p/V-qqsGazbAW</a></p>
 <p>If this were an actual request handler, this would actually look like</p>
-
-<pre><code class="language-go">func APiHandler(w http.ResponseWriter, r *http.Request) {
-    var payloadBytes []byte
-    var err error
-    payload := APIResponse{ID: &quot;1&quot;, Name: &quot;sample&quot;}
-    // dev is some global flag
-    if dev {
-        devPayload := struct {
-            APIResponse  // embedded
-            DevData  string `json:&quot;devData&quot;`
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">APiHandler</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">payloadBytes</span> []<span style="color:#66d9ef">byte</span>
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
+    <span style="color:#a6e22e">payload</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">APIResponse</span>{<span style="color:#a6e22e">ID</span>: <span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;sample&#34;</span>}
+    <span style="color:#75715e">// dev is some global flag
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">dev</span> {
+        <span style="color:#a6e22e">devPayload</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">struct</span> {
+            <span style="color:#a6e22e">APIResponse</span>  <span style="color:#75715e">// embedded
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">DevData</span>  <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;devData&#34;`</span>
         }{
-            DevData: &quot;some special internal value, e.g. a k8s object id&quot;,
+            <span style="color:#a6e22e">DevData</span>: <span style="color:#e6db74">&#34;some special internal value, e.g. a k8s object id&#34;</span>,
         }
-        devPayload.APIResponse = payload
+        <span style="color:#a6e22e">devPayload</span>.<span style="color:#a6e22e">APIResponse</span> = <span style="color:#a6e22e">payload</span>
 
-        payloadBytes, err = json.Marshal(devPayload)
-    } else {
-        payloadBytes, err = json.Marshal(payload)
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">devPayload</span>)
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">payload</span>)
     }
 
-    if err != nil {
-        http.Error(w, err.Error(), http.StatusInternalServerError)
-        return
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+        <span style="color:#66d9ef">return</span>
     }
 
-    w.Header().Set(&quot;Content-Type&quot;, &quot;application/json&quot;)
-    w.Write(payloadBytes)
+    <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Header</span>().<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;application/json&#34;</span>)
+    <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">payloadBytes</span>)
 }
-</code></pre>
-
-<p>Hopefully someone else finds this useful.</p>
+</code></pre></div><p>Hopefully someone else finds this useful.</p>
               
             </div>
           </div>
@@ -422,8 +422,8 @@ with something that looks like this</p>
                 
               
             
-            
-  <div class="post-actions-wrap">
+            <div class="post-actions-wrap">
+  
       <nav style="visibility: hidden">
         <ul class="post-actions post-action-nav">
           
@@ -464,22 +464,22 @@ with something that looks like this</p>
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
             
           </div>
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 Lucas Roesler. 
+    &copy; 2020 Lucas Roesler. 
   </span>
 </footer>
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
-        
-  <div class="post-actions-wrap">
+        <div class="post-actions-wrap">
+  
       <nav style="visibility: hidden">
         <ul class="post-actions post-action-nav">
           
@@ -520,8 +520,8 @@ with something that looks like this</p>
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
@@ -539,11 +539,11 @@ with something that looks like this</p>
       <i class="fa fa-remove"></i>
     </div>
     
-      <img id="about-card-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
     
     <h4 id="about-card-name">Lucas Roesler</h4>
     
-      <div id="about-card-bio">I am senior engineer at <a href='https://contiamo.com'>contiamo.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</div>
+      <div id="about-card-bio">I am senior engineer at <!-- raw HTML omitted -->contiamo.com<!-- raw HTML omitted --> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</div>
     
     
       <div id="about-card-job">
@@ -562,229 +562,10 @@ with something that looks like this</p>
   </div>
 </div>
 
-    <div id="algolia-search-modal" class="modal-container">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="close-button"><i class="fa fa-close"></i></span>
-      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
-        <span class="searchby-algolia-text text-color-light text-small">by</span>
-        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-      </a>
-      <i class="search-icon fa fa-search"></i>
-      <form id="algolia-search-form">
-        <input type="text" id="algolia-search-input" name="search"
-          class="form-control input--large search-input" placeholder="" />
-      </form>
-    </div>
-    <div class="modal-body">
-      <div class="no-result text-color-light text-center"></div>
-      <div class="results">
-        
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/09/action-packed-functions/">
-                <h3 class="media-heading">Action Packed Functions</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Last month, GitHub announced new improved CI/CD with GitHub Actions. Since then, I have experimented with the new Action workflows and created an Action that wraps the faas-cli so that you can easily build and deploy your functions directly from GitHub.
-My initial interactions with the new GitHub Actions were not great, they really meant it when they said &ldquo;public beta&rdquo;. BUT!!! Having said that, there is clearly a lot of promise in GitHub Actions.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/04/developing-openfaas-kind-ly/">
-                <h3 class="media-heading">Developing OpenFaaS KinD-ly</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">There are several ways to run small Kubernetes clusters: k3s and k3d, minikube, and microk8s to name a few. Currently, my favorite is the Kubernetes provided by Docker Desktop for Mac. But this doesn&rsquo;t help my friends (or myself) when I am on a Linux laptop. It would be nice to have one lightweight and shared environment for Kubernetes.
-Luckily, one of the Kubernetes groups has released KinD - Kubernetes in Docker.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/02/when-sequential-tests-arent/">
-                <h3 class="media-heading">When sequential tests aren&#39;t</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Feb 2, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">At work we have been expanding the testing coverage of our auth service and have discovered the perfect storm of edge cases around test caching and Go&rsquo;s test building. In short, we had tests that looked like they were passing locally but would fail sporadically in CI because Go will run the tests inside of a package sequentially but build and test each package in parallel (up to the number of CPU cores).</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/">
-                <h3 class="media-heading">Golang long-polling: a tale of server timeouts</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I recently had a week long battle implementing HTTP long-polling. As so often
-happens in long debugging session in software development, my final fix was
-one line!</p>
+    
 
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/">
-                <h3 class="media-heading">Struct embedding for custom dev responses</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I had to learn about Go struct embedding the other day and I wanted to document my
-fix. In my use case I wanted to add some extra information to an API response to include
-some meta data from kubernetes cluster and/or some extra error information.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/">
-                <h3 class="media-heading">Deploying a private registry in Docker Swarm</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>At <a href="https://contiamo.com">Contiamo</a> I am currently working a project that will eventually integrate with <a href="https://www.openfaas.com/">OpenFaaS</a>.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/08/berlin-and-golang/">
-                <h3 class="media-heading">Berlin and Golang</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>At the beginning of the month I left <a href="https://teem.com/">Teem</a> I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at <a href="https://www.contiamo.com/">Contiamo</a> and will be working on the <a href="https://docs.contiamo.com/en/labs/">Labs feature</a>.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/">
-                <h3 class="media-heading">Home Brewers Association Ruthless Rye Clone</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This recipe is inspired by the <a href="https://www.homebrewersassociation.org/homebrew-recipe/sierra-nevada-ruthless-rye-clone/">Seirra Nevada Ruthless Rye Clone</a> written up by the Home Brewers Association.  I have adjusted it to be a partial mash recipe with about 8 lbs of grains.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/">
-                <h3 class="media-heading">Salt City Brew Supply Orange Honey Wheat</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I just finished my first official &ldquo;summer beer&rdquo; of the year, an Orange Honey Wheat.  This one was inspire by my wife while at the store &ldquo;you should do this one, it uses Utah honey!&rdquo;, thank you <a href="http://techlady.ninja">tech lady ninja</a>.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/">
-                <h3 class="media-heading">SSL Expiry Quick and Simple</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like <a href="https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58">Instagram</a> and <a href="http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html">Google</a>, at <a href="http://status.teem.com/incidents/ddtys5ss4mw5">Teem recently</a>, and of course for myself with my own home server.
-</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-      </div>
-    </div>
-    <div class="modal-footer">
-      <p class="results-count text-medium"
-         data-message-zero=""
-         data-message-one=""
-         data-message-other="">
-         21 posts found
-      </p>
-    </div>
-  </div>
-</div>
     
   
-    
     <div id="cover" style="background-image:url('https://lh3.googleusercontent.com/PslKucVYOkAlYGCTgtwtRcZ24kjQk15UFUhndHkavGffrwrEx3yb2sJOS48NfFsEHPuKCUpoWOnkHkIdz4MdQCWdLk6zYF241LT8xCA7bBY1eaBPOH16g-xlj8WV_aiWrqvll_9eV5QN_X2Zt06b8FuPSto5Tq26S4HLBl-4PVmcJLFyEg54ooUP0s2XYklsqcv6kVwHOMVDe4sOS1rZp2ecfcoknC4mWQYLYT2Nlcx2Q6I-eDTZHmu8uw__19lx8HQJHVLamHImCko8jgAlXpl5x6CTNmwtPdM1CUNiiSrWkajKuEMPMvieiK6NvcGPYZsVL2W14W3xrjS4mzY4iCT11qw2DlBnCDYv_e4Evl8mjuydEulInbHS3Bmw4dBK1En-wlc7bIP7LZ3VsmGGUCzgnARAneCTcrNtcxndSqWJI_8wZT1GAU5pmQhWz8J9kBOWryLtEtPDNQcO-bpMZbZWPO6y4_MISwyMm9VwIb_RPqu5v-peYPDfLCrXtvtzlcnIjpACRRT09Ze6R4U5zXTPVNfUXWX9OY0S_qxur7AEOzfWTFgJA625Gh0Fk9vtSBUVUpj9FKHoAPTsofftPBJHeZ3bkd8pOL3OquFgy0jw4uIpUGb5UIT42V6zAY3uVVLmcIpGubjbohRcXy0JSYAeUcAMxFLrtAu3MjxdMQ=w2856-h1606-no');"></div>
   
 
@@ -795,12 +576,27 @@ some meta data from kubernetes cluster and/or some extra error information.</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="//lucasroesler.com/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="//lucasroesler.com/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
 
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
 
 
   
+
 
 
 

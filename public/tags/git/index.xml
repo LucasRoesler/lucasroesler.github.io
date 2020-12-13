@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Git on Lucas Roesler</title>
+    <title>git on Lucas Roesler</title>
     <link>//lucasroesler.com/tags/git/</link>
-    <description>Recent content in Git on Lucas Roesler</description>
+    <description>Recent content in git on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 19 Mar 2017 00:00:00 -0600</lastBuildDate>
@@ -22,8 +22,7 @@ tech company is &lt;code&gt;git&lt;/code&gt;.  There are a couple of other techn
 probably find, like AWS, but &lt;code&gt;git&lt;/code&gt; is the only one I expect to find everywhere. It is
 also, surprisingly, many developers number one frienemy.  I want to share some
 of my favorite tips and tweaks that I have used over the years to make it all
-friend and never my enemy.
-&lt;/p&gt;</description>
+friend and never my enemy.&lt;/p&gt;</description>
     </item>
     
   </channel>
