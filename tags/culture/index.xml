@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Culture on Lucas Roesler</title>
+    <title>culture on Lucas Roesler</title>
     <link>//lucasroesler.com/tags/culture/</link>
-    <description>Recent content in Culture on Lucas Roesler</description>
+    <description>Recent content in culture on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sat, 22 Apr 2017 12:16:11 -0600</lastBuildDate>
@@ -19,18 +19,15 @@
       <guid>//lucasroesler.com/2017/04/living-our-culture-at-teem-via-peer-reviews/</guid>
       <description>&lt;p&gt;About a year ago we set down to document the core values of the engineering at
 Teem. After a lot of discussion we narrowed it to three core ideas&lt;/p&gt;
-
 &lt;ol&gt;
 &lt;li&gt;maximize positive impact&lt;/li&gt;
 &lt;li&gt;communicate&lt;/li&gt;
 &lt;li&gt;be a good friend&lt;/li&gt;
 &lt;/ol&gt;
-
 &lt;p&gt;I would add one more unofficial value: mentorship and continuous learning.
 About the same time we also started thinking about how we describe/define an
 engineers career path and we quickly realized that measuring progress is hard
-and that measuring commitment to our core values is even harder.
-&lt;/p&gt;</description>
+and that measuring commitment to our core values is even harder.&lt;/p&gt;</description>
     </item>
     
   </channel>

@@ -1,82 +1,99 @@
-
-
-  
-    
-  
-
-
-  
-
-
-
-
-  
-
-
-  
-
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
     
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="generator" content="Hugo 0.34 with theme Tranquilpeak 0.4.3-BETA">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="author" content="Lucas Roesler">
+<meta name="keywords" content="beer, hefeweizen, homebrew, development, management, python, django">
+<meta name="description" content="A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
+with a smooth mouth-feel and dense, whipped-cream head.">
+
+
+<meta property="og:description" content="A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
+with a smooth mouth-feel and dense, whipped-cream head.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A spring Hefe">
+<meta name="twitter:title" content="A spring Hefe">
+<meta property="og:url" content="//lucasroesler.com/2017/03/a-spring-hefe/">
+<meta property="twitter:url" content="//lucasroesler.com/2017/03/a-spring-hefe/">
+<meta property="og:site_name" content="Lucas Roesler">
+<meta property="og:description" content="A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
+with a smooth mouth-feel and dense, whipped-cream head.">
+<meta name="twitter:description" content="A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
+with a smooth mouth-feel and dense, whipped-cream head.">
+<meta property="og:locale" content="en">
+
+  
+    <meta property="article:published_time" content="2017-03-05T00:00:00">
+  
+  
+    <meta property="article:modified_time" content="2017-03-05T00:00:00">
+  
+  
+  
+    
+      <meta property="article:section" content="beer">
+    
+  
+  
+    
+      <meta property="article:tag" content="beer">
+    
+      <meta property="article:tag" content="hefeweizen">
+    
+      <meta property="article:tag" content="homebrew">
+    
+  
+
+
+<meta name="twitter:card" content="summary">
+
+  <meta name="twitter:site" content="@theaxer">
+
+
+  <meta name="twitter:creator" content="@theaxer">
+
+
+
+
+
+
+
+
+  
+    <meta property="og:image" content="https://lh3.googleusercontent.com/8rTbDTYa1I9Vxpiv_XOJBxPnc_wKl6y1guWv1ACOJTHlmsjQhcAECaGaU62_3gHqKqo4jNIWQYGLxL8vrxjwIPYar_TCf5J2svUdsqlr7F_BBntya0yI7WNxQQAgWhdxXhJLrPFLCxhjLdAOPwwp_LKsZeNcRjuGOHJ35zQAQwnWg1sssh-s3d0CIIhmqaOdBdkp05hojATrBtb7g-T49xORk5et8Ov8a5qEu8zRWejoA-icmxPoxtQSCQVlnuWry-8xISCIlbzXmAV06jGkrac6MwWCFdzT9BS5_ZEzatFPSFIkvexYyUflE8_hcpr1Ox2CGIdZybw3tt6UjfImoFVrTHJpEnM-a2eeBM_7fveXqjV8YEOc0mcVKG9Mvp0c8nqBxyzWcHN2ncIlkTK_P5NUGbXnHbZUunwI1JI-9VP8kmqS06YXSOVO69OG3Z9dts9r4DFQzxlft7fFDoBpq24iOqLFaXJCNfO1_IfNC12XoeQYxkPHJG8ty-jfXM34KgZfdUIUG1JR2PSVrDPMGZLSELAhJ_06lCqR0AR3GRyF2-9wA3LW9EAF4DuLi2KphughdOSqYcapY-kWYo7rp9vvAR64yT9VXJgtM5aMScXIl0wGo8ZgpXhE4OTVRhg6b407dX6SZnlnZrUNChTH3ZLFcyOFGiEJXfJkj1CZLg=w2070-h1552-no">
+    <meta property="twitter:image" content="https://lh3.googleusercontent.com/8rTbDTYa1I9Vxpiv_XOJBxPnc_wKl6y1guWv1ACOJTHlmsjQhcAECaGaU62_3gHqKqo4jNIWQYGLxL8vrxjwIPYar_TCf5J2svUdsqlr7F_BBntya0yI7WNxQQAgWhdxXhJLrPFLCxhjLdAOPwwp_LKsZeNcRjuGOHJ35zQAQwnWg1sssh-s3d0CIIhmqaOdBdkp05hojATrBtb7g-T49xORk5et8Ov8a5qEu8zRWejoA-icmxPoxtQSCQVlnuWry-8xISCIlbzXmAV06jGkrac6MwWCFdzT9BS5_ZEzatFPSFIkvexYyUflE8_hcpr1Ox2CGIdZybw3tt6UjfImoFVrTHJpEnM-a2eeBM_7fveXqjV8YEOc0mcVKG9Mvp0c8nqBxyzWcHN2ncIlkTK_P5NUGbXnHbZUunwI1JI-9VP8kmqS06YXSOVO69OG3Z9dts9r4DFQzxlft7fFDoBpq24iOqLFaXJCNfO1_IfNC12XoeQYxkPHJG8ty-jfXM34KgZfdUIUG1JR2PSVrDPMGZLSELAhJ_06lCqR0AR3GRyF2-9wA3LW9EAF4DuLi2KphughdOSqYcapY-kWYo7rp9vvAR64yT9VXJgtM5aMScXIl0wGo8ZgpXhE4OTVRhg6b407dX6SZnlnZrUNChTH3ZLFcyOFGiEJXfJkj1CZLg=w2070-h1552-no">
+  
+    <meta property="og:image" content="https://lh3.googleusercontent.com/q6oPIPYdsulebim14UtAgmZ1ZNml5hHeh8-LwR_K58CZ9DCBCF4SNTyO_m2wqHHBS5_ZXItnvqFv77Q7WqyjhL6UIZbyPIx2n7RSEggrKeYYxyaBnFjonYczLV_t5VdA3XrfaXXVbmcXSriNLE-zyFVeYcc1jq7aUuJy882kwJQL3LJP_gZyh0BuHe9UYrlVERz9aotpSQDUVKQgPKll3YWrxju24sHhRispPNZAWJtIp6G5ShIRtF5aIwWk8rSXn6MoOiO2oevEP4kLOKHgpA99YeEbhH35ekizE0ahSnMS7pbJDG23UvS9yv0v8cvvtyQR5XhssI4n1Z0TmFAJ20LjCp0QqTPAdOzvQztlTwdvwGjePV3TzgU13Exq1Fb96tjYpzVCDizCAxTiaCVUMjfF9uisqO0onrzvh0b0RW_uxsVORA3gJMd5AXI4EniqBEv2W6sNpdCL-gpXp8qoXK4mSzh_wpisHj56jsVW2KZUllyXRUlqX_KH6vyFS1UtGLCHKcv2Zi-FP2yTV86UbX-YIlFSAssH2TKLjh60eikICga2NRQ9ff3nC0QDwRJYzNyAmCOSqw6szuOtWRkVFh663jBYNkIrxMhjqow1Ej8VjYA5tlNNSOiXfqWVTolny-HnDtDHCISmUs9lke9u87uG1PslUo4O-YIQGrDbOg=w2070-h1552-no">
+    <meta property="twitter:image" content="https://lh3.googleusercontent.com/q6oPIPYdsulebim14UtAgmZ1ZNml5hHeh8-LwR_K58CZ9DCBCF4SNTyO_m2wqHHBS5_ZXItnvqFv77Q7WqyjhL6UIZbyPIx2n7RSEggrKeYYxyaBnFjonYczLV_t5VdA3XrfaXXVbmcXSriNLE-zyFVeYcc1jq7aUuJy882kwJQL3LJP_gZyh0BuHe9UYrlVERz9aotpSQDUVKQgPKll3YWrxju24sHhRispPNZAWJtIp6G5ShIRtF5aIwWk8rSXn6MoOiO2oevEP4kLOKHgpA99YeEbhH35ekizE0ahSnMS7pbJDG23UvS9yv0v8cvvtyQR5XhssI4n1Z0TmFAJ20LjCp0QqTPAdOzvQztlTwdvwGjePV3TzgU13Exq1Fb96tjYpzVCDizCAxTiaCVUMjfF9uisqO0onrzvh0b0RW_uxsVORA3gJMd5AXI4EniqBEv2W6sNpdCL-gpXp8qoXK4mSzh_wpisHj56jsVW2KZUllyXRUlqX_KH6vyFS1UtGLCHKcv2Zi-FP2yTV86UbX-YIlFSAssH2TKLjh60eikICga2NRQ9ff3nC0QDwRJYzNyAmCOSqw6szuOtWRkVFh663jBYNkIrxMhjqow1Ej8VjYA5tlNNSOiXfqWVTolny-HnDtDHCISmUs9lke9u87uG1PslUo4O-YIQGrDbOg=w2070-h1552-no">
+  
+    <meta property="og:image" content="https://lh3.googleusercontent.com/j9kyXLx4CVDHXp1iEjzCqbcsiZ4TZrTkG_CMGKfRINTU53Ws4nQejPmjr92DXzCpxJWbHbFtS-pifaEqW6XMBhHiWoT7rQb0ieACg5g57MTOmjfCEvypc6X0jGimQTgFT4ctJbwXlhSl6Xg6yKCQnr_Ew90jBRyZwfLCiKkrDDcgG8w5q0HsryEC2mKskZhMwiI1444hUM_PMFK2AGJrxjmXZRpOtoRYaKma26IuBTFHDN3lfmznI2wDFME-0TpCCmNPB2jkOM6mBP8AhYIYVIXZ7xcTHWX69QqUAWFdepIXLiBkrZegJbMf5adRRg5cFmpQm3Pz00Xy9rQ7Q5DOeOpB-imX0ppZPUwJuMui6KzEMHb0EQtYlsLrWh9t9UamxNCwCx-uM0rVJK-MgSE_L2G00DKmjGSlz7iniFTi5OvhL2b6EXSY66viPnGs8J_SQdBhYYWSw_5_rM_xXZJbDh9lpFl80nH0mDdRr2kwuIrtMZP2K62fEwCg-o4Ll4eivBRHUgBmpbQ8bLkMtOGt5m0V4CNlEP8qMQHNu8qCxAdq_VjdBxbsQjINtHX_5I6QI0O5XcG29fjQRJSjNo5Li6X1X4V4ykhx3YbByUj6jfgqu_v0gqhULyov0QaoREDLL0DiJDsQCtyCZ1gcT75CLRrB1N33bBSiPnfkSoyA-w=w2070-h1552-no">
+    <meta property="twitter:image" content="https://lh3.googleusercontent.com/j9kyXLx4CVDHXp1iEjzCqbcsiZ4TZrTkG_CMGKfRINTU53Ws4nQejPmjr92DXzCpxJWbHbFtS-pifaEqW6XMBhHiWoT7rQb0ieACg5g57MTOmjfCEvypc6X0jGimQTgFT4ctJbwXlhSl6Xg6yKCQnr_Ew90jBRyZwfLCiKkrDDcgG8w5q0HsryEC2mKskZhMwiI1444hUM_PMFK2AGJrxjmXZRpOtoRYaKma26IuBTFHDN3lfmznI2wDFME-0TpCCmNPB2jkOM6mBP8AhYIYVIXZ7xcTHWX69QqUAWFdepIXLiBkrZegJbMf5adRRg5cFmpQm3Pz00Xy9rQ7Q5DOeOpB-imX0ppZPUwJuMui6KzEMHb0EQtYlsLrWh9t9UamxNCwCx-uM0rVJK-MgSE_L2G00DKmjGSlz7iniFTi5OvhL2b6EXSY66viPnGs8J_SQdBhYYWSw_5_rM_xXZJbDh9lpFl80nH0mDdRr2kwuIrtMZP2K62fEwCg-o4Ll4eivBRHUgBmpbQ8bLkMtOGt5m0V4CNlEP8qMQHNu8qCxAdq_VjdBxbsQjINtHX_5I6QI0O5XcG29fjQRJSjNo5Li6X1X4V4ykhx3YbByUj6jfgqu_v0gqhULyov0QaoREDLL0DiJDsQCtyCZ1gcT75CLRrB1N33bBSiPnfkSoyA-w=w2070-h1552-no">
+  
+    <meta property="og:image" content="https://lh3.googleusercontent.com/Dw00GATcDcifFbJ4SFsHYv1HPTdLh6g1nQpjSrrm5Vx5JjQrdS-kU0MR_yG1px56jjW_J7uG08yDnqstjT4GLGDOXJFWtFNh6oHslDhOTguHEv4FWe_YwjFNoCDKRmYFCwR9xOZ8NP7Am_zOghZSJDevNPgEm0hDwIQfRFz4p5MVSc_sYWJ_LCCQdrafgauQk0rNNRLwlg7PgfzijQBUBqPqs_JOAfIgyWwSIFqty_-3iNC82cl2jzJAnJj_7TzyKjL8eya6Hhrnns5RAJUzruoXk1X_WgVzb9XQzDWOWNmooPZUJwCgTlur-VdyABQbjj5dU4wUjhszqk6R9F9w-Ip8xKfCpz1kbYaGemyCZflJKvNKdPUReqr1CvynyGwI5rpFQozektc2PFe3QMtJ7rdMHcFCJwHq-8CNRhvC87DTO0Ct8MOp261xvE1FtFsWtankzB8fyiWQjHPZMqYuGnDriR5qKfUztby7SYaEEAsjCxQ1DnN9BM3-3hUlanP5tc8IZs_sKZk4Pm2Mk6RTg5wDzPoGNSdte6j2P_Y-yW4rS4TSkBbNBFs95E6oQDVLgvV0-8eDCvqjYk2CYBMuKznvHjbS2N5S38T19ugRBEirdvw2Y9rN3bzNdLj14G28kQqnfxgIjXHmYUoEQVQq20n5UpViOhutOGpjNaIDoA=w1164-h1552-no">
+    <meta property="twitter:image" content="https://lh3.googleusercontent.com/Dw00GATcDcifFbJ4SFsHYv1HPTdLh6g1nQpjSrrm5Vx5JjQrdS-kU0MR_yG1px56jjW_J7uG08yDnqstjT4GLGDOXJFWtFNh6oHslDhOTguHEv4FWe_YwjFNoCDKRmYFCwR9xOZ8NP7Am_zOghZSJDevNPgEm0hDwIQfRFz4p5MVSc_sYWJ_LCCQdrafgauQk0rNNRLwlg7PgfzijQBUBqPqs_JOAfIgyWwSIFqty_-3iNC82cl2jzJAnJj_7TzyKjL8eya6Hhrnns5RAJUzruoXk1X_WgVzb9XQzDWOWNmooPZUJwCgTlur-VdyABQbjj5dU4wUjhszqk6R9F9w-Ip8xKfCpz1kbYaGemyCZflJKvNKdPUReqr1CvynyGwI5rpFQozektc2PFe3QMtJ7rdMHcFCJwHq-8CNRhvC87DTO0Ct8MOp261xvE1FtFsWtankzB8fyiWQjHPZMqYuGnDriR5qKfUztby7SYaEEAsjCxQ1DnN9BM3-3hUlanP5tc8IZs_sKZk4Pm2Mk6RTg5wDzPoGNSdte6j2P_Y-yW4rS4TSkBbNBFs95E6oQDVLgvV0-8eDCvqjYk2CYBMuKznvHjbS2N5S38T19ugRBEirdvw2Y9rN3bzNdLj14G28kQqnfxgIjXHmYUoEQVQq20n5UpViOhutOGpjNaIDoA=w1164-h1552-no">
+  
+    <meta property="og:image" content="https://lh3.googleusercontent.com/IoyGi4v5TQ-aqhvAsqmcLUBPuQmT0xI0r--vJIP_HVJ7Vs3W0cAkwTq9za_g0ImcvesnimPZ_h9RoNp5qrGeAo4PYgbibblyc54vEb9PfV1nn7YMK35dV0s_YnCAVbKtAZ-49hiF3mv4DFIq-GAf5OIWMtf4rAONrL-ZSg6wS2lmUwctYbDm-jCHb9RD_9p40p4C-Qv3-0AhhfBxEzAm32gfIwfyZSdSTIlRN3q0gBwD60Ml8v8-LDswgucXC0ugKwJ6VQmHXOWjsQB-4FEBESB-GEwHBzCHVG4FOwnWlIZ3rKmd0X6arrOAYzqWk4IaJsX1P9y_3quZV5kbicyF13kn2C8Ssc5hggYkSLXAN4g9zY38gEWx4eOIokMOO_Pz8AaO3sY3JUsx8Jags-VYfVSfqPLtotHMG2sBv3Qa9isodd_lnVoz_mhirQgKGUsoakVwp6P7H6bjsw5G6xACT4OkPvZW68IdD9-CLP3r-4OCoznSotRhgkMZC42BnahzSMIxL3MHyc-WcZpJoXP3L0pMUsabLTrmQ_2XGYcmXWslX0D49FovzNyGaaJiYBIjsbaIzjt5Ip_C8zBf_v8rCeGGGkHY54gxc79u-DT5EVXmcW0Lh3Mrqqet6iJg71cu3DtWYmB4RCfYDezXBNjegdMkl6uff5fvCVGj7iICIA=w1204-h1552-no">
+    <meta property="twitter:image" content="https://lh3.googleusercontent.com/IoyGi4v5TQ-aqhvAsqmcLUBPuQmT0xI0r--vJIP_HVJ7Vs3W0cAkwTq9za_g0ImcvesnimPZ_h9RoNp5qrGeAo4PYgbibblyc54vEb9PfV1nn7YMK35dV0s_YnCAVbKtAZ-49hiF3mv4DFIq-GAf5OIWMtf4rAONrL-ZSg6wS2lmUwctYbDm-jCHb9RD_9p40p4C-Qv3-0AhhfBxEzAm32gfIwfyZSdSTIlRN3q0gBwD60Ml8v8-LDswgucXC0ugKwJ6VQmHXOWjsQB-4FEBESB-GEwHBzCHVG4FOwnWlIZ3rKmd0X6arrOAYzqWk4IaJsX1P9y_3quZV5kbicyF13kn2C8Ssc5hggYkSLXAN4g9zY38gEWx4eOIokMOO_Pz8AaO3sY3JUsx8Jags-VYfVSfqPLtotHMG2sBv3Qa9isodd_lnVoz_mhirQgKGUsoakVwp6P7H6bjsw5G6xACT4OkPvZW68IdD9-CLP3r-4OCoznSotRhgkMZC42BnahzSMIxL3MHyc-WcZpJoXP3L0pMUsabLTrmQ_2XGYcmXWslX0D49FovzNyGaaJiYBIjsbaIzjt5Ip_C8zBf_v8rCeGGGkHY54gxc79u-DT5EVXmcW0Lh3Mrqqet6iJg71cu3DtWYmB4RCfYDezXBNjegdMkl6uff5fvCVGj7iICIA=w1204-h1552-no">
+  
+
+
+
+  <meta property="og:image" content="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
+  <meta property="twitter:image" content="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
+
+
     <title>A spring Hefe</title>
-    <meta name="author" content="Lucas Roesler">
-    <meta name="keywords" content="beer, hefeweizen, homebrew, development, management, python, django">
 
     <link rel="icon" href="//lucasroesler.com/favicon.png">
     
 
     
-    <meta name="description" content="A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
-with a smooth mouth-feel and dense, whipped-cream head.
 
-">
-    <meta property="og:description" content="A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
-with a smooth mouth-feel and dense, whipped-cream head.
-
-">
-    <meta property="og:type" content="blog">
-    <meta property="og:title" content="A spring Hefe">
-    <meta property="og:url" content="/2017/03/a-spring-hefe/">
-    <meta property="og:site_name" content="Lucas Roesler">
-    <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="Lucas Roesler">
-    <meta name="twitter:description" content="A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
-with a smooth mouth-feel and dense, whipped-cream head.
-
-">
-    
-      <meta name="twitter:creator" content="@theaxer">
-    
-    
-
-    
-    
-
-    
-      <meta property="og:image" content="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=640">
-    
-
-    
-    
-    
-      
-        <meta property="og:image" content="https://lh3.googleusercontent.com/8rTbDTYa1I9Vxpiv_XOJBxPnc_wKl6y1guWv1ACOJTHlmsjQhcAECaGaU62_3gHqKqo4jNIWQYGLxL8vrxjwIPYar_TCf5J2svUdsqlr7F_BBntya0yI7WNxQQAgWhdxXhJLrPFLCxhjLdAOPwwp_LKsZeNcRjuGOHJ35zQAQwnWg1sssh-s3d0CIIhmqaOdBdkp05hojATrBtb7g-T49xORk5et8Ov8a5qEu8zRWejoA-icmxPoxtQSCQVlnuWry-8xISCIlbzXmAV06jGkrac6MwWCFdzT9BS5_ZEzatFPSFIkvexYyUflE8_hcpr1Ox2CGIdZybw3tt6UjfImoFVrTHJpEnM-a2eeBM_7fveXqjV8YEOc0mcVKG9Mvp0c8nqBxyzWcHN2ncIlkTK_P5NUGbXnHbZUunwI1JI-9VP8kmqS06YXSOVO69OG3Z9dts9r4DFQzxlft7fFDoBpq24iOqLFaXJCNfO1_IfNC12XoeQYxkPHJG8ty-jfXM34KgZfdUIUG1JR2PSVrDPMGZLSELAhJ_06lCqR0AR3GRyF2-9wA3LW9EAF4DuLi2KphughdOSqYcapY-kWYo7rp9vvAR64yT9VXJgtM5aMScXIl0wGo8ZgpXhE4OTVRhg6b407dX6SZnlnZrUNChTH3ZLFcyOFGiEJXfJkj1CZLg=w2070-h1552-no">
-      
-        <meta property="og:image" content="https://lh3.googleusercontent.com/q6oPIPYdsulebim14UtAgmZ1ZNml5hHeh8-LwR_K58CZ9DCBCF4SNTyO_m2wqHHBS5_ZXItnvqFv77Q7WqyjhL6UIZbyPIx2n7RSEggrKeYYxyaBnFjonYczLV_t5VdA3XrfaXXVbmcXSriNLE-zyFVeYcc1jq7aUuJy882kwJQL3LJP_gZyh0BuHe9UYrlVERz9aotpSQDUVKQgPKll3YWrxju24sHhRispPNZAWJtIp6G5ShIRtF5aIwWk8rSXn6MoOiO2oevEP4kLOKHgpA99YeEbhH35ekizE0ahSnMS7pbJDG23UvS9yv0v8cvvtyQR5XhssI4n1Z0TmFAJ20LjCp0QqTPAdOzvQztlTwdvwGjePV3TzgU13Exq1Fb96tjYpzVCDizCAxTiaCVUMjfF9uisqO0onrzvh0b0RW_uxsVORA3gJMd5AXI4EniqBEv2W6sNpdCL-gpXp8qoXK4mSzh_wpisHj56jsVW2KZUllyXRUlqX_KH6vyFS1UtGLCHKcv2Zi-FP2yTV86UbX-YIlFSAssH2TKLjh60eikICga2NRQ9ff3nC0QDwRJYzNyAmCOSqw6szuOtWRkVFh663jBYNkIrxMhjqow1Ej8VjYA5tlNNSOiXfqWVTolny-HnDtDHCISmUs9lke9u87uG1PslUo4O-YIQGrDbOg=w2070-h1552-no">
-      
-        <meta property="og:image" content="https://lh3.googleusercontent.com/j9kyXLx4CVDHXp1iEjzCqbcsiZ4TZrTkG_CMGKfRINTU53Ws4nQejPmjr92DXzCpxJWbHbFtS-pifaEqW6XMBhHiWoT7rQb0ieACg5g57MTOmjfCEvypc6X0jGimQTgFT4ctJbwXlhSl6Xg6yKCQnr_Ew90jBRyZwfLCiKkrDDcgG8w5q0HsryEC2mKskZhMwiI1444hUM_PMFK2AGJrxjmXZRpOtoRYaKma26IuBTFHDN3lfmznI2wDFME-0TpCCmNPB2jkOM6mBP8AhYIYVIXZ7xcTHWX69QqUAWFdepIXLiBkrZegJbMf5adRRg5cFmpQm3Pz00Xy9rQ7Q5DOeOpB-imX0ppZPUwJuMui6KzEMHb0EQtYlsLrWh9t9UamxNCwCx-uM0rVJK-MgSE_L2G00DKmjGSlz7iniFTi5OvhL2b6EXSY66viPnGs8J_SQdBhYYWSw_5_rM_xXZJbDh9lpFl80nH0mDdRr2kwuIrtMZP2K62fEwCg-o4Ll4eivBRHUgBmpbQ8bLkMtOGt5m0V4CNlEP8qMQHNu8qCxAdq_VjdBxbsQjINtHX_5I6QI0O5XcG29fjQRJSjNo5Li6X1X4V4ykhx3YbByUj6jfgqu_v0gqhULyov0QaoREDLL0DiJDsQCtyCZ1gcT75CLRrB1N33bBSiPnfkSoyA-w=w2070-h1552-no">
-      
-        <meta property="og:image" content="https://lh3.googleusercontent.com/Dw00GATcDcifFbJ4SFsHYv1HPTdLh6g1nQpjSrrm5Vx5JjQrdS-kU0MR_yG1px56jjW_J7uG08yDnqstjT4GLGDOXJFWtFNh6oHslDhOTguHEv4FWe_YwjFNoCDKRmYFCwR9xOZ8NP7Am_zOghZSJDevNPgEm0hDwIQfRFz4p5MVSc_sYWJ_LCCQdrafgauQk0rNNRLwlg7PgfzijQBUBqPqs_JOAfIgyWwSIFqty_-3iNC82cl2jzJAnJj_7TzyKjL8eya6Hhrnns5RAJUzruoXk1X_WgVzb9XQzDWOWNmooPZUJwCgTlur-VdyABQbjj5dU4wUjhszqk6R9F9w-Ip8xKfCpz1kbYaGemyCZflJKvNKdPUReqr1CvynyGwI5rpFQozektc2PFe3QMtJ7rdMHcFCJwHq-8CNRhvC87DTO0Ct8MOp261xvE1FtFsWtankzB8fyiWQjHPZMqYuGnDriR5qKfUztby7SYaEEAsjCxQ1DnN9BM3-3hUlanP5tc8IZs_sKZk4Pm2Mk6RTg5wDzPoGNSdte6j2P_Y-yW4rS4TSkBbNBFs95E6oQDVLgvV0-8eDCvqjYk2CYBMuKznvHjbS2N5S38T19ugRBEirdvw2Y9rN3bzNdLj14G28kQqnfxgIjXHmYUoEQVQq20n5UpViOhutOGpjNaIDoA=w1164-h1552-no">
-      
-        <meta property="og:image" content="https://lh3.googleusercontent.com/IoyGi4v5TQ-aqhvAsqmcLUBPuQmT0xI0r--vJIP_HVJ7Vs3W0cAkwTq9za_g0ImcvesnimPZ_h9RoNp5qrGeAo4PYgbibblyc54vEb9PfV1nn7YMK35dV0s_YnCAVbKtAZ-49hiF3mv4DFIq-GAf5OIWMtf4rAONrL-ZSg6wS2lmUwctYbDm-jCHb9RD_9p40p4C-Qv3-0AhhfBxEzAm32gfIwfyZSdSTIlRN3q0gBwD60Ml8v8-LDswgucXC0ugKwJ6VQmHXOWjsQB-4FEBESB-GEwHBzCHVG4FOwnWlIZ3rKmd0X6arrOAYzqWk4IaJsX1P9y_3quZV5kbicyF13kn2C8Ssc5hggYkSLXAN4g9zY38gEWx4eOIokMOO_Pz8AaO3sY3JUsx8Jags-VYfVSfqPLtotHMG2sBv3Qa9isodd_lnVoz_mhirQgKGUsoakVwp6P7H6bjsw5G6xACT4OkPvZW68IdD9-CLP3r-4OCoznSotRhgkMZC42BnahzSMIxL3MHyc-WcZpJoXP3L0pMUsabLTrmQ_2XGYcmXWslX0D49FovzNyGaaJiYBIjsbaIzjt5Ip_C8zBf_v8rCeGGGkHY54gxc79u-DT5EVXmcW0Lh3Mrqqet6iJg71cu3DtWYmB4RCfYDezXBNjegdMkl6uff5fvCVGj7iICIA=w1204-h1552-no">
-      
-    
-
-    
+    <link rel="canonical" href="//lucasroesler.com/2017/03/a-spring-hefe/">
 
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
@@ -84,20 +101,23 @@ with a smooth mouth-feel and dense, whipped-cream head.
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.4/helpers/jquery.fancybox-thumbs.min.css" integrity="sha256-SEa4XYAHihTcEP1f5gARTB2K26Uk8PsndQYHQC1f4jU=" crossorigin="anonymous" />
     
     
-    <link rel="stylesheet" href="//lucasroesler.com/css/style-jsjn0006wyhpyzivf6yceb31gvpjatbcs3qzjvlumobfnugccvobqwxnnaj8.min.css" />
+    <link rel="stylesheet" href="//lucasroesler.com/css/style-twzjdbqhmnnacqs0pwwdzcdbt8yhv8giawvjqjmyfoqnvazl0dalmnhdkvp7.min.css" />
     
     
 
     
       
-<script>
-(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-ga('create', 'UA-90384590-1', 'auto');
-ga('send', 'pageview');
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-90384590-1', 'auto');
+	
+	ga('send', 'pageview');
+}
 </script>
 
     
@@ -119,7 +139,7 @@ ga('send', 'pageview');
     
     
       
-        <img class="header-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=90" alt="" />
+        <img class="header-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=90" alt="" />
       
     
     </a>
@@ -131,11 +151,11 @@ ga('send', 'pageview');
     
       <div class="sidebar-profile">
         <a href="//lucasroesler.com/#about">
-          <img class="sidebar-profile-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+          <img class="sidebar-profile-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
         </a>
         <h4 class="sidebar-profile-name">Lucas Roesler</h4>
         
-          <h5 class="sidebar-profile-bio">I am senior engineer at <a href='https://contiamo.com'>contiamo.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</h5>
+          <h5 class="sidebar-profile-bio">I am senior engineer at <!-- raw HTML omitted -->contiamo.com<!-- raw HTML omitted --> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</h5>
         
       </div>
     
@@ -310,52 +330,47 @@ ga('send', 'pageview');
             <div class="main-content-wrap">
               <p>A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
 with a smooth mouth-feel and dense, whipped-cream head.</p>
-
-<p></p>
-
 <h3 id="recipe">Recipe</h3>
-
 <p>This is the full grain recipe for a 5 gallon batch</p>
-
 <blockquote>
-<p>Grains:
-- 5.5 lbs Weyermann Pale Wheat malt
-- 4 lbs German Pilsner malt</p>
-
-<p>Hops:
-- 1 oz German Tettnang for 60 min</p>
-
-<p>Yeast:
-- Fermentis Safbrew WB-06 Dry Yeast</p>
-
+<p>Grains:</p>
+<ul>
+<li>5.5 lbs Weyermann Pale Wheat malt</li>
+<li>4 lbs German Pilsner malt</li>
+</ul>
+<p>Hops:</p>
+<ul>
+<li>1 oz German Tettnang for 60 min</li>
+</ul>
+<p>Yeast:</p>
+<ul>
+<li>Fermentis Safbrew WB-06 Dry Yeast</li>
+</ul>
 <p>Target O.G: 1.049</p>
 </blockquote>
-
 <p>I converted this to a partial mash using the following tweak</p>
-
 <blockquote>
-<p>Grains:
-- 5.5 lbs Weyermann Pale Wheat malt
-- 0.5 lbs 6 Row
-- 3 lbs lbs dry malt extract</p>
-
-<p>Hops:
-- 1 oz German Tettnang for 60 min</p>
-
-<p>Yeast:
-- Fermentis Safbrew WB-06 Dry Yeast</p>
-
+<p>Grains:</p>
+<ul>
+<li>5.5 lbs Weyermann Pale Wheat malt</li>
+<li>0.5 lbs 6 Row</li>
+<li>3 lbs lbs dry malt extract</li>
+</ul>
+<p>Hops:</p>
+<ul>
+<li>1 oz German Tettnang for 60 min</li>
+</ul>
+<p>Yeast:</p>
+<ul>
+<li>Fermentis Safbrew WB-06 Dry Yeast</li>
+</ul>
 <p>Target O.G: 1.049</p>
 </blockquote>
-
 <p>At the end of the brew I recorded an original gravity of 1.045.</p>
-
 <h3 id="the-result">The Result</h3>
-
 <p>Ferment for two weeks and bottle condition for another two weeks and then
 enjoy.  I recorded a final gravity of about 1.020 before bottling. Today is the
 first tasting day, observer the first pour</p>
-
 
 
 
@@ -368,23 +383,19 @@ first tasting day, observer the first pour</p>
   
 </div>
 
-
 <p>As desired, a nice traditional Hefeweizen: cloudy appearance with a fruity
 aroma. This beer came out with a nice smooth, sweet, and light flavor.  It will
 be a perfect spring beer, which is exactly what I was aiming for.</p>
-
 <p>The only concern I have with this beer is that my sugar conversion was not very
 efficient. As a result, the bottle conditioning has resulted in a &ldquo;well
 carbonated&rdquo; beer. Word of warning if I give you one of these, please open over
 a sink because it will immediately overflow the bottle!</p>
-
 <p>Additionally, the recipe specifically does not include a secondary fermentation
 stage and this has resulted in more sediment than I really like in the bottles.
 The reason to skip the secondary is to help maintain the cloudy body of
 the beer.  However, if I were to brew this recipe again, I would definitely do
 a secondary stage.  The secondary stage would most likely help with the
 conversion issue as well.</p>
-
 <p>Either way I am still going to enjoy this batch.  I have included a few more
 pictures of my brewing process below, enjoy!</p>
               
@@ -466,8 +477,8 @@ pictures of my brewing process below, enjoy!</p>
                 
               
             
-            
-  <div class="post-actions-wrap">
+            <div class="post-actions-wrap">
+  
       <nav style="visibility: hidden">
         <ul class="post-actions post-action-nav">
           
@@ -508,22 +519,22 @@ pictures of my brewing process below, enjoy!</p>
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
             
           </div>
         </article>
         <footer id="footer" class="main-content-wrap">
   <span class="copyrights">
-    &copy; 2019 Lucas Roesler. 
+    &copy; 2020 Lucas Roesler. 
   </span>
 </footer>
 
       </div>
       <div id="bottom-bar" class="post-bottom-bar" data-behavior="4">
-        
-  <div class="post-actions-wrap">
+        <div class="post-actions-wrap">
+  
       <nav style="visibility: hidden">
         <ul class="post-actions post-action-nav">
           
@@ -564,8 +575,8 @@ pictures of my brewing process below, enjoy!</p>
         </a>
       </li>
     </ul>
-  </div>
-
+  
+</div>
 
       </div>
       <div id="share-options-bar" class="share-options-bar" data-behavior="4">
@@ -583,11 +594,11 @@ pictures of my brewing process below, enjoy!</p>
       <i class="fa fa-remove"></i>
     </div>
     
-      <img id="about-card-picture" src="//www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
+      <img id="about-card-picture" src="https://www.gravatar.com/avatar/a43ca6177bbda5be96a773bd36fad17a?s=110" alt="" />
     
     <h4 id="about-card-name">Lucas Roesler</h4>
     
-      <div id="about-card-bio">I am senior engineer at <a href='https://contiamo.com'>contiamo.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</div>
+      <div id="about-card-bio">I am senior engineer at <!-- raw HTML omitted -->contiamo.com<!-- raw HTML omitted --> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research.</div>
     
     
       <div id="about-card-job">
@@ -606,229 +617,10 @@ pictures of my brewing process below, enjoy!</p>
   </div>
 </div>
 
-    <div id="algolia-search-modal" class="modal-container">
-  <div class="modal">
-    <div class="modal-header">
-      <span class="close-button"><i class="fa fa-close"></i></span>
-      <a href="https://algolia.com" target="_blank" rel="noopener" class="searchby-algolia text-color-light link-unstyled">
-        <span class="searchby-algolia-text text-color-light text-small">by</span>
-        <img class="searchby-algolia-logo" src="https://www.algolia.com/static_assets/images/press/downloads/algolia-light.svg">
-      </a>
-      <i class="search-icon fa fa-search"></i>
-      <form id="algolia-search-form">
-        <input type="text" id="algolia-search-input" name="search"
-          class="form-control input--large search-input" placeholder="" />
-      </form>
-    </div>
-    <div class="modal-body">
-      <div class="no-result text-color-light text-center"></div>
-      <div class="results">
-        
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/09/action-packed-functions/">
-                <h3 class="media-heading">Action Packed Functions</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Sep 9, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">Last month, GitHub announced new improved CI/CD with GitHub Actions. Since then, I have experimented with the new Action workflows and created an Action that wraps the faas-cli so that you can easily build and deploy your functions directly from GitHub.
-My initial interactions with the new GitHub Actions were not great, they really meant it when they said &ldquo;public beta&rdquo;. BUT!!! Having said that, there is clearly a lot of promise in GitHub Actions.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/04/developing-openfaas-kind-ly/">
-                <h3 class="media-heading">Developing OpenFaaS KinD-ly</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Apr 4, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">There are several ways to run small Kubernetes clusters: k3s and k3d, minikube, and microk8s to name a few. Currently, my favorite is the Kubernetes provided by Docker Desktop for Mac. But this doesn&rsquo;t help my friends (or myself) when I am on a Linux laptop. It would be nice to have one lightweight and shared environment for Kubernetes.
-Luckily, one of the Kubernetes groups has released KinD - Kubernetes in Docker.</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2019/02/when-sequential-tests-arent/">
-                <h3 class="media-heading">When sequential tests aren&#39;t</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Feb 2, 2019
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather">At work we have been expanding the testing coverage of our auth service and have discovered the perfect storm of edge cases around test caching and Go&rsquo;s test building. In short, we had tests that looked like they were passing locally but would fail sporadically in CI because Go will run the tests inside of a package sequentially but build and test each package in parallel (up to the number of CPU cores).</div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/">
-                <h3 class="media-heading">Golang long-polling: a tale of server timeouts</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I recently had a week long battle implementing HTTP long-polling. As so often
-happens in long debugging session in software development, my final fix was
-one line!</p>
+    
 
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/">
-                <h3 class="media-heading">Struct embedding for custom dev responses</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jan 1, 2018
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I had to learn about Go struct embedding the other day and I wanted to document my
-fix. In my use case I wanted to add some extra information to an API response to include
-some meta data from kubernetes cluster and/or some extra error information.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/">
-                <h3 class="media-heading">Deploying a private registry in Docker Swarm</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Oct 10, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>At <a href="https://contiamo.com">Contiamo</a> I am currently working a project that will eventually integrate with <a href="https://www.openfaas.com/">OpenFaaS</a>.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/08/berlin-and-golang/">
-                <h3 class="media-heading">Berlin and Golang</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Aug 8, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>At the beginning of the month I left <a href="https://teem.com/">Teem</a> I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at <a href="https://www.contiamo.com/">Contiamo</a> and will be working on the <a href="https://docs.contiamo.com/en/labs/">Labs feature</a>.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/07/home-brewers-association-ruthless-rye-clone/">
-                <h3 class="media-heading">Home Brewers Association Ruthless Rye Clone</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jul 7, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>This recipe is inspired by the <a href="https://www.homebrewersassociation.org/homebrew-recipe/sierra-nevada-ruthless-rye-clone/">Seirra Nevada Ruthless Rye Clone</a> written up by the Home Brewers Association.  I have adjusted it to be a partial mash recipe with about 8 lbs of grains.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/06/salt-city-brew-supply-orange-honey-wheat/">
-                <h3 class="media-heading">Salt City Brew Supply Orange Honey Wheat</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>I just finished my first official &ldquo;summer beer&rdquo; of the year, an Orange Honey Wheat.  This one was inspire by my wife while at the store &ldquo;you should do this one, it uses Utah honey!&rdquo;, thank you <a href="http://techlady.ninja">tech lady ninja</a>.</p>
-
-<p></p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-          <div class="media">
-            
-            <div class="media-body">
-              <a class="link-unstyled" href="//lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/">
-                <h3 class="media-heading">SSL Expiry Quick and Simple</h3>
-              </a>
-              <span class="media-meta">
-                <span class="media-date text-small">
-                  Jun 6, 2017
-                </span>
-              </span>
-              <div class="media-content hide-xs font-merryweather"><p>Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like <a href="https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58">Instagram</a> and <a href="http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html">Google</a>, at <a href="http://status.teem.com/incidents/ddtys5ss4mw5">Teem recently</a>, and of course for myself with my own home server.
-</p></div>
-            </div>
-            <div style="clear:both;"></div>
-            <hr>
-          </div>
-        
-      </div>
-    </div>
-    <div class="modal-footer">
-      <p class="results-count text-medium"
-         data-message-zero=""
-         data-message-one=""
-         data-message-other="">
-         21 posts found
-      </p>
-    </div>
-  </div>
-</div>
     
   
-    
     <div id="cover" style="background-image:url('https://lh3.googleusercontent.com/PslKucVYOkAlYGCTgtwtRcZ24kjQk15UFUhndHkavGffrwrEx3yb2sJOS48NfFsEHPuKCUpoWOnkHkIdz4MdQCWdLk6zYF241LT8xCA7bBY1eaBPOH16g-xlj8WV_aiWrqvll_9eV5QN_X2Zt06b8FuPSto5Tq26S4HLBl-4PVmcJLFyEg54ooUP0s2XYklsqcv6kVwHOMVDe4sOS1rZp2ecfcoknC4mWQYLYT2Nlcx2Q6I-eDTZHmu8uw__19lx8HQJHVLamHImCko8jgAlXpl5x6CTNmwtPdM1CUNiiSrWkajKuEMPMvieiK6NvcGPYZsVL2W14W3xrjS4mzY4iCT11qw2DlBnCDYv_e4Evl8mjuydEulInbHS3Bmw4dBK1En-wlc7bIP7LZ3VsmGGUCzgnARAneCTcrNtcxndSqWJI_8wZT1GAU5pmQhWz8J9kBOWryLtEtPDNQcO-bpMZbZWPO6y4_MISwyMm9VwIb_RPqu5v-peYPDfLCrXtvtzlcnIjpACRRT09Ze6R4U5zXTPVNfUXWX9OY0S_qxur7AEOzfWTFgJA625Gh0Fk9vtSBUVUpj9FKHoAPTsofftPBJHeZ3bkd8pOL3OquFgy0jw4uIpUGb5UIT42V6zAY3uVVLmcIpGubjbohRcXy0JSYAeUcAMxFLrtAu3MjxdMQ=w2856-h1606-no');"></div>
   
 
@@ -839,12 +631,27 @@ some meta data from kubernetes cluster and/or some extra error information.</p>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.7/js/jquery.fancybox.min.js" integrity="sha256-GEAnjcTqVP+vBp3SSc8bEDQqvWAZMiHyUSIorrWwH50=" crossorigin="anonymous"></script>
 
 
-<script src="//lucasroesler.com/js/script-qi9wbxp2ya2j6p7wx1i6tgavftewndznf4v0hy2gvivk1rxgc3lm7njqb6bz.min.js"></script>
+<script src="//lucasroesler.com/js/script-pcw6v3xilnxydl1vddzazdverrnn9ctynvnxgwho987mfyqkuylcb1nlt.min.js"></script>
 
 
+<script lang="javascript">
+window.onload = updateMinWidth;
+window.onresize = updateMinWidth;
+document.getElementById("sidebar").addEventListener("transitionend", updateMinWidth);
+function updateMinWidth() {
+  var sidebar = document.getElementById("sidebar");
+  var main = document.getElementById("main");
+  main.style.minWidth = "";
+  var w1 = getComputedStyle(main).getPropertyValue("min-width");
+  var w2 = getComputedStyle(sidebar).getPropertyValue("width");
+  var w3 = getComputedStyle(sidebar).getPropertyValue("left");
+  main.style.minWidth = `calc(${w1} - ${w2} - ${w3})`;
+}
+</script>
 
 
   
+
 
 
 

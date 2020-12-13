@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Hefeweizen on Lucas Roesler</title>
+    <title>hefeweizen on Lucas Roesler</title>
     <link>//lucasroesler.com/tags/hefeweizen/</link>
-    <description>Recent content in Hefeweizen on Lucas Roesler</description>
+    <description>Recent content in hefeweizen on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 05 Mar 2017 00:00:00 -0700</lastBuildDate>
@@ -18,9 +18,7 @@
       
       <guid>//lucasroesler.com/2017/03/a-spring-hefe/</guid>
       <description>&lt;p&gt;A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
-with a smooth mouth-feel and dense, whipped-cream head.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+with a smooth mouth-feel and dense, whipped-cream head.&lt;/p&gt;</description>
     </item>
     
   </channel>

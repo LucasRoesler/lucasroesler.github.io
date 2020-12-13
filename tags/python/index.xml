@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Python on Lucas Roesler</title>
+    <title>python on Lucas Roesler</title>
     <link>//lucasroesler.com/tags/python/</link>
-    <description>Recent content in Python on Lucas Roesler</description>
+    <description>Recent content in python on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Sun, 11 Jun 2017 11:00:00 -0600</lastBuildDate>
@@ -17,8 +17,7 @@
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
       <guid>//lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</guid>
-      <description>&lt;p&gt;Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&amp;rsquo;t last forever, we know this when we setup SSL but that doesn&amp;rsquo;t stop it from sneaking up on us.  It has happened to the big guys like &lt;a href=&#34;https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58&#34;&gt;Instagram&lt;/a&gt; and &lt;a href=&#34;http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html&#34;&gt;Google&lt;/a&gt;, at &lt;a href=&#34;http://status.teem.com/incidents/ddtys5ss4mw5&#34;&gt;Teem recently&lt;/a&gt;, and of course for myself with my own home server.
-&lt;/p&gt;</description>
+      <description>&lt;p&gt;Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&amp;rsquo;t last forever, we know this when we setup SSL but that doesn&amp;rsquo;t stop it from sneaking up on us.  It has happened to the big guys like &lt;a href=&#34;https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58&#34;&gt;Instagram&lt;/a&gt; and &lt;a href=&#34;http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html&#34;&gt;Google&lt;/a&gt;, at &lt;a href=&#34;http://status.teem.com/incidents/ddtys5ss4mw5&#34;&gt;Teem recently&lt;/a&gt;, and of course for myself with my own home server.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -27,7 +26,7 @@
       <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
       
       <guid>//lucasroesler.com/2017/04/delete-or-not-to-delete/</guid>
-      <description>Should you remove data from the database or simply mark it as deleted? At Teem we have a lot of data that we need to manage and often &amp;ldquo;physically&amp;rdquo; deleting the data from disk can be problematic. Either the users simply wants to undelete something or the deletion would cause problems for a log. The generic solution to this problem is to soft delete/archive the data by adding a deleted_at timestamp field to the table and then filter all queries to hide rows that have been marked as deleted.</description>
+      <description>Should you remove data from the database or simply mark it as deleted?</description>
     </item>
     
     <item>
@@ -38,7 +37,6 @@
       <guid>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
       <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!&lt;/p&gt;
-
 &lt;p&gt;The most sensitive step of the deploy process is the changes to our database.
 Prior to the automation I am about to describe, validation of the database
 migrations required specialized knowledge about Postgres, the changes to the
@@ -46,9 +44,7 @@ application model, load on the database for that model, and a bit of general
 experience. This obviously slows down reviews and subsequently deploys. Worse,
 it was simply too easy to miss problem migrations when depending on only peer
 reviews. To make our lives easier we created a series of validation checks to
-ensure that each database migration will be backwards compatible.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+ensure that each database migration will be backwards compatible.&lt;/p&gt;</description>
     </item>
     
     <item>
@@ -57,7 +53,7 @@ ensure that each database migration will be backwards compatible.&lt;/p&gt;
       <pubDate>Mon, 06 Feb 2017 20:00:00 +0000</pubDate>
       
       <guid>//lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</guid>
-      <description>How do we build a fast API against database models with foreign keys and many- to-many relationships? If you do nothing you get what I call the &amp;ldquo;waterfall of doom&amp;rdquo;. At some point in the past someone told me or I read that &amp;ldquo;joins are effectively free in Postgres&amp;rdquo;. While this might be somewhat true when you are writing all of the SQL and can control every part of your query; I have recently found that when the database gets big enough and you are using the Django ORM, joins aren&amp;rsquo;t free and less can be more!</description>
+      <description>Dealing with inefficient joins in Django&amp;rsquo;s ORM</description>
     </item>
     
   </channel>

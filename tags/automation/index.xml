@@ -1,9 +1,9 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Automation on Lucas Roesler</title>
+    <title>automation on Lucas Roesler</title>
     <link>//lucasroesler.com/tags/automation/</link>
-    <description>Recent content in Automation on Lucas Roesler</description>
+    <description>Recent content in automation on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
     <lastBuildDate>Mon, 20 Feb 2017 00:00:00 -0700</lastBuildDate>
@@ -19,7 +19,6 @@
       <guid>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
       <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!&lt;/p&gt;
-
 &lt;p&gt;The most sensitive step of the deploy process is the changes to our database.
 Prior to the automation I am about to describe, validation of the database
 migrations required specialized knowledge about Postgres, the changes to the
@@ -27,9 +26,7 @@ application model, load on the database for that model, and a bit of general
 experience. This obviously slows down reviews and subsequently deploys. Worse,
 it was simply too easy to miss problem migrations when depending on only peer
 reviews. To make our lives easier we created a series of validation checks to
-ensure that each database migration will be backwards compatible.&lt;/p&gt;
-
-&lt;p&gt;&lt;/p&gt;</description>
+ensure that each database migration will be backwards compatible.&lt;/p&gt;</description>
     </item>
     
   </channel>
