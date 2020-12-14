@@ -6,11 +6,7 @@
     <description>Recent content in django on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 02 Apr 2017 00:00:00 -0700</lastBuildDate>
-    
-	<atom:link href="//lucasroesler.com/tags/django/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 02 Apr 2017 00:00:00 -0700</lastBuildDate><atom:link href="//lucasroesler.com/tags/django/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Delete or not to delete</title>
       <link>//lucasroesler.com/2017/04/delete-or-not-to-delete/</link>

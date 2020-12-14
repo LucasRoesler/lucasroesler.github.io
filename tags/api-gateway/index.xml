@@ -6,11 +6,7 @@
     <description>Recent content in api gateway on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Jun 2017 11:00:00 -0600</lastBuildDate>
-    
-	<atom:link href="//lucasroesler.com/tags/api-gateway/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 11 Jun 2017 11:00:00 -0600</lastBuildDate><atom:link href="//lucasroesler.com/tags/api-gateway/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SSL Expiry Quick and Simple</title>
       <link>//lucasroesler.com/2017/06/ssl-expiry-quick-and-simple/</link>

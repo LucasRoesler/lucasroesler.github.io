@@ -5,25 +5,21 @@
     <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="generator" content="Hugo 0.74.3 with theme Tranquilpeak 0.4.8-BETA">
+<meta name="generator" content="Hugo 0.78.2 with theme Tranquilpeak 0.4.8-BETA">
 <meta name="author" content="Lucas Roesler">
 <meta name="keywords" content="multipass, docker, development, management, python, django">
-<meta name="description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&rsquo; fault,my good old friend Docker was eating up a decent chunk of my disk too.
-If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.">
+<meta name="description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too.">
 
 
-<meta property="og:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&rsquo; fault,my good old friend Docker was eating up a decent chunk of my disk too.
-If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.">
+<meta property="og:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too.">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Moving the data directory of Multipass and Docker">
 <meta name="twitter:title" content="Moving the data directory of Multipass and Docker">
 <meta property="og:url" content="//lucasroesler.com/2020/12/moving-the-data-directory-of-multipass-and-docker/">
 <meta property="twitter:url" content="//lucasroesler.com/2020/12/moving-the-data-directory-of-multipass-and-docker/">
 <meta property="og:site_name" content="Lucas Roesler">
-<meta property="og:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&rsquo; fault,my good old friend Docker was eating up a decent chunk of my disk too.
-If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.">
-<meta name="twitter:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&rsquo; fault,my good old friend Docker was eating up a decent chunk of my disk too.
-If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.">
+<meta property="og:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too.">
+<meta name="twitter:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too.">
 <meta property="og:locale" content="en">
 
   
@@ -328,7 +324,7 @@ if (!doNotTrack) {
           
           <div class="post-content markdown" itemprop="articleBody">
             <div class="main-content-wrap">
-              <p>This weekend was my first adventure in <a href="https://snapcraft.io/">Snaps</a>. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&rsquo; fault,my good old friend Docker was eating up a decent chunk of my disk too.</p>
+              <p>This weekend was my first adventure in <a href="https://snapcraft.io/">Snaps</a>. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass' fault, my good old friend Docker was eating up a decent chunk of my disk too.</p>
 <p>If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.</p>
 <h1 id="getting-my-laptop">Getting my laptop</h1>
 <p>Earlier this year we got my wife a new computer. Originally, it was supposed to be a simple &ldquo;web and netflix&rdquo; machine. However, being American expats in Germany, the &ldquo;market&rdquo; had a different plan for us. Most budget computers in Germany <em>only</em> come with German keyboard layouts. Very natural, no real complaint. But this means we had to buy something at the professional level. We choose a Dell XPS 13.</p>
@@ -349,7 +345,7 @@ if (!doNotTrack) {
 <ol start="2">
 <li>Then, stop the docker daemon:</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo service docker stop 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo service docker stop
 </code></pre></div><ol start="3">
 <li>Next, create your new data folder</li>
 </ol>
@@ -358,8 +354,8 @@ if (!doNotTrack) {
 <ol start="4">
 <li>Now add or edit the configuration file <code>/etc/docker/daemon.json</code> so that it contains</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{ 
-  <span style="color:#f92672">&#34;data-root&#34;</span>: <span style="color:#e6db74">&#34;/home/docker/data&#34;</span> 
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;data-root&#34;</span>: <span style="color:#e6db74">&#34;/home/docker/data&#34;</span>
 }
 </code></pre></div><ol start="5">
 <li>Now you can copy and remaining Docker metadata to the new location</li>

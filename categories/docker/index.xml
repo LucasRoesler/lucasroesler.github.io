@@ -6,19 +6,14 @@
     <description>Recent content in docker on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Dec 2020 00:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="//lucasroesler.com/categories/docker/index.xml" rel="self" type="application/rss+xml" />
-    
-    
+    <lastBuildDate>Sun, 13 Dec 2020 00:00:00 +0200</lastBuildDate><atom:link href="//lucasroesler.com/categories/docker/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Moving the data directory of Multipass and Docker</title>
       <link>//lucasroesler.com/2020/12/moving-the-data-directory-of-multipass-and-docker/</link>
       <pubDate>Sun, 13 Dec 2020 00:00:00 +0200</pubDate>
       
       <guid>//lucasroesler.com/2020/12/moving-the-data-directory-of-multipass-and-docker/</guid>
-      <description>&lt;p&gt;This weekend was my first adventure in &lt;a href=&#34;https://snapcraft.io/&#34;&gt;Snaps&lt;/a&gt;. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &amp;ldquo;disk is almost out of space&amp;rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&amp;rsquo;t entirely Multipass&amp;rsquo; fault,my good old friend Docker was eating up a decent chunk of my disk too.&lt;/p&gt;
-&lt;p&gt;If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.&lt;/p&gt;</description>
+      <description>&lt;p&gt;This weekend was my first adventure in &lt;a href=&#34;https://snapcraft.io/&#34;&gt;Snaps&lt;/a&gt;. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &amp;ldquo;disk is almost out of space&amp;rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&amp;rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too.&lt;/p&gt;</description>
     </item>
     
     <item>
