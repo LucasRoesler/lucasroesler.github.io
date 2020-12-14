@@ -18,7 +18,7 @@ autoThumbnailImage: true
 draft: false
 thumbnailImagePosition: left
 coverSize: partial
-coverImage: /images/library-898333_640.jpg
+coverImage: /images/library-898333_250.jpeg
 ---
 
 This weekend was my first adventure in [Snaps](https://snapcraft.io/). Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a "disk is almost out of space" notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn't entirely Multipass' fault, my good old friend Docker was eating up a decent chunk of my disk too.
