@@ -21,16 +21,17 @@ coverSize: partial
 coverImage: /images/library-898333_640.jpg
 ---
 
-This weekend was my first adventure in [Snaps](https://snapcraft.io/). Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a "disk is almost out of space" notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn't entirely Multipass' fault,my good old friend Docker was eating up a decent chunk of my disk too.
-
-If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.
+This weekend was my first adventure in [Snaps](https://snapcraft.io/). Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a "disk is almost out of space" notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn't entirely Multipass' fault, my good old friend Docker was eating up a decent chunk of my disk too.
 
 <!--more-->
 
-# Getting my laptop
-Earlier this year we got my wife a new computer. Originally, it was supposed to be a simple "web and netflix" machine. However, being American expats in Germany, the "market" had a different plan for us. Most budget computers in Germany _only_ come with German keyboard layouts. Very natural, no real complaint. But this means we had to buy something at the professional level. We choose a Dell XPS 13. 
+If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.
 
-The bad news is that my wife ultimately didn't like the laptop. Primarily, she didn't liek the keyboard. The good news is that it means _I_ got a new laptop this year. 
+
+# Getting my laptop
+Earlier this year we got my wife a new computer. Originally, it was supposed to be a simple "web and netflix" machine. However, being American expats in Germany, the "market" had a different plan for us. Most budget computers in Germany _only_ come with German keyboard layouts. Very natural, no real complaint. But this means we had to buy something at the professional level. We choose a Dell XPS 13.
+
+The bad news is that my wife ultimately didn't like the laptop. Primarily, she didn't liek the keyboard. The good news is that it means _I_ got a new laptop this year.
 
 ## Setting up my laptop
 For the past 10 years I have been a Mac user due it being offered at work. But I have been itching to get back to Linux. So I installed Ubuntu 20.20 :)
@@ -44,9 +45,9 @@ After several iterations of `df -h`, `du -h`, `lsof`, etc. I pin point the probl
 # Using the data partition
 
 ## Setting up docker
-Docker is the easy one, it has a configuration specifically for this use case. 
+Docker is the easy one, it has a configuration specifically for this use case.
 
-1. First I cleaned up the existing Docker data, 
+1. First I cleaned up the existing Docker data,
 
   ```sh
   docker system prune -f --volumes --all
@@ -55,9 +56,9 @@ Docker is the easy one, it has a configuration specifically for this use case.
   You can probably skip this, but I prefer fresh starts.
 
 2. Then, stop the docker daemon:
-  
+
   ```sh
-  sudo service docker stop 
+  sudo service docker stop
   ```
 
 3. Next, create your new data folder
@@ -70,12 +71,12 @@ Docker is the easy one, it has a configuration specifically for this use case.
 4. Now add or edit the configuration file `/etc/docker/daemon.json` so that it contains
 
   ```json
-  { 
-    "data-root": "/home/docker/data" 
+  {
+    "data-root": "/home/docker/data"
   }
   ```
 
-5. Now you can copy and remaining Docker metadata to the new location 
+5. Now you can copy and remaining Docker metadata to the new location
 
   ```sh
   sudo rsync -aP /var/lib/docker/ /home/docker/data
@@ -100,7 +101,7 @@ Docker is the easy one, it has a configuration specifically for this use case.
   sudo rm -rf /var/lib/docker.old
   ```
 
-## Setting up multipass 
+## Setting up multipass
 Multipass is a bit harder than Docker. It _can_ be done, but the feature is much newer. It was [just merged in October 2020](https://github.com/canonical/multipass/pull/1789)
 
 The author [Michał](https://github.com/Saviq) has kindly (provided instructions)[https://github.com/canonical/multipass/pull/1789#issuecomment-704991752] that I have adapted and extended below
@@ -174,13 +175,13 @@ EOF
 
 ## A networking hiccup
 
-Doing all of that, I now have a workign Docker and (I thought) a working Multipass with images and other data stored in my data partition. But this is a premature victory. 
+Doing all of that, I now have a workign Docker and (I thought) a working Multipass with images and other data stored in my data partition. But this is a premature victory.
 
 Within the last couple days, it seems that Docker changed the way it uses iptables. The consequence is that the `iptables` Multipass needs are disabled and the VMs have _no network access_.  See this [Github issue](https://github.com/canonical/multipass/issues/1866).
 
 Networking questions are generally above my paygrade, but the summary seems to be that the Multipass snap uses legacy `iptables` while Docker switched to `nftables`. Once `nftables` are used, the legacy tables are ignored.
 
-This looks like 
+This looks like
 
 ```sh
 $ sudo iptables -S

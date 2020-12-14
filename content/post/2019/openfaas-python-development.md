@@ -2,7 +2,7 @@
 title: "Python in OpenFaaS with submodules"
 summary: "Tidy python in an OpenFaaS world: or, what happens when you want to split your Python function into multiple modules?"
 permalink: "https://google.com/test"
-date: 2219-01-20T00:00:00+02:00
+date: 2019-01-20T00:00:00+02:00
 categories:
   - programming
   - openfaas
