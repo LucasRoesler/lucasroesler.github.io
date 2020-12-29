@@ -3,10 +3,7 @@ editor = "sublime"
 MetaDataFormat = "YAML"
 title = "Lucas Roesler"
 baseurl = "//lucasroesler.com/"
-theme = "hugo-tranquilpeak-theme"
-# disqusShortname = "hugo-tranquilpeak-theme"
-googleAnalytics = "UA-90384590-1"
-paginate = 7
+theme = "lucas"
 canonifyurls = true
 
 [permalinks]
@@ -14,93 +11,114 @@ canonifyurls = true
 
 [taxonomies]
   tag = "tags"
-  category = "categories"
-  archive = "archives"
+
+# [outputs]
+#   home = ["HTML"]
+#   post = ["HTML", "RSS"]
 
 [author]
   name = "Lucas Roesler"
   bio = "I am senior engineer at <a href='https://contiamo.com'>contiamo.com</a> and an ex-mathematician. I have worked on web applications, algorithms for image analysis, machine learning problems, and pure math research."
   job = "Senior Engineer"
   location = "Berlin, DE"
-  # Your Gravatar email. Overwrite `author.picture` everywhere in the blog
   gravatarEmail = "roesler.lucas@gmail.com"
   # Overwritten by your gravatar image if `author.gravatarEmail` is filled
   picture = "https://cdn1.iconfinder.com/data/icons/ninja-things-1/1772/ninja-simple-512.png"
   # Your Twitter username without the @. E.g : thibaudlepretre
   twitter = "theaxer"
 
+
 # Menu Configuration
-[[menu.main]]
-  weight = 0
-  identifier = "home"
-  name = "Home"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-home\"></i>"
-  url = "/"
-[[menu.main]]
-  weight = 1
-  identifier = "blog"
-  name = "Blog"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-quote-right\"></i>"
-  url = "/post"
-[[menu.main]]
-  weight = 2
-  identifier = "tags"
-  name = "Tags"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-tags\"></i>"
-  url = "/tags"
-[[menu.main]]
-  weight = 3
-  identifier = "reading-list"
-  name = "Reading list"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-book\"></i>"
-  url = "/reading-list/"
-[[menu.main]]
-  weight = 4
-  identifier = "resume"
-  name = "Resume"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-file-text-o\"></i>"
-  url = "/resume/"
-[[menu.main]]
-  weight = 5
-  identifier = "about"
-  name = "About"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-question\"></i>"
-  url = "/#about"
+[menu]
+  [[menu.main]]
+    weight = 1
+    identifier = "home"
+    name = "Home"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-home\"></i>"
+    url = "/"
 
-[[menu.links]]
-  weight = 0
-  identifier = "github"
-  name = "GitHub"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-github\"></i>"
-  url = "https://github.com/lucasroesler"
+  [[menu.main]]
+    weight = 2
+    identifier = "blog"
+    name = "Blog"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-quote-right\"></i>"
+    url = "/posts"
+    [menu.main.params]
+      icon = "quote-right"
 
-[[menu.links]]
-  weight = 1
-  identifier = "stackoverflow"
-  name = "Stack Overflow"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-stack-overflow\"></i>"
-  url = "https://stackoverflow.com/users/826102/theaxer"
+  [[menu.main]]
+    weight = 3
+    identifier = "tags"
+    name = "Tags"
+    url = "/tags"
 
-[[menu.links]]
-  weight = 2
-  identifier = "twitter"
-  name = "Twitter"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-twitter\"></i>"
-  url = "https://twitter.com/theaxer"
+  [[menu.main]]
+    weight = 4
+    identifier = "resume"
+    name = "Resume"
+    url = "/resume/"
+    [menu.main.params]
+      icon = "file-alt"
 
-[[menu.links]]
-  weight = 3
-  identifier = "linkedin"
-  name = "LinkedIn"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-linkedin\"></i>"
-  url = "https://www.linkedin.com/in/lucasroesler"
+  [[menu.links]]
+    weight = 1
+    identifier = "github"
+    name = "GitHub"
+    url = "https://github.com/lucasroesler"
 
-[[menu.misc]]
-  weight = 0
-  identifier = "rss"
-  name = "RSS"
-  pre = "<i class=\"sidebar-button-icon fa fa-lg fa-rss\"></i>"
-  url = "/index.xml"
+  [[menu.links]]
+    weight = 3
+    identifier = "stackoverflow"
+    name = "Stack Overflow"
+    url = "https://stackoverflow.com/users/826102/theaxer"
+    [menu.links.params]
+      icon = "stack-overflow"
+
+  [[menu.links]]
+    weight = 2
+    identifier = "twitter"
+    name = "Twitter"
+    url = "https://twitter.com/theaxer"
+
+  [[menu.links]]
+    weight = 4
+    identifier = "linkedin"
+    name = "LinkedIn"
+    url = "https://www.linkedin.com/in/lucasroesler"
+
+  [[menu.misc]]
+    weight = 1
+    identifier = "rss"
+    name = "RSS"
+    url = "/posts/index.xml"
+
+  # additonal links to add to the intro page _after_ the menu.links list
+  [[menu.intro]]
+    weight = 1
+    identifier = "resume"
+    name = "Resume"
+    url = "/resume/"
+    [menu.intro.params]
+      iconset = "fas"
+      icon = "file-alt"
+
+  [[menu.intro]]
+    weight = 2
+    identifier = "blog"
+    name = "Blog"
+    url = "/posts"
+    [menu.intro.params]
+      iconset = "fas"
+
+  [[menu.intro]]
+    weight = 3
+    identifier = "description"
+    name = "Description"
+    url = "#a-few-more-details"
+    [menu.intro.params]
+      iconset = "fas"
+      icon = "angle-down"
+      text = "more"
 
 [params]
   # Customize date format use to render blog post date, categories and other
@@ -111,69 +129,34 @@ canonifyurls = true
 
   # Global keywords configuration. Following keywords will be add to every pages
   keywords = ["development", "management", "python", "django"]
-
-  # Hide sidebar on all article page to let article take full width to improve reading, and enjoy wide images and cover images. (true: enable, false: disable)
-  clearReading = true
-
-  # Define categories will create hierarchy between parents: `categories = ["foo", "bar"]` will consider "bar" a sub-category of "foo".
-  # If false it will flat categories.
-  hierarchicalCategories = false
-
   description = "Talkity talk by Lucas Roesler"
 
-  # Customization
-  # Define the behavior of the sidebar
-  # 1: Display extra large sidebar on extra large screen, large sidebar on large screen,
-  #    medium sidebar on medium screen and header bar on small screen and
-  # extra large sidebar is swiped on extra large screen and large sidebar on all lower screen (default)
-  # 2: Display large sidebar on large screen, medium sidebar on medium screen and
-  #    header bar on small screen and large sidebar is swiped
-  # 3: Display medium sidebar on large and medium screen and header bar on small screen and
-  #    medium sidebar is swiped
-  # 4: Display header bar on all screens, extra large sidebar is swiped on extra large screen and
-  #    large sidebar is swiped on all lower screens
-  # 5: Display header bar on all screens and large sidebar is swiped on large screen
-  # 6: Display header bar on all screens and medium sidebar is swiped
-  sidebarBehavior = 1
+  [params.copyright]
+    start = "2017"
+  # Customize date format use to render blog post date, categories and other
+  # You must use date format used by Go Time package https://golang.org/pkg/time/
+  # Months (not work with short month like "jan", "feb", etc) are translated if translation exists on i18n folders
+  # Default format is: January 2, 2006
+  # dateFormat = "2006-01-02"
 
-  # Your blog cover picture. I STRONGLY recommend you to use a CDN to speed up loading of pages.
-  # There is many free CDN like Cloudinary or you can also use indirectly
-  # by using services like Google Photos.
-  # Current image is on AWS S3 and delivered by AWS CloudFront.
-  # Otherwise put your image in folder `static/_images/` (development)  or in `source/assets/images/` if you can't or don't want to build the theme,
-  # and use relative url : `your-image.png`
-  coverImage = "https://lh3.googleusercontent.com/PslKucVYOkAlYGCTgtwtRcZ24kjQk15UFUhndHkavGffrwrEx3yb2sJOS48NfFsEHPuKCUpoWOnkHkIdz4MdQCWdLk6zYF241LT8xCA7bBY1eaBPOH16g-xlj8WV_aiWrqvll_9eV5QN_X2Zt06b8FuPSto5Tq26S4HLBl-4PVmcJLFyEg54ooUP0s2XYklsqcv6kVwHOMVDe4sOS1rZp2ecfcoknC4mWQYLYT2Nlcx2Q6I-eDTZHmu8uw__19lx8HQJHVLamHImCko8jgAlXpl5x6CTNmwtPdM1CUNiiSrWkajKuEMPMvieiK6NvcGPYZsVL2W14W3xrjS4mzY4iCT11qw2DlBnCDYv_e4Evl8mjuydEulInbHS3Bmw4dBK1En-wlc7bIP7LZ3VsmGGUCzgnARAneCTcrNtcxndSqWJI_8wZT1GAU5pmQhWz8J9kBOWryLtEtPDNQcO-bpMZbZWPO6y4_MISwyMm9VwIb_RPqu5v-peYPDfLCrXtvtzlcnIjpACRRT09Ze6R4U5zXTPVNfUXWX9OY0S_qxur7AEOzfWTFgJA625Gh0Fk9vtSBUVUpj9FKHoAPTsofftPBJHeZ3bkd8pOL3OquFgy0jw4uIpUGb5UIT42V6zAY3uVVLmcIpGubjbohRcXy0JSYAeUcAMxFLrtAu3MjxdMQ=w2856-h1606-no"
+  # try https://coolors.co/
 
-  # Display an image gallery at the end of a post which have photos variables (false: disabled, true: enabled)
-  imageGallery = true
+  # Gunmetal
+  [params.colors]
+    background = "#333745"
+    foreground = "#edf7ff"
+    hover = "#c7efcf"
+    svgFillOpacity = "0.25"
+    dark = "#5C6B73"
 
-  # Display thumbnail image of each post on index pages (false: disabled, true: enabled)
-  thumbnailImage = true
-  # Display thumbnail image at the right of title in index pages (`right`, `left` or `bottom`)
-  # Set this value to `right` if you have old posts to keep the old style on them
-  # and define `thumbnailImagePosition` on a post to overwrite this setting
-  thumbnailImagePosition = "left"
-  # Automatically select the cover image or the first photo from the gallery of a post if there is no thumbnail image as the thumbnail image
-  # Set this value to `true` if you have old posts that use the cover image or the first photo as the thumbnail image
-  # and set `autoThumbnailImage` to `false` on a post to overwrite this setting
-  autoThumbnailImage = true
+  # Kobe red
+  # [params.colors]
+      # background = "#872108"
+      # foreground = "#edf7ff"
+      # hover = "#003e1f"
 
-  # Header configuration
-  # The link at the right of the header is customizable
-  # You can add a link (as an icon) at the right of the header instead of the author's gravatar image or author's picture.
-  # By default, author's gravatar or author's picture is displayed.
-  #     url: /#search
-  #     icon: search
-  #     class: st-search-show-outputs
-  [params.header.rightLink]
-    class = ""
-    icon = ""
-    url = "/#about"
-
-  # Customize like of athor avatar in sidebar
-  # [params.sidebar.profile]
-  #   url = "/#about"
-
-  # Customize copyright value "© 2016 <CUSTOMIZATION>. All Rights Reserved"
-  # [params.footer]
-  #   copyright = "<a href=\"https://github.com/kakawait\">kakawait</a>"
+  [params.posts.colors]
+    background = "#ffffff"
+    foreground = "#000000"
+    hover = "#c7efcf"
+    dark = "#0C090D"

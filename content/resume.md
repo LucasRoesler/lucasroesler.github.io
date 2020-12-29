@@ -7,9 +7,9 @@ type        = "resume"
 +++
 
 ### Lucas Roesler
-Salt Lake City, UT 84047\\
-<roesler.lucas@gmail.com>\\
-<https://github.com/LucasRoesler>\\
+Salt Lake City, UT 84047\
+<roesler.lucas@gmail.com>\
+<https://github.com/LucasRoesler>\
 <https://www.linkedin.com/in/lucasroesler/>
 
 ---
