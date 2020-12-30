@@ -1,0 +1,13 @@
+{
+	"version": 3,
+	"file": "resume.style.css",
+	"sourceRoot": "/Users/lucasroesler/Code/lucasroesler.github.io",
+	"sources": [
+		"stdin"
+	],
+	"sourcesContent": [
+		"html, body {\n    height: \"100%\";\n}\n\n.resume {\n    margin: 5vh 15vw;\n}\n\na {\n    text-decoration: none;\n    color:unset;\n}\n"
+	],
+	"names": [],
+	"mappings": "AAAA,AAAA,IAAI,CAAE,IAAI,AAAC,CACP,MAAM,CAAE,MAAM,CACjB,AAED,AAAA,OAAO,AAAC,CACJ,MAAM,CAAE,QAAQ,CACnB,AAED,AAAA,CAAC,AAAC,CACE,eAAe,CAAE,IAAI,CACrB,KAAK,CAAC,KAAK,CACd"
+}

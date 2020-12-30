@@ -6,32 +6,104 @@
     <description>Recent content in programming on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0200</lastBuildDate><atom:link href="//lucasroesler.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Dec 2020 00:00:00 +0200</lastBuildDate><atom:link href="//lucasroesler.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Moving the data directory of Multipass and Docker</title>
+      <link>//lucasroesler.com/posts/2020/multipass-data-partition/</link>
+      <pubDate>Sun, 13 Dec 2020 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/posts/2020/multipass-data-partition/</guid>
+      <description>&lt;p&gt;This weekend was my first adventure in &lt;a href=&#34;https://snapcraft.io/&#34;&gt;Snaps&lt;/a&gt;. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &amp;ldquo;disk is almost out of space&amp;rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&amp;rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Action Packed Functions</title>
-      <link>//lucasroesler.com/2019/09/action-packed-functions/</link>
+      <link>//lucasroesler.com/posts/2019/openfaas-github-actions/</link>
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/2019/09/action-packed-functions/</guid>
+      <guid>//lucasroesler.com/posts/2019/openfaas-github-actions/</guid>
       <description>A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions</description>
     </item>
     
     <item>
       <title>Developing OpenFaaS KinD-ly</title>
-      <link>//lucasroesler.com/2019/04/developing-openfaas-kind-ly/</link>
+      <link>//lucasroesler.com/posts/2019/kind-development-for-openfaas/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/2019/04/developing-openfaas-kind-ly/</guid>
+      <guid>//lucasroesler.com/posts/2019/kind-development-for-openfaas/</guid>
       <description>Creating an isolated OpenFaaS Development environment with KinD</description>
     </item>
     
     <item>
       <title>When sequential tests aren&#39;t</title>
-      <link>//lucasroesler.com/2019/02/when-sequential-tests-arent/</link>
+      <link>//lucasroesler.com/posts/2019/golang-parallel-testing/</link>
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/2019/02/when-sequential-tests-arent/</guid>
+      <guid>//lucasroesler.com/posts/2019/golang-parallel-testing/</guid>
       <description>A brief reminder that go will default to testing packages in parallel</description>
+    </item>
+    
+    <item>
+      <title>Golang long-polling: a tale of server timeouts</title>
+      <link>//lucasroesler.com/posts/2018/golang-server-timeouts/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/posts/2018/golang-server-timeouts/</guid>
+      <description>&lt;p&gt;I recently had a week long battle implementing HTTP long-polling. As so often
+happens in long debugging session in software development, my final fix was
+one line!&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Struct embedding for custom dev responses</title>
+      <link>//lucasroesler.com/posts/2018/golang-struct-embedding/</link>
+      <pubDate>Sat, 27 Jan 2018 00:00:00 -0600</pubDate>
+      
+      <guid>//lucasroesler.com/posts/2018/golang-struct-embedding/</guid>
+      <description>&lt;p&gt;I had to learn about Go struct embedding the other day and I wanted to document my
+fix. In my use case I wanted to add some extra information to an API response to include
+some meta data from kubernetes cluster and/or some extra error information.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Deploying a private registry in Docker Swarm</title>
+      <link>//lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/</link>
+      <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
+      
+      <guid>//lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/</guid>
+      <description>&lt;p&gt;At &lt;a href=&#34;https://contiamo.com&#34;&gt;Contiamo&lt;/a&gt; I am currently working a project that will eventually integrate with &lt;a href=&#34;https://www.openfaas.com/&#34;&gt;OpenFaaS&lt;/a&gt;.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Delete or not to delete</title>
+      <link>//lucasroesler.com/posts/2017/delete-or-not-to-delete/</link>
+      <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
+      
+      <guid>//lucasroesler.com/posts/2017/delete-or-not-to-delete/</guid>
+      <description>Should you remove data from the database or simply mark it as deleted?</description>
+    </item>
+    
+    <item>
+      <title>How I Git</title>
+      <link>//lucasroesler.com/posts/2017/how-i-git/</link>
+      <pubDate>Sun, 19 Mar 2017 00:00:00 -0600</pubDate>
+      
+      <guid>//lucasroesler.com/posts/2017/how-i-git/</guid>
+      <description>&lt;p&gt;Perhaps the one piece of ubiquitous technology that you will find at any new
+tech company is &lt;code&gt;git&lt;/code&gt;.  There are a couple of other technologies that you will
+probably find, like AWS, but &lt;code&gt;git&lt;/code&gt; is the only one I expect to find everywhere. It is
+also, surprisingly, many developers number one frienemy.  I want to share some
+of my favorite tips and tweaks that I have used over the years to make it all
+friend and never my enemy.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Postgres Joins and Django Querysets</title>
+      <link>//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</link>
+      <pubDate>Mon, 06 Feb 2017 20:00:00 +0000</pubDate>
+      
+      <guid>//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</guid>
+      <description>Dealing with inefficient joins in Django&amp;rsquo;s ORM</description>
     </item>
     
   </channel>

@@ -1,0 +1,151 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="Your API&#39;s rat nest" />
+<meta property="og:description" content="Recently, I have seen several articles talking about RESTful API design.  Of
+course this is also a common topic of discussion for the engineers at Teem.  I
+want to use (and write) APIs that are easy to understand and explain and the
+fastest way to complicate your API is nested routes. Just don&rsquo;t do it! Do not
+create nested routes in your API.  Let&rsquo;s keep our APIs simple and create one
+endpoint per resource and if filters are needs, use GET parameters. This is
+simpler to document and simpler to maintain and ultimately, easier to use." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2017/api-rats-nest/" />
+<meta property="article:published_time" content="2017-06-05T21:22:00-06:00" />
+<meta property="article:modified_time" content="2017-06-05T21:22:00-06:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Your API&#39;s rat nest"/>
+<meta name="twitter:description" content="Recently, I have seen several articles talking about RESTful API design.  Of
+course this is also a common topic of discussion for the engineers at Teem.  I
+want to use (and write) APIs that are easy to understand and explain and the
+fastest way to complicate your API is nested routes. Just don&rsquo;t do it! Do not
+create nested routes in your API.  Let&rsquo;s keep our APIs simple and create one
+endpoint per resource and if filters are needs, use GET parameters. This is
+simpler to document and simpler to maintain and ultimately, easier to use."/>
+
+<meta property="og:title" content="Your API&#39;s rat nest" />
+<meta property="og:description" content="Recently, I have seen several articles talking about RESTful API design.  Of
+course this is also a common topic of discussion for the engineers at Teem.  I
+want to use (and write) APIs that are easy to understand and explain and the
+fastest way to complicate your API is nested routes. Just don&rsquo;t do it! Do not
+create nested routes in your API.  Let&rsquo;s keep our APIs simple and create one
+endpoint per resource and if filters are needs, use GET parameters. This is
+simpler to document and simpler to maintain and ultimately, easier to use." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2017/api-rats-nest/" />
+<meta property="article:published_time" content="2017-06-05T21:22:00-06:00" />
+<meta property="article:modified_time" content="2017-06-05T21:22:00-06:00" />
+
+<meta itemprop="name" content="Your API&#39;s rat nest">
+<meta itemprop="description" content="Recently, I have seen several articles talking about RESTful API design.  Of
+course this is also a common topic of discussion for the engineers at Teem.  I
+want to use (and write) APIs that are easy to understand and explain and the
+fastest way to complicate your API is nested routes. Just don&rsquo;t do it! Do not
+create nested routes in your API.  Let&rsquo;s keep our APIs simple and create one
+endpoint per resource and if filters are needs, use GET parameters. This is
+simpler to document and simpler to maintain and ultimately, easier to use.">
+<meta itemprop="datePublished" content="2017-06-05T21:22:00-06:00" />
+<meta itemprop="dateModified" content="2017-06-05T21:22:00-06:00" />
+<meta itemprop="wordCount" content="338">
+
+
+
+<meta itemprop="keywords" content="api,rest," />
+
+
+
+    <title>
+        Your API&#39;s rat nest &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="//lucasroesler.com/posts/2017/api-rats-nest/">
+
+    
+    <link rel="stylesheet" href="//lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/posts/2017/api-rats-nest/wires.jpg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>Your API&#39;s rat nest</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/posts/index.xml">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>Recently, I have seen several articles talking about RESTful API design.  Of
+course this is also a common topic of discussion for the engineers at Teem.  I
+want to use (and write) APIs that are easy to understand and explain and the
+fastest way to complicate your API is nested routes. Just don&rsquo;t do it! Do not
+create nested routes in your API.  Let&rsquo;s keep our APIs simple and create one
+endpoint per resource and if filters are needs, use GET parameters. This is
+simpler to document and simpler to maintain and ultimately, easier to use.</p>
+<p>In a RESTful API urls identify resources and identifiers should change
+as infrequently as possible [[Fielding pg. 110](https://www.ics.uci.edu/
+~fielding/pubs/dissertation/fielding_dissertation.pdf)].  The natural
+consequence is that urls should contain the minimal information needed
+to access a resource. For example, in an API with Users and Companies,
+<code>/users/:userId</code> is better than <code>/companies/:companyId/users/:userId</code>.
+If your user changes companies, then the identifier must change.  This is also
+more complicated than it needs to be. The user&rsquo;s <code>id</code> should be enough to
+access it from the database.</p>
+<p>Some people will argue that you solve the above problem by implementing
+<em>both</em> endpoints.  However, if you pair this with the Unix philosophy
+<a href="https://en.wikipedia.org/wiki/Unix_philosophy#Do_One_Thing_and_Do_It_Well">&ldquo;Do One Thing and Do It Well&rdquo;</a>,
+then you simply shouldn&rsquo;t use nested routes. It is simpler to understand
+an API that has only one way to access any given resource. Additionally,
+any request that you can do with nested routes you can do with a non-nested
+route and query parameters. This also reduces the complexity of
+managing and testing endpoints because there is only one code path that
+users/developers can use.  Basically, the non-nested endpoint is works
+it works well, so why create another endpoint to clutter up the API?</p>
+<p>At the end of the day, APIs without nested routes are easier to build, easier
+to maintain, and easier to consume.  This leads to happy devs and ultimately
+happy users.</p>
+<hr>
+<p>Thank you to
+<!-- raw HTML omitted -->Tom Ducat-White<!-- raw HTML omitted --> for the CC BY-NC-ND image I used as the cover on this post.</p>
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/api/">api</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/rest/">rest</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2020 by Lucas Roesler. 
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>

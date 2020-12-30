@@ -1,0 +1,230 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="When sequential tests aren&#39;t" />
+<meta property="og:description" content="A brief reminder that go will default to testing packages in parallel" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2019/golang-parallel-testing/" />
+<meta property="article:published_time" content="2019-02-02T00:00:00+02:00" />
+<meta property="article:modified_time" content="2019-02-02T00:00:00+02:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="When sequential tests aren&#39;t"/>
+<meta name="twitter:description" content="A brief reminder that go will default to testing packages in parallel"/>
+
+<meta property="og:title" content="When sequential tests aren&#39;t" />
+<meta property="og:description" content="A brief reminder that go will default to testing packages in parallel" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2019/golang-parallel-testing/" />
+<meta property="article:published_time" content="2019-02-02T00:00:00+02:00" />
+<meta property="article:modified_time" content="2019-02-02T00:00:00+02:00" />
+
+<meta itemprop="name" content="When sequential tests aren&#39;t">
+<meta itemprop="description" content="A brief reminder that go will default to testing packages in parallel">
+<meta itemprop="datePublished" content="2019-02-02T00:00:00+02:00" />
+<meta itemprop="dateModified" content="2019-02-02T00:00:00+02:00" />
+<meta itemprop="wordCount" content="837">
+
+
+
+<meta itemprop="keywords" content="programming,golang,testing," />
+
+
+
+    <title>
+        When sequential tests aren&#39;t &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="//lucasroesler.com/posts/2019/golang-parallel-testing/">
+
+    
+    <link rel="stylesheet" href="//lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/posts/2019/golang-parallel-testing/dominos.jpg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>When sequential tests aren&#39;t</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/posts/index.xml">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>At work we have been expanding the testing coverage of our auth service and have discovered the perfect storm of edge cases around test caching and Go&rsquo;s test building. In short, we had tests that looked like they were passing locally but would fail sporadically in CI because Go will run the tests inside of a package sequentially but build and test each package in parallel (up to the number of CPU cores).</p>
+<hr>
+<h2 id="background">Background</h2>
+<p>For various reasons we have a package called <code>server</code> that looks roughly like this</p>
+<pre><code>server
+├── server.go
+├── bootstrap.go
+├── bootstrap_test.go
+├── tenant
+│   ├── db.go
+│   ├── service.go
+│   ├── service_test.go
+│   ├── testutils.go
+│   └── validation.go
+└── user
+    ├── db.go
+    ├── password.go
+    ├── service.go
+    ├── service_test.go
+    └── validation.go
+</code></pre><p>Each of those test files wants to connect to the DB and will run some queries. To enable running individual tests, we also have a helper method for initializing the database</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> (
+	<span style="color:#a6e22e">testDatabase</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span>
+	<span style="color:#a6e22e">err</span>          <span style="color:#66d9ef">error</span>
+	<span style="color:#a6e22e">once</span>         <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Once</span>
+)
+
+<span style="color:#75715e">// GetDatabase gets a test database
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetDatabase</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span> {
+	<span style="color:#a6e22e">once</span>.<span style="color:#a6e22e">Do</span>(<span style="color:#66d9ef">func</span>() {
+		<span style="color:#a6e22e">testDatabase</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">connectDB</span>()
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#66d9ef">return</span>
+		}
+		<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithTimeout</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
+		<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>()
+
+		<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">SetupTables</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">testDatabase</span>)
+		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+			<span style="color:#66d9ef">return</span>
+		}
+	})
+
+	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;Can&#39;t initialize the database: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+	}
+	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">testDatabase</span>
+}
+</code></pre></div><h2 id="the-bug">The bug</h2>
+<p>Using <code>sync.Once</code> ensures that the database setup method runs exactly once. This works but with a big caveat, when you run</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">go test ./...
+</code></pre></div><p>Go builds and runs binaries for <code>tenant/service_test.go</code>, <code>user/service_test.go</code>, and <code>bootstrap_test.go</code> in parallel. When they run in parallel at the same time we would see a sql error</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">pq: duplicate <span style="color:#66d9ef">key</span> value violates <span style="color:#66d9ef">unique</span> <span style="color:#66d9ef">constraint</span> <span style="color:#e6db74">&#34;pg_extension_name_index&#34;</span>
+</code></pre></div><p>which is caused by running <code>CREATE EXTENSION IF NOT EXISTS foo</code> multiple times simultaneously.</p>
+<p>At first, I couldn&rsquo;t determine why. I thought all of the tests were run sequentially. But, after digging through the documentation for <code>go test</code> and then <code>go build</code>, <a href="https://golang.org/cmd/go/#hdr-Compile_packages_and_dependencies">I found</a></p>
+<pre><code>	-p n
+		the number of programs, such as build commands or
+		test binaries, that can be run in parallel.
+		The default is the number of CPUs available.
+</code></pre><p>This points to the quick fix, but I was still confused why it would mostly succeed when run locally but usually fail in CI. <a href="https://golang.org/doc/go1.10#test">CACHING!</a>. In Go 1.10</p>
+<blockquote>
+<p>The go test command now caches test results</p>
+</blockquote>
+<p>Due to random timing, sometimes one of those test packages would succeed, the result cached, and then on subsequent test runs, skipped. Which would reduce the number of calls to <code>GetDatabase</code> and allow all of the tests to pass. This can be disabled by passing <code>-count=1</code> to your test command.</p>
+<h2 id="the-fixes">The fix(es)</h2>
+<p>Having read the docs and disable the cache, I was able to repoduce and then &ldquo;fix&rdquo; the issue</p>
+<ol>
+<li>
+<p><em>The quick fix to get CI passing</em>: the most obvious way to resolve this issue is to not allow parallel test binaries, using</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">go test -p<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ./...
+</code></pre></div><p>Now each package and test is run exactly in the order that it is printed, nothing in parallel.</p>
+</li>
+<li>
+<p><em>A slightly better fix</em>: Create a new database per test package. In the initial <code>GetDatabase</code> method the same database connection is used over and over. In particular, the same database itself is used. If we modify the method to allow us to pass a new db name, then we can instantiate a fresh database per package and allows us to drop the <code>-p=1</code> flag.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// GetDatabase gets a test database
+</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetDatabase</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span> {
+    <span style="color:#a6e22e">once</span>.<span style="color:#a6e22e">Do</span>(<span style="color:#66d9ef">func</span>() {
+        <span style="color:#a6e22e">testDatabase</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">connectDB</span>(<span style="color:#a6e22e">name</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#66d9ef">return</span>
+        }
+        <span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithTimeout</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
+        <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>()
+
+        <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">SetupTables</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">testDatabase</span>)
+        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+            <span style="color:#66d9ef">return</span>
+        }
+    })
+
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;Can&#39;t initialize the database: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+    }
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">testDatabase</span>
+}
+
+<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">connectDB</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) (<span style="color:#a6e22e">db</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+    <span style="color:#a6e22e">adminConnStr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(
+        <span style="color:#e6db74">&#34;dbname=%s user=%s sslmode=disable host=0.0.0.0 password=%s&#34;</span>,
+        <span style="color:#a6e22e">databaseName</span>,
+        <span style="color:#a6e22e">databaseUser</span>,
+        <span style="color:#a6e22e">databasePassword</span>,
+    )
+
+    <span style="color:#a6e22e">adminDB</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;postgres&#34;</span>, <span style="color:#a6e22e">adminConnStr</span>)
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+    }
+    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">adminDB</span>.<span style="color:#a6e22e">Close</span>()
+    <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">adminDB</span>.<span style="color:#a6e22e">Exec</span>(<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;CREATE DATABASE %s OWNER %s&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">databaseUser</span>))
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+    }
+
+    <span style="color:#a6e22e">connStr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(
+        <span style="color:#e6db74">&#34;dbname=%s user=%s sslmode=disable host=0.0.0.0 password=%s&#34;</span>,
+        <span style="color:#a6e22e">name</span>,
+        <span style="color:#a6e22e">databaseUser</span>,
+        <span style="color:#a6e22e">databasePassword</span>,
+    )
+
+    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;postgres&#34;</span>, <span style="color:#a6e22e">connStr</span>)
+}
+</code></pre></div></li>
+<li>
+<p><em>The &ldquo;correct&rdquo; solution</em>: separate the datalayer into its own package. Any code that contains SQL or needs to actually access the DB should live in a single package and expose an interface that we can import into the server. If only one package needs to access the db, then there is only one call to setup the db! This also provides various other great benefits. For various, not very good, reasons we didn&rsquo;t do this immediately from the start. This requires a bit more effort to resolve. (Although some other very smart decisions we made will make this refactor much more simple than it seems.)</p>
+</li>
+</ol>
+<h2 id="wrapping-up">Wrapping up</h2>
+<p>I love Go&rsquo;s test caching, but it definitely bit me this week. Fortunately, it only required a small tweak to get tests up and running consistently.</p>
+
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/programming/">programming</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/golang/">golang</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/testing/">testing</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2020 by Lucas Roesler. 
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>

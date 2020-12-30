@@ -1,0 +1,250 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="Zero downtime deploys: A tale of Django migrations" />
+<meta property="og:description" content="At Teem, we aim for zero down-time deploys; so, one of the most
+important things we must validate is that things will not break mid-deploy!
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2017/automatic-migration-validation/" />
+<meta property="article:published_time" content="2017-02-20T00:00:00-07:00" />
+<meta property="article:modified_time" content="2017-02-20T00:00:00-07:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Zero downtime deploys: A tale of Django migrations"/>
+<meta name="twitter:description" content="At Teem, we aim for zero down-time deploys; so, one of the most
+important things we must validate is that things will not break mid-deploy!
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible."/>
+
+<meta property="og:title" content="Zero downtime deploys: A tale of Django migrations" />
+<meta property="og:description" content="At Teem, we aim for zero down-time deploys; so, one of the most
+important things we must validate is that things will not break mid-deploy!
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2017/automatic-migration-validation/" />
+<meta property="article:published_time" content="2017-02-20T00:00:00-07:00" />
+<meta property="article:modified_time" content="2017-02-20T00:00:00-07:00" />
+
+<meta itemprop="name" content="Zero downtime deploys: A tale of Django migrations">
+<meta itemprop="description" content="At Teem, we aim for zero down-time deploys; so, one of the most
+important things we must validate is that things will not break mid-deploy!
+The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible.">
+<meta itemprop="datePublished" content="2017-02-20T00:00:00-07:00" />
+<meta itemprop="dateModified" content="2017-02-20T00:00:00-07:00" />
+<meta itemprop="wordCount" content="1136">
+
+
+
+<meta itemprop="keywords" content="python,django,automation,postgres," />
+
+
+
+    <title>
+        Zero downtime deploys: A tale of Django migrations &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="//lucasroesler.com/posts/2017/automatic-migration-validation/">
+
+    
+    <link rel="stylesheet" href="//lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/images/topography.svg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>Zero downtime deploys: A tale of Django migrations</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/posts/index.xml">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>At Teem, we aim for zero down-time deploys; so, one of the most
+important things we must validate is that things will not break mid-deploy!</p>
+<p>The most sensitive step of the deploy process is the changes to our database.
+Prior to the automation I am about to describe, validation of the database
+migrations required specialized knowledge about Postgres, the changes to the
+application model, load on the database for that model, and a bit of general
+experience. This obviously slows down reviews and subsequently deploys. Worse,
+it was simply too easy to miss problem migrations when depending on only peer
+reviews. To make our lives easier we created a series of validation checks to
+ensure that each database migration will be backwards compatible.</p>
+<h2 id="the-what">The what</h2>
+<p>The checks I am going to describe are simply a sequence of regex
+that we run on the migrations in the changelog. The process looks, roughly,
+like this:</p>
+<ol>
+<li>Using git, generate a list of new migrations in this release,</li>
+<li>Using Django&rsquo;s <code>sqlmigrate</code> manage command, generate the SQL for each
+migration,</li>
+<li>Run a sequence of regex on each SQL command,</li>
+<li>Report the issues,</li>
+<li>Profit!</li>
+</ol>
+<p>We do this in a python script we internally call <code>octoeb</code> which uses
+<a href="http://click.pocoo.org/5/">Click</a> to create a commandline
+interface.  So, I can get a changelog along with an audit of the migrations
+in my current branch using:</p>
+<pre><code>$ ocotoeb changelog
+</code></pre><p>I won&rsquo;t describe the specific python code, instead I will give you equivalent bash commands
+that you can run in your CLI and a simple description of the regex that we
+are using. This will give you all the pieces you need to build a similar script
+in your favorite language.</p>
+<h2 id="the-why">The why</h2>
+<p>The basic goal is to ensure that any applied migrations are backwards
+compatible with the model definitions in the currently deployed release. This
+is a requirement because our current deployment process looks like:</p>
+<ol>
+<li>pull the new release code to a single server,</li>
+<li>run the migrations,</li>
+<li>restart the application,</li>
+<li>check the application status,</li>
+<li>slowly roll the code to the rest of the servers.</li>
+</ol>
+<p>As a result, during a deploy we have a mix of old model definitions and new
+model definitions running simultaneously.  This means that the database must
+except both the old and the new for a short period of time and that any change we make
+to the database should not lock up an entire table.</p>
+<p>Probably the most common change we often want to make is simply adding a new
+column to an existing model.  This can present several issues.  First, your new
+column should not set a default.  In postgres, adding a column with a default will
+lock the table while it rewrites the existing rows with the default.  This can
+easily be avoided by adding the column first without the default, then adding
+the default, followed by a future backfill on the existing rows.  This will
+create the column and all future rows will have the default.</p>
+<p>Implicit in the above recommendation is that all new columns must be nullable.
+You can not add a column without a default unless you allow null. Additionally,
+while the old models are running against the new table definitions, the app
+will set a value for that column, so it must either have a default or allow
+null otherwise Postgres will throw an error.</p>
+<p>Finally, the other change that we need to watch for is removing columns. This
+is a multi-step process. If you drop a column while the old models are still
+active you will get two possible errors (1) when Django tries to select on
+that column that no longer exists (which it will because it always explicitly
+names the columns selected) or (2) attempting to insert data to a column that
+doesn&rsquo;t exist anymore. To actually handle this type of model change you must
+deploy the model change prior to running the migration.  In our process, that
+means you must commit the model change in a release separate from the database
+migration.</p>
+<p>There are certainly other cases to consider, but we have found these 3 cases to
+cover the vast majority of our migration concerns. Having put these checks into
+place, we rarely have any issues with database migrations during deploy.</p>
+<h2 id="the-how">The how</h2>
+<h3 id="getting-your-list-of-migrations">Getting your list of migrations</h3>
+<p>To find the new migrations you can run the following command</p>
+<pre><code>$ git log --name-status master.. | grep -e  &quot;^[MA].*migrations.*&quot;
+</code></pre><p>Breaking this down, <code>git log --name-status master..</code> will print a log of the
+commits and the file changes in each commit between <code>master</code> and the current
+<code>HEAD</code>.  The <code>grep</code> returns only those lines that start with <code>A</code> or <code>M</code> and
+also contains the work <code>migrations</code>.  These are all of the new or modified
+migration files.  It will return something like this</p>
+<pre><code>A	apps/accounts/migrations/0019_auto_20170126_1830.py
+</code></pre><h3 id="getting-your-sql">Getting your SQL</h3>
+<p>Once you have the list of migration files that you need to check, we need to
+get the actual SQL that is going to be run by Django.  Fortunately, Django
+provides a simple command to get this SQL,
+<a href="https://docs.djangoproject.com/en/1.10/ref/django-admin/#sqlmigrate"><code>sqlmigrate</code></a>.
+For example,</p>
+<pre><code>django-admin sqlmigrate account 0002
+</code></pre><p>will print the sql for the second migration in the <code>accounts</code> app. In the
+pervious section the ouput contains all of the information that we need.
+Specifically, with a command like this</p>
+<pre><code>$ git log --name-status master.. | grep -e  &quot;^[AM].*migrations.*&quot; | cut -d / -f 2,4 | cut -d . -f 1
+</code></pre><p>we would get back exactly the list of apps and the migration name for each
+migration that we need to check</p>
+<pre><code>accounts/0017_auto_20170126_1342
+</code></pre><p>This still isn&rsquo;t quite what we need.  At the end of the day the following
+command will generate the SQL for you</p>
+<pre><code>$ git log --name-status master.. | grep -e  &quot;^[AM].*migrations.*&quot; | cut -d / -f 2,4 | cut -d . -f 1 | awk -F&quot;/&quot; '{ print $1,$2}' | xargs -t -L 1 django-admin sqlmigrate
+</code></pre><p>We are using python for our scripting, so my script is actually a bit
+different, using the regex <code>apps/((.*)/migrations/(\d+[0-9a-z_]*))\.py</code> and a
+combination of a for loop and subprocess to generate the SQL.</p>
+<h3 id="regex-magic">Regex magic</h3>
+<p>Now that we have the actual SQL that needs to be tested, it is simply a matter
+of running a few regex tests. We have 3 core tests that we run:</p>
+<ul>
+<li><code>check_for_not_null</code> which we test using <code>/NOT NULL/</code></li>
+<li><code>check_for_dropped_columns</code> which we test using <code>/DROP COLUMN/</code>,
+and</li>
+<li><code>check_for_add_with_default</code> which we test using <code>/ADD COLUMN .* DEFAULT/</code>.</li>
+</ul>
+<p>For each migration, we test those 3 regex and alert if they have any matches.
+As I mentioned earlier, there are certainly other cases that could be
+considered. Let me know if there are some additional checks I should add.
+Since we have implemented these checkes, I can&rsquo;t remember the last time we had
+a migration issue during a deploy so they seem to cover most of the use cases
+we run into.</p>
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/python/">python</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/django/">django</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/automation/">automation</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/postgres/">postgres</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2020 by Lucas Roesler. 
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>

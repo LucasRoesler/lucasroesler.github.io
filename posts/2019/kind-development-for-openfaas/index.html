@@ -1,0 +1,185 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="Developing OpenFaaS KinD-ly" />
+<meta property="og:description" content="Creating an isolated OpenFaaS Development environment with KinD" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2019/kind-development-for-openfaas/" />
+<meta property="article:published_time" content="2019-04-14T00:00:00+02:00" />
+<meta property="article:modified_time" content="2019-04-14T00:00:00+02:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Developing OpenFaaS KinD-ly"/>
+<meta name="twitter:description" content="Creating an isolated OpenFaaS Development environment with KinD"/>
+
+<meta property="og:title" content="Developing OpenFaaS KinD-ly" />
+<meta property="og:description" content="Creating an isolated OpenFaaS Development environment with KinD" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2019/kind-development-for-openfaas/" />
+<meta property="article:published_time" content="2019-04-14T00:00:00+02:00" />
+<meta property="article:modified_time" content="2019-04-14T00:00:00+02:00" />
+
+<meta itemprop="name" content="Developing OpenFaaS KinD-ly">
+<meta itemprop="description" content="Creating an isolated OpenFaaS Development environment with KinD">
+<meta itemprop="datePublished" content="2019-04-14T00:00:00+02:00" />
+<meta itemprop="dateModified" content="2019-04-14T00:00:00+02:00" />
+<meta itemprop="wordCount" content="634">
+
+
+
+<meta itemprop="keywords" content="programming,openfaas,development,kubernetes,kind," />
+
+
+
+    <title>
+        Developing OpenFaaS KinD-ly &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="//lucasroesler.com/posts/2019/kind-development-for-openfaas/">
+
+    
+    <link rel="stylesheet" href="//lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/posts/2019/kind-development-for-openfaas/tools-498202_1280.jpg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>Developing OpenFaaS KinD-ly</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/posts/index.xml">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>There are several ways to run small Kubernetes clusters: <a href="https://github.com/rancher/k3d">k3s and k3d</a>, <a href="https://kubernetes.io/docs/setup/minikube/">minikube</a>, and <a href="https://microk8s.io/">microk8s</a> to name a few. Currently, my favorite is the Kubernetes provided by <a href="https://www.docker.com/products/docker-desktop"><code>Docker Desktop for Mac</code></a>. But this doesn&rsquo;t help my friends (or myself) when I am on a Linux laptop. It would be nice to have one lightweight and shared environment for Kubernetes.</p>
+<p>Luckily, one of the Kubernetes groups has released <a href="https://kind.sigs.k8s.io/">KinD - Kubernetes in Docker</a>. In this post I will show how I use KinD for local development of OpenFaaS. I like KinD because, similar to Docker Desktop, it creates a simple single node Kubernetes environment in a Docker container and has a simple <code>kind load</code> command that allows us avoid the push/pull of local development builds of our project.</p>
+<hr>
+<h2 id="creating-a-dev-environment">Creating a dev environment</h2>
+<h3 id="start-a-kind-cluster">Start a KinD cluster</h3>
+<p>Because we are starting a cluster for development of OpenFaaS, I assume that you have <a href="https://golang.org/doc/install">go</a> and <a href="https://docs.docker.com/install/">docker</a> installed already.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># install/upgrade kind</span>
+go get -u sigs.k8s.io/kind
+<span style="color:#75715e"># create a cluster</span>
+kind create cluster --name dev-openfaas
+
+<span style="color:#75715e"># verify everything started</span>
+export KUBECONFIG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>kind get kubeconfig-path --name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dev-openfaas&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+kubectl rollout status deploy coredns --watch -n kube-system
+</code></pre></div><h3 id="installing-helm">Installing Helm</h3>
+<p>You must have the <a href="https://helm.sh/docs/using_helm/#installing-the-helm-client">Helm client installed</a>.</p>
+<p>Then, setup the RBAC permissions to make the Helm tiller a cluster admin</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl -n kube-system create sa tiller
+kubectl create clusterrolebinding tiller <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --clusterrole cluster-admin <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>  --serviceaccount<span style="color:#f92672">=</span>kube-system:tiller
+</code></pre></div><p>Then, install Helm into the cluster</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># export is not needed if you are in the original terminal used to setup KinD</span>
+export KUBECONFIG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>kind get kubeconfig-path --name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dev-openfaas&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+helm init --skip-refresh --upgrade --service-account tiller
+</code></pre></div><h3 id="installing-openfaas">Installing OpenFaaS</h3>
+<p>First we need to install a vanilla release of OpenFaaS</p>
+<ol>
+<li>
+<p>Setup the default namespaces</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
+</code></pre></div></li>
+<li>
+<p>Setup Gateway basic auth credentials</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export PASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tester&#34;</span>
+kubectl -n openfaas create secret generic basic-auth <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--from-literal<span style="color:#f92672">=</span>basic-auth-user<span style="color:#f92672">=</span>admin <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>--from-literal<span style="color:#f92672">=</span>basic-auth-password<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$PASSWORD<span style="color:#e6db74">&#34;</span>
+</code></pre></div></li>
+<li>
+<p>Instll OpenFaaS via Helm</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm repo add openfaas https://openfaas.github.io/faas-netes/
+helm repo update
+helm upgrade openfaas --install openfaas/openfaas <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --namespace openfaas  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set basic_auth<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set functionNamespace<span style="color:#f92672">=</span>openfaas-fn
+kubectl rollout status deploy gateway --watch -n openfaas
+</code></pre></div><p>At this point, we have a default OpenFaaS installation isolated in a Docker container. Normally, this would be accessible at http://localhost:31112/ui but this is not exposed yet. Unlike Docker Desktop, NodePort services are not automatically bound to your localhost.  Instead, we must manually expose it.</p>
+</li>
+<li>
+<p>In a separate terminal, we need to expose the</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl -n openfaas port-forward deploy/gateway 31112:8080
+</code></pre></div></li>
+<li>
+<p>Deploy a test function
+Now that we can access the gateway, we can deploy a test function with the <code>faas-cli</code></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export GATEWAY<span style="color:#f92672">=</span>http://localhost:31112
+faas-cli login --gateway<span style="color:#f92672">=</span>$GATEWAY -u admin -p tester
+faas-cli store deploy nodeinfo --gateway<span style="color:#f92672">=</span>$GATEWAY
+echo <span style="color:#e6db74">&#34;&#34;</span> | faas-cli invoke nodeinfo --gateway<span style="color:#f92672">=</span>$GATEWAY
+</code></pre></div></li>
+</ol>
+<h3 id="deploy-a-local-development-version-of-the-kubernetes-provider">Deploy a local development version of the kubernetes provider</h3>
+<p>Now that we have this environment created, we can start testing our local development builds.</p>
+<p>If I want to test a local branch of the faas-netes project, I use the <code>kind load</code> command to copy the docker image from my local docker into kind cluster.  This a lot faster than pushing it to a registry and then pulling it back to my laptop!</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make build
+kind load docker-image --name dev-openfaas openfaas/faas-netes:latest
+export KUBECONFIG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>kind get kubeconfig-path --name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dev-openfaas&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
+helm upgrade openfaas --install openfaas/openfaas <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --namespace openfaas  <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set basic_auth<span style="color:#f92672">=</span>true <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set openfaasImagePullPolicy<span style="color:#f92672">=</span>IfNotPresent <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set faasnetes.imagePullPolicy<span style="color:#f92672">=</span>IfNotPresent <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set faasnetes.image<span style="color:#f92672">=</span>openfaas/faas-netes:latest <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>    --set functionNamespace<span style="color:#f92672">=</span>openfaas-fn
+</code></pre></div><h3 id="cleaning-up">Cleaning up</h3>
+<p>If I ever get in trouble and want to start from scratch, I can always recreate the cluster in a minute</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kind delete cluster --name dev-openfaas
+unset KUBECONFIG
+</code></pre></div><p>And start again!  I have moved most of this into a simple bash script that I have shared as <a href="https://gist.github.com/LucasRoesler/c029f7b7446f7c051522b8edb456b703">a gist.</a></p>
+<hr>
+<p>KinD provides a lightweight, disposable, and consistent method to test OpenFaaS on Kubernetes without needing a cloud provider or pushing images around the cloud. Going forward, all of my OpenFaaS pull requests will include test instructions that start from a clean cluster using KinD.</p>
+
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/programming/">programming</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/openfaas/">openfaas</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/development/">development</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/kubernetes/">kubernetes</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/kind/">kind</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2020 by Lucas Roesler. 
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>

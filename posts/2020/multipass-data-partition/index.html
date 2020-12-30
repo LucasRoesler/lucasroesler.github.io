@@ -1,0 +1,223 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="Moving the data directory of Multipass and Docker" />
+<meta property="og:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2020/multipass-data-partition/" />
+<meta property="article:published_time" content="2020-12-13T00:00:00+02:00" />
+<meta property="article:modified_time" content="2020-12-13T00:00:00+02:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Moving the data directory of Multipass and Docker"/>
+<meta name="twitter:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too."/>
+
+<meta property="og:title" content="Moving the data directory of Multipass and Docker" />
+<meta property="og:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2020/multipass-data-partition/" />
+<meta property="article:published_time" content="2020-12-13T00:00:00+02:00" />
+<meta property="article:modified_time" content="2020-12-13T00:00:00+02:00" />
+
+<meta itemprop="name" content="Moving the data directory of Multipass and Docker">
+<meta itemprop="description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too.">
+<meta itemprop="datePublished" content="2020-12-13T00:00:00+02:00" />
+<meta itemprop="dateModified" content="2020-12-13T00:00:00+02:00" />
+<meta itemprop="wordCount" content="1055">
+
+
+
+<meta itemprop="keywords" content="programming,multipass,docker," />
+
+
+
+    <title>
+        Moving the data directory of Multipass and Docker &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="//lucasroesler.com/posts/2020/multipass-data-partition/">
+
+    
+    <link rel="stylesheet" href="//lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/posts/2020/multipass-data-partition/images/library-898333_250.jpeg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>Moving the data directory of Multipass and Docker</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/posts/index.xml">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>This weekend was my first adventure in <a href="https://snapcraft.io/">Snaps</a>. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass' fault, my good old friend Docker was eating up a decent chunk of my disk too.</p>
+<p>If you are like me, you have a separate (larger) data partion and probably want the Docker and Multipass data directories to live there instead of your small OS root partition.</p>
+<h1 id="getting-my-laptop">Getting my laptop</h1>
+<p>Earlier this year we got my wife a new computer. Originally, it was supposed to be a simple &ldquo;web and netflix&rdquo; machine. However, being American expats in Germany, the &ldquo;market&rdquo; had a different plan for us. Most budget computers in Germany <em>only</em> come with German keyboard layouts. Very natural, no real complaint. But this means we had to buy something at the professional level. We choose a Dell XPS 13.</p>
+<p>The bad news is that my wife ultimately didn&rsquo;t like the laptop. Primarily, she didn&rsquo;t liek the keyboard. The good news is that it means <em>I</em> got a new laptop this year.</p>
+<h2 id="setting-up-my-laptop">Setting up my laptop</h2>
+<p>For the past 10 years I have been a Mac user due it being offered at work. But I have been itching to get back to Linux. So I installed Ubuntu 20.20 :)</p>
+<p>In the past I have always used 2 or 3 partitions, one for the OS, one for data, and optionally one for a second OS. On the XPs I have a separate <code>/home</code> mount which contains almost all of my disk space 230GB and a root <code>/</code> partition with just 37GB.</p>
+<p>I thought this would be enough space for the OS, until I tried to compile a snap. 5 mins later and a notification pops up &ldquo;You are almost out of disk space, 1 GB remaining&rdquo;. Now this is shocking since I don&rsquo;t remember installing any massive pieces of software.</p>
+<p>After several iterations of <code>df -h</code>, <code>du -h</code>, <code>lsof</code>, etc. I pin point the problem to: Docker and Multipass saving every image, vm, and data mount to my <code>/var</code> folder. After recovering my disk space, I set out to move the data locations for docker and multipass to my <code>/home</code> partition, which has plenty of space.</p>
+<h1 id="using-the-data-partition">Using the data partition</h1>
+<h2 id="setting-up-docker">Setting up docker</h2>
+<p>Docker is the easy one, it has a configuration specifically for this use case.</p>
+<ol>
+<li>First I cleaned up the existing Docker data,</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">docker system prune -f --volumes --all
+</code></pre></div><p>You can probably skip this, but I prefer fresh starts.</p>
+<ol start="2">
+<li>Then, stop the docker daemon:</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo service docker stop
+</code></pre></div><ol start="3">
+<li>Next, create your new data folder</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir -p /home/docker/data
+</code></pre></div><p>the folder will be owned by root, but this is ok.</p>
+<ol start="4">
+<li>Now add or edit the configuration file <code>/etc/docker/daemon.json</code> so that it contains</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+  <span style="color:#f92672">&#34;data-root&#34;</span>: <span style="color:#e6db74">&#34;/home/docker/data&#34;</span>
+}
+</code></pre></div><ol start="5">
+<li>Now you can copy and remaining Docker metadata to the new location</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo rsync -aP /var/lib/docker/ /home/docker/data
+</code></pre></div><p>If you are being cautious, rename the old data folder so that you can safely revert if anything goes wrong</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mv /var/lib/docker /var/lib/docker.old
+</code></pre></div><ol start="6">
+<li>Resart the docker daemon and test everything is work</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo service docker start
+docker run --rm hello-world
+</code></pre></div><ol start="7">
+<li>Cleanup the old data</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo rm -rf /var/lib/docker.old
+</code></pre></div><h2 id="setting-up-multipass">Setting up multipass</h2>
+<p>Multipass is a bit harder than Docker. It <em>can</em> be done, but the feature is much newer. It was <a href="https://github.com/canonical/multipass/pull/1789">just merged in October 2020</a></p>
+<p>The author <a href="https://github.com/Saviq">Michał</a> has kindly (provided instructions)[https://github.com/canonical/multipass/pull/1789#issuecomment-704991752] that I have adapted and extended below</p>
+<ol>
+<li>First I want to safely clear any cached multipass data, the simplest way to do this is the uninstall and reinstall multipass</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap remove multipass
+sudo snap install multipass
+</code></pre></div><ol start="2">
+<li>Make the new data directory</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir /home/multipass
+</code></pre></div><ol start="3">
+<li>I created a new group for my user and <code>root</code>, so that I would have simpler access to the data directory</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo groupadd multipass
+sudo usermod -a G root multipass
+sudo usermod -a -G multipass $USER
+sudo chown -R root:multipass /home/multipass
+</code></pre></div><ol start="4">
+<li>Stop you multipass daemon and enable the required volumn plugins for snap</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap stop multipass
+sudo snap connect multipass:removable-media  <span style="color:#75715e"># for /mnt /media https://snapcraft.io/docs/removable-media-interface</span>
+sudo snap connect multipass:all-home  <span style="color:#75715e"># for /home/* https://snapcraft.io/docs/home-interface</span>
+</code></pre></div><ol start="5">
+<li>Update the multipass service definition to set the required <code>MULTIPASS_STORAGE</code> environment variable.</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir /etc/systemd/system/snap.multipass.multipassd.service.d/
+sudo tee /etc/systemd/system/snap.multipass.multipassd.service.d/override.conf <span style="color:#e6db74">&lt;&lt;EOF
+</span><span style="color:#e6db74">[Service]
+</span><span style="color:#e6db74">Environment=MULTIPASS_STORAGE=/home/multipass
+</span><span style="color:#e6db74">EOF</span>
+</code></pre></div><ol start="6">
+<li>Reload the service defitions</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo  systemctl daemon-reload
+</code></pre></div><ol start="7">
+<li>Restart the multipass daemon</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap start multipass
+</code></pre></div><ol start="8">
+<li>Check that things are working</li>
+</ol>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ls -al /home/multipass
+total 16K
+drwxrwxr-x <span style="color:#ae81ff">4</span> root multipass 4,0K Dez <span style="color:#ae81ff">13</span> 16:00 .
+drwxr-xr-x <span style="color:#ae81ff">6</span> root root      4,0K Dez <span style="color:#ae81ff">12</span> 21:58 ..
+drwxr-xr-x <span style="color:#ae81ff">3</span> root root      4,0K Dez <span style="color:#ae81ff">13</span> 16:00 cache
+drwxr-xr-x <span style="color:#ae81ff">6</span> root root      4,0K Dez <span style="color:#ae81ff">13</span> 16:00 data
+</code></pre></div><p>If you start a new vm, e.g. using <code>multipass shell</code>, then you will
+start seeing data in the <code>/home/multipass/cache/vault/images</code>, for example.</p>
+<h2 id="a-networking-hiccup">A networking hiccup</h2>
+<p>Doing all of that, I now have a workign Docker and (I thought) a working Multipass with images and other data stored in my data partition. But this is a premature victory.</p>
+<p>Within the last couple days, it seems that Docker changed the way it uses iptables. The consequence is that the <code>iptables</code> Multipass needs are disabled and the VMs have <em>no network access</em>.  See this <a href="https://github.com/canonical/multipass/issues/1866">Github issue</a>.</p>
+<p>Networking questions are generally above my paygrade, but the summary seems to be that the Multipass snap uses legacy <code>iptables</code> while Docker switched to <code>nftables</code>. Once <code>nftables</code> are used, the legacy tables are ignored.</p>
+<p>This looks like</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo iptables -S
+<span style="color:#75715e"># Warning: iptables-legacy tables present, use iptables-legacy to see them</span>
+-P INPUT ACCEPT
+-P FORWARD DROP
+-P OUTPUT ACCEPT
+-N DOCKER
+-N DOCKER-ISOLATION-STAGE-1
+-N DOCKER-USER
+-N DOCKER-ISOLATION-STAGE-2
+-A FORWARD -j DOCKER-USER
+-A FORWARD -j DOCKER-ISOLATION-STAGE-1
+-A FORWARD -o docker0 -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A FORWARD -o docker0 -j DOCKER
+-A FORWARD -i docker0 ! -o docker0 -j ACCEPT
+-A FORWARD -i docker0 -o docker0 -j ACCEPT
+-A DOCKER-ISOLATION-STAGE-1 -i docker0 ! -o docker0 -j DOCKER-ISOLATION-STAGE-2
+-A DOCKER-ISOLATION-STAGE-1 -j RETURN
+-A DOCKER-USER -j RETURN
+-A DOCKER-ISOLATION-STAGE-2 -o docker0 -j DROP
+-A DOCKER-ISOLATION-STAGE-2 -j RETURN
+</code></pre></div><p>The solution is to update the iptables/nftables. At this time, I am still researching how to do this without breaking my laptop.  If you already <em>know</em> iptables and nftables, please let me know on <a href="https://twitter.com/TheAxeR">Twitter</a></p>
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/programming/">programming</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/multipass/">multipass</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/docker/">docker</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2020 by Lucas Roesler. 
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>

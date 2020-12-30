@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 05 Jun 2017 21:22:00 -0600</lastBuildDate><atom:link href="//lucasroesler.com/tags/rest/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Your API&#39;s rat nest</title>
-      <link>//lucasroesler.com/2017/06/your-apis-rat-nest/</link>
+      <link>//lucasroesler.com/posts/2017/api-rats-nest/</link>
       <pubDate>Mon, 05 Jun 2017 21:22:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/2017/06/your-apis-rat-nest/</guid>
+      <guid>//lucasroesler.com/posts/2017/api-rats-nest/</guid>
       <description>&lt;p&gt;Recently, I have seen several articles talking about RESTful API design.  Of
 course this is also a common topic of discussion for the engineers at Teem.  I
 want to use (and write) APIs that are easy to understand and explain and the

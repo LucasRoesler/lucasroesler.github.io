@@ -9,10 +9,10 @@
     <lastBuildDate>Mon, 20 Feb 2017 00:00:00 -0700</lastBuildDate><atom:link href="//lucasroesler.com/tags/automation/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
-      <link>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
+      <link>//lucasroesler.com/posts/2017/automatic-migration-validation/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
+      <guid>//lucasroesler.com/posts/2017/automatic-migration-validation/</guid>
       <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!&lt;/p&gt;
 &lt;p&gt;The most sensitive step of the deploy process is the changes to our database.

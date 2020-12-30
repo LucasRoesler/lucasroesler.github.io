@@ -26,6 +26,15 @@
     </item>
     
     <item>
+      <title>programming</title>
+      <link>//lucasroesler.com/tags/programming/</link>
+      <pubDate>Sun, 13 Dec 2020 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/tags/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>development</title>
       <link>//lucasroesler.com/tags/development/</link>
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
@@ -62,15 +71,6 @@
     </item>
     
     <item>
-      <title>programming</title>
-      <link>//lucasroesler.com/tags/programming/</link>
-      <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
-      
-      <guid>//lucasroesler.com/tags/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>kind</title>
       <link>//lucasroesler.com/tags/kind/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
@@ -103,6 +103,15 @@
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
       
       <guid>//lucasroesler.com/tags/testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>http</title>
+      <link>//lucasroesler.com/tags/http/</link>
+      <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
+      
+      <guid>//lucasroesler.com/tags/http/</guid>
       <description></description>
     </item>
     
@@ -355,6 +364,15 @@
       <pubDate>Sun, 15 Jan 2017 13:48:19 -0700</pubDate>
       
       <guid>//lucasroesler.com/tags/porter/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>misc</title>
+      <link>//lucasroesler.com/tags/misc/</link>
+      <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
+      
+      <guid>//lucasroesler.com/tags/misc/</guid>
       <description></description>
     </item>
     

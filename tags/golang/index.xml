@@ -9,19 +9,19 @@
     <lastBuildDate>Sat, 02 Feb 2019 00:00:00 +0200</lastBuildDate><atom:link href="//lucasroesler.com/tags/golang/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>When sequential tests aren&#39;t</title>
-      <link>//lucasroesler.com/2019/02/when-sequential-tests-arent/</link>
+      <link>//lucasroesler.com/posts/2019/golang-parallel-testing/</link>
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/2019/02/when-sequential-tests-arent/</guid>
+      <guid>//lucasroesler.com/posts/2019/golang-parallel-testing/</guid>
       <description>A brief reminder that go will default to testing packages in parallel</description>
     </item>
     
     <item>
       <title>Golang long-polling: a tale of server timeouts</title>
-      <link>//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/</link>
+      <link>//lucasroesler.com/posts/2018/golang-server-timeouts/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/2018/07/golang-long-polling-a-tale-of-server-timeouts/</guid>
+      <guid>//lucasroesler.com/posts/2018/golang-server-timeouts/</guid>
       <description>&lt;p&gt;I recently had a week long battle implementing HTTP long-polling. As so often
 happens in long debugging session in software development, my final fix was
 one line!&lt;/p&gt;</description>
@@ -29,10 +29,10 @@ one line!&lt;/p&gt;</description>
     
     <item>
       <title>Struct embedding for custom dev responses</title>
-      <link>//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</link>
+      <link>//lucasroesler.com/posts/2018/golang-struct-embedding/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/2018/01/struct-embedding-for-custom-dev-responses/</guid>
+      <guid>//lucasroesler.com/posts/2018/golang-struct-embedding/</guid>
       <description>&lt;p&gt;I had to learn about Go struct embedding the other day and I wanted to document my
 fix. In my use case I wanted to add some extra information to an API response to include
 some meta data from kubernetes cluster and/or some extra error information.&lt;/p&gt;</description>
@@ -40,19 +40,19 @@ some meta data from kubernetes cluster and/or some extra error information.&lt;/
     
     <item>
       <title>Deploying a private registry in Docker Swarm</title>
-      <link>//lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</link>
+      <link>//lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/</link>
       <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/2017/10/deploying-a-private-registry-in-docker-swarm/</guid>
+      <guid>//lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/</guid>
       <description>&lt;p&gt;At &lt;a href=&#34;https://contiamo.com&#34;&gt;Contiamo&lt;/a&gt; I am currently working a project that will eventually integrate with &lt;a href=&#34;https://www.openfaas.com/&#34;&gt;OpenFaaS&lt;/a&gt;.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Berlin and Golang</title>
-      <link>//lucasroesler.com/2017/08/berlin-and-golang/</link>
+      <link>//lucasroesler.com/posts/2017/starting-golang/</link>
       <pubDate>Wed, 02 Aug 2017 11:00:00 -0400</pubDate>
       
-      <guid>//lucasroesler.com/2017/08/berlin-and-golang/</guid>
+      <guid>//lucasroesler.com/posts/2017/starting-golang/</guid>
       <description>&lt;p&gt;At the beginning of the month I left &lt;a href=&#34;https://teem.com/&#34;&gt;Teem&lt;/a&gt; I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at &lt;a href=&#34;https://www.contiamo.com/&#34;&gt;Contiamo&lt;/a&gt; and will be working on the &lt;a href=&#34;https://docs.contiamo.com/en/labs/&#34;&gt;Labs feature&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     

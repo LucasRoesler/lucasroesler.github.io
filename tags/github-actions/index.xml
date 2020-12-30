@@ -9,10 +9,10 @@
     <lastBuildDate>Sat, 28 Sep 2019 00:00:00 +0200</lastBuildDate><atom:link href="//lucasroesler.com/tags/github-actions/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Action Packed Functions</title>
-      <link>//lucasroesler.com/2019/09/action-packed-functions/</link>
+      <link>//lucasroesler.com/posts/2019/openfaas-github-actions/</link>
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/2019/09/action-packed-functions/</guid>
+      <guid>//lucasroesler.com/posts/2019/openfaas-github-actions/</guid>
       <description>A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions</description>
     </item>
     
