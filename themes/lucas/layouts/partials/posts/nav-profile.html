@@ -1,0 +1,27 @@
+<!-- Fix hugo 0.17 expects ".Site.Author.gravatarEmail" whereas hugo 0.18 expects ".Site.Author.gravataremail" -->
+
+{{- $authorPicture := .Site.Author.picture }}
+{{- $authorPictureTiny := .Site.Author.picture }}
+{{- if .Site.Author.gravataremail }}
+{{- $gravatar := (printf "https://www.gravatar.com/avatar/%s" (urlize (md5 (.Site.Author.gravataremail))))}}
+{{- $authorPicture = (printf "%s?s=90" $gravatar) }}
+{{- $authorPictureTiny = (printf "%s?s=30" $gravatar) }}
+{{- end -}}
+
+<div class="nav-profile">
+    {{- with $authorPicture }}
+    <picture>
+        <source srcset="{{$authorPictureTiny}} 30w" sizes="30w" media="(max-width: 799px)">
+        <img 
+            class="nav-profile-picture" 
+            height="90px" width="90px"
+            src="{{ . }}{{ if in . " //www.gravatar.com/avatar/" }}?s=90{{ end }}"
+            alt="{{ i18n " global.author_picture" }}" 
+        />
+    </picture>
+    {{- end }}
+    <h4 class="nav-profile-name">{{ $.Site.Author.name }}</h4>
+    {{ with $.Site.Author.bio }}
+    <h5 class="nav-profile-bio">{{ . | markdownify }}</h5>
+    {{ end }}
+</div>

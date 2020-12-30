@@ -1,0 +1,55 @@
+{{/* http://www.heropatterns.com/ */}}
+{{- $default := resources.Get "svg/topography.svg" | resources.ExecuteAsTemplate "images/topography.svg" . }}
+{{- $coverimage := $default.RelPermalink }}
+{{- if .Params.coverImage }}
+{{- $cover := .Page.Resources.GetMatch (print .Params.coverImage) }}
+{{- if $cover }}
+{{- $coverimage = $cover.RelPermalink }}
+{{- else }}
+{{- $coverimage = $default.RelPermalink }}
+{{- end }}
+{{- end}}
+
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default " en" }}">
+{{- partial "posts/head.html" . -}}
+
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url({{ $coverimage }}) no-repeat center center scroll;
+                background-color: {{ .Site.Params.colors.background | default " #6fcdbd" }};">
+                <h1>{{.Title}}</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="/posts/index.xml">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    {{ .Content | safeHTML }}
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                {{ if gt (len .Params.tags) 0 }}
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small">{{ i18n "post.tagged_in" }}</span><br />
+                    {{ range $.Params.tags }}
+                    <a class="tag tag--small" href="{{ $.Site.LanguagePrefix }}/tags/{{ . | urlize }}/">{{ . }}</a>
+                    {{ end }}
+                </div>
+                {{ end }}
+            </div>
+        </article>
+        {{ partial "posts/footer.html" . }}
+    </main>
+</body>
+
+</html>

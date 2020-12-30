@@ -1,0 +1,63 @@
+{{- /* get file that matches the filename as specified as src="" in shortcode */}}
+
+{{- $src := .Page.Resources.GetMatch (.Get "src") }}
+{{- if not $src }}
+{{- $src = resources.Get (.Get "src") }}
+{{- end }}
+
+{{- /* set image sizes, these are hardcoded for now, x dictates that images are resized to this width */ -}}
+{{- $lqipwidth := default "20" }}
+{{- $tinywidth := default "500" }}
+{{- $smallwidth := default "800" }}
+{{- $mediumwidth := default "1000" }}
+{{- $largewidth := default "1200" }}
+{{- $thumbwidth := default "140" }}
+
+{{- $lqipw := default "20x" }}
+{{- $tinyw := default "500x" }}
+{{- $smallw := default "800x" }}
+{{- $mediumw := default "1000x" }}
+{{- $largew := default "1200x" }}
+{{- $thumbw := (.Get "thumbnail") | default "140x140" }}
+
+{{- /* resize the src image to the given sizes */ -}}
+
+{{- $lqip := $src.Resize $lqipw }}
+{{- $tiny := $src.Resize $tinyw }}
+{{- $small := $src.Resize $smallw }}
+{{- $medium := $src.Resize $mediumw }}
+{{- $large := $src.Resize $largew }}
+{{- $thumb := $src.Fill $thumbw }}
+
+{{- /* only use images smaller than or equal to the src (original) image size, as Hugo will upscale small images */ -}}
+{{- /* set the sizes attribute to (min-width: 35em) 1200px, 100vw unless overridden in shortcode */ -}}
+
+{{- $baseimage := $tiny }}
+
+{{- $alttext := (.Get "alt")}}
+{{- if not $alttext }}
+{{- $alttext = (.Get "title")}}
+{{- end }}
+
+<figure class="image">
+    <picture style="background: url(data:image/jpeg;base64,{{ $lqip.Content | base64Encode  }}); background-size: cover;">
+        <source srcset="{{$tiny.RelPermalink}} {{$tinywidth}}w" sizes="{{$tinywidth}}w" media="(max-width: 799px)">
+        <source srcset="{{$small.RelPermalink}} {{$smallwidth}}w" sizes="{{$smallwidth}}w" media="(max-width: 1199px)" >
+        {{- if ge $src.Width $mediumwidth }}
+        <source srcset="{{$medium.RelPermalink}} {{$medium}}w" sizes="{{$medium}}w" media="(max-width: 1499px)" >
+        {{- end }}
+        {{ if ge $src.Width $largewidth }}
+        <source srcset="{{$large.RelPermalink}} {{$largewidth}}w" sizes="{{$largewidth}}w">
+        {{- end }}
+        <img
+            decoding="{{ .Get "decoding" | default "async" }}"
+            loading="lazy"
+            width="{{ $baseimage.Width }}" height="{{ $baseimage.Height}}"
+            srcset="{{ $baseimage.RelPermalink }}"
+            alt="{{ $alttext | default `` }}"
+            >
+    </picture>
+    {{- if (.Get "title")}}
+    <figcaption class="caption">{{ .Get "title" }}</figcaption>
+    {{- end }}
+</figure>

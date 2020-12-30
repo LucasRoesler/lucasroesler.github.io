@@ -1,0 +1,20 @@
+// Colours
+$color-background: {{ .Site.Params.posts.colors.background | default "#6fcdbd" }};
+$color-foreground: {{ .Site.Params.posts.colors.foreground | default "#fff" }};
+$color-hover: {{ .Site.Params.posts.colors.hover | default "#333" }};
+$color-dark: {{ .Site.Params.posts.colors.dark | default "#6fcdbd" }};
+
+$intro-color-background: {{ .Site.Params.colors.background | default "#6fcdbd" }};
+$intro-color-foreground: {{ .Site.Params.colors.foreground | default "#fff" }};
+$intro-color-hover: {{ .Site.Params.colors.hover | default "#333" }};
+$intro-color-dark: {{ .Site.Params.colors.dark | default "#6fcdbd" }};
+
+{{/* http://www.heropatterns.com/ */}}
+{{- $default := resources.Get "svg/topography.svg" | resources.ExecuteAsTemplate "images/topography.svg" . | resources.Minify }}
+{{- $coverimage := $default.RelPermalink }}
+
+$coverimage: "{{$coverimage}}";
+
+@import '../common/variables';
+@import 'common/base';
+@import 'common/layout';

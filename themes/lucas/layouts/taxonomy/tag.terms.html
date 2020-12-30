@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+    {{- partial "posts/head.html" . -}}
+    <body>
+        <div class="post-list">
+            {{ partial "posts/nav.html" . }}
+            <main class="list">
+            <section class="tags-cloud">
+                {{ range .Data.Terms.ByCount }}
+                    <a class="tag tag--small" href="#tag-{{ .Name | urlize }}">{{ .Page.Title }} ({{ .Count }})</a>
+                {{ end }}
+            </section>
+            <section class="tags-list">
+                {{ range .Data.Terms.ByCount }}
+                <div id="{{ .Name | urlize }}-list" data-tag="{{ .Name | lower }}">
+                    <h4 class="tag-title" id="tag-{{ .Name | urlize }}">
+                    <a href="{{ .Name | urlize }}">
+                        {{ .Name }} ({{ .Pages | len }})
+                    </a>
+                    </h4>
+                    <ul class="tags-posts">
+                    {{ range .Pages.ByDate }}
+                        <li class="archive-post">
+                        <a class="archive-post-title" href="{{ .Permalink }}">
+                            {{ .Title }}
+                        </a>
+                        <span class="tag-post-date"> - {{ partial "internal/date" . }}</span>
+                        </li>
+                    {{ end }}
+                    </ul>
+                </div>
+                {{ end }}
+            </section>
+            {{ $paginator := .Paginate (where .Pages "Type" "posts") }}
+                {{ range $paginator.Pages }}
+                {{ partial "posts/summary" . }}
+                {{ end }}
+            {{ partial "posts/pagination.html" . }}
+            </main>
+        </div>
+    </body>
+</html>
+

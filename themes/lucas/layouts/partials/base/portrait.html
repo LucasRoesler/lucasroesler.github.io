@@ -1,0 +1,8 @@
+{{- $authorPicture := .Site.Author.picture | default " images/portrait.jpg" }}
+{{- if .Site.Author.gravataremail }}
+{{- $gravatar := (printf "https://www.gravatar.com/avatar/%s" (urlize (md5 (.Site.Author.gravataremail))))}}
+{{- $authorPicture = (printf "%s?s=300" $gravatar) }}
+{{- end -}}
+<picture>
+    <img src="{{ $authorPicture }}" class="portrait" alt="Portrait" />
+</picture>

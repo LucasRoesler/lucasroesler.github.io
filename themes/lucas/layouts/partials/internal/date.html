@@ -1,0 +1,5 @@
+{{ if $.Site.Params.dateFormat }}
+    {{ .Date.Format $.Site.Params.dateFormat }}
+{{ else }}
+  {{ .Date.Format "2006-01-02" }}
+{{ end }}

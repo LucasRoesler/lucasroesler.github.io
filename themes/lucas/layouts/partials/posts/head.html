@@ -1,0 +1,30 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ .Description }}">
+    {{ partial "social_metadata" . }}
+
+    <title>
+        {{ .Title }} &middot; {{ .Site.Title }}
+    </title>
+
+    {{- if .Params.canonicalLink }}
+    <link rel="canonical" href="{{ .Params.canonicalLink }}" />
+    {{- else }}
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{- end }}
+
+    <!-- CSS -->
+    {{- $cssTarget := "css/posts.style.css" }}
+    {{- $cssOptions := (dict "targetPath" $cssTarget "enableSourceMap" true "outputStyle" "compressed") }}
+    {{- $sassTemplate := resources.Get "scss/posts/main.scss" }}
+    {{- $style := $sassTemplate | resources.ExecuteAsTemplate "main.scss" . | resources.ToCSS $cssOptions }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    {{ with .OutputFormats.Get "rss" -}}
+    <link rel="{{ .Rel }}" type="{{.MediaType.Type}}" href=" {{.Permalink}}" title="{{$.Site.Title}}" />
+    {{ end -}}
+</head>

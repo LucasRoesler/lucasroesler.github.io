@@ -1,0 +1,15 @@
+<figure class="image">
+    <picture>
+        <img
+            decoding="{{ .Get " decoding" | default "async" }}"
+            loading="lazy"
+            width="100%" height="auto"
+            {{- with(.Get "src" ) }}
+            src="{{.}}"
+            {{- end}}
+            {{ with .Get "alt" }}alt="{{.}}" {{ else }}alt="" {{ end }}>
+    </picture>
+    {{- if (.Get "title")}}
+    <figcaption class="caption">{{ .Get "title" }}</figcaption>
+    {{- end }}
+</figure>

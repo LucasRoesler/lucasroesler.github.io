@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default " en" }}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="{{ .Description }}">
+    {{ template "_internal/opengraph.html" . }}
+    {{ template "_internal/twitter_cards.html" . }}
+    {{ template "_internal/opengraph.html" . }}
+    {{ template "_internal/schema.html" . }}
+    <title>
+        {{ .Title }} &middot; {{ .Site.Title }}
+    </title>
+
+    {{- if .Params.canonicalLink }}
+    <link rel="canonical" href="{{ .Params.canonicalLink }}" />
+    {{- else }}
+    <link rel="canonical" href="{{ .Permalink }}">
+    {{- end }}
+
+    <!-- CSS -->
+    {{- $cssTarget := "css/resume.style.css" }}
+    {{- $cssOptions := (dict "targetPath" $cssTarget "enableSourceMap" true "outputStyle" "compressed") }}
+    {{- $sassTemplate := resources.Get "scss/resume/main.scss" }}
+    {{- $style := $sassTemplate | resources.ExecuteAsTemplate "main.scss" . | resources.ToCSS $cssOptions }}
+    <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+</head>
+
+<body>
+    <main class="resume">
+        <div class="resume-content markdown">
+            <div class="resume-content-wrap">
+                {{ .Content }}
+            </div>
+        </div>
+        {{ partial "posts/footer.html" . }}
+    </main>
+</body>
+
+</html>

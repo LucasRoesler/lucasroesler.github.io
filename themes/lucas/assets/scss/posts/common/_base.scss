@@ -1,0 +1,122 @@
+html, body {
+    color: $color-foreground;
+    height: 100%;
+    width: 100vw;
+    margin: 0;
+}
+
+html {
+    font-family: $sans-serif;
+    font-size: $font-size;
+    overflow-y: auto;
+}
+
+body {
+    background-color: $color-background;
+}
+
+nav {
+    background-color: $intro-color-background;
+    color: $intro-color-foreground;
+    min-height: 100vh;
+
+    a {
+        color: $intro-color-foreground;
+    }
+
+    .nav-profile {
+        text-align: center;
+    }
+
+    .nav-profile-picture {
+        height: 90px;
+        width: 90px;
+        border-radius: 90px;
+    }
+}
+
+
+.pagination {
+    list-style: none;
+    ul {
+        padding: 0;
+    }
+    li {
+        display: inline-block;
+    }
+}
+
+
+.btn {
+    width: auto;
+    height: auto;
+    border-radius: 3px;
+    padding: 8px 15px;
+    margin: 0;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.btn--default {
+    border: 1px solid $color-foreground;
+}
+
+.tag {
+    width: auto;
+    height: auto;
+    border-color: $intro-color-background;
+    border-radius: 3px;
+    padding: 8px 15px;
+    margin: 0;
+    text-decoration: none;
+    color: $intro-color-background;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.tag--small {
+    border: 1px solid $color-foreground;
+    font-size: .8rem;
+}
+
+
+.article {
+    h1, h2, h3, h4, h5, h6 {
+        font-family: "Open Sans",sans-serif;
+        font-weight: 700;
+        line-height: 1.45em;
+    }
+
+    h1, h2, h3 {
+        margin: 1em 0 1em 0;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+}
+
+a {
+    @include transition(color .2s ease-out);
+    color: $intro-color-background;
+
+    &:hover {
+        color: $intro-color-hover;
+        text-decoration: underline;
+    }
+}
+
+
+.list-nav {
+    background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url($coverimage);
+    background-color: $intro-color-background;
+}
+
+.cover-img {
+    background-color: $intro-color-background;
+}

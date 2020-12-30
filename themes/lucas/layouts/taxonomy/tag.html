@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+    {{- partial "posts/head.html" . -}}
+    <body>
+        <div class="post-list">
+            {{ partial "posts/nav.html" . }}
+            <main class="list">
+            {{- partial "posts/header.html" . -}}
+            {{ $paginator := .Paginate (where .Pages "Type" "posts") }}
+                {{ range $paginator.Pages }}
+                {{ partial "posts/summary" . }}
+                {{ end }}
+            {{ partial "posts/pagination.html" . }}
+            </main>
+        </div>
+    </body>
+</html>

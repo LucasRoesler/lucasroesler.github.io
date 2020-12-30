@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.LanguageCode | default "en" }}">
+    {{- partial "base/head.html" . -}}
+    <body>
+        {{- partial "base/header.html" . -}}
+        <main>
+            <div class="block introduction">
+                <div class="column left">
+                    {{ partial "base/portrait.html" . }}
+                </div>
+                <div class="column right">
+                    <h1>Hello.</h1>
+                    <h2>I am {{ .Site.Author.name | default "Name" }}.</h2>
+                    {{- if (fileExists "content/intro.md") -}}
+                    {{ with .Site.GetPage "/intro.md" }}{{ .Content }}{{ end }}
+                    {{- else -}}
+                    <p>Add your introduction to <code>content/intro.md</code> and <code>content/description.md</code></p>
+                    {{- end }}
+                    {{ range last 1 (where .Site.Pages.ByPublishDate "Type" "posts") }}
+                    {{ partial "posts/latest.html" . }}
+                    {{ end }}
+                    <div class="links">
+                        {{- range .Site.Menus.links.ByWeight -}}
+                        <a rel="me" href="{{ .URL | safeURL }}" title="{{ .Title }}">
+                            <span class="{{ .Params.iconset | default " fab" }} {{.Params.iconorigin | default "fa" }}-{{ .Params.icon  | default .Identifier}}"></span>
+                            <span class="link-text">{{ .Params.text }}</span>
+                        </a>
+                        {{- end -}}
+                        {{- range .Site.Menus.intro.ByWeight -}}
+                        <a rel="me" href="{{ .URL | safeURL }}" title="{{ .Title }}">
+                            <span class="{{ .Params.iconset | default " fab" }} {{.Params.iconorigin | default "fa" }}-{{ .Params.icon  | default .Identifier}}"></span>
+                            <span class="link-text">{{ .Params.text }}</span>
+                        </a>
+                        {{- end -}}
+                    </div>
+                </div>
+            </div>
+
+            {{- if (fileExists "content/description.md") -}}
+            <div class="block">
+                <div class="column left"></div>
+                <div class="column right">
+                    {{ with .Site.GetPage "/description.md" }}{{ .Content }}{{ end }}
+                </div>
+            </div>
+            {{- end -}}
+        </main>
+        {{- partial "base/footer.html" . -}}
+    </body>
+</html>

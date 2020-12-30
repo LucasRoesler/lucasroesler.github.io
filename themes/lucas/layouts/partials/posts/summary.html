@@ -1,0 +1,45 @@
+{{- $src := resources.Get (print .Params.coverImage) }}
+{{- if not $src }}
+{{- $src = .Resources.GetMatch (print .Params.coverImage) }}
+{{- end }}
+<article class="post-short" itemscope itemType="http://schema.org/BlogPosting">
+  <div class="post-short-wrap">
+    {{- with $src }}
+    {{- $thumb := .Fill "140x140"  }}
+    <a href="{{ .Permalink }}">
+      <div class="post-short-thumbnail">
+          <img
+            alt=""
+            itemprop="image"
+            src="{{ $thumb.RelPermalink }}"
+            height="{{$thumb.Height}}"
+            width="{{$thumb.Width}}"
+          />
+        </div>
+    </a>
+    {{ end }}
+    <div class="post-short-header">
+      <h1 class="post-short-title" itemprop="headline">
+        <a class="link-unstyled" href="{{ .Permalink }}">
+          {{ .Title }}
+        </a>
+      </h1>
+    </div>
+    {{ partial "posts/meta" . }}
+    <div class="post-short-excerpt" itemprop="articleBody">
+      {{ if .Params.Summary }}
+        {{ .Params.Summary | markdownify }}
+      {{ else }}
+        {{ .Summary }}
+      {{ end }}
+      <p>
+        <a href="{{ .Permalink }}" class="post-short-excerpt_link link">{{ i18n "post.read_more" }}</a>
+        {{ with .Params.readingtime }}
+          <span class="post-short-readingtime">
+            {{ printf " - %s min read" . }}
+          </span>
+        {{ end }}
+      </p>
+    </div>
+  </div>
+</article>

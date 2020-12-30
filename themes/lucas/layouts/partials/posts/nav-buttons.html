@@ -1,0 +1,24 @@
+<div class="nav-buttons main">
+    {{- range .Site.Menus.main.ByWeight -}}
+    <a class="nav-button" rel="me" href="{{ .URL | safeURL }}" title="{{ .Title }}">
+        <icon class="nav-icon {{ .Params.iconset | default " fas" }} {{.Params.iconorigin | default "fa" }}-{{ .Params.icon  | default .Identifier}}"></icon>
+        <span class="nav-text">{{ .Name }}</span>
+    </a>
+    {{- end -}}
+</div>
+<div class="nav-buttons links">
+    {{- range .Site.Menus.links.ByWeight -}}
+    <a class="nav-button" rel="me" href="{{ .URL | safeURL }}" title="{{ .Title }}">
+        <icon class="nav-icon {{ .Params.iconset | default " fab" }} {{.Params.iconorigin | default "fa" }}-{{ .Params.icon  | default .Identifier}}"></icon>
+        <span class="nav-text">{{ .Name }}</span>
+    </a>
+    {{- end -}}
+</div>
+<div class="nav-buttons misc">
+    {{- range .Site.Menus.misc.ByWeight -}}
+    <a class="nav-button" rel="me" href="{{ .URL | safeURL }}" title="{{ .Title }}">
+        <icon class="nav-icon {{ .Params.iconset | default " fas" }} {{.Params.iconorigin | default "fa" }}-{{ .Params.icon  | default .Identifier}}"></icon>
+        <span class="nav-text">{{ .Name }}</span>
+    </a>
+    {{- end -}}
+</div>
