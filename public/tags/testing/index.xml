@@ -9,10 +9,10 @@
     <lastBuildDate>Sat, 02 Feb 2019 00:00:00 +0200</lastBuildDate><atom:link href="//lucasroesler.com/tags/testing/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>When sequential tests aren&#39;t</title>
-      <link>//lucasroesler.com/2019/02/when-sequential-tests-arent/</link>
+      <link>//lucasroesler.com/posts/2019/golang-parallel-testing/</link>
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/2019/02/when-sequential-tests-arent/</guid>
+      <guid>//lucasroesler.com/posts/2019/golang-parallel-testing/</guid>
       <description>A brief reminder that go will default to testing packages in parallel</description>
     </item>
     

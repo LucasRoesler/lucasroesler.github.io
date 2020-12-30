@@ -1,0 +1,210 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="SSL Expiry Quick and Simple" />
+<meta property="og:description" content="Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like Instagram and Google, at Teem recently, and of course for myself with my own home server." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2017/ssl-expiration-checking/" />
+<meta property="article:published_time" content="2017-06-11T11:00:00-06:00" />
+<meta property="article:modified_time" content="2017-06-11T11:00:00-06:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="SSL Expiry Quick and Simple"/>
+<meta name="twitter:description" content="Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like Instagram and Google, at Teem recently, and of course for myself with my own home server."/>
+
+<meta property="og:title" content="SSL Expiry Quick and Simple" />
+<meta property="og:description" content="Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like Instagram and Google, at Teem recently, and of course for myself with my own home server." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2017/ssl-expiration-checking/" />
+<meta property="article:published_time" content="2017-06-11T11:00:00-06:00" />
+<meta property="article:modified_time" content="2017-06-11T11:00:00-06:00" />
+
+<meta itemprop="name" content="SSL Expiry Quick and Simple">
+<meta itemprop="description" content="Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like Instagram and Google, at Teem recently, and of course for myself with my own home server.">
+<meta itemprop="datePublished" content="2017-06-11T11:00:00-06:00" />
+<meta itemprop="dateModified" content="2017-06-11T11:00:00-06:00" />
+<meta itemprop="wordCount" content="1118">
+
+
+
+<meta itemprop="keywords" content="python,aws,lambda,api gateway,ssl," />
+
+
+
+    <title>
+        SSL Expiry Quick and Simple &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="//lucasroesler.com/posts/2017/ssl-expiration-checking/">
+
+    
+    <link rel="stylesheet" href="//lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/posts/2017/ssl-expiration-checking/locks.jpg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>SSL Expiry Quick and Simple</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/posts/index.xml">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like <a href="https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58">Instagram</a> and <a href="http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html">Google</a>, at <a href="http://status.teem.com/incidents/ddtys5ss4mw5">Teem recently</a>, and of course for myself with my own home server.</p>
+<figure class="image">
+    <picture>
+        <img
+            decoding="async"
+            loading="lazy"
+            width="100%" height="auto"
+            src="https://media.giphy.com/media/joV1k1sNOT5xC/giphy.gif"
+            alt="" >
+    </picture>
+    <figcaption class="caption">Everything is fine</figcaption>
+</figure>
+
+<p>I got tired of this and hacked together a tool to warn when a cert is going to expire: <a href="https://github.com/LucasRoesler/ssl-expiry-check">ssl-expiry-check</a>.</p>
+<h2 id="the-script">The script</h2>
+<p>Checking SSL expiration is actually relatively simple, all of the information is public, you just need to grab it and validate it. My little project is a Python 3 project and uses only the standard library so that it is easy to use in any Python 3 environment, in particular AWS Lambda.</p>
+<p>So, what does it take to validate an SSL cert?</p>
+<pre><code>import datetime
+import logging
+import socket
+import ssl
+
+
+logger = logging.getLogger('SSLVerify')
+
+
+def ssl_expiry_datetime(hostname: str) -&gt; datetime.datetime:
+    ssl_date_fmt = r'%b %d %H:%M:%S %Y %Z'
+
+    context = ssl.create_default_context()
+    conn = context.wrap_socket(
+        socket.socket(socket.AF_INET),
+        server_hostname=hostname,
+    )
+    # 3 second timeout because Lambda has runtime limitations
+    conn.settimeout(3.0)
+
+    logger.debug('Connect to {}'.format(hostname))
+    conn.connect((hostname, 443))
+    ssl_info = conn.getpeercert()
+    # parse the string from the certificate into a Python datetime object
+    return datetime.datetime.strptime(ssl_info['notAfter'], ssl_date_fmt)
+
+
+def ssl_valid_time_remaining(hostname: str) -&gt; datetime.timedelta:
+    &quot;&quot;&quot;Get the number of days left in a cert's lifetime.&quot;&quot;&quot;
+    expires = ssl_expiry_datetime(hostname)
+    logger.debug(
+        'SSL cert for {} expires at {}'.format(
+            hostname, expires.isoformat()
+        )
+    )
+    return expires - datetime.datetime.utcnow()
+
+
+def test_host(hostname: str, buffer_days: int=30) -&gt; str:
+    &quot;&quot;&quot;Return test message for hostname cert expiration.&quot;&quot;&quot;
+    try:
+        will_expire_in = ssl_valid_time_remaining(hostname)
+    except ssl.CertificateError as e:
+        return f'{hostname} cert error {e}'
+    except ssl.SSLError as e:
+        return f'{hostname} cert error {e}'
+    except socket.timeout as e:
+        return f'{hostname} could not connect'
+    else:
+        if will_expire_in &lt; datetime.timedelta(days=0):
+            return f'{hostname} cert will expired'
+        elif will_expire_in &lt; datetime.timedelta(days=buffer_days):
+            return f'{hostname} cert will expire in {will_expire_in}'
+        else:
+            return f'{hostname} cert is fine'
+</code></pre><p>At the core of this script is the <code>SSLSocket.getpeercert</code> method, using Python&rsquo;s <code>ssl</code> and <code>socket</code> modules, we connect to the provided <code>hostname</code> on port 443 and then <code>getpeercert</code> returns the SSL certificate as a dictionary. At this point you want the <code>notAfter</code> value.</p>
+<p>For the <code>ssl-expiry</code> tool, we parse the <code>notAfter</code> value into a <code>timedelta</code> object because we want to know if the certificate will expire soon (defaults to 30 days).</p>
+<p>If you checkout the source for <code>ssl-expiry</code> you can quickly check if a certificate is expiring soon using</p>
+<pre><code>$ echo &quot;google.com\nfacebook.com&quot; | python ssl_expiry.py
+&gt; google.com cert is fine
+&gt; facebook.com cert is fine
+</code></pre><p>Depending on your environment, you may need to explicitly call to <code>python3</code></p>
+<pre><code>$ echo &quot;google.com\nfacebook.com&quot; | python3 ssl_expiry.py
+</code></pre><h2 id="ssl-expiry-in-action">SSL Expiry in Action</h2>
+<p>At this point, you could easily create a <code>cron</code> job to run this regularly and notify you if the output contains <code>&quot;expire&quot;</code>.  This is what I did for my home server. At Teem we use <a href="https://newrelic.com/">New Relic</a> which provides an awesome tool called <a href="https://newrelic.com/synthetics">Synthetics</a> that provides a cron-like tool that allows you to ping or GET against an API on regular intervals.  It will then trigger alerts that can be forwarded to your favorite on-call to (:cough:PagerDuty:cough:) if the request fails or the response does not contain an expected sub-string. With this tool available, I decided to deploy <code>ssl-expiry</code> as an AWS Lambda function an expose it via an AWS API Gateway api.</p>
+<p>To simplify this deployment, I created a script specifically for Lambda, cleverly called <a href="https://github.com/LucasRoesler/ssl-expiry-check/blob/master/ssl_expiry_lambda.py"><code>ssl-expiry-lambda</code></a> This script simply wraps <code>ssl-expiry</code> so that the output is specialized to the format that Lambda and Gateway need so that I can</p>
+<ul>
+<li>Return a 200 if all of the requested hosts are valid for the next 30 days, or</li>
+<li>Return a 400 and the list of certificate test strings if at least one of the requested hosts is expired, will expire in the next 30 days, or is in some other way currently invalid.</li>
+</ul>
+<p>With this setup, it is very easy to use New Relic Synthetics to alert the on-call developers to any SSL certificate issues.  This also implicitly alerts us if any of the domains are inaccessible.</p>
+<p>I should note that New Relic Synthetics does have a &ldquo;Validate SSL&rdquo; option for any ping type checks that you configure.  However, this option does not include the preemptive &ldquo;will expire soon&rdquo; validation that I am looking for.</p>
+<p>Configuring Lambda and API Gateway was actually more time consuming that writing the script, mostly due to trying to get the API response just right. To deploy to Lambda, create a zip that contains <code>ssl_expiry.py</code> and <code>ssl_expiry_lambda.py</code> and then follow the normal instructions to setup and configure a Lambda function. The <code>ssl_expiry_lambda</code> will use, if they exist, two env parameters:</p>
+<ul>
+<li><code>HOSTLIST</code>: a comma separated string of <code>hostnames</code> to validate, and</li>
+<li><code>EXPIRY_BUFFER</code>: an int that represents the days prior to expiration that the script will alert for, i.e. alert if the expiration is within <code>EXPIRY_BUFFER</code> days.</li>
+</ul>
+<p>The entry point for the Lambda will be <code>ssl_expiry_lambda.main</code>.  Set the <code>HOSTLIST</code> env variable and you now have a default list of hostnames that will always be checked when calling this Lambda.</p>
+<p>AWS API Gateway was the trickiest to configure. The important parts that are not obvious from the API Gateway admin UI are as follows:</p>
+<p>You will need to create a new &ldquo;Integration Response&rdquo; for the exception that is raised when the check finds a failing or soon to fail certificate.</p>
+<p>I configured this new Integration Response with a regex of</p>
+<pre><code>.*Cert Errors.*
+</code></pre><p>and a &ldquo;Body Mapping Template&rdquo; with content type <code>application/json</code> and the template:</p>
+<pre><code>#set($inputRoot = $input.path('$'))
+$input.path('$.errorMessage')
+</code></pre><p>With this configuration, the exception raised by the <code>main</code> method will be parsed and returned as the body of the response. The HTTP status code will be a 400.</p>
+<p>Additionally, in the &ldquo;Method Request&rdquo; section, I declared URL Query String Parameters for <code>host_list</code> and <code>expiry_buffer</code>.  This is helpful for testing the API, since the AWS UI will provide form fields for setting these parameters while testing it.</p>
+<p>Finally, you should also define a &ldquo;Method Response&rdquo; for the 400 status. This can be left with all for the default empty values for response headers and response body.</p>
+<p>With all of this in place, you now have an API that with a simple GET request, will validate the SSL certificates for a list of hostnames, including a warning for when certificates are about to expire. You can now sit back and relax knowing that you will be abruptly alerted as soon as any of your certificates are even close to expiring.</p>
+<hr>
+<p>Thank you to
+<!-- raw HTML omitted -->Sam Stockton<!-- raw HTML omitted --> for the CC BY 2.0 image I used as the cover on this post.</p>
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/python/">python</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/aws/">aws</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/lambda/">lambda</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/api-gateway/">api gateway</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/ssl/">ssl</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2020 by Lucas Roesler. 
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>

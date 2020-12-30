@@ -9,19 +9,19 @@
     <lastBuildDate>Sun, 02 Apr 2017 00:00:00 -0700</lastBuildDate><atom:link href="//lucasroesler.com/tags/django/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Delete or not to delete</title>
-      <link>//lucasroesler.com/2017/04/delete-or-not-to-delete/</link>
+      <link>//lucasroesler.com/posts/2017/delete-or-not-to-delete/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/2017/04/delete-or-not-to-delete/</guid>
+      <guid>//lucasroesler.com/posts/2017/delete-or-not-to-delete/</guid>
       <description>Should you remove data from the database or simply mark it as deleted?</description>
     </item>
     
     <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
-      <link>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</link>
+      <link>//lucasroesler.com/posts/2017/automatic-migration-validation/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/2017/02/zero-downtime-deploys-a-tale-of-django-migrations/</guid>
+      <guid>//lucasroesler.com/posts/2017/automatic-migration-validation/</guid>
       <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!&lt;/p&gt;
 &lt;p&gt;The most sensitive step of the deploy process is the changes to our database.
@@ -36,10 +36,10 @@ ensure that each database migration will be backwards compatible.&lt;/p&gt;</des
     
     <item>
       <title>Postgres Joins and Django Querysets</title>
-      <link>//lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</link>
+      <link>//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</link>
       <pubDate>Mon, 06 Feb 2017 20:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/2017/02/postgres-joins-and-django-querysets/</guid>
+      <guid>//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</guid>
       <description>Dealing with inefficient joins in Django&amp;rsquo;s ORM</description>
     </item>
     

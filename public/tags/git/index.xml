@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 19 Mar 2017 00:00:00 -0600</lastBuildDate><atom:link href="//lucasroesler.com/tags/git/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>How I Git</title>
-      <link>//lucasroesler.com/2017/03/how-i-git/</link>
+      <link>//lucasroesler.com/posts/2017/how-i-git/</link>
       <pubDate>Sun, 19 Mar 2017 00:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/2017/03/how-i-git/</guid>
+      <guid>//lucasroesler.com/posts/2017/how-i-git/</guid>
       <description>&lt;p&gt;Perhaps the one piece of ubiquitous technology that you will find at any new
 tech company is &lt;code&gt;git&lt;/code&gt;.  There are a couple of other technologies that you will
 probably find, like AWS, but &lt;code&gt;git&lt;/code&gt; is the only one I expect to find everywhere. It is

@@ -9,10 +9,10 @@
     <lastBuildDate>Sun, 14 Apr 2019 00:00:00 +0200</lastBuildDate><atom:link href="//lucasroesler.com/tags/kubernetes/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Developing OpenFaaS KinD-ly</title>
-      <link>//lucasroesler.com/2019/04/developing-openfaas-kind-ly/</link>
+      <link>//lucasroesler.com/posts/2019/kind-development-for-openfaas/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/2019/04/developing-openfaas-kind-ly/</guid>
+      <guid>//lucasroesler.com/posts/2019/kind-development-for-openfaas/</guid>
       <description>Creating an isolated OpenFaaS Development environment with KinD</description>
     </item>
     

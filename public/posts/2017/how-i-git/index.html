@@ -1,0 +1,330 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="How I Git" />
+<meta property="og:description" content="Perhaps the one piece of ubiquitous technology that you will find at any new
+tech company is git.  There are a couple of other technologies that you will
+probably find, like AWS, but git is the only one I expect to find everywhere. It is
+also, surprisingly, many developers number one frienemy.  I want to share some
+of my favorite tips and tweaks that I have used over the years to make it all
+friend and never my enemy." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2017/how-i-git/" />
+<meta property="article:published_time" content="2017-03-19T00:00:00-06:00" />
+<meta property="article:modified_time" content="2017-03-19T00:00:00-06:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="How I Git"/>
+<meta name="twitter:description" content="Perhaps the one piece of ubiquitous technology that you will find at any new
+tech company is git.  There are a couple of other technologies that you will
+probably find, like AWS, but git is the only one I expect to find everywhere. It is
+also, surprisingly, many developers number one frienemy.  I want to share some
+of my favorite tips and tweaks that I have used over the years to make it all
+friend and never my enemy."/>
+
+<meta property="og:title" content="How I Git" />
+<meta property="og:description" content="Perhaps the one piece of ubiquitous technology that you will find at any new
+tech company is git.  There are a couple of other technologies that you will
+probably find, like AWS, but git is the only one I expect to find everywhere. It is
+also, surprisingly, many developers number one frienemy.  I want to share some
+of my favorite tips and tweaks that I have used over the years to make it all
+friend and never my enemy." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2017/how-i-git/" />
+<meta property="article:published_time" content="2017-03-19T00:00:00-06:00" />
+<meta property="article:modified_time" content="2017-03-19T00:00:00-06:00" />
+
+<meta itemprop="name" content="How I Git">
+<meta itemprop="description" content="Perhaps the one piece of ubiquitous technology that you will find at any new
+tech company is git.  There are a couple of other technologies that you will
+probably find, like AWS, but git is the only one I expect to find everywhere. It is
+also, surprisingly, many developers number one frienemy.  I want to share some
+of my favorite tips and tweaks that I have used over the years to make it all
+friend and never my enemy.">
+<meta itemprop="datePublished" content="2017-03-19T00:00:00-06:00" />
+<meta itemprop="dateModified" content="2017-03-19T00:00:00-06:00" />
+<meta itemprop="wordCount" content="1955">
+
+
+
+<meta itemprop="keywords" content="programming,git," />
+
+
+
+    <title>
+        How I Git &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="//lucasroesler.com/posts/2017/how-i-git/">
+
+    
+    <link rel="stylesheet" href="//lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/images/topography.svg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>How I Git</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/posts/index.xml">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>Perhaps the one piece of ubiquitous technology that you will find at any new
+tech company is <code>git</code>.  There are a couple of other technologies that you will
+probably find, like AWS, but <code>git</code> is the only one I expect to find everywhere. It is
+also, surprisingly, many developers number one frienemy.  I want to share some
+of my favorite tips and tweaks that I have used over the years to make it all
+friend and never my enemy.</p>
+<p>First, let&rsquo;s get this out of the way.  I like <code>git</code>, a lot. I am one of the odd
+people that think it makes sense. I can&rsquo;t defend how complex it can sometimes
+get, but I think that by and large the design and philosophy works for me and
+I can do a lot with it.</p>
+<h1 id="best-practices">Best Practices</h1>
+<h2 id="branching">Branching</h2>
+<p>Use 2 permanent branches <code>master</code> and <code>develop</code> with ephemeral branches for
+<code>features</code> and <code>hotfix</code>es.  Many people will advocate for other branching
+strategies but I think that this model is easy to convey and easy to mentally
+track. All new code is merged into <code>develop</code> and when you are ready to release
+something you merge <code>develop</code> into <code>master</code> and then tag the HEAD of <code>master</code>.</p>
+<p>Need to fix a bug in production? Create a <code>hotfix</code> branch off of <code>master</code>,
+merge that into <code>master</code>, tag it, deploy, and then merge master back into
+<code>develop</code>.</p>
+<p>Want to build the next cool feature? Create a <code>feature</code> branch off of
+<code>develop</code> and then merge that back into <code>develop</code> when you are done and move on
+to the next hot thing.</p>
+<p>I like this pattern because it is simple and gives you quite a bit of control
+over what happens when. I have seen many people advocate for a single <code>master</code>
+branch that everything goes into. But, unless you have really good test
+coverage and are doing true continuous integration where every commit is
+deployable; the single branch policy will eventually breakdown on a team of any
+reasonable size. It simply requires a discipline that I haven&rsquo;t seen larger
+teams maintain.</p>
+<p>At Teem, we use one more semi-permanent branch we lovingly refer to as the
+<code>release</code> branch.  For each release (we release weekly) we branch off of
+develop into a branch named <code>release-&lt;version_num&gt;</code>.  We then deploy
+this to a staging server for QA to validate. Having this additional branch
+allows development of new features to keep going without causing a lot of
+headache or confusion about what is in the release and if QA finds an issue,
+how to merge the fix for that release.  Everything for that release is branched
+from and merged back into the <code>release</code> branch. Finally, when it is time to
+release, we merge the <code>release</code> branch into <code>master</code> and tag the HEAD. Backport
+<code>master</code> into <code>develop</code>, rinse and repeat.</p>
+<h2 id="branch-names">Branch names</h2>
+<p>Please, for the love of all that is good, use descriptive branch names. I
+suggest the following naming patterns</p>
+<pre><code>feature-&lt;ISSUE_ID&gt;-short-summary-of-branch
+hotfix-&lt;ISSUE_ID&gt;-short-summary-of-branch
+releasefix-&lt;ISSUE_ID&gt;-short-summary-of-branch
+</code></pre><p>Doing this allows anyone that is reviewing that branch to have some idea of
+where that merge should be going, e.g. <code>feature</code> branches merge into <code>develop</code>
+not <code>master</code>.  Having the issue id (we use JIRA, but this could be the id from
+any ticket tracker) allows people to reference what the branch should be
+addressing, be that a bug report or a user story.  And finally, a short summary
+makes the branch descriptive and easier to use. I also recommend this pattern
+because it then becomes easy to create a changelog from the git log of merges.</p>
+<h2 id="commit-messages">Commit Messages</h2>
+<p>Let&rsquo;s get the less contentious piece of advice out of the way, commit messages
+should be informative and well structured.  I have generally followed the
+advice of
+<a href="http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html">tpope</a>
+and the
+<a href="https://www.git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines"><code>git</code> handbook</a>
+but with a slight tweak. Here is a example commit message</p>
+<pre><code>Capitalized, short (50 chars or less) summary
+
+**What**
+- Bullet pointed list of changes you made.
+- Each line should be no longer than 72 characters.
+- For example:
+- Switch from o365 beta API to the v1 API
+
+**Why**
+- Again a bulleted list of reasons you made that change.
+- Again, no longer than 72 characters.
+- For example:
+- The v1 API is now stable and the beta API contains breaking changes with the
+v1 api.
+
+**Notes**
+- Any additional notes for peer reviewers or to add additional context.
+</code></pre><p>The most important thing to remember, this message is supposed to inform people
+about what is happening in the project without them needing to read every file.
+For peer review, it is important that they can recognize what is intended to be
+in the change set and what should not be there. One-line messages help no one.</p>
+<p>To help ensure that you write a half-decent commit message, <code>git</code> has a feature
+where called <code>.gitmessage</code>.  Create a file called <code>.gitmessage</code> in your home
+folder and put this in it</p>
+<pre><code>Captialized, short (50 chars or less) summary
+
+**What**
+-
+
+**Why**
+-
+
+**Notes**
+</code></pre><p><code>git</code> will now use that as the template/initial text in all of your commit
+messages.</p>
+<p>Note, it will not have any impact on specifying the commit message when using
+<code>git -m</code>.</p>
+<h2 id="commits">Commits</h2>
+<p>Something that is probably not so contentious: I believe in
+committing frequently.  And now something slightly more contentious: I believe
+in using rebase to create a sensible history that makes something like
+<code>cherry-pick</code> simple to use. I generally believe that you should work on small
+chunks of code that can be reasonably described in a single commit with one or
+two comments in the &ldquo;What&rdquo; section of my commit message. I also believe that
+you should break coding style fixes, e.g PEP8 fixes, into separate commits so
+that they can be reviewed separately. To actually make all of these ideas play
+nicely together I use rebase frequently. I squash my frequent small commit into
+larger (but still fairly small) semantic pieces of history, so my git log will
+go from something like this</p>
+<pre><code>sha1 - &quot;Add new contact method&quot;
+sha2 - &quot;Fix typo in contact method&quot;
+sha3 - &quot;Add new unit test&quot;
+sha4 - &quot;Fix bug found by unit test&quot;
+sha5 - &quot;Fix PEP8 issues with imports&quot;
+sha6 - &quot;Fix PEP8 issues with line lengths&quot;
+</code></pre><p>to something like this</p>
+<pre><code>sha1' - &quot;Add new contact method and unit test&quot;
+sha2' - &quot;Fix PEP8 issues&quot;
+</code></pre><p>This history makes it easy to cherry-pick or revert the new feature and it
+makes it easier for peer reviewers to review the logic change in <code>sah1'</code>
+independently of the potentially noisy and distracting PEP8 changes in <code>sha2'</code>.
+To do this I make heavy use <code>git rebase -i</code> to selectively squash commits.  I
+have also created an aliases called <code>git fixup</code> that will simply squash my
+staged changes into my previous commit. More on aliases later.</p>
+<h2 id="on-rebasing">On rebasing</h2>
+<p>I do not intend to give a full defense of rebasing here. I will say this; if
+you are not comfortable with <code>git</code>, then rebasing may not be for you.  Almost
+everything else you do in <code>git</code> is fairly safe, there is a way to recover from
+what you are doing, this is why I like and trust <code>git</code>.  However, <code>rebase</code> is
+one of those commands that is not always recoverable and you often have to
+simply live with the end results. With that said, if you are using rebase
+especially if you are using <code>pull -r</code>, which is a standard pull that uses
+rebase instead of merge, then you must enable and configure the <code>rerere</code>
+feature. Quick, update your <code>~/.gitconfig</code> to have</p>
+<pre><code>[rerere]
+    enabled = 1
+    autoupdate = 1
+</code></pre><p>you will thank me. From the <a href="https://git-scm.com/blog/2010/03/08/rerere.html">git
+book</a>:</p>
+<blockquote>
+<p>The name stands for &ldquo;reuse recorded resolution&rdquo; and as the name implies, it
+allows you to ask Git to remember how you&rsquo;ve resolved a hunk conflict so
+that the next time it sees the same conflict, Git can automatically resolve
+it for you.</p>
+</blockquote>
+<p>Basically, while you are rebasing, if you have a conflict that you resolve, git
+will now remember that resolution and automatically apply it again in the
+future.  This is huge for <code>git pull -r</code>, which will often replay the same
+section of your history and therefore run into the same conflict over and over.
+Honestly, I don&rsquo;t think rebase is usable without enabling <code>rerere</code>.</p>
+<h1 id="aliases">Aliases</h1>
+<p>Any post on <code>git</code> can not be complete without a list of handy-dandy aliases and
+commands.  So, here are mine.  I have roughly 3 categories of aliases: audit
+and cleanup, historical logging, and commit helpers.</p>
+<h2 id="audit-and-cleanup">Audit and cleanup</h2>
+<p>The following commands help me clean up old branches</p>
+<pre><code>audit = !git branch --merged | grep -v '\*\|master\|develop\|release-'
+clean-audit = !git branch --merged | grep -v '\*\|master\|develop\|release-' | xargs -n 1 git branch -d
+b = !git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'
+trim = !git reflog expire --expire=now --all &amp;&amp; git gc --prune=now
+</code></pre><p>I use <code>audit</code> and <code>clean-audit</code> the most frequently.  <code>audit</code> simply lists my
+local branches that have already been merged (except for <code>master</code>, <code>develop</code>,
+and the <code>release</code> branches) and hence are not needed anymore. <code>clean-audit</code>
+simply extends that command to delete the listed branches.</p>
+<p>The <code>b</code> alias prints a summary of all local branches, it looks likes this</p>
+<pre><code>Fri Mar 17 16:19:24 2017 -0600	4d2a351	master
+Fri Mar 17 15:08:31 2017 -0600	d9ce23e	release-17.12.01
+Fri Mar 17 13:21:34 2017 -0600	a5d5f73	develop
+</code></pre><p>I use <code>trim</code> pretty sparingly. It simply cleans up old branch pointers that are
+not being used as of &ldquo;now&rdquo;.  This can be useful to reclaim some space after you
+do <code>clean-audit</code>.  I only recommend this command if you have OCD.</p>
+<h2 id="historical-logging">Historical Logging</h2>
+<p>The following commands will print your <code>git log</code> in fun, potentially
+informative, ways:</p>
+<pre><code>graph = log --graph --oneline --decorate --all
+l = log --pretty=format:%C(yellow)%h\ %ad%Cred%d\ %Creset%s%Cblue\ [%cn] --decorate --date=short
+ll = log --pretty=format:%C(yellow)%h%Cred%d\ %Creset%s%Cblue\ [%cn] --decorate --numstat
+</code></pre><p>Assuming that you and your team are writing good summary lines in your commit
+messages, these commands can be used to quickly find when a certain commit
+happened.  I don&rsquo;t use these frequently, but they have been useful when trying
+to find when something happened in the repo.  <code>git l</code> is great a really short
+summary of the history, e.g.</p>
+<pre><code>af1f3ec 2017-03-05 (HEAD -&gt; source-hugo, origin/source-hugo) Site rebuild Sun Mar  5 13:53:22 MST 2017 [Lucas Roesler]
+ddfdd9d 2017-03-05 Post new spring hefe beer post [Lucas Roesler]
+e5bd906 2017-02-25 Site rebuild Sat Feb 25 13:33:12 MST 2017 [Lucas Roesler]
+bd21f27 2017-02-25 Add a reading list page [Lucas Roesler]
+dad0fbb 2017-02-18 Site rebuild Sat Feb 18 20:20:50 MST 2017 [Lucas Roesler]
+</code></pre><p>If you need a little more detail, <code>git ll</code> will show you the change stats as
+well as the summary that you get in <code>git l</code>, e.g.</p>
+<pre><code>af1f3ec (HEAD -&gt; source-hugo, origin/source-hugo) Site rebuild Sun Mar  5 13:53:22 MST 2017 [Lucas Roesler]
+21      1       public/2017/01/hello/index.html
+21      1       public/2017/01/my-management-philosophy/index.html
+21      1       public/2017/01/spicy-winter-porter/index.html
+</code></pre><h2 id="commit-helpers">Commit helpers</h2>
+<p>I only have one alias related to commits <code>fixup</code></p>
+<pre><code>fixup=!git commit --amend
+</code></pre><p>This command will take your staged changes and immediately squash them into the
+previous commit.  This is great for fixing small typos and simply reduces the
+amount of time I need to spend in <code>rebase</code>. This is by far my most frequently
+used alias.</p>
+<h2 id="adding-aliases">Adding aliases</h2>
+<p>Adding these aliases to your system is pretty simple. In your <code>~/.gitconfig</code>
+file, add or update the <code>[alias]</code> section with the snippets I shared above. My
+config file looks like</p>
+<pre><code>[alias]
+    fixup=!git commit --amend
+
+    # cleanup old branches
+    audit = &quot;!git branch --merged | grep -v '\\*\\|master\\|develop\\|release-'&quot;
+    clean-audit = &quot;!git branch --merged | grep -v '\\*\\|master\\|develop\\|release-' | xargs -n 1 git branch -d&quot;
+</code></pre><h1 id="summary">Summary</h1>
+<p>Git is a powerful tool, one of my favorites. I like a semantic git logs, so I
+use rebase. You don&rsquo;t have to do this. But, you better write good commit
+messages :)</p>
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/programming/">programming</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/git/">git</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2020 by Lucas Roesler. 
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>misc on Lucas Roesler</title>
+    <link>//lucasroesler.com/tags/misc/</link>
+    <description>Recent content in misc on Lucas Roesler</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 15 Jan 2017 00:00:00 -0700</lastBuildDate><atom:link href="//lucasroesler.com/tags/misc/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>hello</title>
+      <link>//lucasroesler.com/posts/2017/hello/</link>
+      <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
+      
+      <guid>//lucasroesler.com/posts/2017/hello/</guid>
+      <description>&lt;p&gt;Welcome! This is just a test post, a proof of life.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,193 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta property="og:title" content="Struct embedding for custom dev responses" />
+<meta property="og:description" content="I had to learn about Go struct embedding the other day and I wanted to document my
+fix. In my use case I wanted to add some extra information to an API response to include
+some meta data from kubernetes cluster and/or some extra error information." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2018/golang-struct-embedding/" />
+<meta property="article:published_time" content="2018-01-27T00:00:00-06:00" />
+<meta property="article:modified_time" content="2018-01-27T00:00:00-06:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Struct embedding for custom dev responses"/>
+<meta name="twitter:description" content="I had to learn about Go struct embedding the other day and I wanted to document my
+fix. In my use case I wanted to add some extra information to an API response to include
+some meta data from kubernetes cluster and/or some extra error information."/>
+
+<meta property="og:title" content="Struct embedding for custom dev responses" />
+<meta property="og:description" content="I had to learn about Go struct embedding the other day and I wanted to document my
+fix. In my use case I wanted to add some extra information to an API response to include
+some meta data from kubernetes cluster and/or some extra error information." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//lucasroesler.com/posts/2018/golang-struct-embedding/" />
+<meta property="article:published_time" content="2018-01-27T00:00:00-06:00" />
+<meta property="article:modified_time" content="2018-01-27T00:00:00-06:00" />
+
+<meta itemprop="name" content="Struct embedding for custom dev responses">
+<meta itemprop="description" content="I had to learn about Go struct embedding the other day and I wanted to document my
+fix. In my use case I wanted to add some extra information to an API response to include
+some meta data from kubernetes cluster and/or some extra error information.">
+<meta itemprop="datePublished" content="2018-01-27T00:00:00-06:00" />
+<meta itemprop="dateModified" content="2018-01-27T00:00:00-06:00" />
+<meta itemprop="wordCount" content="389">
+
+
+
+<meta itemprop="keywords" content="programming,golang," />
+
+
+
+    <title>
+        Struct embedding for custom dev responses &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="//lucasroesler.com/posts/2018/golang-struct-embedding/">
+
+    
+    <link rel="stylesheet" href="//lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/images/topography.svg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>Struct embedding for custom dev responses</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/posts/index.xml">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>I had to learn about Go struct embedding the other day and I wanted to document my
+fix. In my use case I wanted to add some extra information to an API response to include
+some meta data from kubernetes cluster and/or some extra error information.</p>
+<p>When I first implemented this particular API I was just learning Go and for simplicity
+<em>to get things done</em> I just used two structs.  For example:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    <span style="color:#a6e22e">dev</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">true</span>
+    <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">APIResponse</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">ID</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;id&#34;`</span>
+        <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;name&#34;`</span>
+    }
+
+    <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">DevAPIResponse</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">ID</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;id&#34;`</span>
+        <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;name&#34;`</span>
+        <span style="color:#a6e22e">DevData</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;devData&#34;`</span>
+    }
+
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">payloadBytes</span> []<span style="color:#66d9ef">byte</span>
+    <span style="color:#a6e22e">payload</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">APIResponse</span>{<span style="color:#a6e22e">ID</span>: <span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;sample&#34;</span>}
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">dev</span> {
+        <span style="color:#a6e22e">devPayload</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">DevAPIResponse</span> {
+            <span style="color:#a6e22e">ID</span>: <span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">ID</span>,
+            <span style="color:#a6e22e">Name</span>: <span style="color:#a6e22e">payload</span>.<span style="color:#a6e22e">Name</span>,
+            <span style="color:#a6e22e">DevData</span>: <span style="color:#e6db74">&#34;some special internal value, e.g. a k8s object id&#34;</span>,
+        }
+
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">devPayload</span>)
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">payload</span>)
+    }
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s\n&#34;</span>, <span style="color:#a6e22e">payloadBytes</span>)
+</code></pre></div><p>You can run this at <a href="https://play.golang.com/p/WAT2OKkxVq-">https://play.golang.com/p/WAT2OKkxVq-</a></p>
+<p>But, I was recently refactoring the original code and I could not stand the idea of is basically
+a duplicated struct and the need to keep them in sync.  I struggled to find a good example of
+extending a struct like this.  Plenty of toy examples that involve Dogs or Balls, but no actual
+practical  examples. So, I spent time to learn and play with Go struct embedding and ended up
+with something that looks like this</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">    <span style="color:#a6e22e">dev</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">true</span>
+    <span style="color:#66d9ef">type</span> <span style="color:#a6e22e">APIResponse</span> <span style="color:#66d9ef">struct</span> {
+        <span style="color:#a6e22e">ID</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;id&#34;`</span>
+        <span style="color:#a6e22e">Name</span> <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;name&#34;`</span>
+    }
+
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">payloadBytes</span> []<span style="color:#66d9ef">byte</span>
+    <span style="color:#a6e22e">payload</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">APIResponse</span>{<span style="color:#a6e22e">ID</span>: <span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;sample&#34;</span>}
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">dev</span> {
+        <span style="color:#a6e22e">devPayload</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">struct</span> {
+            <span style="color:#a6e22e">APIResponse</span>  <span style="color:#75715e">// embedded
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">DevData</span>  <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;devData&#34;`</span>
+        }{
+            <span style="color:#a6e22e">DevData</span>: <span style="color:#e6db74">&#34;some special internal value, e.g. a k8s object id&#34;</span>,
+        }
+        <span style="color:#a6e22e">devPayload</span>.<span style="color:#a6e22e">APIResponse</span> = <span style="color:#a6e22e">payload</span>
+
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">devPayload</span>)
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">_</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">payload</span>)
+    }
+
+    <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Println</span>(<span style="color:#a6e22e">payloadBytes</span>)
+</code></pre></div><p><a href="https://play.golang.org/p/V-qqsGazbAW">https://play.golang.org/p/V-qqsGazbAW</a></p>
+<p>If this were an actual request handler, this would actually look like</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">APiHandler</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">payloadBytes</span> []<span style="color:#66d9ef">byte</span>
+    <span style="color:#66d9ef">var</span> <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
+    <span style="color:#a6e22e">payload</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">APIResponse</span>{<span style="color:#a6e22e">ID</span>: <span style="color:#e6db74">&#34;1&#34;</span>, <span style="color:#a6e22e">Name</span>: <span style="color:#e6db74">&#34;sample&#34;</span>}
+    <span style="color:#75715e">// dev is some global flag
+</span><span style="color:#75715e"></span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">dev</span> {
+        <span style="color:#a6e22e">devPayload</span> <span style="color:#f92672">:=</span> <span style="color:#66d9ef">struct</span> {
+            <span style="color:#a6e22e">APIResponse</span>  <span style="color:#75715e">// embedded
+</span><span style="color:#75715e"></span>            <span style="color:#a6e22e">DevData</span>  <span style="color:#66d9ef">string</span> <span style="color:#e6db74">`json:&#34;devData&#34;`</span>
+        }{
+            <span style="color:#a6e22e">DevData</span>: <span style="color:#e6db74">&#34;some special internal value, e.g. a k8s object id&#34;</span>,
+        }
+        <span style="color:#a6e22e">devPayload</span>.<span style="color:#a6e22e">APIResponse</span> = <span style="color:#a6e22e">payload</span>
+
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">devPayload</span>)
+    } <span style="color:#66d9ef">else</span> {
+        <span style="color:#a6e22e">payloadBytes</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">json</span>.<span style="color:#a6e22e">Marshal</span>(<span style="color:#a6e22e">payload</span>)
+    }
+
+    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+        <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Error</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">err</span>.<span style="color:#a6e22e">Error</span>(), <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusInternalServerError</span>)
+        <span style="color:#66d9ef">return</span>
+    }
+
+    <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Header</span>().<span style="color:#a6e22e">Set</span>(<span style="color:#e6db74">&#34;Content-Type&#34;</span>, <span style="color:#e6db74">&#34;application/json&#34;</span>)
+    <span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">Write</span>(<span style="color:#a6e22e">payloadBytes</span>)
+}
+</code></pre></div><p>Hopefully someone else finds this useful.</p>
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/programming/">programming</a>
+                    
+                    <a class="tag tag--small" href="//lucasroesler.com/tags/golang/">golang</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2020 by Lucas Roesler. 
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>
