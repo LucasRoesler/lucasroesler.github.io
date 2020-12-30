@@ -2,35 +2,35 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>python on Lucas Roesler</title>
-    <link>//lucasroesler.com/tags/python/</link>
+    <link>https://lucasroesler.com/tags/python/</link>
     <description>Recent content in python on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Jun 2017 11:00:00 -0600</lastBuildDate><atom:link href="//lucasroesler.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 11 Jun 2017 11:00:00 -0600</lastBuildDate><atom:link href="https://lucasroesler.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>SSL Expiry Quick and Simple</title>
-      <link>//lucasroesler.com/posts/2017/ssl-expiration-checking/</link>
+      <link>https://lucasroesler.com/posts/2017/ssl-expiration-checking/</link>
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/ssl-expiration-checking/</guid>
+      <guid>https://lucasroesler.com/posts/2017/ssl-expiration-checking/</guid>
       <description>&lt;p&gt;Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&amp;rsquo;t last forever, we know this when we setup SSL but that doesn&amp;rsquo;t stop it from sneaking up on us.  It has happened to the big guys like &lt;a href=&#34;https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58&#34;&gt;Instagram&lt;/a&gt; and &lt;a href=&#34;http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html&#34;&gt;Google&lt;/a&gt;, at &lt;a href=&#34;http://status.teem.com/incidents/ddtys5ss4mw5&#34;&gt;Teem recently&lt;/a&gt;, and of course for myself with my own home server.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Delete or not to delete</title>
-      <link>//lucasroesler.com/posts/2017/delete-or-not-to-delete/</link>
+      <link>https://lucasroesler.com/posts/2017/delete-or-not-to-delete/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/delete-or-not-to-delete/</guid>
+      <guid>https://lucasroesler.com/posts/2017/delete-or-not-to-delete/</guid>
       <description>Should you remove data from the database or simply mark it as deleted?</description>
     </item>
     
     <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
-      <link>//lucasroesler.com/posts/2017/automatic-migration-validation/</link>
+      <link>https://lucasroesler.com/posts/2017/automatic-migration-validation/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/automatic-migration-validation/</guid>
+      <guid>https://lucasroesler.com/posts/2017/automatic-migration-validation/</guid>
       <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!&lt;/p&gt;
 &lt;p&gt;The most sensitive step of the deploy process is the changes to our database.
@@ -45,10 +45,10 @@ ensure that each database migration will be backwards compatible.&lt;/p&gt;</des
     
     <item>
       <title>Postgres Joins and Django Querysets</title>
-      <link>//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</link>
+      <link>https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</link>
       <pubDate>Mon, 06 Feb 2017 20:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</guid>
+      <guid>https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</guid>
       <description>Dealing with inefficient joins in Django&amp;rsquo;s ORM</description>
     </item>
     

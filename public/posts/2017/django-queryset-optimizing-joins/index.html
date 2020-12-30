@@ -8,7 +8,7 @@
     <meta property="og:title" content="Postgres Joins and Django Querysets" />
 <meta property="og:description" content="Dealing with inefficient joins in Django&rsquo;s ORM" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/" />
 <meta property="article:published_time" content="2017-02-06T20:00:00+00:00" />
 <meta property="article:modified_time" content="2017-02-06T20:00:00+00:00" />
 
@@ -19,7 +19,7 @@
 <meta property="og:title" content="Postgres Joins and Django Querysets" />
 <meta property="og:description" content="Dealing with inefficient joins in Django&rsquo;s ORM" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/" />
 <meta property="article:published_time" content="2017-02-06T20:00:00+00:00" />
 <meta property="article:modified_time" content="2017-02-06T20:00:00+00:00" />
 
@@ -38,10 +38,10 @@
     <title>
         Postgres Joins and Django Querysets &middot; Lucas Roesler
     </title>
-    <link rel="canonical" href="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/">
+    <link rel="canonical" href="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/">
 
     
-    <link rel="stylesheet" href="//lucasroesler.com/css/posts.style.css">
+    <link rel="stylesheet" href="https://lucasroesler.com/css/posts.style.css">
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
         integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
@@ -56,10 +56,10 @@
                 <h1>Postgres Joins and Django Querysets</h1>
             </div>
             <div class="nav--mini">
-                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/">
                     <icon class="nav-icon fas fa-home"></icon>
                 </a>
-                <a class="btn .btn--default btn--nav" href="//lucasroesler.com/posts/index.xml">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/index.xml">
                     <icon class="nav-icon fas fa-rss"></icon>
                 </a>
             </div>
@@ -177,16 +177,16 @@ like this</p>
 
 <figure class="image">
     <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAIAAACHqfpvAAAA2ElEQVR4nHzPTa6rMAyGYdsxuISbdBfsfy/sgfEN9CcxCT5qK51BJc4zf7/EPM/zNE3OufQ/GdjwBidKKSJSSmHmZVn48bjnnJl53VYiut3uROi9B8R/4/gVt9ZUdV3Xvu9TShxiFBFEjPH6yYjo7GVEJKIQAgB477nkknMmon1XAFBVMzubOI6DiFprZqaqnPMTAJxznwk7zLHbVbv&#43;5SuutTJzrdXeOMZr13XMHEIYx5HIARgi/vFtETEzEeH8fLlcLiJSawWoZwf/SikNw7Bt208AAAD//3KucCwjFQXVAAAAAElFTkSuQmCC); background-size: cover;">
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/select_related_performance_hu0a487320039f6741fd5f86628d6ab978_146867_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/select_related_performance_hu0a487320039f6741fd5f86628d6ab978_146867_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/select_related_performance_hu0a487320039f6741fd5f86628d6ab978_146867_1000x0_resize_box_2.png select_related_performance.pngw" sizes="select_related_performance.pngw" media="(max-width: 1499px)" >
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/select_related_performance_hu0a487320039f6741fd5f86628d6ab978_146867_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/select_related_performance_hu0a487320039f6741fd5f86628d6ab978_146867_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/select_related_performance_hu0a487320039f6741fd5f86628d6ab978_146867_1000x0_resize_box_2.png select_related_performance.pngw" sizes="select_related_performance.pngw" media="(max-width: 1499px)" >
         
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/select_related_performance_hu0a487320039f6741fd5f86628d6ab978_146867_1200x0_resize_box_2.png 1200w" sizes="1200w">
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/select_related_performance_hu0a487320039f6741fd5f86628d6ab978_146867_1200x0_resize_box_2.png 1200w" sizes="1200w">
         <img
             decoding="async"
             loading="lazy"
             width="500" height="165"
-            srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/select_related_performance_hu0a487320039f6741fd5f86628d6ab978_146867_500x0_resize_box_2.png"
+            srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/select_related_performance_hu0a487320039f6741fd5f86628d6ab978_146867_500x0_resize_box_2.png"
             alt="Example Performance with select_related"
             >
     </picture>
@@ -274,16 +274,16 @@ slowest API call is an order of magnitude faster than the previous call with the
 
 <figure class="image">
     <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAIAAADKYVtkAAAAjElEQVR4nHyOsRKDMAxDY8vhkpGF//877pjYMCGNesVbe/RNGvRs2bquy7L03vd9BzDPs4ikB9y9lOLuqioiRrK19roZY2zbZmYASim/V8YY53m21kSEpKkqbwBEY5qmnHNKieSXHM3In8&#43;qGimWPA0OogyApKqau9daQ661/peD4zhyztd1vQMAAP//YuxH6DNkZw0AAAAASUVORK5CYII=); background-size: cover;">
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/prefetch_related_performance_hu2458431a5aee0494e4e3fc199fbd5a7e_110715_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/prefetch_related_performance_hu2458431a5aee0494e4e3fc199fbd5a7e_110715_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/prefetch_related_performance_hu2458431a5aee0494e4e3fc199fbd5a7e_110715_1000x0_resize_box_2.png prefetch_related_performance.pngw" sizes="prefetch_related_performance.pngw" media="(max-width: 1499px)" >
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/prefetch_related_performance_hu2458431a5aee0494e4e3fc199fbd5a7e_110715_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/prefetch_related_performance_hu2458431a5aee0494e4e3fc199fbd5a7e_110715_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/prefetch_related_performance_hu2458431a5aee0494e4e3fc199fbd5a7e_110715_1000x0_resize_box_2.png prefetch_related_performance.pngw" sizes="prefetch_related_performance.pngw" media="(max-width: 1499px)" >
         
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/prefetch_related_performance_hu2458431a5aee0494e4e3fc199fbd5a7e_110715_1200x0_resize_box_2.png 1200w" sizes="1200w">
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/prefetch_related_performance_hu2458431a5aee0494e4e3fc199fbd5a7e_110715_1200x0_resize_box_2.png 1200w" sizes="1200w">
         <img
             decoding="async"
             loading="lazy"
             width="500" height="136"
-            srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/prefetch_related_performance_hu2458431a5aee0494e4e3fc199fbd5a7e_110715_500x0_resize_box_2.png"
+            srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/prefetch_related_performance_hu2458431a5aee0494e4e3fc199fbd5a7e_110715_500x0_resize_box_2.png"
             alt="Performance with prefetch_related"
             >
     </picture>
@@ -298,16 +298,16 @@ the average dropped by half!</p>
 
 <figure class="image">
     <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAFCAIAAADKYVtkAAAA30lEQVR4nHyPO0p0QRBGv3p0z/8PJooPFByMTF2Cy3Cjgpsw00DBRAZRdECh5T66b1XJRQMjD0VFX3COllJSSjln/MnnOGaRrOruERinlkX0rU7PnT20/r159XgtBSwCpHCbxtH60lqzerFanR/uA2Dm&#43;Turquau48en4fZ&#43;pxlRHAcxOQALaia1qhA4aJgCRwdE9GNCM7re2PV6cXmzVwMMBECAz0e/tc/0w1Z3WRPmTQy138r/NKnvbi9OT5bEzETfSSIcEe4ucwHMbOmLzdULwoBglsmp/5&#43;/AgAA///Jf3EaBgJnegAAAABJRU5ErkJggg==); background-size: cover;">
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/average_speed_up_hu65ce35e722f10d17c23d1773c637ad3d_29642_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/average_speed_up_hu65ce35e722f10d17c23d1773c637ad3d_29642_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/average_speed_up_hu65ce35e722f10d17c23d1773c637ad3d_29642_1000x0_resize_box_2.png average_speed_up.pngw" sizes="average_speed_up.pngw" media="(max-width: 1499px)" >
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/average_speed_up_hu65ce35e722f10d17c23d1773c637ad3d_29642_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/average_speed_up_hu65ce35e722f10d17c23d1773c637ad3d_29642_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/average_speed_up_hu65ce35e722f10d17c23d1773c637ad3d_29642_1000x0_resize_box_2.png average_speed_up.pngw" sizes="average_speed_up.pngw" media="(max-width: 1499px)" >
         
-        <source srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/average_speed_up_hu65ce35e722f10d17c23d1773c637ad3d_29642_1200x0_resize_box_2.png 1200w" sizes="1200w">
+        <source srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/average_speed_up_hu65ce35e722f10d17c23d1773c637ad3d_29642_1200x0_resize_box_2.png 1200w" sizes="1200w">
         <img
             decoding="async"
             loading="lazy"
             width="500" height="118"
-            srcset="//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/average_speed_up_hu65ce35e722f10d17c23d1773c637ad3d_29642_500x0_resize_box_2.png"
+            srcset="https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/average_speed_up_hu65ce35e722f10d17c23d1773c637ad3d_29642_500x0_resize_box_2.png"
             alt="Average reservations api call"
             >
     </picture>
@@ -329,13 +329,13 @@ small.</p>
                 <div class="post-footer-tags">
                     <span class="text-color-light text-small"></span><br />
                     
-                    <a class="tag tag--small" href="//lucasroesler.com/tags/programming/">programming</a>
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/programming/">programming</a>
                     
-                    <a class="tag tag--small" href="//lucasroesler.com/tags/django/">django</a>
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/django/">django</a>
                     
-                    <a class="tag tag--small" href="//lucasroesler.com/tags/python/">python</a>
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/python/">python</a>
                     
-                    <a class="tag tag--small" href="//lucasroesler.com/tags/postgres/">postgres</a>
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/postgres/">postgres</a>
                     
                 </div>
                 

@@ -3,352 +3,352 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>//lucasroesler.com/tags/docker/</loc>
+    <loc>https://lucasroesler.com/tags/docker/</loc>
     <lastmod>2020-12-13T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/</loc>
+    <loc>https://lucasroesler.com/</loc>
     <lastmod>2020-12-13T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2020/multipass-data-partition/</loc>
+    <loc>https://lucasroesler.com/posts/2020/multipass-data-partition/</loc>
     <lastmod>2020-12-13T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/multipass/</loc>
+    <loc>https://lucasroesler.com/tags/multipass/</loc>
     <lastmod>2020-12-13T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/</loc>
+    <loc>https://lucasroesler.com/posts/</loc>
     <lastmod>2020-12-13T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/programming/</loc>
+    <loc>https://lucasroesler.com/tags/programming/</loc>
     <lastmod>2020-12-13T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/</loc>
+    <loc>https://lucasroesler.com/tags/</loc>
     <lastmod>2020-12-13T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2019/openfaas-github-actions/</loc>
+    <loc>https://lucasroesler.com/posts/2019/openfaas-github-actions/</loc>
     <lastmod>2019-09-28T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/development/</loc>
+    <loc>https://lucasroesler.com/tags/development/</loc>
     <lastmod>2019-09-28T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/github/</loc>
+    <loc>https://lucasroesler.com/tags/github/</loc>
     <lastmod>2019-09-28T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/github-actions/</loc>
+    <loc>https://lucasroesler.com/tags/github-actions/</loc>
     <lastmod>2019-09-28T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/openfaas/</loc>
+    <loc>https://lucasroesler.com/tags/openfaas/</loc>
     <lastmod>2019-09-28T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2019/kind-development-for-openfaas/</loc>
+    <loc>https://lucasroesler.com/posts/2019/kind-development-for-openfaas/</loc>
     <lastmod>2019-04-14T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/kind/</loc>
+    <loc>https://lucasroesler.com/tags/kind/</loc>
     <lastmod>2019-04-14T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/kubernetes/</loc>
+    <loc>https://lucasroesler.com/tags/kubernetes/</loc>
     <lastmod>2019-04-14T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/golang/</loc>
+    <loc>https://lucasroesler.com/tags/golang/</loc>
     <lastmod>2019-02-02T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/testing/</loc>
+    <loc>https://lucasroesler.com/tags/testing/</loc>
     <lastmod>2019-02-02T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2019/golang-parallel-testing/</loc>
+    <loc>https://lucasroesler.com/posts/2019/golang-parallel-testing/</loc>
     <lastmod>2019-02-02T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2018/golang-server-timeouts/</loc>
+    <loc>https://lucasroesler.com/posts/2018/golang-server-timeouts/</loc>
     <lastmod>2018-07-29T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/http/</loc>
+    <loc>https://lucasroesler.com/tags/http/</loc>
     <lastmod>2018-07-29T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/long-polling/</loc>
+    <loc>https://lucasroesler.com/tags/long-polling/</loc>
     <lastmod>2018-07-29T00:00:00+02:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2018/golang-struct-embedding/</loc>
+    <loc>https://lucasroesler.com/posts/2018/golang-struct-embedding/</loc>
     <lastmod>2018-01-27T00:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/</loc>
+    <loc>https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/</loc>
     <lastmod>2017-10-09T12:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/docker-swarm/</loc>
+    <loc>https://lucasroesler.com/tags/docker-swarm/</loc>
     <lastmod>2017-10-09T12:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/berlin/</loc>
+    <loc>https://lucasroesler.com/tags/berlin/</loc>
     <lastmod>2017-08-02T11:00:00-04:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/starting-golang/</loc>
+    <loc>https://lucasroesler.com/posts/2017/starting-golang/</loc>
     <lastmod>2017-08-02T11:00:00-04:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/beer/</loc>
+    <loc>https://lucasroesler.com/tags/beer/</loc>
     <lastmod>2017-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/beer-hba-ruthless-rye-clone/</loc>
+    <loc>https://lucasroesler.com/posts/2017/beer-hba-ruthless-rye-clone/</loc>
     <lastmod>2017-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/homebrew/</loc>
+    <loc>https://lucasroesler.com/tags/homebrew/</loc>
     <lastmod>2017-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/ipa/</loc>
+    <loc>https://lucasroesler.com/tags/ipa/</loc>
     <lastmod>2017-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/rye/</loc>
+    <loc>https://lucasroesler.com/tags/rye/</loc>
     <lastmod>2017-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/summer/</loc>
+    <loc>https://lucasroesler.com/tags/summer/</loc>
     <lastmod>2017-07-08T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/orange/</loc>
+    <loc>https://lucasroesler.com/tags/orange/</loc>
     <lastmod>2017-06-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/beer-scbs-orange-honey-wheat/</loc>
+    <loc>https://lucasroesler.com/posts/2017/beer-scbs-orange-honey-wheat/</loc>
     <lastmod>2017-06-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/wheat/</loc>
+    <loc>https://lucasroesler.com/tags/wheat/</loc>
     <lastmod>2017-06-24T00:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/api-gateway/</loc>
+    <loc>https://lucasroesler.com/tags/api-gateway/</loc>
     <lastmod>2017-06-11T11:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/aws/</loc>
+    <loc>https://lucasroesler.com/tags/aws/</loc>
     <lastmod>2017-06-11T11:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/lambda/</loc>
+    <loc>https://lucasroesler.com/tags/lambda/</loc>
     <lastmod>2017-06-11T11:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/python/</loc>
+    <loc>https://lucasroesler.com/tags/python/</loc>
     <lastmod>2017-06-11T11:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/ssl/</loc>
+    <loc>https://lucasroesler.com/tags/ssl/</loc>
     <lastmod>2017-06-11T11:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/ssl-expiration-checking/</loc>
+    <loc>https://lucasroesler.com/posts/2017/ssl-expiration-checking/</loc>
     <lastmod>2017-06-11T11:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/api/</loc>
+    <loc>https://lucasroesler.com/tags/api/</loc>
     <lastmod>2017-06-05T21:22:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/rest/</loc>
+    <loc>https://lucasroesler.com/tags/rest/</loc>
     <lastmod>2017-06-05T21:22:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/api-rats-nest/</loc>
+    <loc>https://lucasroesler.com/posts/2017/api-rats-nest/</loc>
     <lastmod>2017-06-05T21:22:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/leadership/</loc>
+    <loc>https://lucasroesler.com/tags/leadership/</loc>
     <lastmod>2017-05-21T22:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/management/</loc>
+    <loc>https://lucasroesler.com/tags/management/</loc>
     <lastmod>2017-05-21T22:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/take-care-of-your-people/</loc>
+    <loc>https://lucasroesler.com/posts/2017/take-care-of-your-people/</loc>
     <lastmod>2017-05-21T22:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/culture/</loc>
+    <loc>https://lucasroesler.com/tags/culture/</loc>
     <lastmod>2017-04-22T12:16:11-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/how-we-live-the-teem-engineering-values/</loc>
+    <loc>https://lucasroesler.com/posts/2017/how-we-live-the-teem-engineering-values/</loc>
     <lastmod>2017-04-22T12:16:11-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/reviews/</loc>
+    <loc>https://lucasroesler.com/tags/reviews/</loc>
     <lastmod>2017-04-22T12:16:11-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/startup/</loc>
+    <loc>https://lucasroesler.com/tags/startup/</loc>
     <lastmod>2017-04-22T12:16:11-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/delete-or-not-to-delete/</loc>
+    <loc>https://lucasroesler.com/posts/2017/delete-or-not-to-delete/</loc>
     <lastmod>2017-04-02T00:00:00-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/django/</loc>
+    <loc>https://lucasroesler.com/tags/django/</loc>
     <lastmod>2017-04-02T00:00:00-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/git/</loc>
+    <loc>https://lucasroesler.com/tags/git/</loc>
     <lastmod>2017-03-19T00:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/how-i-git/</loc>
+    <loc>https://lucasroesler.com/posts/2017/how-i-git/</loc>
     <lastmod>2017-03-19T00:00:00-06:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/beer-spring-hefeweizen/</loc>
+    <loc>https://lucasroesler.com/posts/2017/beer-spring-hefeweizen/</loc>
     <lastmod>2017-03-05T00:00:00-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/hefeweizen/</loc>
+    <loc>https://lucasroesler.com/tags/hefeweizen/</loc>
     <lastmod>2017-03-05T00:00:00-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/automation/</loc>
+    <loc>https://lucasroesler.com/tags/automation/</loc>
     <lastmod>2017-02-20T00:00:00-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/postgres/</loc>
+    <loc>https://lucasroesler.com/tags/postgres/</loc>
     <lastmod>2017-02-20T00:00:00-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/automatic-migration-validation/</loc>
+    <loc>https://lucasroesler.com/posts/2017/automatic-migration-validation/</loc>
     <lastmod>2017-02-20T00:00:00-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</loc>
+    <loc>https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</loc>
     <lastmod>2017-02-06T20:00:00+00:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/management-philosophy/</loc>
+    <loc>https://lucasroesler.com/posts/2017/management-philosophy/</loc>
     <lastmod>2017-01-29T20:00:00-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/porter/</loc>
+    <loc>https://lucasroesler.com/tags/porter/</loc>
     <lastmod>2017-01-15T13:48:19-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/beer-spicy-winter-warmer/</loc>
+    <loc>https://lucasroesler.com/posts/2017/beer-spicy-winter-warmer/</loc>
     <lastmod>2017-01-15T13:48:19-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/posts/2017/hello/</loc>
+    <loc>https://lucasroesler.com/posts/2017/hello/</loc>
     <lastmod>2017-01-15T00:00:00-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/misc/</loc>
+    <loc>https://lucasroesler.com/tags/misc/</loc>
     <lastmod>2017-01-15T00:00:00-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/tags/test/</loc>
+    <loc>https://lucasroesler.com/tags/test/</loc>
     <lastmod>2017-01-15T00:00:00-07:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/resume/</loc>
+    <loc>https://lucasroesler.com/resume/</loc>
     <lastmod>2013-06-21T11:27:27-04:00</lastmod>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/description/</loc>
+    <loc>https://lucasroesler.com/description/</loc>
     <priority>0</priority>
   </url>
   
   <url>
-    <loc>//lucasroesler.com/intro/</loc>
+    <loc>https://lucasroesler.com/intro/</loc>
   </url>
   
 </urlset>
