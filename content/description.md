@@ -7,7 +7,7 @@ At [Contiamo GmbH][contiamo] I am a senior engineer and lead the Platform team. 
 At the [University of Connecticut][uconn] I completed my Ph.D. studying combinatorics, tilting theory, and cluster algebras with [Ralf Schiffler][ralf].
 
 
-You can find a brief guide to my research [here][research-summary]. For all of the gory details, you can find all of my mathematical papers on the [arxiv][arxiv].
+You can find a brief [guide to my research here][research-summary]. For all of the gory details, you can find all of my mathematical papers on the [arxiv][arxiv].
 
 [openfaas]: https://www.openfaas.com "Openfaas homepage"
 [contiamo]: https://contiamo.com "Contiamo GmbH homepage"

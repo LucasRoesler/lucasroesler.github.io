@@ -43,6 +43,12 @@ main {
                 margin-right: 0.5rem;
                 text-decoration: none;
 
+                @media screen and (max-width: $break-small) {
+                    display: inline-block;
+                    min-height: 48px;
+                    min-width: 48px;
+                }
+
                 .link-text {
                     font-size: $font-size;
                 }
