@@ -1,16 +1,10 @@
 ---
-categories:
-- programming
-comments: false
 date: 2017-04-02T00:00:00-07:00
-keywords:
-- python
-- django
 summary: Should you remove data from the database or simply mark it as deleted?
 tags:
+- programming
 - python
 - django
-showPagination: false
 title: Delete or not to delete
 ---
 

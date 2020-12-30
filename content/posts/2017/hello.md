@@ -4,9 +4,7 @@ title: hello
 draft: false
 tags:
 - test
-categories:
 - misc
-showPagination: false
 ---
 
 Welcome! This is just a test post, a proof of life.

@@ -1,12 +1,5 @@
 ---
-categories:
-- management
-comments: false
 date: 2017-01-29T20:00:00-07:00
-keywords:
-- python
-- django
-showPagination: false
 summary: It is a real job, be intentional with it, be a multiplier for your team, and finally reduce friction.
 tags:
 - management

@@ -1,15 +1,5 @@
 ---
-categories:
-- leadership
-draft: false
-comments: false
 date: 2017-04-22T12:16:11-06:00
-keywords:
-- culture
-- startup
-- reviews
-- leadership
-showPagination: false
 summary: How we use peer reviews to explify and reinforce our core values.
 tags:
 - culture
@@ -140,7 +130,7 @@ section has two twists.  First, we use a Fibonacci scale to rate skill levels.
 We purposefully do this to recognize that technical talent and ability is not
 linear. Skills are cumulative and it is often easy to learn the basics but then
 much hard to gain and demonstrate high level mastery.  The second twist, we
-have a little bit of fun with the scale, mostly because Dal is a huge Star Wars 
+have a little bit of fun with the scale, mostly because Dal is a huge Star Wars
 fan, by labeling each level of the scale with a title from the Jedi Academy:
 Padawan, Jedi, Jedi Knight, and Jedi Master.
 
@@ -185,7 +175,7 @@ Padawan, Jedi, Jedi Knight, and Jedi Master.
         defined problem, go into a cave with their team, and show up on the
         other side with a shippable solution.
 * How would you rate this person's people leadership?
-    * Padawan - This person is a good friend, listens well, and you trust their 
+    * Padawan - This person is a good friend, listens well, and you trust their
         advice.
     * Jedi - This person helps remove confusion, they understand how we work at
         Teem, and is a good mentor to help onboard people to become

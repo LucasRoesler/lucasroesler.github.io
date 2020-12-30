@@ -1,13 +1,8 @@
 ---
-categories:
-- programming
-comments: false
 date: 2017-03-19T00:00:00-06:00
-keywords:
-- git
-showPagination: false
 summary: A little primer and tips from how I use Git.
 tags:
+- programming
 - git
 title: How I Git
 ---
@@ -22,8 +17,8 @@ friend and never my enemy.
 
 First, let's get this out of the way.  I like `git`, a lot. I am one of the odd
 people that think it makes sense. I can't defend how complex it can sometimes
-get, but I think that by and large the design and philosophy works for me and 
-I can do a lot with it. 
+get, but I think that by and large the design and philosophy works for me and
+I can do a lot with it.
 
 # Best Practices
 
@@ -48,7 +43,7 @@ branch that everything goes into. But, unless you have really good test
 coverage and are doing true continuous integration where every commit is
 deployable; the single branch policy will eventually breakdown on a team of any
 reasonable size. It simply requires a discipline that I haven't seen larger
-teams maintain. 
+teams maintain.
 
 At Teem, we use one more semi-permanent branch we lovingly refer to as the
 `release` branch.  For each release (we release weekly) we branch off of
@@ -84,15 +79,15 @@ Let's get the less contentious piece of advice out of the way, commit messages
 should be informative and well structured.  I have generally followed the
 advice of
 [tpope](http://tbaggery.com/2008/04/19/a-note-about-git-commit-messages.html)
-and the 
-[`git` handbook](https://www.git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines) 
+and the
+[`git` handbook](https://www.git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines)
 but with a slight tweak. Here is a example commit message
 
 ```
 Capitalized, short (50 chars or less) summary
 
 **What**
-- Bullet pointed list of changes you made. 
+- Bullet pointed list of changes you made.
 - Each line should be no longer than 72 characters.
 - For example:
 - Switch from o365 beta API to the v1 API
@@ -105,7 +100,7 @@ Capitalized, short (50 chars or less) summary
 v1 api.
 
 **Notes**
-- Any additional notes for peer reviewers or to add additional context. 
+- Any additional notes for peer reviewers or to add additional context.
 ```
 
 The most important thing to remember, this message is supposed to inform people
@@ -129,22 +124,22 @@ Captialized, short (50 chars or less) summary
 **Notes**
 ```
 `git` will now use that as the template/initial text in all of your commit
-messages.  
+messages.
 
-Note, it will not have any impact on specifying the commit message when using 
+Note, it will not have any impact on specifying the commit message when using
 `git -m`.
 
 ## Commits
-Something that is probably not so contentious: I believe in 
-committing frequently.  And now something slightly more contentious: I believe 
-in using rebase to create a sensible history that makes something like 
+Something that is probably not so contentious: I believe in
+committing frequently.  And now something slightly more contentious: I believe
+in using rebase to create a sensible history that makes something like
 `cherry-pick` simple to use. I generally believe that you should work on small
 chunks of code that can be reasonably described in a single commit with one or
 two comments in the "What" section of my commit message. I also believe that
 you should break coding style fixes, e.g PEP8 fixes, into separate commits so
 that they can be reviewed separately. To actually make all of these ideas play
 nicely together I use rebase frequently. I squash my frequent small commit into
-larger (but still fairly small) semantic pieces of history, so my git log will 
+larger (but still fairly small) semantic pieces of history, so my git log will
 go from something like this
 
 ```
@@ -168,7 +163,7 @@ makes it easier for peer reviewers to review the logic change in `sah1'`
 independently of the potentially noisy and distracting PEP8 changes in `sha2'`.
 To do this I make heavy use `git rebase -i` to selectively squash commits.  I
 have also created an aliases called `git fixup` that will simply squash my
-staged changes into my previous commit. More on aliases later. 
+staged changes into my previous commit. More on aliases later.
 
 ## On rebasing
 I do not intend to give a full defense of rebasing here. I will say this; if
@@ -188,10 +183,10 @@ feature. Quick, update your `~/.gitconfig` to have
 you will thank me. From the [git
 book](https://git-scm.com/blog/2010/03/08/rerere.html):
 
->  The name stands for "reuse recorded resolution" and as the name implies, it 
->  allows you to ask Git to remember how you've resolved a hunk conflict so 
->  that the next time it sees the same conflict, Git can automatically resolve 
->  it for you. 
+>  The name stands for "reuse recorded resolution" and as the name implies, it
+>  allows you to ask Git to remember how you've resolved a hunk conflict so
+>  that the next time it sees the same conflict, Git can automatically resolve
+>  it for you.
 
 Basically, while you are rebasing, if you have a conflict that you resolve, git
 will now remember that resolution and automatically apply it again in the
@@ -216,7 +211,7 @@ trim = !git reflog expire --expire=now --all && git gc --prune=now
 I use `audit` and `clean-audit` the most frequently.  `audit` simply lists my
 local branches that have already been merged (except for `master`, `develop`,
 and the `release` branches) and hence are not needed anymore. `clean-audit`
-simply extends that command to delete the listed branches. 
+simply extends that command to delete the listed branches.
 
 The `b` alias prints a summary of all local branches, it looks likes this
 
@@ -244,7 +239,7 @@ Assuming that you and your team are writing good summary lines in your commit
 messages, these commands can be used to quickly find when a certain commit
 happened.  I don't use these frequently, but they have been useful when trying
 to find when something happened in the repo.  `git l` is great a really short
-summary of the history, e.g. 
+summary of the history, e.g.
 
 ```
 af1f3ec 2017-03-05 (HEAD -> source-hugo, origin/source-hugo) Site rebuild Sun Mar  5 13:53:22 MST 2017 [Lucas Roesler]
@@ -255,7 +250,7 @@ dad0fbb 2017-02-18 Site rebuild Sat Feb 18 20:20:50 MST 2017 [Lucas Roesler]
 ```
 
 If you need a little more detail, `git ll` will show you the change stats as
-well as the summary that you get in `git l`, e.g. 
+well as the summary that you get in `git l`, e.g.
 
 ```
 af1f3ec (HEAD -> source-hugo, origin/source-hugo) Site rebuild Sun Mar  5 13:53:22 MST 2017 [Lucas Roesler]
@@ -274,7 +269,7 @@ fixup=!git commit --amend
 This command will take your staged changes and immediately squash them into the
 previous commit.  This is great for fixing small typos and simply reduces the
 amount of time I need to spend in `rebase`. This is by far my most frequently
-used alias. 
+used alias.
 
 ## Adding aliases
 Adding these aliases to your system is pretty simple. In your `~/.gitconfig`
@@ -293,4 +288,4 @@ config file looks like
 # Summary
 Git is a powerful tool, one of my favorites. I like a semantic git logs, so I
 use rebase. You don't have to do this. But, you better write good commit
-messages :) 
+messages :)

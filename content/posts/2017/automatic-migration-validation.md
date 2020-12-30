@@ -1,24 +1,15 @@
 ---
-categories:
-- programming
-comments: false
 date: 2017-02-20T00:00:00-07:00
-keywords:
-- python
-- django
-- automation
-- postgres
-showPagination: false
 summary: How we automate the validation of our Django migrations
 tags:
 - python
 - django
 - automation
 - postgres
-title: "Zero downtime deploys: A tale of Django migrations" 
+title: "Zero downtime deploys: A tale of Django migrations"
 ---
 
-At Teem, we aim for zero down-time deploys; so, one of the most 
+At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!
 
 The most sensitive step of the deploy process is the changes to our database.
@@ -28,7 +19,7 @@ application model, load on the database for that model, and a bit of general
 experience. This obviously slows down reviews and subsequently deploys. Worse,
 it was simply too easy to miss problem migrations when depending on only peer
 reviews. To make our lives easier we created a series of validation checks to
-ensure that each database migration will be backwards compatible. 
+ensure that each database migration will be backwards compatible.
 
 <!--more-->
 ## The what
@@ -73,7 +64,7 @@ except both the old and the new for a short period of time and that any change w
 to the database should not lock up an entire table.
 
 Probably the most common change we often want to make is simply adding a new
-column to an existing model.  This can present several issues.  First, your new 
+column to an existing model.  This can present several issues.  First, your new
 column should not set a default.  In postgres, adding a column with a default will
 lock the table while it rewrites the existing rows with the default.  This can
 easily be avoided by adding the column first without the default, then adding
@@ -89,18 +80,18 @@ null otherwise Postgres will throw an error.
 Finally, the other change that we need to watch for is removing columns. This
 is a multi-step process. If you drop a column while the old models are still
 active you will get two possible errors (1) when Django tries to select on
-that column that no longer exists (which it will because it always explicitly 
-names the columns selected) or (2) attempting to insert data to a column that 
-doesn't exist anymore. To actually handle this type of model change you must 
-deploy the model change prior to running the migration.  In our process, that 
-means you must commit the model change in a release separate from the database 
+that column that no longer exists (which it will because it always explicitly
+names the columns selected) or (2) attempting to insert data to a column that
+doesn't exist anymore. To actually handle this type of model change you must
+deploy the model change prior to running the migration.  In our process, that
+means you must commit the model change in a release separate from the database
 migration.
 
 There are certainly other cases to consider, but we have found these 3 cases to
 cover the vast majority of our migration concerns. Having put these checks into
 place, we rarely have any issues with database migrations during deploy.
 
-## The how 
+## The how
 ### Getting your list of migrations
 To find the new migrations you can run the following command
 
@@ -170,5 +161,5 @@ As I mentioned earlier, there are certainly other cases that could be
 considered. Let me know if there are some additional checks I should add.
 Since we have implemented these checkes, I can't remember the last time we had
 a migration issue during a deploy so they seem to cover most of the use cases
-we run into. 
+we run into.
 
