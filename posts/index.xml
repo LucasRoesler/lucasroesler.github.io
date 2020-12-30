@@ -2,53 +2,53 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Posts on Lucas Roesler</title>
-    <link>//lucasroesler.com/posts/</link>
+    <link>https://lucasroesler.com/posts/</link>
     <description>Recent content in Posts on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Dec 2020 00:00:00 +0200</lastBuildDate><atom:link href="//lucasroesler.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Dec 2020 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/posts/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Moving the data directory of Multipass and Docker</title>
-      <link>//lucasroesler.com/posts/2020/multipass-data-partition/</link>
+      <link>https://lucasroesler.com/posts/2020/multipass-data-partition/</link>
       <pubDate>Sun, 13 Dec 2020 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/posts/2020/multipass-data-partition/</guid>
+      <guid>https://lucasroesler.com/posts/2020/multipass-data-partition/</guid>
       <description>&lt;p&gt;This weekend was my first adventure in &lt;a href=&#34;https://snapcraft.io/&#34;&gt;Snaps&lt;/a&gt;. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &amp;ldquo;disk is almost out of space&amp;rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&amp;rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Action Packed Functions</title>
-      <link>//lucasroesler.com/posts/2019/openfaas-github-actions/</link>
+      <link>https://lucasroesler.com/posts/2019/openfaas-github-actions/</link>
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/posts/2019/openfaas-github-actions/</guid>
+      <guid>https://lucasroesler.com/posts/2019/openfaas-github-actions/</guid>
       <description>A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions</description>
     </item>
     
     <item>
       <title>Developing OpenFaaS KinD-ly</title>
-      <link>//lucasroesler.com/posts/2019/kind-development-for-openfaas/</link>
+      <link>https://lucasroesler.com/posts/2019/kind-development-for-openfaas/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/posts/2019/kind-development-for-openfaas/</guid>
+      <guid>https://lucasroesler.com/posts/2019/kind-development-for-openfaas/</guid>
       <description>Creating an isolated OpenFaaS Development environment with KinD</description>
     </item>
     
     <item>
       <title>When sequential tests aren&#39;t</title>
-      <link>//lucasroesler.com/posts/2019/golang-parallel-testing/</link>
+      <link>https://lucasroesler.com/posts/2019/golang-parallel-testing/</link>
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/posts/2019/golang-parallel-testing/</guid>
+      <guid>https://lucasroesler.com/posts/2019/golang-parallel-testing/</guid>
       <description>A brief reminder that go will default to testing packages in parallel</description>
     </item>
     
     <item>
       <title>Golang long-polling: a tale of server timeouts</title>
-      <link>//lucasroesler.com/posts/2018/golang-server-timeouts/</link>
+      <link>https://lucasroesler.com/posts/2018/golang-server-timeouts/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/posts/2018/golang-server-timeouts/</guid>
+      <guid>https://lucasroesler.com/posts/2018/golang-server-timeouts/</guid>
       <description>&lt;p&gt;I recently had a week long battle implementing HTTP long-polling. As so often
 happens in long debugging session in software development, my final fix was
 one line!&lt;/p&gt;</description>
@@ -56,10 +56,10 @@ one line!&lt;/p&gt;</description>
     
     <item>
       <title>Struct embedding for custom dev responses</title>
-      <link>//lucasroesler.com/posts/2018/golang-struct-embedding/</link>
+      <link>https://lucasroesler.com/posts/2018/golang-struct-embedding/</link>
       <pubDate>Sat, 27 Jan 2018 00:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/posts/2018/golang-struct-embedding/</guid>
+      <guid>https://lucasroesler.com/posts/2018/golang-struct-embedding/</guid>
       <description>&lt;p&gt;I had to learn about Go struct embedding the other day and I wanted to document my
 fix. In my use case I wanted to add some extra information to an API response to include
 some meta data from kubernetes cluster and/or some extra error information.&lt;/p&gt;</description>
@@ -67,55 +67,55 @@ some meta data from kubernetes cluster and/or some extra error information.&lt;/
     
     <item>
       <title>Deploying a private registry in Docker Swarm</title>
-      <link>//lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/</link>
+      <link>https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/</link>
       <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/</guid>
+      <guid>https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/</guid>
       <description>&lt;p&gt;At &lt;a href=&#34;https://contiamo.com&#34;&gt;Contiamo&lt;/a&gt; I am currently working a project that will eventually integrate with &lt;a href=&#34;https://www.openfaas.com/&#34;&gt;OpenFaaS&lt;/a&gt;.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Berlin and Golang</title>
-      <link>//lucasroesler.com/posts/2017/starting-golang/</link>
+      <link>https://lucasroesler.com/posts/2017/starting-golang/</link>
       <pubDate>Wed, 02 Aug 2017 11:00:00 -0400</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/starting-golang/</guid>
+      <guid>https://lucasroesler.com/posts/2017/starting-golang/</guid>
       <description>&lt;p&gt;At the beginning of the month I left &lt;a href=&#34;https://teem.com/&#34;&gt;Teem&lt;/a&gt; I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at &lt;a href=&#34;https://www.contiamo.com/&#34;&gt;Contiamo&lt;/a&gt; and will be working on the &lt;a href=&#34;https://docs.contiamo.com/en/labs/&#34;&gt;Labs feature&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Home Brewers Association Ruthless Rye Clone</title>
-      <link>//lucasroesler.com/posts/2017/beer-hba-ruthless-rye-clone/</link>
+      <link>https://lucasroesler.com/posts/2017/beer-hba-ruthless-rye-clone/</link>
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/beer-hba-ruthless-rye-clone/</guid>
+      <guid>https://lucasroesler.com/posts/2017/beer-hba-ruthless-rye-clone/</guid>
       <description>&lt;p&gt;This recipe is inspired by the &lt;a href=&#34;https://www.homebrewersassociation.org/homebrew-recipe/sierra-nevada-ruthless-rye-clone/&#34;&gt;Seirra Nevada Ruthless Rye Clone&lt;/a&gt; written up by the Home Brewers Association.  I have adjusted it to be a partial mash recipe with about 8 lbs of grains.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Salt City Brew Supply Orange Honey Wheat</title>
-      <link>//lucasroesler.com/posts/2017/beer-scbs-orange-honey-wheat/</link>
+      <link>https://lucasroesler.com/posts/2017/beer-scbs-orange-honey-wheat/</link>
       <pubDate>Sat, 24 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/beer-scbs-orange-honey-wheat/</guid>
+      <guid>https://lucasroesler.com/posts/2017/beer-scbs-orange-honey-wheat/</guid>
       <description>&lt;p&gt;I just finished my first official &amp;ldquo;summer beer&amp;rdquo; of the year, an Orange Honey Wheat.  This one was inspire by my wife while at the store &amp;ldquo;you should do this one, it uses Utah honey!&amp;rdquo;, thank you &lt;a href=&#34;http://techlady.ninja&#34;&gt;tech lady ninja&lt;/a&gt;.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>SSL Expiry Quick and Simple</title>
-      <link>//lucasroesler.com/posts/2017/ssl-expiration-checking/</link>
+      <link>https://lucasroesler.com/posts/2017/ssl-expiration-checking/</link>
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/ssl-expiration-checking/</guid>
+      <guid>https://lucasroesler.com/posts/2017/ssl-expiration-checking/</guid>
       <description>&lt;p&gt;Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&amp;rsquo;t last forever, we know this when we setup SSL but that doesn&amp;rsquo;t stop it from sneaking up on us.  It has happened to the big guys like &lt;a href=&#34;https://thenextweb.com/apps/2015/04/30/oops-instagram-forgot-to-renew-its-ssl-certificate/#.tnw_9kCFpT58&#34;&gt;Instagram&lt;/a&gt; and &lt;a href=&#34;http://www.pcworld.com/article/2906216/expired-google-certificate-temporarily-disrupts-gmail-service.html&#34;&gt;Google&lt;/a&gt;, at &lt;a href=&#34;http://status.teem.com/incidents/ddtys5ss4mw5&#34;&gt;Teem recently&lt;/a&gt;, and of course for myself with my own home server.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Your API&#39;s rat nest</title>
-      <link>//lucasroesler.com/posts/2017/api-rats-nest/</link>
+      <link>https://lucasroesler.com/posts/2017/api-rats-nest/</link>
       <pubDate>Mon, 05 Jun 2017 21:22:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/api-rats-nest/</guid>
+      <guid>https://lucasroesler.com/posts/2017/api-rats-nest/</guid>
       <description>&lt;p&gt;Recently, I have seen several articles talking about RESTful API design.  Of
 course this is also a common topic of discussion for the engineers at Teem.  I
 want to use (and write) APIs that are easy to understand and explain and the
@@ -127,11 +127,11 @@ simpler to document and simpler to maintain and ultimately, easier to use.&lt;/p
     
     <item>
       <title>Take Care of Your People</title>
-      <link>//lucasroesler.com/posts/2017/take-care-of-your-people/</link>
+      <link>https://lucasroesler.com/posts/2017/take-care-of-your-people/</link>
       <pubDate>Sun, 21 May 2017 22:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/take-care-of-your-people/</guid>
-      <description>&lt;p&gt;When I first started this blog, I started with &lt;a href=&#34;//lucasroesler.com/posts/2017/management-philosophy/&#34;&gt;My Management Philosophy&lt;/a&gt;.  In short,&lt;/p&gt;
+      <guid>https://lucasroesler.com/posts/2017/take-care-of-your-people/</guid>
+      <description>&lt;p&gt;When I first started this blog, I started with &lt;a href=&#34;https://lucasroesler.com/posts/2017/management-philosophy/&#34;&gt;My Management Philosophy&lt;/a&gt;.  In short,&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;be a multiplier for your team and reduce friction&amp;hellip;
 Successful managers make other people better at their jobs, “multiplying”
@@ -144,10 +144,10 @@ this is that good leadership requires &lt;em&gt;empathy&lt;/em&gt; and &lt;em&gt
     
     <item>
       <title>Living Our Culture at Teem via Peer Reviews</title>
-      <link>//lucasroesler.com/posts/2017/how-we-live-the-teem-engineering-values/</link>
+      <link>https://lucasroesler.com/posts/2017/how-we-live-the-teem-engineering-values/</link>
       <pubDate>Sat, 22 Apr 2017 12:16:11 -0600</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/how-we-live-the-teem-engineering-values/</guid>
+      <guid>https://lucasroesler.com/posts/2017/how-we-live-the-teem-engineering-values/</guid>
       <description>&lt;p&gt;About a year ago we set down to document the core values of the engineering at
 Teem. After a lot of discussion we narrowed it to three core ideas&lt;/p&gt;
 &lt;ol&gt;
@@ -163,19 +163,19 @@ and that measuring commitment to our core values is even harder.&lt;/p&gt;</desc
     
     <item>
       <title>Delete or not to delete</title>
-      <link>//lucasroesler.com/posts/2017/delete-or-not-to-delete/</link>
+      <link>https://lucasroesler.com/posts/2017/delete-or-not-to-delete/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/delete-or-not-to-delete/</guid>
+      <guid>https://lucasroesler.com/posts/2017/delete-or-not-to-delete/</guid>
       <description>Should you remove data from the database or simply mark it as deleted?</description>
     </item>
     
     <item>
       <title>How I Git</title>
-      <link>//lucasroesler.com/posts/2017/how-i-git/</link>
+      <link>https://lucasroesler.com/posts/2017/how-i-git/</link>
       <pubDate>Sun, 19 Mar 2017 00:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/how-i-git/</guid>
+      <guid>https://lucasroesler.com/posts/2017/how-i-git/</guid>
       <description>&lt;p&gt;Perhaps the one piece of ubiquitous technology that you will find at any new
 tech company is &lt;code&gt;git&lt;/code&gt;.  There are a couple of other technologies that you will
 probably find, like AWS, but &lt;code&gt;git&lt;/code&gt; is the only one I expect to find everywhere. It is
@@ -186,20 +186,20 @@ friend and never my enemy.&lt;/p&gt;</description>
     
     <item>
       <title>A spring Hefe</title>
-      <link>//lucasroesler.com/posts/2017/beer-spring-hefeweizen/</link>
+      <link>https://lucasroesler.com/posts/2017/beer-spring-hefeweizen/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/beer-spring-hefeweizen/</guid>
+      <guid>https://lucasroesler.com/posts/2017/beer-spring-hefeweizen/</guid>
       <description>&lt;p&gt;A traditional Bavarian Hefeweizen: medium body, cloudy, malty, and spicy,
 with a smooth mouth-feel and dense, whipped-cream head.&lt;/p&gt;</description>
     </item>
     
     <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
-      <link>//lucasroesler.com/posts/2017/automatic-migration-validation/</link>
+      <link>https://lucasroesler.com/posts/2017/automatic-migration-validation/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/automatic-migration-validation/</guid>
+      <guid>https://lucasroesler.com/posts/2017/automatic-migration-validation/</guid>
       <description>&lt;p&gt;At Teem, we aim for zero down-time deploys; so, one of the most
 important things we must validate is that things will not break mid-deploy!&lt;/p&gt;
 &lt;p&gt;The most sensitive step of the deploy process is the changes to our database.
@@ -214,19 +214,19 @@ ensure that each database migration will be backwards compatible.&lt;/p&gt;</des
     
     <item>
       <title>Postgres Joins and Django Querysets</title>
-      <link>//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</link>
+      <link>https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</link>
       <pubDate>Mon, 06 Feb 2017 20:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</guid>
+      <guid>https://lucasroesler.com/posts/2017/django-queryset-optimizing-joins/</guid>
       <description>Dealing with inefficient joins in Django&amp;rsquo;s ORM</description>
     </item>
     
     <item>
       <title>My Management Philosophy</title>
-      <link>//lucasroesler.com/posts/2017/management-philosophy/</link>
+      <link>https://lucasroesler.com/posts/2017/management-philosophy/</link>
       <pubDate>Sun, 29 Jan 2017 20:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/management-philosophy/</guid>
+      <guid>https://lucasroesler.com/posts/2017/management-philosophy/</guid>
       <description>&lt;p&gt;The other day I was having lunch with a friend when he asked what resources I
 use to learn about management and tech leadership in general. I will share
 some recommendations at the end, but my answer to him got me thinking about
@@ -237,10 +237,10 @@ want to share here.&lt;/p&gt;
     
     <item>
       <title>Spicy Winter Porter</title>
-      <link>//lucasroesler.com/posts/2017/beer-spicy-winter-warmer/</link>
+      <link>https://lucasroesler.com/posts/2017/beer-spicy-winter-warmer/</link>
       <pubDate>Sun, 15 Jan 2017 13:48:19 -0700</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/beer-spicy-winter-warmer/</guid>
+      <guid>https://lucasroesler.com/posts/2017/beer-spicy-winter-warmer/</guid>
       <description>&lt;p&gt;I just finished my winter beer.  I usually do one dark spicy beer for the winter
 season. Last year was the &amp;ldquo;Better Not Pout Stout&amp;rdquo;, this year is the less
 excitingly named &amp;ldquo;Spicy Winter Porter&amp;rdquo;.&lt;/p&gt;</description>
@@ -248,10 +248,10 @@ excitingly named &amp;ldquo;Spicy Winter Porter&amp;rdquo;.&lt;/p&gt;</descripti
     
     <item>
       <title>hello</title>
-      <link>//lucasroesler.com/posts/2017/hello/</link>
+      <link>https://lucasroesler.com/posts/2017/hello/</link>
       <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/hello/</guid>
+      <guid>https://lucasroesler.com/posts/2017/hello/</guid>
       <description>&lt;p&gt;Welcome! This is just a test post, a proof of life.&lt;/p&gt;</description>
     </item>
     

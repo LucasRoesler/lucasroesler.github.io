@@ -2,386 +2,386 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>Tags on Lucas Roesler</title>
-    <link>//lucasroesler.com/tags/</link>
+    <link>https://lucasroesler.com/tags/</link>
     <description>Recent content in Tags on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 13 Dec 2020 00:00:00 +0200</lastBuildDate><atom:link href="//lucasroesler.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 13 Dec 2020 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>docker</title>
-      <link>//lucasroesler.com/tags/docker/</link>
+      <link>https://lucasroesler.com/tags/docker/</link>
       <pubDate>Sun, 13 Dec 2020 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/docker/</guid>
+      <guid>https://lucasroesler.com/tags/docker/</guid>
       <description></description>
     </item>
     
     <item>
       <title>multipass</title>
-      <link>//lucasroesler.com/tags/multipass/</link>
+      <link>https://lucasroesler.com/tags/multipass/</link>
       <pubDate>Sun, 13 Dec 2020 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/multipass/</guid>
+      <guid>https://lucasroesler.com/tags/multipass/</guid>
       <description></description>
     </item>
     
     <item>
       <title>programming</title>
-      <link>//lucasroesler.com/tags/programming/</link>
+      <link>https://lucasroesler.com/tags/programming/</link>
       <pubDate>Sun, 13 Dec 2020 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/programming/</guid>
+      <guid>https://lucasroesler.com/tags/programming/</guid>
       <description></description>
     </item>
     
     <item>
       <title>development</title>
-      <link>//lucasroesler.com/tags/development/</link>
+      <link>https://lucasroesler.com/tags/development/</link>
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/development/</guid>
+      <guid>https://lucasroesler.com/tags/development/</guid>
       <description></description>
     </item>
     
     <item>
       <title>github</title>
-      <link>//lucasroesler.com/tags/github/</link>
+      <link>https://lucasroesler.com/tags/github/</link>
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/github/</guid>
+      <guid>https://lucasroesler.com/tags/github/</guid>
       <description></description>
     </item>
     
     <item>
       <title>github actions</title>
-      <link>//lucasroesler.com/tags/github-actions/</link>
+      <link>https://lucasroesler.com/tags/github-actions/</link>
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/github-actions/</guid>
+      <guid>https://lucasroesler.com/tags/github-actions/</guid>
       <description></description>
     </item>
     
     <item>
       <title>openfaas</title>
-      <link>//lucasroesler.com/tags/openfaas/</link>
+      <link>https://lucasroesler.com/tags/openfaas/</link>
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/openfaas/</guid>
+      <guid>https://lucasroesler.com/tags/openfaas/</guid>
       <description></description>
     </item>
     
     <item>
       <title>kind</title>
-      <link>//lucasroesler.com/tags/kind/</link>
+      <link>https://lucasroesler.com/tags/kind/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/kind/</guid>
+      <guid>https://lucasroesler.com/tags/kind/</guid>
       <description></description>
     </item>
     
     <item>
       <title>kubernetes</title>
-      <link>//lucasroesler.com/tags/kubernetes/</link>
+      <link>https://lucasroesler.com/tags/kubernetes/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/kubernetes/</guid>
+      <guid>https://lucasroesler.com/tags/kubernetes/</guid>
       <description></description>
     </item>
     
     <item>
       <title>golang</title>
-      <link>//lucasroesler.com/tags/golang/</link>
+      <link>https://lucasroesler.com/tags/golang/</link>
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/golang/</guid>
+      <guid>https://lucasroesler.com/tags/golang/</guid>
       <description></description>
     </item>
     
     <item>
       <title>testing</title>
-      <link>//lucasroesler.com/tags/testing/</link>
+      <link>https://lucasroesler.com/tags/testing/</link>
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/testing/</guid>
+      <guid>https://lucasroesler.com/tags/testing/</guid>
       <description></description>
     </item>
     
     <item>
       <title>http</title>
-      <link>//lucasroesler.com/tags/http/</link>
+      <link>https://lucasroesler.com/tags/http/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/http/</guid>
+      <guid>https://lucasroesler.com/tags/http/</guid>
       <description></description>
     </item>
     
     <item>
       <title>long-polling</title>
-      <link>//lucasroesler.com/tags/long-polling/</link>
+      <link>https://lucasroesler.com/tags/long-polling/</link>
       <pubDate>Sun, 29 Jul 2018 00:00:00 +0200</pubDate>
       
-      <guid>//lucasroesler.com/tags/long-polling/</guid>
+      <guid>https://lucasroesler.com/tags/long-polling/</guid>
       <description></description>
     </item>
     
     <item>
       <title>docker swarm</title>
-      <link>//lucasroesler.com/tags/docker-swarm/</link>
+      <link>https://lucasroesler.com/tags/docker-swarm/</link>
       <pubDate>Mon, 09 Oct 2017 12:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/tags/docker-swarm/</guid>
+      <guid>https://lucasroesler.com/tags/docker-swarm/</guid>
       <description></description>
     </item>
     
     <item>
       <title>berlin</title>
-      <link>//lucasroesler.com/tags/berlin/</link>
+      <link>https://lucasroesler.com/tags/berlin/</link>
       <pubDate>Wed, 02 Aug 2017 11:00:00 -0400</pubDate>
       
-      <guid>//lucasroesler.com/tags/berlin/</guid>
+      <guid>https://lucasroesler.com/tags/berlin/</guid>
       <description></description>
     </item>
     
     <item>
       <title>beer</title>
-      <link>//lucasroesler.com/tags/beer/</link>
+      <link>https://lucasroesler.com/tags/beer/</link>
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/tags/beer/</guid>
+      <guid>https://lucasroesler.com/tags/beer/</guid>
       <description></description>
     </item>
     
     <item>
       <title>homebrew</title>
-      <link>//lucasroesler.com/tags/homebrew/</link>
+      <link>https://lucasroesler.com/tags/homebrew/</link>
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/tags/homebrew/</guid>
+      <guid>https://lucasroesler.com/tags/homebrew/</guid>
       <description></description>
     </item>
     
     <item>
       <title>IPA</title>
-      <link>//lucasroesler.com/tags/ipa/</link>
+      <link>https://lucasroesler.com/tags/ipa/</link>
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/tags/ipa/</guid>
+      <guid>https://lucasroesler.com/tags/ipa/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rye</title>
-      <link>//lucasroesler.com/tags/rye/</link>
+      <link>https://lucasroesler.com/tags/rye/</link>
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/tags/rye/</guid>
+      <guid>https://lucasroesler.com/tags/rye/</guid>
       <description></description>
     </item>
     
     <item>
       <title>summer</title>
-      <link>//lucasroesler.com/tags/summer/</link>
+      <link>https://lucasroesler.com/tags/summer/</link>
       <pubDate>Sat, 08 Jul 2017 00:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/tags/summer/</guid>
+      <guid>https://lucasroesler.com/tags/summer/</guid>
       <description></description>
     </item>
     
     <item>
       <title>orange</title>
-      <link>//lucasroesler.com/tags/orange/</link>
+      <link>https://lucasroesler.com/tags/orange/</link>
       <pubDate>Sat, 24 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/tags/orange/</guid>
+      <guid>https://lucasroesler.com/tags/orange/</guid>
       <description></description>
     </item>
     
     <item>
       <title>wheat</title>
-      <link>//lucasroesler.com/tags/wheat/</link>
+      <link>https://lucasroesler.com/tags/wheat/</link>
       <pubDate>Sat, 24 Jun 2017 00:00:00 +0000</pubDate>
       
-      <guid>//lucasroesler.com/tags/wheat/</guid>
+      <guid>https://lucasroesler.com/tags/wheat/</guid>
       <description></description>
     </item>
     
     <item>
       <title>api gateway</title>
-      <link>//lucasroesler.com/tags/api-gateway/</link>
+      <link>https://lucasroesler.com/tags/api-gateway/</link>
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/api-gateway/</guid>
+      <guid>https://lucasroesler.com/tags/api-gateway/</guid>
       <description></description>
     </item>
     
     <item>
       <title>aws</title>
-      <link>//lucasroesler.com/tags/aws/</link>
+      <link>https://lucasroesler.com/tags/aws/</link>
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/aws/</guid>
+      <guid>https://lucasroesler.com/tags/aws/</guid>
       <description></description>
     </item>
     
     <item>
       <title>lambda</title>
-      <link>//lucasroesler.com/tags/lambda/</link>
+      <link>https://lucasroesler.com/tags/lambda/</link>
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/lambda/</guid>
+      <guid>https://lucasroesler.com/tags/lambda/</guid>
       <description></description>
     </item>
     
     <item>
       <title>python</title>
-      <link>//lucasroesler.com/tags/python/</link>
+      <link>https://lucasroesler.com/tags/python/</link>
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/python/</guid>
+      <guid>https://lucasroesler.com/tags/python/</guid>
       <description></description>
     </item>
     
     <item>
       <title>ssl</title>
-      <link>//lucasroesler.com/tags/ssl/</link>
+      <link>https://lucasroesler.com/tags/ssl/</link>
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/ssl/</guid>
+      <guid>https://lucasroesler.com/tags/ssl/</guid>
       <description></description>
     </item>
     
     <item>
       <title>api</title>
-      <link>//lucasroesler.com/tags/api/</link>
+      <link>https://lucasroesler.com/tags/api/</link>
       <pubDate>Mon, 05 Jun 2017 21:22:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/api/</guid>
+      <guid>https://lucasroesler.com/tags/api/</guid>
       <description></description>
     </item>
     
     <item>
       <title>rest</title>
-      <link>//lucasroesler.com/tags/rest/</link>
+      <link>https://lucasroesler.com/tags/rest/</link>
       <pubDate>Mon, 05 Jun 2017 21:22:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/rest/</guid>
+      <guid>https://lucasroesler.com/tags/rest/</guid>
       <description></description>
     </item>
     
     <item>
       <title>leadership</title>
-      <link>//lucasroesler.com/tags/leadership/</link>
+      <link>https://lucasroesler.com/tags/leadership/</link>
       <pubDate>Sun, 21 May 2017 22:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/leadership/</guid>
+      <guid>https://lucasroesler.com/tags/leadership/</guid>
       <description></description>
     </item>
     
     <item>
       <title>management</title>
-      <link>//lucasroesler.com/tags/management/</link>
+      <link>https://lucasroesler.com/tags/management/</link>
       <pubDate>Sun, 21 May 2017 22:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/management/</guid>
+      <guid>https://lucasroesler.com/tags/management/</guid>
       <description></description>
     </item>
     
     <item>
       <title>culture</title>
-      <link>//lucasroesler.com/tags/culture/</link>
+      <link>https://lucasroesler.com/tags/culture/</link>
       <pubDate>Sat, 22 Apr 2017 12:16:11 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/culture/</guid>
+      <guid>https://lucasroesler.com/tags/culture/</guid>
       <description></description>
     </item>
     
     <item>
       <title>reviews</title>
-      <link>//lucasroesler.com/tags/reviews/</link>
+      <link>https://lucasroesler.com/tags/reviews/</link>
       <pubDate>Sat, 22 Apr 2017 12:16:11 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/reviews/</guid>
+      <guid>https://lucasroesler.com/tags/reviews/</guid>
       <description></description>
     </item>
     
     <item>
       <title>startup</title>
-      <link>//lucasroesler.com/tags/startup/</link>
+      <link>https://lucasroesler.com/tags/startup/</link>
       <pubDate>Sat, 22 Apr 2017 12:16:11 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/startup/</guid>
+      <guid>https://lucasroesler.com/tags/startup/</guid>
       <description></description>
     </item>
     
     <item>
       <title>django</title>
-      <link>//lucasroesler.com/tags/django/</link>
+      <link>https://lucasroesler.com/tags/django/</link>
       <pubDate>Sun, 02 Apr 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/tags/django/</guid>
+      <guid>https://lucasroesler.com/tags/django/</guid>
       <description></description>
     </item>
     
     <item>
       <title>git</title>
-      <link>//lucasroesler.com/tags/git/</link>
+      <link>https://lucasroesler.com/tags/git/</link>
       <pubDate>Sun, 19 Mar 2017 00:00:00 -0600</pubDate>
       
-      <guid>//lucasroesler.com/tags/git/</guid>
+      <guid>https://lucasroesler.com/tags/git/</guid>
       <description></description>
     </item>
     
     <item>
       <title>hefeweizen</title>
-      <link>//lucasroesler.com/tags/hefeweizen/</link>
+      <link>https://lucasroesler.com/tags/hefeweizen/</link>
       <pubDate>Sun, 05 Mar 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/tags/hefeweizen/</guid>
+      <guid>https://lucasroesler.com/tags/hefeweizen/</guid>
       <description></description>
     </item>
     
     <item>
       <title>automation</title>
-      <link>//lucasroesler.com/tags/automation/</link>
+      <link>https://lucasroesler.com/tags/automation/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/tags/automation/</guid>
+      <guid>https://lucasroesler.com/tags/automation/</guid>
       <description></description>
     </item>
     
     <item>
       <title>postgres</title>
-      <link>//lucasroesler.com/tags/postgres/</link>
+      <link>https://lucasroesler.com/tags/postgres/</link>
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/tags/postgres/</guid>
+      <guid>https://lucasroesler.com/tags/postgres/</guid>
       <description></description>
     </item>
     
     <item>
       <title>porter</title>
-      <link>//lucasroesler.com/tags/porter/</link>
+      <link>https://lucasroesler.com/tags/porter/</link>
       <pubDate>Sun, 15 Jan 2017 13:48:19 -0700</pubDate>
       
-      <guid>//lucasroesler.com/tags/porter/</guid>
+      <guid>https://lucasroesler.com/tags/porter/</guid>
       <description></description>
     </item>
     
     <item>
       <title>misc</title>
-      <link>//lucasroesler.com/tags/misc/</link>
+      <link>https://lucasroesler.com/tags/misc/</link>
       <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/tags/misc/</guid>
+      <guid>https://lucasroesler.com/tags/misc/</guid>
       <description></description>
     </item>
     
     <item>
       <title>test</title>
-      <link>//lucasroesler.com/tags/test/</link>
+      <link>https://lucasroesler.com/tags/test/</link>
       <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
       
-      <guid>//lucasroesler.com/tags/test/</guid>
+      <guid>https://lucasroesler.com/tags/test/</guid>
       <description></description>
     </item>
     

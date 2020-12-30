@@ -2,17 +2,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>startup on Lucas Roesler</title>
-    <link>//lucasroesler.com/tags/startup/</link>
+    <link>https://lucasroesler.com/tags/startup/</link>
     <description>Recent content in startup on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 22 Apr 2017 12:16:11 -0600</lastBuildDate><atom:link href="//lucasroesler.com/tags/startup/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 22 Apr 2017 12:16:11 -0600</lastBuildDate><atom:link href="https://lucasroesler.com/tags/startup/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Living Our Culture at Teem via Peer Reviews</title>
-      <link>//lucasroesler.com/posts/2017/how-we-live-the-teem-engineering-values/</link>
+      <link>https://lucasroesler.com/posts/2017/how-we-live-the-teem-engineering-values/</link>
       <pubDate>Sat, 22 Apr 2017 12:16:11 -0600</pubDate>
       
-      <guid>//lucasroesler.com/posts/2017/how-we-live-the-teem-engineering-values/</guid>
+      <guid>https://lucasroesler.com/posts/2017/how-we-live-the-teem-engineering-values/</guid>
       <description>&lt;p&gt;About a year ago we set down to document the core values of the engineering at
 Teem. After a lot of discussion we narrowed it to three core ideas&lt;/p&gt;
 &lt;ol&gt;
