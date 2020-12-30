@@ -1,7 +1,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    {{- if .Description }}
     <meta name="description" content="{{ .Description }}">
+    {{- else }}
+    <meta name="description" content="{{ .Site.Params.Description }}">
+    {{- end }}
     {{ partial "social_metadata" . }}
 
     <title>
