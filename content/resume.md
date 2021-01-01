@@ -7,16 +7,15 @@ type        = "resume"
 +++
 
 ### Lucas Roesler
-Salt Lake City, UT 84047\
+Berlin, DE \
 <roesler.lucas@gmail.com>\
 <https://github.com/LucasRoesler>\
 <https://www.linkedin.com/in/lucasroesler/>
 
 ---
 #### Technical  Skills
-* Languages:  Python, Django, AngularJS, MongoDB, PostgreSQL, PHP, MySQL, HTML, CSS, Javascript, jQuery, R, Bash
-* Applications:  Amazon Web Services (AWS), Git, Sage, Mathematica, LaTeX
-* Operating Systems:  UNIX/Linux, Mac OS X, Windows
+* Languages: Go, Python, PostgreSQL, MongoDB, Javascript, Typescript, HTML, CSS
+* Technologies: OpenFaaS, Docker, Kubernetes, OpenTracing, Grafana, Loki, OpenAmazon Web Services (AWS), Google Cloud (GCP), Git, OpenAPI
 
 ---
 
@@ -32,8 +31,25 @@ Salt Lake City, UT 84047\
 
 ---
 
-#### Professional Experience
-**Director of Engineering**, Teem (formerly EventBoard), Salt Lake City, Utah - **2016 -- present**
+#### Experience
+**Core Developer**, OpenFaas, - **2017 -- present**
+
+> - Implemented the Secrets, Logs, and Profiles features.
+> - General contributions, bug fixes, and code reviews.
+> - Significant contributions to the `faas-cli`, `faas-netes`, `faasd`, `faas-swarm`, `faas-provider`, the `certifier`, and the Python function SDK components.
+>
+> *Go - Kubernetes - Docker - Containerd*
+
+**Senior Engineer**, Contiamo GmbH, Berlin Germany, - **2017 -- present**
+
+> - Team lead for the full stack API, Application, and Platform team.
+> - Design and lead the team to build the core infrastructure of the Contiamo Data Catalog.
+> - Design and build APIs using OpenAPI and Go.
+> - Manage and guide the team roadmap.
+>
+> *Go - Postgres - Kubernetes*
+
+**Director of Engineering**, Teem (formerly EventBoard), Salt Lake City, Utah - **2016 -- 2017**
 
 > - Manage the workflow of the engineering team and work with stakeholders to establish project priorities and timelines.
 > - Work with Support to troubleshoot and resolve or assign issues.
@@ -74,7 +90,7 @@ Salt Lake City, UT 84047\
 >
 > *Python - Django - C++ - Git*
 
-**Web developer**, *Pedegogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
+**Web developer**, *Pedagogy in Large Lectures*, UConn, Storrs, Connecticut - **2011 -- 2012**
 
 > - Designed, created, and managed the webpage, videos, surveys, and raw data reports
 >   for the Pedagogy in Large Lectures research project.
@@ -91,7 +107,7 @@ Salt Lake City, UT 84047\
 >
 >  *PHP - MySQL - Javascript*
 
-#### Public Projects
+<!-- #### Public Projects
 
 **Django Encrypted Json Field** - https://github.com/LucasRoesler/django-encrypted-json
 
@@ -100,12 +116,24 @@ Salt Lake City, UT 84047\
 
 **Django Cryptographic Fields** - https://github.com/foundertherapy/django-cryptographic-fields
 
-> - Contributions to allow key rotation and general improvements.
+> - Contributions to allow key rotation and general improvements. -->
+---
+#### Talks / Publications
+**OpenFaaS Blog**
+> - [*Time travelling through your OpenFaaS Function logs*](https://www.openfaas.com/blog/openfaas-loki-into/) - **2020-06-06**
+> - [*How to Serve Data Science Models with OpenFaaS*](https://www.openfaas.com/blog/python-datascience-with-openfaas/) - **2020-06-04**
+> - [*How to split large Python Functions across multiple files*](https://www.openfaas.com/blog/multifile-python-functions/) - **2019-01-29**
 
+**Merging Quickly in a Cloud Native World**, Kubecon, Barcelona - **2019**
+> You are really excited by a new project, you have a great idea to contribute, you click submit ... and wait. The latest StackOverflow community report states that 80% of surveyed developers are coding in their free time but only 44% are contributing to open source projects. While this number seems good, can we do better? How can we ensure that both contributors and maintainers enjoy and benefit from participating?
+>
+> In this presentation Lucas goes behind the scenes of the OpenFaaS project to share his knowledge from contributing to OpenFaaS and becoming a core contributor. We will walk through the standard git flow to understand what the maintainers of a large open-source project are looking for in new contributions, what we are doing to improve the experience, what the Kubernetes community at large is working on to help, and what you can do to get your pull request merged more quickly.
+> ([Summary](https://kccnceu19.sched.com/event/MPZM/merging-quickly-in-a-cloud-native-world-lucas-roesler-contiamo)), ([Recording](https://youtu.be/d0E7PSlkBbs)) and ([Slides](https://static.sched.com/hosted_files/kccnceu19/e2/merging-quickly.pdf))
 
+---
 #### Other Experience
 
-**Visiting Instructor in Mathematics**, *Lebanon Valley College*, Annville, Pennsylvania **2012 -- 2013**
+**Visiting Instructor in Mathematics**, *Lebanon Valley College*, Annville, Pennsylvania - **2012 -- 2013**
 
 > *Finite Mathematics - Calculus 1 - Differential Equations*
 
@@ -125,7 +153,7 @@ Salt Lake City, UT 84047\
 > *Python - Sage*
 
 
-#### Publications
+#### Other Publications
 
 1. L\. David-Roesler. *The AG-invariant for m-angulations*, submitted, available online: [arXiv:1210.6087]
 

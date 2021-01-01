@@ -3,7 +3,12 @@ html, body {
 }
 
 .resume {
-    margin: 5vh 15vw;
+    margin: 5vh auto;
+    max-width: 800px;
+
+    @media screen and (max-width: 1000px) {
+        margin: 5vh 15vw;
+    }
 }
 
 a {
