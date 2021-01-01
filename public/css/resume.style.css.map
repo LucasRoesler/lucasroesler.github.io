@@ -6,8 +6,8 @@
 		"stdin"
 	],
 	"sourcesContent": [
-		"html, body {\n    height: \"100%\";\n}\n\n.resume {\n    margin: 5vh 15vw;\n}\n\na {\n    text-decoration: none;\n    color:unset;\n}\n"
+		"html, body {\n    height: \"100%\";\n}\n\n.resume {\n    margin: 5vh auto;\n    max-width: 800px;\n\n    @media screen and (max-width: 1000px) {\n        margin: 5vh 15vw;\n    }\n}\n\na {\n    text-decoration: none;\n    color:unset;\n}\n"
 	],
 	"names": [],
-	"mappings": "AAAA,AAAA,IAAI,CAAE,IAAI,AAAC,CACP,MAAM,CAAE,MAAM,CACjB,AAED,AAAA,OAAO,AAAC,CACJ,MAAM,CAAE,QAAQ,CACnB,AAED,AAAA,CAAC,AAAC,CACE,eAAe,CAAE,IAAI,CACrB,KAAK,CAAC,KAAK,CACd"
+	"mappings": "AAAA,AAAA,IAAI,CAAE,IAAI,AAAC,CACP,MAAM,CAAE,MAAM,CACjB,AAED,AAAA,OAAO,AAAC,CACJ,MAAM,CAAE,QAAQ,CAChB,SAAS,CAAE,KAAK,CAKnB,AAHG,MAAM,+BAJV,CAAA,AAAA,OAAO,AAAC,CAKA,MAAM,CAAE,QAAQ,CAEvB,CAAA,AAED,AAAA,CAAC,AAAC,CACE,eAAe,CAAE,IAAI,CACrB,KAAK,CAAC,KAAK,CACd"
 }
