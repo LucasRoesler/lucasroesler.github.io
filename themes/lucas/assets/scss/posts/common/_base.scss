@@ -109,3 +109,22 @@ a {
 .cover-img {
     background-color: $intro-color-background;
 }
+
+blockquote {
+    border-left: 10px solid $color-dark;
+    margin: 1.5em 10px;
+    padding: 0.5em 10px;
+    font-style: oblique;
+
+    ::before {
+        content: open-quote close-quote;
+        font-size: 3em;
+        line-height: 0.1em;
+        margin-right: 0.25em;
+        vertical-align: -0.4em;
+    }
+
+    p {
+        display: inline;
+    }
+}
