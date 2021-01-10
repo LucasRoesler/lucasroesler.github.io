@@ -3,12 +3,47 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://lucasroesler.com/tags/docker/</loc>
-    <lastmod>2020-12-13T00:00:00+02:00</lastmod>
+    <loc>https://lucasroesler.com/posts/2021/custom-linux-keyboard-layout/</loc>
+    <lastmod>2021-01-10T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/dell-xps/</loc>
+    <lastmod>2021-01-10T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/keyboard/</loc>
+    <lastmod>2021-01-10T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/linux/</loc>
+    <lastmod>2021-01-10T00:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://lucasroesler.com/</loc>
+    <lastmod>2021-01-10T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/posts/</loc>
+    <lastmod>2021-01-10T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/programming/</loc>
+    <lastmod>2021-01-10T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/</loc>
+    <lastmod>2021-01-10T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/docker/</loc>
     <lastmod>2020-12-13T00:00:00+02:00</lastmod>
   </url>
   
@@ -19,21 +54,6 @@
   
   <url>
     <loc>https://lucasroesler.com/tags/multipass/</loc>
-    <lastmod>2020-12-13T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/posts/</loc>
-    <lastmod>2020-12-13T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/tags/programming/</loc>
-    <lastmod>2020-12-13T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/tags/</loc>
     <lastmod>2020-12-13T00:00:00+02:00</lastmod>
   </url>
   

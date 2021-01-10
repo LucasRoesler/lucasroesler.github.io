@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "base.style.css",
-	"sourceRoot": "/Users/lucasroesler/Code/lucasroesler.github.io",
+	"sourceRoot": "/home/lucas/code/lucasroesler.github.io",
 	"sources": [
 		"themes/lucas/assets/scss/base/main.scss",
 		"themes/lucas/assets/scss/common/_variables.scss",
