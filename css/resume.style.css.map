@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "resume.style.css",
-	"sourceRoot": "/Users/lucasroesler/Code/lucasroesler.github.io",
+	"sourceRoot": "/home/lucas/code/lucasroesler.github.io",
 	"sources": [
 		"stdin"
 	],
