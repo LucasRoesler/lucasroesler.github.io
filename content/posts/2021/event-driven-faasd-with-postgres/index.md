@@ -1,5 +1,5 @@
 ---
-title: "Driving OpenFaaS from Postgres"
+title: "Event driven functions powered by Postgres"
 date: 2021-01-28T00:00:00+02:00
 tags:
   - programming
@@ -7,6 +7,7 @@ tags:
   - serverless
   - postgres
   - wal
+  - event driven
 draft: false
 coverImage: images/cover1.jpg
 ---
