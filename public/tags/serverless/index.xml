@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>openfaas on Lucas Roesler</title>
-    <link>https://lucasroesler.com/tags/openfaas/</link>
-    <description>Recent content in openfaas on Lucas Roesler</description>
+    <title>serverless on Lucas Roesler</title>
+    <link>https://lucasroesler.com/tags/serverless/</link>
+    <description>Recent content in serverless on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Jan 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/openfaas/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Jan 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/serverless/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Event driven functions powered by Postgres</title>
       <link>https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/</link>
@@ -15,24 +15,6 @@
       <guid>https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/</guid>
       <description>&lt;p&gt;An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don&amp;rsquo;t own the code in the app. A recently added a feature to &lt;code&gt;faasd&lt;/code&gt; got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app!&lt;/p&gt;
 &lt;p&gt;This post will show you how to quickly deploy Postgresql along with an event listener and some custom functions. From there it’s up to you what you build.&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Action Packed Functions</title>
-      <link>https://lucasroesler.com/posts/2019/openfaas-github-actions/</link>
-      <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/posts/2019/openfaas-github-actions/</guid>
-      <description>A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions</description>
-    </item>
-    
-    <item>
-      <title>Developing OpenFaaS KinD-ly</title>
-      <link>https://lucasroesler.com/posts/2019/kind-development-for-openfaas/</link>
-      <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/posts/2019/kind-development-for-openfaas/</guid>
-      <description>Creating an isolated OpenFaaS Development environment with KinD</description>
     </item>
     
   </channel>

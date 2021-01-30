@@ -6,7 +6,17 @@
     <description>Recent content in postgres on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Mon, 20 Feb 2017 00:00:00 -0700</lastBuildDate><atom:link href="https://lucasroesler.com/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Jan 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/postgres/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Event driven functions powered by Postgres</title>
+      <link>https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/</guid>
+      <description>&lt;p&gt;An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don&amp;rsquo;t own the code in the app. A recently added a feature to &lt;code&gt;faasd&lt;/code&gt; got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app!&lt;/p&gt;
+&lt;p&gt;This post will show you how to quickly deploy Postgresql along with an event listener and some custom functions. From there it’s up to you what you build.&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Zero downtime deploys: A tale of Django migrations</title>
       <link>https://lucasroesler.com/posts/2017/automatic-migration-validation/</link>

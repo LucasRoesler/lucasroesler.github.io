@@ -6,7 +6,61 @@
     <description>Recent content in Tags on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 10 Jan 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 30 Jan 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>event driven</title>
+      <link>https://lucasroesler.com/tags/event-driven/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/event-driven/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openfaas</title>
+      <link>https://lucasroesler.com/tags/openfaas/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/openfaas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>postgres</title>
+      <link>https://lucasroesler.com/tags/postgres/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/postgres/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>https://lucasroesler.com/tags/programming/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>serverless</title>
+      <link>https://lucasroesler.com/tags/serverless/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/serverless/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>wal</title>
+      <link>https://lucasroesler.com/tags/wal/</link>
+      <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/wal/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>dell xps</title>
       <link>https://lucasroesler.com/tags/dell-xps/</link>
@@ -31,15 +85,6 @@
       <pubDate>Sun, 10 Jan 2021 00:00:00 +0200</pubDate>
       
       <guid>https://lucasroesler.com/tags/linux/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>programming</title>
-      <link>https://lucasroesler.com/tags/programming/</link>
-      <pubDate>Sun, 10 Jan 2021 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/programming/</guid>
       <description></description>
     </item>
     
@@ -85,15 +130,6 @@
       <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
       
       <guid>https://lucasroesler.com/tags/github-actions/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>openfaas</title>
-      <link>https://lucasroesler.com/tags/openfaas/</link>
-      <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/openfaas/</guid>
       <description></description>
     </item>
     
@@ -373,15 +409,6 @@
       <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
       
       <guid>https://lucasroesler.com/tags/automation/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>postgres</title>
-      <link>https://lucasroesler.com/tags/postgres/</link>
-      <pubDate>Mon, 20 Feb 2017 00:00:00 -0700</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/postgres/</guid>
       <description></description>
     </item>
     
