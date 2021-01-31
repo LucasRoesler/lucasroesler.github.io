@@ -12,13 +12,15 @@ draft: false
 coverImage: images/cover1.jpg
 ---
 
-An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don't own the code in the app. A recently added a feature to `faasd` got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app! 
+An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don't own the code in the app. A recently added a feature to [`faasd`](https://github.com/openfaas/faasd) got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app! 
 
 This post will show you how to quickly deploy Postgresql along with an event listener and some custom functions. From there it’s up to you what you build.
 
 <!--more-->
 
-The core components of `faasd` are defined and deployed via a [Compose spec](https://www.compose-spec.io/). Yes that Compose made famous by Docker Compose. This is great because it allows us to add our own custom sidecar containers to deploy along side `faasd` and more importantly along side and exposed to our OpenFaaS functions.
+The core components of [`faasd`](https://github.com/openfaas/faasd) are defined and deployed via a [Compose spec](https://www.compose-spec.io/). Yes that Compose made famous by Docker Compose. This is great because it allows us to add our own custom sidecar containers to deploy along side `faasd` and more importantly along side and exposed to our OpenFaaS functions.
+
+> faasd is [OpenFaaS](https://github.com/openfaas/) reimagined, but without the cost and complexity of Kubernetes. It runs on a single host with very modest requirements, making it fast and easy to manage.
 
 This is super cool, but not the feature that got me thinking.  It may not sound like much, but [`faasd` 0.10.0+](https://github.com/openfaas/faasd/releases/tag/0.10.0) now has support to set the container user! This is important because if I want to run a database next to my functions and use a local folder to provide durable persistence, I need to set the container user for Postgres.
 
@@ -205,5 +207,7 @@ Let's see it in action:
 One tiny service and we have integrated Postgres into OpenFaaS. But, this example is just the tip of the iceberg, the example doesn't _do_ anything. If you have a postgres application, you could easily deploy `wal-listener` for your database, it will work with your local self-hosted Postgres _and_ cloud hosted Postgres like RDS.  You could send events from your application to an an automation system like Zapier or [`n8n`](https://n8n.io/)
 
 If you don't have Postgres, let's say you are a MySQL fan or a NoSQL fan using MongoDB, don't worry I won't hold it against you. Also, you can mimic the same workflow by just swapping out `wal-listener`. The [lapidus](https://github.com/JarvusInnovations/lapidus) project supports both MySQL _and_ MongoDB, but I am not a MySQL or Mongo expert, so YMMV.
+
+You can also find a walk-through of how to deploy and customize `faasd` in Alex's new book [Serverless for Everyone Else](https://gumroad.com/l/serverless-for-everyone-else).
 
 If you build something awesome, let me know on [Twitter]() or stop by the [OpenFaas Slack](https://docs.openfaas.com/community/#slack-workspace) and share it with the community.

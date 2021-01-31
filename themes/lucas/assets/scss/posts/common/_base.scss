@@ -116,8 +116,8 @@ blockquote {
     padding: 0.5em 10px;
     font-style: oblique;
 
-    ::before {
-        content: open-quote close-quote;
+    p::before {
+        content: open-quote;
         font-size: 3em;
         line-height: 0.1em;
         margin-right: 0.25em;
