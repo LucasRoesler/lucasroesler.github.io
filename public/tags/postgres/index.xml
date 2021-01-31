@@ -13,7 +13,7 @@
       <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
       
       <guid>https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/</guid>
-      <description>&lt;p&gt;An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don&amp;rsquo;t own the code in the app. A recently added a feature to &lt;code&gt;faasd&lt;/code&gt; got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app!&lt;/p&gt;
+      <description>&lt;p&gt;An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don&amp;rsquo;t own the code in the app. A recently added a feature to &lt;a href=&#34;https://github.com/openfaas/faasd&#34;&gt;&lt;code&gt;faasd&lt;/code&gt;&lt;/a&gt; got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app!&lt;/p&gt;
 &lt;p&gt;This post will show you how to quickly deploy Postgresql along with an event listener and some custom functions. From there it’s up to you what you build.&lt;/p&gt;</description>
     </item>
     

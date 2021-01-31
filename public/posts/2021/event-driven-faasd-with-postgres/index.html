@@ -31,7 +31,7 @@ This post will show you how to quickly deploy Postgresql along with an event lis
 This post will show you how to quickly deploy Postgresql along with an event listener and some custom functions. From there it’s up to you what you build.">
 <meta itemprop="datePublished" content="2021-01-30T00:00:00+02:00" />
 <meta itemprop="dateModified" content="2021-01-30T00:00:00+02:00" />
-<meta itemprop="wordCount" content="1382">
+<meta itemprop="wordCount" content="1432">
 
 
 
@@ -71,9 +71,12 @@ This post will show you how to quickly deploy Postgresql along with an event lis
         <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
             <div class="post-content markdown" itemprop="articleBody">
                 <div class="main-content-wrap">
-                    <p>An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don&rsquo;t own the code in the app. A recently added a feature to <code>faasd</code> got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app!</p>
+                    <p>An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don&rsquo;t own the code in the app. A recently added a feature to <a href="https://github.com/openfaas/faasd"><code>faasd</code></a> got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app!</p>
 <p>This post will show you how to quickly deploy Postgresql along with an event listener and some custom functions. From there it’s up to you what you build.</p>
-<p>The core components of <code>faasd</code> are defined and deployed via a <a href="https://www.compose-spec.io/">Compose spec</a>. Yes that Compose made famous by Docker Compose. This is great because it allows us to add our own custom sidecar containers to deploy along side <code>faasd</code> and more importantly along side and exposed to our OpenFaaS functions.</p>
+<p>The core components of <a href="https://github.com/openfaas/faasd"><code>faasd</code></a> are defined and deployed via a <a href="https://www.compose-spec.io/">Compose spec</a>. Yes that Compose made famous by Docker Compose. This is great because it allows us to add our own custom sidecar containers to deploy along side <code>faasd</code> and more importantly along side and exposed to our OpenFaaS functions.</p>
+<blockquote>
+<p>faasd is <a href="https://github.com/openfaas/">OpenFaaS</a> reimagined, but without the cost and complexity of Kubernetes. It runs on a single host with very modest requirements, making it fast and easy to manage.</p>
+</blockquote>
 <p>This is super cool, but not the feature that got me thinking.  It may not sound like much, but <a href="https://github.com/openfaas/faasd/releases/tag/0.10.0"><code>faasd</code> 0.10.0+</a> now has support to set the container user! This is important because if I want to run a database next to my functions and use a local folder to provide durable persistence, I need to set the container user for Postgres.</p>
 <p>Now that I can run Postgres and functions together, I started thinking &ldquo;I should have easy access to the WAL&rdquo;. Cue evil laughter.</p>
 <p>I started looking at <a href="https://github.com/eulerto/wal2json"><code>wal2json</code></a> and but ultimately ended up looking at <a href="https://github.com/ihippik/wal-listener"><code>wal-listener</code></a> because I looked at the OpenFaaS ecosystem and we already have event driven functions via the <a href="https://github.com/openfaas/nats-connector"><code>nats-connector</code></a> and <code>faasd</code> <em>already</em> installs NATS. With <code>wal-listenr</code> plus `Postgres just work directly on top of that.</p>
@@ -225,6 +228,7 @@ WARNING! Communication is not secure, please consider using HTTPS. Letsencrypt.o
 <h2 id="next-steps">Next steps</h2>
 <p>One tiny service and we have integrated Postgres into OpenFaaS. But, this example is just the tip of the iceberg, the example doesn&rsquo;t <em>do</em> anything. If you have a postgres application, you could easily deploy <code>wal-listener</code> for your database, it will work with your local self-hosted Postgres <em>and</em> cloud hosted Postgres like RDS.  You could send events from your application to an an automation system like Zapier or <a href="https://n8n.io/"><code>n8n</code></a></p>
 <p>If you don&rsquo;t have Postgres, let&rsquo;s say you are a MySQL fan or a NoSQL fan using MongoDB, don&rsquo;t worry I won&rsquo;t hold it against you. Also, you can mimic the same workflow by just swapping out <code>wal-listener</code>. The <a href="https://github.com/JarvusInnovations/lapidus">lapidus</a> project supports both MySQL <em>and</em> MongoDB, but I am not a MySQL or Mongo expert, so YMMV.</p>
+<p>You can also find a walk-through of how to deploy and customize <code>faasd</code> in Alex&rsquo;s new book <a href="https://gumroad.com/l/serverless-for-everyone-else">Serverless for Everyone Else</a>.</p>
 <p>If you build something awesome, let me know on <a href="">Twitter</a> or stop by the <a href="https://docs.openfaas.com/community/#slack-workspace">OpenFaas Slack</a> and share it with the community.</p>
                 </div>
             </div>
