@@ -31,7 +31,7 @@ This post will show you how to quickly deploy Postgresql along with an event lis
 This post will show you how to quickly deploy Postgresql along with an event listener and some custom functions. From there it’s up to you what you build.">
 <meta itemprop="datePublished" content="2021-01-30T00:00:00+02:00" />
 <meta itemprop="dateModified" content="2021-01-30T00:00:00+02:00" />
-<meta itemprop="wordCount" content="1157">
+<meta itemprop="wordCount" content="1193">
 
 
 
@@ -99,9 +99,12 @@ cd openfaas-wal-listener
 <p>Copy the new docker-compose</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make install 
 <span style="color:#75715e"># or manually run </span>
-<span style="color:#75715e"># sudo cp -r postgres /var/lib/faasd</span>
-<span style="color:#75715e"># sudo cp -r wal_listener /var/lib/faasd</span>
+<span style="color:#75715e"># sudo cp -rf postgres /var/lib/faasd</span>
+<span style="color:#75715e"># sudo mkdir -p /var/lib/faasd/postgres/pgdata</span>
+<span style="color:#75715e"># sudo mkdir -p /var/lib/faasd/postgresql/run</span>
+<span style="color:#75715e"># sudo cp -rf wal_listener /var/lib/faasd</span>
 <span style="color:#75715e"># sudo cp docker-compose.yaml /var/lib/faasd</span>
+<span style="color:#75715e"># sudo chown -R 1000:1000 /var/lib/faasd/postgres</span>
 </code></pre></div></li>
 <li>
 <p>Restart faasd</p>
@@ -206,6 +209,7 @@ stderr: 2021/01/24 15:05:00 received <span style="color:#e6db74">&#34;{\&#34;id\
 <h2 id="next-steps">Next steps</h2>
 <p>One tiny service and we have integrated Postgres into OpenFaaS. But, this example is just the tip of the iceberg, the example doesn&rsquo;t <em>do</em> anything. If you have a postgres application, you could easily deploy <code>wal-listener</code> for your database, it will work with your local self-hosted Postgres <em>and</em> cloud hosted Postgres like RDS.  You could send events from your application to an an automation system like Zapier or <a href="https://n8n.io/"><code>n8n</code></a></p>
 <p>If you don&rsquo;t have Postgres, let&rsquo;s say you are a MySQL fan or a NoSQL fan using MongoDB, don&rsquo;t worry I won&rsquo;t hold it against you. Also, you can mimic the same workflow by just swapping out <code>wal-listener</code>. The <a href="https://github.com/JarvusInnovations/lapidus">lapidus</a> project supports both MySQL <em>and</em> MongoDB, but I am not a MySQL or Mongo expert, so YMMV.</p>
+<p>Another connector library was also recommended to me, <a href="https://debezium.io/">debezium</a>. It has several <a href="https://debezium.io/documentation/reference/connectors/index.html">connectors</a> including Postgre, MySQL, MongoDB, Oracle, and Cassandra.</p>
 <p>You can also find a walk-through of how to deploy and customize <code>faasd</code> in Alex&rsquo;s new book <a href="https://gumroad.com/l/serverless-for-everyone-else">Serverless for Everyone Else</a>.</p>
 <p>If you build something awesome, let me know on <a href="">Twitter</a> or stop by the <a href="https://docs.openfaas.com/community/#slack-workspace">OpenFaas Slack</a> and share it with the community.</p>
                 </div>
