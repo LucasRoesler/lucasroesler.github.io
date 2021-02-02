@@ -188,7 +188,9 @@ Let's see it in action:
 
 One tiny service and we have integrated Postgres into OpenFaaS. But, this example is just the tip of the iceberg, the example doesn't _do_ anything. If you have a postgres application, you could easily deploy `wal-listener` for your database, it will work with your local self-hosted Postgres _and_ cloud hosted Postgres like RDS.  You could send events from your application to an an automation system like Zapier or [`n8n`](https://n8n.io/)
 
-If you don't have Postgres, let's say you are a MySQL fan or a NoSQL fan using MongoDB, don't worry I won't hold it against you. Also, you can mimic the same workflow by just swapping out `wal-listener`. The [lapidus](https://github.com/JarvusInnovations/lapidus) project supports both MySQL _and_ MongoDB, but I am not a MySQL or Mongo expert, so YMMV.
+If you don't have Postgres, let's say you are a MySQL fan or a NoSQL fan using MongoDB, don't worry I won't hold it against you. Also, you can mimic the same workflow by just swapping out `wal-listener`. The [lapidus](https://github.com/JarvusInnovations/lapidus) project supports both MySQL _and_ MongoDB, but I am not a MySQL or Mongo expert, so YMMV.  
+
+Another connector library was also recommended to me, [debezium](https://debezium.io/). It has several [connectors](https://debezium.io/documentation/reference/connectors/index.html) including Postgre, MySQL, MongoDB, Oracle, and Cassandra.
 
 You can also find a walk-through of how to deploy and customize `faasd` in Alex's new book [Serverless for Everyone Else](https://gumroad.com/l/serverless-for-everyone-else).
 
