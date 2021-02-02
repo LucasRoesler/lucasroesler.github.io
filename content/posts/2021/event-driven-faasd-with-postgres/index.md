@@ -194,4 +194,4 @@ Another connector library was also recommended to me, [debezium](https://debeziu
 
 You can also find a walk-through of how to deploy and customize `faasd` in Alex's new book [Serverless for Everyone Else](https://gumroad.com/l/serverless-for-everyone-else).
 
-If you build something awesome, let me know on [Twitter]() or stop by the [OpenFaas Slack](https://docs.openfaas.com/community/#slack-workspace) and share it with the community.
+If you build something awesome, let me know on [Twitter](https://twitter.com/theaxer) or stop by the [OpenFaas Slack](https://docs.openfaas.com/community/#slack-workspace) and share it with the community.
