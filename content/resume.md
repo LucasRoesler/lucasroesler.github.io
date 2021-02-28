@@ -15,7 +15,7 @@ Berlin, DE \
 ---
 #### Technical  Skills
 * Languages: Go, Python, PostgreSQL, MongoDB, Javascript, Typescript, HTML, CSS
-* Technologies: OpenFaaS, Docker, Kubernetes, OpenTracing, Grafana, Loki, OpenAmazon Web Services (AWS), Google Cloud (GCP), Git, OpenAPI
+* Technologies: OpenFaaS, Docker, Kubernetes, OpenTracing, Grafana, Loki, Amazon Web Services (AWS), Google Cloud (GCP), Git, OpenAPI
 
 ---
 
@@ -32,24 +32,28 @@ Berlin, DE \
 ---
 
 #### Experience
-**Core Developer**, OpenFaas, - **2017 -- present**
+**Core Developer**, OpenFaaS, - **2017 -- present**
 
 > - Implemented the Secrets, Logs, and Profiles features.
 > - General contributions, bug fixes, and code reviews.
-> - Significant contributions to the `faas-cli`, `faas-netes`, `faasd`, `faas-swarm`, `faas-provider`, the `certifier`, and the Python function SDK components.
+> - Significant contributions to the `faas-cli`, `faas-netes`, `faasd`, `faas-provider`, the `certifier`, and the Python function SDK components.
 >
 > *Go - Kubernetes - Docker - Containerd*
 
 **Senior Engineer**, Contiamo GmbH, Berlin Germany, - **2017 -- present**
 
-> - Team lead for the full stack API, Application, and Platform team.
-> - Design and lead the team to build the core infrastructure of the Contiamo Data Catalog.
-> - Design and build APIs using OpenAPI and Go.
-> - Manage and guide the team roadmap.
+> - Team lead for the API, Authentication, Application, and Platform team.
+> - Responsible for running daily stand-ups and one-on-ones.
+> - Contribute to the development of the product roadmap to prioritize features/projects.
+> - Create and review architectural decisions and implementation plans.
+> - Design and build the APIs and data model for the Data Catalog.
+> - Developed a release process to enable self-hosted on-premise installations of Contiamo.
+> - Lead the adoption of Kubernetes and Helm as core components of this release process.
+> - Lead the adoption of OpenTracing and Prometheus to ensure the application is observable out-of-the-box.
 >
 > *Go - Postgres - Kubernetes*
 
-**Director of Engineering**, Teem (formerly EventBoard), Salt Lake City, Utah - **2016 -- 2017**
+**Director of Engineering**, Teem (formerly EventBoard, acquired by WeWork), Salt Lake City, Utah - **2016 -- 2017**
 
 > - Manage the workflow of the engineering team and work with stakeholders to establish project priorities and timelines.
 > - Work with Support to troubleshoot and resolve or assign issues.
@@ -119,6 +123,9 @@ Berlin, DE \
 > - Contributions to allow key rotation and general improvements. -->
 ---
 #### Talks / Publications
+**Event Driven Postgres with OpenFaas**, Livestream with Alex Elis - **2021-02-02**
+> We discuss how you can combine the Postgres WAL, NATS, and OpenFaaS to create a lightweight event driven architecture. Including a short demo of a simple "event echo" to prove the concept. https://www.youtube.com/watch?v=nGOZLOjg5Zs
+
 **OpenFaaS Blog**
 > - [*Time travelling through your OpenFaaS Function logs*](https://www.openfaas.com/blog/openfaas-loki-into/) - **2020-06-06**
 > - [*How to Serve Data Science Models with OpenFaaS*](https://www.openfaas.com/blog/python-datascience-with-openfaas/) - **2020-06-04**
