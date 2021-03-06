@@ -6,7 +6,17 @@
     <description>Recent content on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Jan 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using Tox and PyTest with OpenFaaS</title>
+      <link>https://lucasroesler.com/posts/2021/test-python-functions/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/posts/2021/test-python-functions/</guid>
+      <description>I think it is an uncontroversial statement that to say testing is important in software development. Writing tests may not always be fun, but nothing is a sweet as that moment when a unit test catches a bug before your commit.
+In OpenFaaS we have tons of tests in each project, even the certifier itself that runs a short suite of end-to-end tests. But, not all of our function templates have first class testing support.</description>
+    </item>
+    
     <item>
       <title>Event driven functions powered by Postgres</title>
       <link>https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/</link>
@@ -275,11 +285,11 @@ excitingly named &amp;ldquo;Spicy Winter Porter&amp;rdquo;.&lt;/p&gt;</descripti
     </item>
     
     <item>
-      <title>Lucas Roesler</title>
-      <link>https://lucasroesler.com/resume/</link>
+      <title>Resume</title>
+      <link>https://lucasroesler.com/resume/full/</link>
       <pubDate>Fri, 21 Jun 2013 11:27:27 -0400</pubDate>
       
-      <guid>https://lucasroesler.com/resume/</guid>
+      <guid>https://lucasroesler.com/resume/full/</guid>
       <description>Lucas Roesler Berlin, DE
 roesler.lucas@gmail.com
 https://github.com/LucasRoesler
@@ -287,26 +297,6 @@ https://www.linkedin.com/in/lucasroesler/
  Technical Skills  Languages: Go, Python, PostgreSQL, MongoDB, Javascript, Typescript, HTML, CSS Technologies: OpenFaaS, Docker, Kubernetes, OpenTracing, Grafana, Loki, Amazon Web Services (AWS), Google Cloud (GCP), Git, OpenAPI   Education Ph.D. in Mathematics, University of Connecticut (UConn), Storrs, Connecticut - May 2012
  Dissertation Title: &amp;ldquo;Algebras from surfaces and their derived equivalences&amp;rdquo; Advisor: Dr. Ralf Schiffler
  M.S. in Mathematics, University of Connecticut (UConn), Storrs, Connecticut - May 2009</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://lucasroesler.com/description/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lucasroesler.com/description/</guid>
-      <description>A few more details I have been a core contributor to OpenFaas since 2017. I implemented the secrets, logs, and profiles features as well as general contributions throughout the rest of the project including faas-swarm, faas-netes, faasd, the faas-provider, the certifier, and the Python function SDK.
-At Contiamo GmbH I am a senior engineer and lead the Platform team. We design the core architecture, operational and observability tooling, and the public API of Contiamo&amp;rsquo;s DataHub platform.</description>
-    </item>
-    
-    <item>
-      <title>introduction</title>
-      <link>https://lucasroesler.com/intro/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://lucasroesler.com/intro/</guid>
-      <description>I am senior engineer at contiamo.com, core contributor to OpenFaas, and an ex-mathematician.
-I work with Go, Python, Kubernetes, Serverless, Observability, and REST APIS. I like rock climbing, beer, hiking, and my motorcycle.</description>
     </item>
     
   </channel>

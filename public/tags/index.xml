@@ -6,7 +6,88 @@
     <description>Recent content in Tags on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Jan 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>github actions</title>
+      <link>https://lucasroesler.com/tags/github-actions/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/github-actions/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>openfaas</title>
+      <link>https://lucasroesler.com/tags/openfaas/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/openfaas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>https://lucasroesler.com/tags/programming/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pytest</title>
+      <link>https://lucasroesler.com/tags/pytest/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/pytest/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://lucasroesler.com/tags/python/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>serverless</title>
+      <link>https://lucasroesler.com/tags/serverless/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/serverless/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>testing</title>
+      <link>https://lucasroesler.com/tags/testing/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tox</title>
+      <link>https://lucasroesler.com/tags/tox/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/tox/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>unit test</title>
+      <link>https://lucasroesler.com/tags/unit-test/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/unit-test/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>event driven</title>
       <link>https://lucasroesler.com/tags/event-driven/</link>
@@ -17,38 +98,11 @@
     </item>
     
     <item>
-      <title>openfaas</title>
-      <link>https://lucasroesler.com/tags/openfaas/</link>
-      <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/openfaas/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>postgres</title>
       <link>https://lucasroesler.com/tags/postgres/</link>
       <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
       
       <guid>https://lucasroesler.com/tags/postgres/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>programming</title>
-      <link>https://lucasroesler.com/tags/programming/</link>
-      <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>serverless</title>
-      <link>https://lucasroesler.com/tags/serverless/</link>
-      <pubDate>Sat, 30 Jan 2021 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/serverless/</guid>
       <description></description>
     </item>
     
@@ -125,15 +179,6 @@
     </item>
     
     <item>
-      <title>github actions</title>
-      <link>https://lucasroesler.com/tags/github-actions/</link>
-      <pubDate>Sat, 28 Sep 2019 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/github-actions/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>kind</title>
       <link>https://lucasroesler.com/tags/kind/</link>
       <pubDate>Sun, 14 Apr 2019 00:00:00 +0200</pubDate>
@@ -157,15 +202,6 @@
       <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
       
       <guid>https://lucasroesler.com/tags/golang/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>testing</title>
-      <link>https://lucasroesler.com/tags/testing/</link>
-      <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/testing/</guid>
       <description></description>
     </item>
     
@@ -292,15 +328,6 @@
       <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
       
       <guid>https://lucasroesler.com/tags/lambda/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://lucasroesler.com/tags/python/</link>
-      <pubDate>Sun, 11 Jun 2017 11:00:00 -0600</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/python/</guid>
       <description></description>
     </item>
     
@@ -436,6 +463,15 @@
       <pubDate>Sun, 15 Jan 2017 00:00:00 -0700</pubDate>
       
       <guid>https://lucasroesler.com/tags/test/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>ci/cd</title>
+      <link>https://lucasroesler.com/tags/ci/cd/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/ci/cd/</guid>
       <description></description>
     </item>
     
