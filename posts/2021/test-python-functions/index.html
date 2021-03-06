@@ -27,7 +27,7 @@
 <meta itemprop="description" content="How to Unit Test Python functions in OpenFaaS">
 <meta itemprop="datePublished" content="2021-03-06T00:00:00+02:00" />
 <meta itemprop="dateModified" content="2021-03-06T00:00:00+02:00" />
-<meta itemprop="wordCount" content="1710">
+<meta itemprop="wordCount" content="1713">
 
 
 
@@ -67,14 +67,14 @@
         <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
             <div class="post-content markdown" itemprop="articleBody">
                 <div class="main-content-wrap">
-                    <p>I think it is an uncontroversial statement that to say testing is important in software development. Writing tests may not always be fun, but nothing is a sweet as that moment when a unit test catches a bug before your commit.</p>
-<p>In OpenFaaS we have tons of tests in each project, even the <a href="https://github.com/openfaas/certifier"><code>certifier</code></a> itself that runs a short suite of end-to-end tests. <em>But</em>, not all of our function templates have first class testing support. For Go, Node, and Java, this has already been added. For Go it is easy because there is a standard test command <code>go test</code>. For Node and Java we (or the community) have picked and optional default test command. Soon, we are going to do the same for Python.</p>
+                    <p>I think it is an uncontroversial statement to say testing is important in software development. Writing tests may not always be fun, but nothing is a sweet as that moment when a unit test catches a bug before you deploy.</p>
+<p>In OpenFaaS we have tons of tests in each project, even the <a href="https://github.com/openfaas/certifier"><code>certifier</code></a> itself runs a short suite of end-to-end tests. <em>But</em>, not all of our function templates have first class testing support. For Go, Node, and Java, this has already been added. For Go it is easy because there is a standard test command <code>go test</code>. For Node and Java we (or the community) have picked and optional default test command. Soon, we are going to do the same for Python.</p>
 <p>But what do you do in the mean time? Or, what if you have your own Python template and you want to add testing to it?  In this post I am going to show you how to use  <a href="https://tox.readthedocs.io/en/latest/"><code>tox</code></a> and <a href="https://docs.pytest.org/en/stable/"><code>pytest</code></a> with any Python OpenFaaS template.</p>
 <!-- raw HTML omitted -->
 <h2 id="intro">Intro</h2>
 <p>For this demo we are going to create a tiny calculator function. This gives us just enough code to demonstrate interesting but very common test cases:</p>
 <ol>
-<li>is the request correct, .e.g did the request specify a valid math operation and two numbers,</li>
+<li>is the request correct, i.e did the request specify a valid math operation and two numbers,</li>
 <li>is the response correct, i.e. the calculation.</li>
 </ol>
 <p>Almost all functions will want these kind of tests and, as we will see, they are easy to write.</p>
@@ -92,7 +92,7 @@ $ mv calc.yml stack.yml
 
 </code></pre></div><h3 id="setup-the-local-python-environment">Setup the local python environment</h3>
 <p>I use <a href="https://docs.conda.io/projects/conda/en/latest/">conda</a> for my local virtual environments, but you can of course use <a href="https://virtualenv.readthedocs.org/en/latest/"><code>virtualenv</code></a> or <a href="https://docs.python.org/3/library/venv.html"><code>venv</code></a> (see also <a href="https://realpython.com/python-virtual-environments-a-primer/">RealPython&rsquo;s primer on virtual environments</a>).</p>
-<p>In short this creates an isolated and repeatable development environment which you can delete and recreate if you need.</p>
+<p>This creates an isolated and repeatable development environment which you can delete and recreate if you need.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ conda create -n pytest-sample tox
 $ conda activate pytest-sample
 $ cat <span style="color:#e6db74">&lt;&lt;EOF &gt;&gt; requirements.txt
@@ -127,8 +127,8 @@ $ conda install --yes --file dev.txt
         resp, code <span style="color:#f92672">=</span> h<span style="color:#f92672">.</span>handle(req)
         <span style="color:#66d9ef">assert</span> code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>
         <span style="color:#66d9ef">assert</span> resp[<span style="color:#e6db74">&#34;value&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">100.01</span>
-</code></pre></div><p>At this point, we have followed normal conventions for pytest, by default, pytest will look for files that match the pattern <code>*_test.py</code> and then the run the functions that  match <code>test_*</code> (including matching methods if the class is named <code>Test*</code>, which is what we did above).</p>
-<p>Now, we can run our test and see all of the errors in their wonderful glory</p>
+</code></pre></div><p>At this point, we have followed normal conventions for pytest, by default pytest will look for files that match the pattern <code>*_test.py</code> and then the run the functions that  match <code>test_*</code> (including matching methods if the class is named <code>Test*</code>, which is what we did above).</p>
+<p>Now, we can run our test and see all of the errors in their wonderful glory.</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ pytest
 <span style="color:#f92672">=========================================</span> test session starts <span style="color:#f92672">=========================================</span>
 platform linux -- Python 3.8.8, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
@@ -162,9 +162,9 @@ calc/handler_test.py:73: ValueError
 FAILED calc/handler_test.py::TestParsing::test_operation_addition - ValueError: too many values to u...
 FAILED calc/handler_test.py::TestParsing::test_operation_multiplication - ValueError: too many value...
 <span style="color:#f92672">==========================================</span> <span style="color:#ae81ff">2</span> failed in 0.05s <span style="color:#f92672">==========================================</span>
-</code></pre></div><p>In this case we get a value error because our handler function only returns a string, not a dictionary and a status code like the test expects.  These test cases  are expecting that the handler returns something that looks like this</p>
+</code></pre></div><p>In this case we get a value error because our handler function only returns a string, not a dictionary and a status code like the test expects.  These test cases expect that the handler to return something that looks like this</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;value&#34;</span>: <span style="color:#ae81ff">1.1</span>}, <span style="color:#ae81ff">200</span>
-</code></pre></div><p>This return value works with Flask, it will json serialize the dictionary and set the status code to 200 for us. Like the above snippet and run pytest again, the we get a new error, a value error because we got the wrong calculation result</p>
+</code></pre></div><p>This return value works with Flask; it will json serialize the dictionary and set the status code to 200 for us.  Once we update the function to look like the above snippet and run pytest again, then we get a new error, a value error because we got the wrong calculation result</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ pytest
 <span style="color:#f92672">=========================================</span> test session starts <span style="color:#f92672">=========================================</span>
 platform linux -- Python 3.8.8, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
@@ -190,7 +190,7 @@ calc/handler_test.py:75: AssertionError
 FAILED calc/handler_test.py::TestParsing::test_operation_multiplication - assert 1 <span style="color:#f92672">==</span> 0.25
 <span style="color:#f92672">=====================================</span> <span style="color:#ae81ff">1</span> failed, <span style="color:#ae81ff">1</span> passed in 0.06s <span style="color:#f92672">=====================================</span>
 </code></pre></div><h3 id="adding-tox">Adding <code>tox</code></h3>
-<p>Before we fix the test, we want to setup one more thing: <a href="https://tox.readthedocs.io/en/latest/index.html"><code>tox</code></a>: <code>tox</code>provides a unified set of tooling that will run <code>pytest</code> for us. This provides a standardized interface that we will use later in CI. In fact, it ensures we are running exactly the same thing in CI and our local dev environment, hopefully reducing the numer of &ldquo;Actually fix CI&rdquo; commit messages.  Later, if you decide that you prefer <code>nose</code> or some other testing tool or if you application is even more complex and requires pre-test configuration &ndash; we can manage that through <code>tox</code>.</p>
+<p>Before we fix the test, we want to setup one more thing: <a href="https://tox.readthedocs.io/en/latest/index.html"><code>tox</code></a>: <code>tox</code>provides a unified set of tooling that will run <code>pytest</code> for us. This provides a standardized interface that we will use later in CI. In fact, it ensures we are running exactly the same thing in CI and our local dev environment, hopefully reducing the number of &ldquo;Actually fix CI&rdquo; commit messages.  Later, if you decide that you prefer <code>nose</code> or some other testing tool or if you application is even more complex and requires pre-test configuration &ndash; we can manage that through <code>tox</code>.</p>
 <p>Create a <code>calc/tox.ini</code> file that looks like</p>
 <div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-ini" data-lang="ini"><span style="color:#75715e"># calc/tox.ini</span>
 <span style="color:#66d9ef">[tox]</span>
