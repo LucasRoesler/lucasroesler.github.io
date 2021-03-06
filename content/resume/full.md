@@ -1,10 +1,9 @@
-+++
-date        = "2013-06-21T11:27:27-04:00"
-title       = "Lucas Roesler"
-description = "Resume for Lucas Roesler"
-slug        = "resume"
-type        = "resume"
-+++
+---
+date: "2013-06-21T11:27:27-04:00"
+title: "Resume"
+description: "Long Form Resume for Lucas Roesler"
+layout: "single"
+---
 
 ### Lucas Roesler
 Berlin, DE \
@@ -171,7 +170,7 @@ Berlin, DE \
 ---
 
 #### Interests
-* Rock climbing/bouldering, home brewing, music (bass guitar and listening), hiking, reading, tabletop gaming, and participating in open source projects (Ubuntu, Gnome, Gedit).
+* Rock climbing/bouldering, home brewing beer, music, hiking, reading, tabletop gaming, and participating in open source development.
 
   [Sage]: http://www.sagemath.org/ "Sage"
   [Linkedin]: http://www.linkedin.com/in/lucasroesler/ "Linkedin"
@@ -179,3 +178,4 @@ Berlin, DE \
   [doi:10.1016/j.jalgebra.2011.10.034]: http://www.sciencedirect.com/science/article/pii/S0021869311006211 "doi:10.1016/j.jalgebra.2011.10.034"
   [doi:10.1007/s10468-012-9384-9]: http://link.springer.com/article/10.1007%2Fs10468-012-9384-9 "doi:10.1007/s10468-012-9384-9"
   [arXiv:1210.6087]: http://arxiv.org/abs/1210.6087 "arXiv:1210.6087"
+  [arxiv:results]: https://arxiv.org/search/?query=David-Roesler&searchtype=author
