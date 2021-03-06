@@ -18,9 +18,9 @@ draft: false
 coverImage: images/cover2-alexander-andrews.jpg
 ---
 
-I think it is an uncontroversial statement that to say testing is important in software development. Writing tests may not always be fun, but nothing is a sweet as that moment when a unit test catches a bug before your commit.
+I think it is an uncontroversial statement to say testing is important in software development. Writing tests may not always be fun, but nothing is a sweet as that moment when a unit test catches a bug before you deploy.
 
-In OpenFaaS we have tons of tests in each project, even the [`certifier`](https://github.com/openfaas/certifier) itself that runs a short suite of end-to-end tests. _But_, not all of our function templates have first class testing support. For Go, Node, and Java, this has already been added. For Go it is easy because there is a standard test command `go test`. For Node and Java we (or the community) have picked and optional default test command. Soon, we are going to do the same for Python.
+In OpenFaaS we have tons of tests in each project, even the [`certifier`](https://github.com/openfaas/certifier) itself runs a short suite of end-to-end tests. _But_, not all of our function templates have first class testing support. For Go, Node, and Java, this has already been added. For Go it is easy because there is a standard test command `go test`. For Node and Java we (or the community) have picked and optional default test command. Soon, we are going to do the same for Python.
 
 But what do you do in the mean time? Or, what if you have your own Python template and you want to add testing to it?  In this post I am going to show you how to use  [`tox`](https://tox.readthedocs.io/en/latest/) and [`pytest`](https://docs.pytest.org/en/stable/) with any Python OpenFaaS template.
 
@@ -29,7 +29,7 @@ But what do you do in the mean time? Or, what if you have your own Python templa
 
 For this demo we are going to create a tiny calculator function. This gives us just enough code to demonstrate interesting but very common test cases:
 
-1. is the request correct, .e.g did the request specify a valid math operation and two numbers,
+1. is the request correct, i.e did the request specify a valid math operation and two numbers,
 2. is the response correct, i.e. the calculation.
 
 Almost all functions will want these kind of tests and, as we will see, they are easy to write.
@@ -57,7 +57,7 @@ configuration:
 ### Setup the local python environment
 I use [conda](https://docs.conda.io/projects/conda/en/latest/) for my local virtual environments, but you can of course use [`virtualenv`](https://virtualenv.readthedocs.org/en/latest/) or [`venv`](https://docs.python.org/3/library/venv.html) (see also [RealPython's primer on virtual environments](https://realpython.com/python-virtual-environments-a-primer/)).
 
-In short this creates an isolated and repeatable development environment which you can delete and recreate if you need.
+This creates an isolated and repeatable development environment which you can delete and recreate if you need.
 
 ```sh
 $ conda create -n pytest-sample tox
@@ -105,9 +105,9 @@ class TestParsing:
         assert resp["value"] == 100.01
 ```
 
-At this point, we have followed normal conventions for pytest, by default, pytest will look for files that match the pattern `*_test.py` and then the run the functions that  match `test_*` (including matching methods if the class is named `Test*`, which is what we did above).
+At this point, we have followed normal conventions for pytest, by default pytest will look for files that match the pattern `*_test.py` and then the run the functions that  match `test_*` (including matching methods if the class is named `Test*`, which is what we did above).
 
-Now, we can run our test and see all of the errors in their wonderful glory
+Now, we can run our test and see all of the errors in their wonderful glory.
 
 ```sh
 $ pytest
@@ -145,13 +145,13 @@ FAILED calc/handler_test.py::TestParsing::test_operation_multiplication - ValueE
 ========================================== 2 failed in 0.05s ==========================================
 ```
 
-In this case we get a value error because our handler function only returns a string, not a dictionary and a status code like the test expects.  These test cases  are expecting that the handler returns something that looks like this
+In this case we get a value error because our handler function only returns a string, not a dictionary and a status code like the test expects.  These test cases expect that the handler to return something that looks like this
 
 ```py
 return {"value": 1.1}, 200
 ```
 
-This return value works with Flask, it will json serialize the dictionary and set the status code to 200 for us. Like the above snippet and run pytest again, the we get a new error, a value error because we got the wrong calculation result
+This return value works with Flask; it will json serialize the dictionary and set the status code to 200 for us.  Once we update the function to look like the above snippet and run pytest again, then we get a new error, a value error because we got the wrong calculation result
 
 ```sh
 $ pytest
@@ -182,7 +182,7 @@ FAILED calc/handler_test.py::TestParsing::test_operation_multiplication - assert
 
 ### Adding `tox`
 
-Before we fix the test, we want to setup one more thing: [`tox`](https://tox.readthedocs.io/en/latest/index.html): `tox`provides a unified set of tooling that will run `pytest` for us. This provides a standardized interface that we will use later in CI. In fact, it ensures we are running exactly the same thing in CI and our local dev environment, hopefully reducing the numer of "Actually fix CI" commit messages.  Later, if you decide that you prefer `nose` or some other testing tool or if you application is even more complex and requires pre-test configuration -- we can manage that through `tox`.
+Before we fix the test, we want to setup one more thing: [`tox`](https://tox.readthedocs.io/en/latest/index.html): `tox`provides a unified set of tooling that will run `pytest` for us. This provides a standardized interface that we will use later in CI. In fact, it ensures we are running exactly the same thing in CI and our local dev environment, hopefully reducing the number of "Actually fix CI" commit messages.  Later, if you decide that you prefer `nose` or some other testing tool or if you application is even more complex and requires pre-test configuration -- we can manage that through `tox`.
 
 Create a `calc/tox.ini` file that looks like
 
