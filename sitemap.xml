@@ -3,6 +3,71 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://lucasroesler.com/tags/github-actions/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/openfaas/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/posts/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/programming/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/pytest/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/python/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/serverless/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/testing/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/tox/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/unit-test/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/posts/2021/test-python-functions/</loc>
+    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://lucasroesler.com/tags/event-driven/</loc>
     <lastmod>2021-01-30T00:00:00+02:00</lastmod>
   </url>
@@ -13,37 +78,7 @@
   </url>
   
   <url>
-    <loc>https://lucasroesler.com/</loc>
-    <lastmod>2021-01-30T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/tags/openfaas/</loc>
-    <lastmod>2021-01-30T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lucasroesler.com/tags/postgres/</loc>
-    <lastmod>2021-01-30T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/posts/</loc>
-    <lastmod>2021-01-30T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/tags/programming/</loc>
-    <lastmod>2021-01-30T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/tags/serverless/</loc>
-    <lastmod>2021-01-30T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/tags/</loc>
     <lastmod>2021-01-30T00:00:00+02:00</lastmod>
   </url>
   
@@ -103,11 +138,6 @@
   </url>
   
   <url>
-    <loc>https://lucasroesler.com/tags/github-actions/</loc>
-    <lastmod>2019-09-28T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lucasroesler.com/posts/2019/kind-development-for-openfaas/</loc>
     <lastmod>2019-04-14T00:00:00+02:00</lastmod>
   </url>
@@ -124,11 +154,6 @@
   
   <url>
     <loc>https://lucasroesler.com/tags/golang/</loc>
-    <lastmod>2019-02-02T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/tags/testing/</loc>
     <lastmod>2019-02-02T00:00:00+02:00</lastmod>
   </url>
   
@@ -234,11 +259,6 @@
   
   <url>
     <loc>https://lucasroesler.com/tags/lambda/</loc>
-    <lastmod>2017-06-11T11:00:00-06:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/tags/python/</loc>
     <lastmod>2017-06-11T11:00:00-06:00</lastmod>
   </url>
   
@@ -383,12 +403,12 @@
   </url>
   
   <url>
-    <loc>https://lucasroesler.com/description/</loc>
-    <priority>0</priority>
+    <loc>https://lucasroesler.com/resume/full/</loc>
+    <lastmod>2013-06-21T11:27:27-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://lucasroesler.com/intro/</loc>
+    <loc>https://lucasroesler.com/tags/ci/cd/</loc>
   </url>
   
 </urlset>

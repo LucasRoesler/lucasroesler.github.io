@@ -6,7 +6,17 @@
     <description>Recent content in Posts on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 30 Jan 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Using Tox and PyTest with OpenFaaS</title>
+      <link>https://lucasroesler.com/posts/2021/test-python-functions/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/posts/2021/test-python-functions/</guid>
+      <description>I think it is an uncontroversial statement that to say testing is important in software development. Writing tests may not always be fun, but nothing is a sweet as that moment when a unit test catches a bug before your commit.
+In OpenFaaS we have tons of tests in each project, even the certifier itself that runs a short suite of end-to-end tests. But, not all of our function templates have first class testing support.</description>
+    </item>
+    
     <item>
       <title>Event driven functions powered by Postgres</title>
       <link>https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/</link>

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>testing on Lucas Roesler</title>
-    <link>https://lucasroesler.com/tags/testing/</link>
-    <description>Recent content in testing on Lucas Roesler</description>
+    <title>unit test on Lucas Roesler</title>
+    <link>https://lucasroesler.com/tags/unit-test/</link>
+    <description>Recent content in unit test on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/testing/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/unit-test/index.xml" rel="self" type="application/rss+xml" />
     <item>
       <title>Using Tox and PyTest with OpenFaaS</title>
       <link>https://lucasroesler.com/posts/2021/test-python-functions/</link>
@@ -15,15 +15,6 @@
       <guid>https://lucasroesler.com/posts/2021/test-python-functions/</guid>
       <description>I think it is an uncontroversial statement that to say testing is important in software development. Writing tests may not always be fun, but nothing is a sweet as that moment when a unit test catches a bug before your commit.
 In OpenFaaS we have tons of tests in each project, even the certifier itself that runs a short suite of end-to-end tests. But, not all of our function templates have first class testing support.</description>
-    </item>
-    
-    <item>
-      <title>When sequential tests aren&#39;t</title>
-      <link>https://lucasroesler.com/posts/2019/golang-parallel-testing/</link>
-      <pubDate>Sat, 02 Feb 2019 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/posts/2019/golang-parallel-testing/</guid>
-      <description>A brief reminder that go will default to testing packages in parallel</description>
     </item>
     
   </channel>
