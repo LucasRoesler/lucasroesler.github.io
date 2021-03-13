@@ -101,6 +101,7 @@ canonifyurls = true
     [menu.intro.params]
       iconset = "fas"
       icon = "file-alt"
+      text = "CV"
 
   [[menu.intro]]
     weight = 2
@@ -109,9 +110,10 @@ canonifyurls = true
     url = "/posts"
     [menu.intro.params]
       iconset = "fas"
+      text = "blog"
 
   [[menu.intro]]
-    weight = 3
+    weight = 1
     identifier = "description"
     name = "Description"
     url = "#a-few-more-details"
