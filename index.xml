@@ -299,5 +299,25 @@ https://www.linkedin.com/in/lucasroesler/
  M.S. in Mathematics, University of Connecticut (UConn), Storrs, Connecticut - May 2009</description>
     </item>
     
+    <item>
+      <title></title>
+      <link>https://lucasroesler.com/description/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lucasroesler.com/description/</guid>
+      <description>A few more details I have been a core contributor to OpenFaas since 2017. I implemented the secrets, logs, and profiles features as well as general contributions throughout the rest of the project including faas-swarm, faas-netes, faasd, the faas-provider, the certifier, and the Python function SDK.
+At Contiamo GmbH I am a senior engineer and lead the Platform team. We design the core architecture, operational and observability tooling, and the public API of Contiamo&amp;rsquo;s DataHub platform.</description>
+    </item>
+    
+    <item>
+      <title>introduction</title>
+      <link>https://lucasroesler.com/intro/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://lucasroesler.com/intro/</guid>
+      <description>I am senior engineer at contiamo.com, core contributor to OpenFaas, and an ex-mathematician.
+I work with Go, Python, Kubernetes, Serverless, Observability, and REST APIS. I like rock climbing, beer, hiking, and my motorcycle.</description>
+    </item>
+    
   </channel>
 </rss>
