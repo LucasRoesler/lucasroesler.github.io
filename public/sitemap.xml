@@ -408,7 +408,15 @@
   </url>
   
   <url>
+    <loc>https://lucasroesler.com/description/</loc>
+  </url>
+  
+  <url>
     <loc>https://lucasroesler.com/tags/ci/cd/</loc>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/intro/</loc>
   </url>
   
 </urlset>
