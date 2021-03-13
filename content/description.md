@@ -1,5 +1,5 @@
 ---
-draft: true
+draft: false
 ---
 ### A few more details ####
 I have been a core contributor to [OpenFaas][openfaas] since 2017. I implemented the secrets, logs, and profiles features as well as general contributions throughout the rest of the project including `faas-swarm`, `faas-netes`, `faasd`, the `faas-provider`, the `certifier`, and the Python function SDK.
