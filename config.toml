@@ -110,6 +110,7 @@ canonifyurls = true
     url = "/posts"
     [menu.intro.params]
       iconset = "fas"
+      icon = "rss"
       text = "blog"
 
   [[menu.intro]]
