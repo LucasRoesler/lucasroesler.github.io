@@ -3,11 +3,13 @@
 	"file": "resume.style.css",
 	"sourceRoot": "/home/lucas/code/lucasroesler.github.io",
 	"sources": [
-		"stdin"
+		"themes/lucas/assets/scss/resume/main.scss",
+		"themes/lucas/assets/scss/common/_variables.scss"
 	],
 	"sourcesContent": [
-		"html, body {\n    height: \"100%\";\n}\n\n.resume {\n    margin: 5vh auto;\n    max-width: 800px;\n\n    @media screen and (max-width: 1000px) {\n        margin: 5vh 15vw;\n    }\n}\n\na {\n    text-decoration: none;\n    color:unset;\n}\n"
+		"// Colours\n$color-background: #ffffff;\n$color-foreground: #000000;\n$color-hover: #c7efcf;\n$color-dark: #0C090D;\n\n$intro-color-background: #333745;\n$intro-color-foreground: #edf7ff;\n$intro-color-hover: #c7efcf;\n$intro-color-dark: #5C6B73;\n@import '../common/variables';\n\nhtml, body {\n    height: \"100%\";\n}\n\n.resume {\n    margin: 5vh auto;\n    max-width: 800px;\n\n    @media screen and (max-width: 1000px) {\n        margin: 5vh 15vw;\n    }\n}\n\na {\n    text-decoration: none;\n    color:unset;\n}\n\n\n.nav--mini {\n    margin-top: 5vh;\n\n    .btn--nav {\n        color: $intro-color-foreground;\n        background-color: $intro-color-dark;\n\n        border-radius: 0;\n        padding-right: 10px;\n        padding-left: 20px;\n\n        &:first-of-type {\n            border-radius: 5px 0 0 5px;\n        }\n\n        &:last-of-type {\n            border-radius: 0 5px 5px 0;\n        }\n\n        &:hover {\n            color: $intro-color-foreground;\n        }\n\n        @media screen and (max-width: $break-medium) {\n            font-size: .85rem;\n            padding: 10px;\n        }\n    }\n}",
+		"// Fonts\n$sans-serif: 'Helvetica Neue', 'Segoe UI', Helvetica, Arial, sans-serif;\n$font-size: 16px;\n\n// Responsive breaks\n$break-extra-small: 575px;\n$break-small: 576px;\n$break-medium: 768px;\n$break-large: 992px;\n$break-extra-large: 1200px;\n\n@mixin transition($args...) {\n    -webkit-transition: $args;\n       -moz-transition: $args;\n            transition: $args;\n}\n\n\n@media print {\n    .noprint {\n        display: none;\n    }\n}"
 	],
 	"names": [],
-	"mappings": "AAAA,AAAA,IAAI,CAAE,IAAI,AAAC,CACP,MAAM,CAAE,MAAM,CACjB,AAED,AAAA,OAAO,AAAC,CACJ,MAAM,CAAE,QAAQ,CAChB,SAAS,CAAE,KAAK,CAKnB,AAHG,MAAM,+BAJV,CAAA,AAAA,OAAO,AAAC,CAKA,MAAM,CAAE,QAAQ,CAEvB,CAAA,AAED,AAAA,CAAC,AAAC,CACE,eAAe,CAAE,IAAI,CACrB,KAAK,CAAC,KAAK,CACd"
+	"mappings": "ACkBA,MAAM,MACF,CAAA,AAAA,QAAQ,AAAC,CACL,OAAO,CAAE,IAAI,CAChB,CAAA,ADTL,AAAA,IAAI,CAAE,IAAI,AAAC,CACP,MAAM,CAAE,MAAM,CACjB,AAED,AAAA,OAAO,AAAC,CACJ,MAAM,CAAE,QAAQ,CAChB,SAAS,CAAE,KAAK,CAKnB,AAHG,MAAM,+BAJV,CAAA,AAAA,OAAO,AAAC,CAKA,MAAM,CAAE,QAAQ,CAEvB,CAAA,AAED,AAAA,CAAC,AAAC,CACE,eAAe,CAAE,IAAI,CACrB,KAAK,CAAC,KAAK,CACd,AAGD,AAAA,UAAU,AAAC,CACP,UAAU,CAAE,GAAG,CA2BlB,AA5BD,AAGI,UAHM,CAGN,SAAS,AAAC,CACN,KAAK,CA5BY,OAAO,CA6BxB,gBAAgB,CA3BL,OAAO,CA6BlB,aAAa,CAAE,CAAC,CAChB,aAAa,CAAE,IAAI,CACnB,YAAY,CAAE,IAAI,CAkBrB,AA3BL,AAWQ,UAXE,CAGN,SAAS,CAQH,aAAa,AAAC,CACZ,aAAa,CAAE,WAAW,CAC7B,AAbT,AAeQ,UAfE,CAGN,SAAS,CAYH,YAAY,AAAC,CACX,aAAa,CAAE,WAAW,CAC7B,AAjBT,AAmBQ,UAnBE,CAGN,SAAS,CAgBH,KAAK,AAAC,CACJ,KAAK,CA5CQ,OAAO,CA6CvB,AAED,MAAM,8BApBV,CAHJ,AAGI,UAHM,CAGN,SAAS,AAAC,CAqBF,SAAS,CAAE,MAAM,CACjB,OAAO,CAAE,IAAI,CAEpB,CAAA"
 }
