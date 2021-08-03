@@ -3,27 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://lucasroesler.com/tags/github-actions/</loc>
-    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+    <loc>https://lucasroesler.com/posts/2021/pydantic-settings-for-openfaas-functions/</loc>
+    <lastmod>2021-08-03T00:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://lucasroesler.com/</loc>
-    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+    <lastmod>2021-08-03T00:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://lucasroesler.com/tags/openfaas/</loc>
-    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+    <lastmod>2021-08-03T00:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://lucasroesler.com/posts/</loc>
-    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
+    <lastmod>2021-08-03T00:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://lucasroesler.com/tags/programming/</loc>
+    <lastmod>2021-08-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/pydantic/</loc>
+    <lastmod>2021-08-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/python/</loc>
+    <lastmod>2021-08-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/secrets/</loc>
+    <lastmod>2021-08-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/</loc>
+    <lastmod>2021-08-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/github-actions/</loc>
     <lastmod>2021-03-06T00:00:00+02:00</lastmod>
   </url>
   
@@ -33,17 +58,7 @@
   </url>
   
   <url>
-    <loc>https://lucasroesler.com/tags/python/</loc>
-    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lucasroesler.com/tags/serverless/</loc>
-    <lastmod>2021-03-06T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/tags/</loc>
     <lastmod>2021-03-06T00:00:00+02:00</lastmod>
   </url>
   
