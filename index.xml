@@ -6,7 +6,18 @@
     <description>Recent content on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Aug 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Easy settings management for Python functions with Pydantic</title>
+      <link>https://lucasroesler.com/posts/2021/pydantic-settings-for-openfaas-functions/</link>
+      <pubDate>Tue, 03 Aug 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/posts/2021/pydantic-settings-for-openfaas-functions/</guid>
+      <description>File this under quick tips and tricks for Python functions in OpenFaas.
+I just learned about Pydantic&amp;rsquo;s support for reading settings from secret files and it fits perfectly with secrets in OpenFaaS. If you love Python or you are writing Python functions in OpenFaas, this is a great way to simplify your configuration parsing.
+I am going to keep this short and sweet. Let&amp;rsquo;s say you have an OpenFaas function that needs to access a database.</description>
+    </item>
+    
     <item>
       <title>Using Tox and PyTest with OpenFaaS</title>
       <link>https://lucasroesler.com/posts/2021/test-python-functions/</link>

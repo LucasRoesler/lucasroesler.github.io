@@ -6,7 +6,52 @@
     <description>Recent content in Tags on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Mar 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Tue, 03 Aug 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>openfaas</title>
+      <link>https://lucasroesler.com/tags/openfaas/</link>
+      <pubDate>Tue, 03 Aug 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/openfaas/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>programming</title>
+      <link>https://lucasroesler.com/tags/programming/</link>
+      <pubDate>Tue, 03 Aug 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/programming/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>pydantic</title>
+      <link>https://lucasroesler.com/tags/pydantic/</link>
+      <pubDate>Tue, 03 Aug 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/pydantic/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>python</title>
+      <link>https://lucasroesler.com/tags/python/</link>
+      <pubDate>Tue, 03 Aug 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/python/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>secrets</title>
+      <link>https://lucasroesler.com/tags/secrets/</link>
+      <pubDate>Tue, 03 Aug 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/tags/secrets/</guid>
+      <description></description>
+    </item>
+    
     <item>
       <title>github actions</title>
       <link>https://lucasroesler.com/tags/github-actions/</link>
@@ -17,38 +62,11 @@
     </item>
     
     <item>
-      <title>openfaas</title>
-      <link>https://lucasroesler.com/tags/openfaas/</link>
-      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/openfaas/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>programming</title>
-      <link>https://lucasroesler.com/tags/programming/</link>
-      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/programming/</guid>
-      <description></description>
-    </item>
-    
-    <item>
       <title>pytest</title>
       <link>https://lucasroesler.com/tags/pytest/</link>
       <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
       
       <guid>https://lucasroesler.com/tags/pytest/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>python</title>
-      <link>https://lucasroesler.com/tags/python/</link>
-      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
-      
-      <guid>https://lucasroesler.com/tags/python/</guid>
       <description></description>
     </item>
     
