@@ -1,0 +1,172 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Introducing a walk-through for adding OpenTelemetry to your Python functions">
+    <meta property="og:title" content="A foray into OpenTelemetry with OpenFaaS" />
+<meta property="og:description" content="Introducing a walk-through for adding OpenTelemetry to your Python functions" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/" />
+<meta property="article:published_time" content="2021-12-12T00:00:00+02:00" />
+<meta property="article:modified_time" content="2021-12-12T00:00:00+02:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="A foray into OpenTelemetry with OpenFaaS"/>
+<meta name="twitter:description" content="Introducing a walk-through for adding OpenTelemetry to your Python functions"/>
+
+<meta property="og:title" content="A foray into OpenTelemetry with OpenFaaS" />
+<meta property="og:description" content="Introducing a walk-through for adding OpenTelemetry to your Python functions" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/" />
+<meta property="article:published_time" content="2021-12-12T00:00:00+02:00" />
+<meta property="article:modified_time" content="2021-12-12T00:00:00+02:00" />
+
+<meta itemprop="name" content="A foray into OpenTelemetry with OpenFaaS">
+<meta itemprop="description" content="Introducing a walk-through for adding OpenTelemetry to your Python functions">
+<meta itemprop="datePublished" content="2021-12-12T00:00:00+02:00" />
+<meta itemprop="dateModified" content="2021-12-12T00:00:00+02:00" />
+<meta itemprop="wordCount" content="1054">
+
+
+
+<meta itemprop="keywords" content="programming,openfaas,serverless,python,tracing,opentelemetry,observability,kubernetes," />
+
+
+
+    <title>
+        A foray into OpenTelemetry with OpenFaaS &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/">
+
+    
+    <link rel="stylesheet" href="https://lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/posts/2021/opentelemetry-and-openfaas/images/nicolas-picard-small-unspash.jpg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>A foray into OpenTelemetry with OpenFaaS</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>I have always been a fan of tracing. My first taste of it was with NewRelic, but the development of <a href="https://opentracing.io/">OpenTracing</a> and more recently <a href="https://opentelemetry.io/">OpenTelemetry</a> have made it an easy must have in every project I start. I have created a <a href="https://github.com/LucasRoesler/openfaas-tracing-walkthrough">new walk-through: Tracing and Observability with OpenFaaS</a> to show you how to add OpenTelemetry to your Python Flask functions.</p>
+<hr>
+<p>This post won&rsquo;t go through the walk-through, the walk-through already does that. Instead, I will offer some commentary on the experience and some next steps we should take.</p>
+<h2 id="set-up-and-configuring-opentelemetry">Set up and configuring OpenTelemetry</h2>
+<p>OpenTelemetry provides a set of vendor agnostic APIs, SDKs, and tooling to provide telemetry data for you applications. This means: tracing, logging, and metrics. This is an ambitious project to standardize the way we monitor and debug our applications in almost every popular language. This is great but has has certainly made the initial configuration slightly more complex. The minimal configuration of the Flask app looks something like this</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">resource <span style="color:#f92672">=</span> Resource(attributes<span style="color:#f92672">=</span>{SERVICE_NAME: NAME})
+provider <span style="color:#f92672">=</span> TracerProvider(resource<span style="color:#f92672">=</span>resource)
+
+exporter <span style="color:#f92672">=</span> OTLPSpanExporter()
+provider<span style="color:#f92672">.</span>add_span_processor(BatchSpanProcessor(exporter))
+
+trace<span style="color:#f92672">.</span>set_tracer_provider(provider)
+tracer <span style="color:#f92672">=</span> trace<span style="color:#f92672">.</span>get_tracer(__name__)
+
+FlaskInstrumentor()<span style="color:#f92672">.</span>instrument_app(app)
+</code></pre></div><p>Previously, I would have used Jaeger and OpenTracing and it would look something like this</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">config <span style="color:#f92672">=</span> Config(config<span style="color:#f92672">=</span>{}, service_name<span style="color:#f92672">=</span>NAME, validate<span style="color:#f92672">=</span>True)
+tracer <span style="color:#f92672">=</span>  config<span style="color:#f92672">.</span>initialize_tracer()
+tracing <span style="color:#f92672">=</span> FlaskTracing(tracer, True, app)
+</code></pre></div><p>It is slightly simpler, because OpenTracing, is slightly less agnostic putting more work onto the tracing provider. This means that the OpenTracing Jaeger provider does a little bit more work, whereas OpenTelemetry needs to expose more configuration options. OpenTelemetry introduces or exposes the concepts of the Resource, Exporter, and Provider that would previously be rolled together as just the Tracer.</p>
+<p>My first impression was &ldquo;oh no! what is all of this new stuff?&rdquo; Fortunately, OpenTelemetry is very <a href="https://12factor.net/config">12 Factor App</a> friendly, meaning most or all of the options can be configured via the environment variables. This also means that once you a familiar with what options you need to configure, you can probably hide this configuration behind a simple utility function. Of course, your milage may vary, these configuration options are exposed for a reason and may need to be tweaked based on your preferred language and observability stack.</p>
+<h2 id="backwards-compatibility-for-opentracing">Backwards compatibility for OpenTracing</h2>
+<p>In Python, I was able to completely customize the configuration with the correct <code>pip install</code> and environment variables. Notably, the walk-through integrates traces from NGINX and an OpenFaaS function. Currently NGINX can produce <em>OpenTracing</em> tracing headers with support for <a href="https://www.jaegertracing.io/">Jaeger</a>, <a href="https://zipkin.io/">Zipkin</a>, and Datadog. The default configuration in the Python OpenTelemetry SDK does not parse these headers, but it is very easy to enable it.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">pip install opentelemetry-propagator-jaeger
+
+</code></pre></div><p>and then set this environment variable</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">OTEL_PROPAGATORS</span>: <span style="color:#ae81ff">tracecontext,baggage,jaeger</span>
+</code></pre></div><p>This works really well in Python because it can dynamically import the required <code>opentelemetry-propagator-jaeger</code>, so we don&rsquo;t need to modify our function to enable this compatibility.</p>
+<h2 id="integrating-into-openfaas-templates">Integrating into OpenFaaS templates</h2>
+<p>The OpenTelemetry project, NGINX, and Grafana have made it very easy to install and integrate OpenTracing/OpenTelemetry with minimal changes to your code. If you are writing OpenFaaS functions, this flexibility will depend greatly on your template.</p>
+<p>The default <a href="https://github.com/openfaas/python-flask-template">Flask template</a> is a bit harder to integrate, primarily because it does not directly expose the request headers to your function implementation. We need access to the headers to initialize the tracing context. For my walk-through, I forked the original template to add an <code>initialize</code> hook so that the function can modify the Flask app initialization. In the template, I added</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#75715e"># the template</span>
+<span style="color:#66d9ef">if</span> hasattr(handler, <span style="color:#e6db74">&#34;initialize&#34;</span>):
+    app <span style="color:#f92672">=</span> handler<span style="color:#f92672">.</span>initialize(app)
+</code></pre></div><p>then in handler I can add</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize</span>(app: Flask) <span style="color:#f92672">-&gt;</span> Flask:
+    FlaskInstrumentor()<span style="color:#f92672">.</span>instrument_app(app)
+</code></pre></div><p>This actually seems like a good pattern that we should consider adopting in all of the base OpenFaaS templates. As it stands, we could probably standardize on OpenTelemetry in all templates because it is agnostic of your preferred vendor. Prior to OpenTelemetry, we would have had to pick a preferred SDK, it is much easier to abstract and integrate tracing into each template without adding this <code>initialize</code> hook. However, the pattern would be very useful in general, for example, to customize the logger or other Flask middlewares.</p>
+<p>On the other hand, the base templates are exactly that, generic and basic. I generally advise teams adopting OpenFaaS to take advantage of the custom template repository support. This allows teams to standardize and pre-configure their preferred libraries, utils, and configuration. This is how I work, a repository of private custom templates using my preferred libraries configured in the &ldquo;correct&rdquo; way. Correct for your team might be slightly different, so fork the base templates and &ldquo;fix&rdquo; them to your liking.</p>
+<h2 id="next-steps-and-tracing-openfaas-components">Next steps and tracing OpenFaaS components</h2>
+<p>The obvious next steps are to create more walk-throughs for other languages. Go is my preferred language, so that might happen before the end of the year. Check out the <a href="https://github.com/openfaas/templates/tree/master/template">template store repo</a>, for your favorite language. If you want to give OpenTelemetry a try, then <a href="https://github.com/LucasRoesler/openfaas-tracing-walkthrough">fork my walk-through</a> and provide a new sample function for your favorite language/template. The walk-through already provides all of the setup and configuration for the cluster and tracing, we only need to build out more sample functions.</p>
+<p>Part of the reason that I included NGINX in my walk-through is the (1) it is a very common component and (2) I wanted to have multiple components producing traces and showing those traces connecting together to provide a more complete picture of the system. Currently, OpenFaaS does not integrate any tracing. Of course, it does not prevent any tracing, it is very good about ensuring that headers are preserved both on the request and the response. This is true for both synchronous and asynchronous function calls.</p>
+<p>One area that would be nice to add tracing is in the OpenFaaS Gateway. The Gateway process is pretty simple and light weight, but it would be nice to have an explicit tracing span showing the Gateway timing, similar to thr tracing that NGINX provides. It can obviously be inferred from the existing traces, but explicit is better than implicit, as the <a href="https://www.python.org/dev/peps/pep-0020/">Zen of Python</a> says.</p>
+
+
+<figure class="image">
+    <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAATCAIAAAAf7rriAAACJklEQVR4nHxTaW/bOhDcXS4P2ZYTX3HsGM778vAQ4P2F/v&#43;fUBT92gStUx&#43;JD0mkSBaMW&#43;eokpEgQeAOR7Oc5cHF5Oa/f61z338sMqOFEHVdM3OMcXG/hA&#43;B48lMCIoxflzXCJZM3bwDEBExy1ohBO&#43;90Xq73&#43;edjrV2uVzleZuQbF1381wpudvtH7fbzGicza8lc1XZ97bXWinJh6Ly3r9VHvW7n24OgvR7ZMHK1xaAn&#43;7Xnmfz64f1CgBG816Wm97k7E2FktI61&#43;wZACSn5&#43;Zu&#43;0A7QUKaVwpeBuuaTeF0NidCAHiv4QjQuIAAYjAczq4mWZZppYqizDLDLKx152ddo3VZVqPR0HtvrY2v0euds7Vu/fObag2t80QEEYhISrnePB4VBnoxaTdp45pd7feHUMft7mDrhJB8psMOx5rbJRA2kBEhxbBwlLcO44tJiuTivtUyCGid2x8KALjshat&#43;aPSMw/H0&#43;NHpZwqMSZlQq9W6qkpjdFFWRqcI9P&#43;RJPCt9omMhEggWSIgM9vKhpiu1AgE74NqEUt6QUU&#43;/kBCiFJLJSUhseAQAj1xBCGzEIJBO5WJl8qMCPjnIG1RudL&#43;Pz1bFVF1O5kxt7d3vo5KtSHGELxq80tlHF1OT9oxptk6n7XK7XMeGan&#43;ayR&#43;Lz3lKp7I6UWn3RLaOh8NhpvNgzb6cnyxWq0/f/kaQur/c8NOyr3rdvn4rFzvg62aB&#43;NXAAAA///BUAhiQeLUlQAAAABJRU5ErkJggg==); background-size: cover;">
+        <source srcset="https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/images/connected-traces_hu3e13347060fe63428721b71eaddab891_259995_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/images/connected-traces_hu3e13347060fe63428721b71eaddab891_259995_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
+        <source srcset="https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/images/connected-traces_hu3e13347060fe63428721b71eaddab891_259995_1000x0_resize_box_2.png images/connected-traces.pngw" sizes="images/connected-traces.pngw" media="(max-width: 1499px)" >
+        
+        <source srcset="https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/images/connected-traces_hu3e13347060fe63428721b71eaddab891_259995_1200x0_resize_box_2.png 1200w" sizes="1200w">
+        <img
+            decoding="async"
+            loading="lazy"
+            width="500" height="474"
+            srcset="https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/images/connected-traces_hu3e13347060fe63428721b71eaddab891_259995_500x0_resize_box_2.png"
+            alt="Connected Traces: we can estimate that the Gateway adds ~10-15ms of overheard."
+            >
+    </picture>
+    <figcaption class="caption">Connected Traces: we can estimate that the Gateway adds ~10-15ms of overheard.</figcaption>
+</figure>
+
+<p>OpenTelemetry&rsquo;s flexibility makes this much easier add to OpenFaaS while also providing maximum flexibility. We started looking into awhile ago with OpenTracing, but never made much progress: <a href="https://github.com/openfaas/faas/issues/1354">https://github.com/openfaas/faas/issues/1354</a>. If this is something you are interested in or what to see, let me know on the <a href="https://github.com/openfaas/faas/issues/1354">Github issue</a> or <a href="https://twitter.com/Theaxer">Twitter</a>.</p>
+
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/programming/">programming</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/openfaas/">openfaas</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/serverless/">serverless</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/python/">python</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/tracing/">tracing</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/opentelemetry/">opentelemetry</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/observability/">observability</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/kubernetes/">kubernetes</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2021 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>
