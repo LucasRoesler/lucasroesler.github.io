@@ -13,7 +13,7 @@ tags:
   - kubernetes
 draft: false
 # Photo by <a href="https://unsplash.com/@artnok?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Nicolas Picard</a> on <a href="https://unsplash.com/?utm_source=unsplash&utm_medium=referral&utm_content=creditCopyText">Unsplash</a>
-coverImage: images/nicolas-picard-small-unspash.jpg
+coverImage: images/schar.jpg
 ---
 
 I have always been a fan of tracing. My first taste of it was with NewRelic, but the development of [OpenTracing](https://opentracing.io/) and more recently [OpenTelemetry](https://opentelemetry.io/) have made it an easy must have in every project I start. I have created a [new walk-through: Tracing and Observability with OpenFaaS](https://github.com/LucasRoesler/openfaas-tracing-walkthrough) to show you how to add OpenTelemetry to your Python Flask functions.
