@@ -3,17 +3,52 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>https://lucasroesler.com/tags/cooking/</loc>
+    <lastmod>2022-01-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/food/</loc>
+    <lastmod>2022-01-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/gluten-free/</loc>
+    <lastmod>2022-01-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/posts/2022/0-gluten-free-pancake/</loc>
+    <lastmod>2022-01-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/</loc>
+    <lastmod>2022-01-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/pancakes/</loc>
+    <lastmod>2022-01-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/posts/</loc>
+    <lastmod>2022-01-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>https://lucasroesler.com/tags/</loc>
+    <lastmod>2022-01-03T00:00:00+02:00</lastmod>
+  </url>
+  
+  <url>
     <loc>https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/</loc>
     <lastmod>2021-12-12T00:00:00+02:00</lastmod>
   </url>
   
   <url>
     <loc>https://lucasroesler.com/tags/kubernetes/</loc>
-    <lastmod>2021-12-12T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/</loc>
     <lastmod>2021-12-12T00:00:00+02:00</lastmod>
   </url>
   
@@ -33,11 +68,6 @@
   </url>
   
   <url>
-    <loc>https://lucasroesler.com/posts/</loc>
-    <lastmod>2021-12-12T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
     <loc>https://lucasroesler.com/tags/programming/</loc>
     <lastmod>2021-12-12T00:00:00+02:00</lastmod>
   </url>
@@ -49,11 +79,6 @@
   
   <url>
     <loc>https://lucasroesler.com/tags/serverless/</loc>
-    <lastmod>2021-12-12T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>https://lucasroesler.com/tags/</loc>
     <lastmod>2021-12-12T00:00:00+02:00</lastmod>
   </url>
   
