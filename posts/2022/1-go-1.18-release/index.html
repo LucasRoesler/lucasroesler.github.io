@@ -8,9 +8,10 @@
     <meta property="og:title" content="Go 1.18 Released" />
 <meta property="og:description" content="Generics, string utils, and workspaces, oh my!" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2022/1-go-1.18-release/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2022/1-go-1.18-release/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-20T00:00:00+02:00" />
 <meta property="article:modified_time" content="2022-03-20T00:00:00+02:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Go 1.18 Released"/>
@@ -19,20 +20,16 @@
 <meta property="og:title" content="Go 1.18 Released" />
 <meta property="og:description" content="Generics, string utils, and workspaces, oh my!" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2022/1-go-1.18-release/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2022/1-go-1.18-release/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-20T00:00:00+02:00" />
 <meta property="article:modified_time" content="2022-03-20T00:00:00+02:00" />
 
+
 <meta itemprop="name" content="Go 1.18 Released">
-<meta itemprop="description" content="Generics, string utils, and workspaces, oh my!">
-<meta itemprop="datePublished" content="2022-03-20T00:00:00+02:00" />
+<meta itemprop="description" content="Generics, string utils, and workspaces, oh my!"><meta itemprop="datePublished" content="2022-03-20T00:00:00+02:00" />
 <meta itemprop="dateModified" content="2022-03-20T00:00:00+02:00" />
 <meta itemprop="wordCount" content="886">
-
-
-
 <meta itemprop="keywords" content="golang,programming," />
-
 
 
     <title>
@@ -86,7 +83,7 @@
 </blockquote>
 <p>Basically, this can be <em>any</em> folder where the sub-folders are Go modules. Even if you don&rsquo;t use a monorepo, you will still want to create a workspace for any project with multiple components/repos. Creating a workspace will allow your editor/IDE to simultaneously lint and autocomplete all of the components in that workspace.</p>
 <p>I like to organize my <code>code</code> folder so that components are nested together in sub-folders:</p>
-<pre><code>code
+<pre tabindex="0"><code>code
 ├── company
 │   ├── componet-a
 │   ├── componet-b
@@ -99,7 +96,7 @@
     └── bug-repro
 </code></pre><p>As a result, previously, when I opened <code>company</code> in VSCode, linting would just be broken. It would complain about detecting multiple modules and just mark everything in red. It was not a workable dev environment until switched to a subdirectory for a single component.</p>
 <p>With Go 1.18, I can create a <code>go.work</code> workspace for my <code>company</code> folder like this</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd code/company
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd code/company
 go work init .
 go work use component-a
 go work use component-b

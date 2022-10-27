@@ -8,9 +8,10 @@
     <meta property="og:title" content="Developing OpenFaaS KinD-ly" />
 <meta property="og:description" content="Creating an isolated OpenFaaS Development environment with KinD" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2019/kind-development-for-openfaas/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2019/kind-development-for-openfaas/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-04-14T00:00:00+02:00" />
 <meta property="article:modified_time" content="2019-04-14T00:00:00+02:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Developing OpenFaaS KinD-ly"/>
@@ -19,20 +20,16 @@
 <meta property="og:title" content="Developing OpenFaaS KinD-ly" />
 <meta property="og:description" content="Creating an isolated OpenFaaS Development environment with KinD" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2019/kind-development-for-openfaas/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2019/kind-development-for-openfaas/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-04-14T00:00:00+02:00" />
 <meta property="article:modified_time" content="2019-04-14T00:00:00+02:00" />
 
+
 <meta itemprop="name" content="Developing OpenFaaS KinD-ly">
-<meta itemprop="description" content="Creating an isolated OpenFaaS Development environment with KinD">
-<meta itemprop="datePublished" content="2019-04-14T00:00:00+02:00" />
+<meta itemprop="description" content="Creating an isolated OpenFaaS Development environment with KinD"><meta itemprop="datePublished" content="2019-04-14T00:00:00+02:00" />
 <meta itemprop="dateModified" content="2019-04-14T00:00:00+02:00" />
 <meta itemprop="wordCount" content="634">
-
-
-
 <meta itemprop="keywords" content="programming,openfaas,development,kubernetes,kind," />
-
 
 
     <title>
@@ -73,7 +70,7 @@
 <h2 id="creating-a-dev-environment">Creating a dev environment</h2>
 <h3 id="start-a-kind-cluster">Start a KinD cluster</h3>
 <p>Because we are starting a cluster for development of OpenFaaS, I assume that you have <a href="https://golang.org/doc/install">go</a> and <a href="https://docs.docker.com/install/">docker</a> installed already.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># install/upgrade kind</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># install/upgrade kind</span>
 go get -u sigs.k8s.io/kind
 <span style="color:#75715e"># create a cluster</span>
 kind create cluster --name dev-openfaas
@@ -84,12 +81,12 @@ kubectl rollout status deploy coredns --watch -n kube-system
 </code></pre></div><h3 id="installing-helm">Installing Helm</h3>
 <p>You must have the <a href="https://helm.sh/docs/using_helm/#installing-the-helm-client">Helm client installed</a>.</p>
 <p>Then, setup the RBAC permissions to make the Helm tiller a cluster admin</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl -n kube-system create sa tiller
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl -n kube-system create sa tiller
 kubectl create clusterrolebinding tiller <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --clusterrole cluster-admin <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>  --serviceaccount<span style="color:#f92672">=</span>kube-system:tiller
 </code></pre></div><p>Then, install Helm into the cluster</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># export is not needed if you are in the original terminal used to setup KinD</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># export is not needed if you are in the original terminal used to setup KinD</span>
 export KUBECONFIG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>kind get kubeconfig-path --name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dev-openfaas&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 helm init --skip-refresh --upgrade --service-account tiller
 </code></pre></div><h3 id="installing-openfaas">Installing OpenFaaS</h3>
@@ -97,18 +94,18 @@ helm init --skip-refresh --upgrade --service-account tiller
 <ol>
 <li>
 <p>Setup the default namespaces</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl apply -f https://raw.githubusercontent.com/openfaas/faas-netes/master/namespaces.yml
 </code></pre></div></li>
 <li>
 <p>Setup Gateway basic auth credentials</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export PASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tester&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export PASSWORD<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;tester&#34;</span>
 kubectl -n openfaas create secret generic basic-auth <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--from-literal<span style="color:#f92672">=</span>basic-auth-user<span style="color:#f92672">=</span>admin <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>--from-literal<span style="color:#f92672">=</span>basic-auth-password<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span>$PASSWORD<span style="color:#e6db74">&#34;</span>
 </code></pre></div></li>
 <li>
 <p>Instll OpenFaaS via Helm</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm repo add openfaas https://openfaas.github.io/faas-netes/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">helm repo add openfaas https://openfaas.github.io/faas-netes/
 helm repo update
 helm upgrade openfaas --install openfaas/openfaas <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --namespace openfaas  <span style="color:#ae81ff">\
@@ -119,12 +116,12 @@ kubectl rollout status deploy gateway --watch -n openfaas
 </li>
 <li>
 <p>In a separate terminal, we need to expose the</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl -n openfaas port-forward deploy/gateway 31112:8080
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kubectl -n openfaas port-forward deploy/gateway 31112:8080
 </code></pre></div></li>
 <li>
 <p>Deploy a test function
 Now that we can access the gateway, we can deploy a test function with the <code>faas-cli</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export GATEWAY<span style="color:#f92672">=</span>http://localhost:31112
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">export GATEWAY<span style="color:#f92672">=</span>http://localhost:31112
 faas-cli login --gateway<span style="color:#f92672">=</span>$GATEWAY -u admin -p tester
 faas-cli store deploy nodeinfo --gateway<span style="color:#f92672">=</span>$GATEWAY
 echo <span style="color:#e6db74">&#34;&#34;</span> | faas-cli invoke nodeinfo --gateway<span style="color:#f92672">=</span>$GATEWAY
@@ -133,7 +130,7 @@ echo <span style="color:#e6db74">&#34;&#34;</span> | faas-cli invoke nodeinfo --
 <h3 id="deploy-a-local-development-version-of-the-kubernetes-provider">Deploy a local development version of the kubernetes provider</h3>
 <p>Now that we have this environment created, we can start testing our local development builds.</p>
 <p>If I want to test a local branch of the faas-netes project, I use the <code>kind load</code> command to copy the docker image from my local docker into kind cluster.  This a lot faster than pushing it to a registry and then pulling it back to my laptop!</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make build
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make build
 kind load docker-image --name dev-openfaas openfaas/faas-netes:latest
 export KUBECONFIG<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;</span><span style="color:#66d9ef">$(</span>kind get kubeconfig-path --name<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;dev-openfaas&#34;</span><span style="color:#66d9ef">)</span><span style="color:#e6db74">&#34;</span>
 helm upgrade openfaas --install openfaas/openfaas <span style="color:#ae81ff">\
@@ -145,7 +142,7 @@ helm upgrade openfaas --install openfaas/openfaas <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>    --set functionNamespace<span style="color:#f92672">=</span>openfaas-fn
 </code></pre></div><h3 id="cleaning-up">Cleaning up</h3>
 <p>If I ever get in trouble and want to start from scratch, I can always recreate the cluster in a minute</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kind delete cluster --name dev-openfaas
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">kind delete cluster --name dev-openfaas
 unset KUBECONFIG
 </code></pre></div><p>And start again!  I have moved most of this into a simple bash script that I have shared as <a href="https://gist.github.com/LucasRoesler/c029f7b7446f7c051522b8edb456b703">a gist.</a></p>
 <hr>

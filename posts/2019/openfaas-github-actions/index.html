@@ -8,9 +8,10 @@
     <meta property="og:title" content="Action Packed Functions" />
 <meta property="og:description" content="A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2019/openfaas-github-actions/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2019/openfaas-github-actions/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-09-28T00:00:00+02:00" />
 <meta property="article:modified_time" content="2019-09-28T00:00:00+02:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Action Packed Functions"/>
@@ -19,20 +20,16 @@
 <meta property="og:title" content="Action Packed Functions" />
 <meta property="og:description" content="A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2019/openfaas-github-actions/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2019/openfaas-github-actions/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-09-28T00:00:00+02:00" />
 <meta property="article:modified_time" content="2019-09-28T00:00:00+02:00" />
 
+
 <meta itemprop="name" content="Action Packed Functions">
-<meta itemprop="description" content="A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions">
-<meta itemprop="datePublished" content="2019-09-28T00:00:00+02:00" />
+<meta itemprop="description" content="A quick review of GitHub Actions and how to use them for CI/CD of your OpenFaaS Functions"><meta itemprop="datePublished" content="2019-09-28T00:00:00+02:00" />
 <meta itemprop="dateModified" content="2019-09-28T00:00:00+02:00" />
 <meta itemprop="wordCount" content="1337">
-
-
-
 <meta itemprop="keywords" content="programming,openfaas,development,github,github actions," />
-
 
 
     <title>
@@ -73,7 +70,7 @@
 <p>Back at the beginning of the year, I wrote a short walk-through on the OpenFaaS blog showing how to cleanly <a href="https://www.openfaas.com/blog/multifile-python-functions/">split Python functions into multiple modules</a>. Today, we will extend that <a href="https://github.com/LucasRoesler/openfaas-multifile-example">example repo</a> with a <a href="https://github.com/LucasRoesler/openfaas-multifile-example/pull/2/checks?check_run_id=202252631">GitHub Action Workflow</a> to make sure that the latest version of the function is <a href="https://cloud.docker.com/repository/docker/theaxer/wordcount">available to deploy</a>.</p>
 <h2 id="tldr">TL;DR</h2>
 <p>If you are a GitHub Actions expert already and just want to see the workflow files:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">CI</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">CI</span>
 
 <span style="color:#f92672">on</span>: [<span style="color:#ae81ff">push]</span>
 
@@ -123,7 +120,7 @@
 <li>push the function image.</li>
 </ol>
 <p>Each of these actions is effectively a Docker image, a command, and some optional metadata. For example, the template pull Action is just this bit of yaml</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#e6db74">&#39;OpenFaaS CLI Template Repo Pull Action&#39;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#e6db74">&#39;OpenFaaS CLI Template Repo Pull Action&#39;</span>
 <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#39;Pull templates from a remote repository&#39;</span>
 <span style="color:#f92672">author</span>: <span style="color:#e6db74">&#39;Lucas Roesler&#39;</span>
 <span style="color:#f92672">inputs</span>:
@@ -146,16 +143,16 @@
 
 <figure class="image">
     <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAICAIAAAB2/0i6AAAA7klEQVR4nHSP4U4CMRCEZ9ulxeMHL6C&#43;/7OZKBIQrr3ujulVDQkyP9pt9utkRp9fXnPO7i4Agc1Ga11UtbU25pxTpE958/Z5MuJW6hJnD16u451S2u2m948DgLkUAKVWAIcz7qUAgibawlYHaq7TNIEUEYIhBDMftIi4e1lNSaqIgM62AAJBa83M/lCSMUYzG/M48btWSAjpCdcT6L10lJBUgtTzTO9ca&#43;0&#43;8D5vj6XoahF12vsye72iG3f3n&#43;s/rWH7XkG3erH5RDP0SgG&#43;hTt87tADHWuvrdsIQf2yNRtBW&#43;xyfPTnViS&#43;AwAA//9pFJsv1LyWbgAAAABJRU5ErkJggg==); background-size: cover;">
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-secrets_hue71a18b139dec1959f2f795dab7eee62_150137_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-secrets_hue71a18b139dec1959f2f795dab7eee62_150137_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-secrets_hue71a18b139dec1959f2f795dab7eee62_150137_1000x0_resize_box_2.png github-secrets.pngw" sizes="github-secrets.pngw" media="(max-width: 1499px)" >
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-secrets_hue71a18b139dec1959f2f795dab7eee62_150137_500x0_resize_box_3.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-secrets_hue71a18b139dec1959f2f795dab7eee62_150137_800x0_resize_box_3.png 800w" sizes="800w" media="(max-width: 1199px)" >
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-secrets_hue71a18b139dec1959f2f795dab7eee62_150137_1000x0_resize_box_3.png github-secrets.pngw" sizes="github-secrets.pngw" media="(max-width: 1499px)" >
         
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-secrets_hue71a18b139dec1959f2f795dab7eee62_150137_1200x0_resize_box_2.png 1200w" sizes="1200w">
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-secrets_hue71a18b139dec1959f2f795dab7eee62_150137_1200x0_resize_box_3.png 1200w" sizes="1200w">
         <img
             decoding="async"
             loading="lazy"
             width="500" height="189"
-            srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-secrets_hue71a18b139dec1959f2f795dab7eee62_150137_500x0_resize_box_2.png"
+            srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-secrets_hue71a18b139dec1959f2f795dab7eee62_150137_500x0_resize_box_3.png"
             alt="Setup docker credentials as repository secrets"
             >
     </picture>
@@ -168,16 +165,16 @@
 
 <figure class="image">
     <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAHCAIAAACHqfpvAAAAv0lEQVR4nIyPUUoDQRBEu2pGzGYN4pf/asj9z&#43;QJgklme2enS8YFIRCD9dfQRb2X94cDgDrXiHjM9KW1EAmFQMJsrtVuBWbZzCQVd5pth/F5OwgW0qWUyX9qiTKY0P&#43;lRKaXN46vy/ET7x97Ev37UnZPY84ZgCSSEQHgdD67zzfH86UUSevRIqxj94671z&#43;Af8MrDWAYNkut0zTVWL3uJV&#43;V&#43;dCUNuNuRTl9HaMt/10OWesODBlTl7&#43;//B0AAP//lRtpb&#43;589ZwAAAAASUVORK5CYII=); background-size: cover;">
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup_huba26000e2734e8b72619904bc0666970_289808_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup_huba26000e2734e8b72619904bc0666970_289808_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup_huba26000e2734e8b72619904bc0666970_289808_1000x0_resize_box_2.png github-actions-setup.pngw" sizes="github-actions-setup.pngw" media="(max-width: 1499px)" >
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup_huba26000e2734e8b72619904bc0666970_289808_500x0_resize_box_3.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup_huba26000e2734e8b72619904bc0666970_289808_800x0_resize_box_3.png 800w" sizes="800w" media="(max-width: 1199px)" >
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup_huba26000e2734e8b72619904bc0666970_289808_1000x0_resize_box_3.png github-actions-setup.pngw" sizes="github-actions-setup.pngw" media="(max-width: 1499px)" >
         
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup_huba26000e2734e8b72619904bc0666970_289808_1200x0_resize_box_2.png 1200w" sizes="1200w">
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup_huba26000e2734e8b72619904bc0666970_289808_1200x0_resize_box_3.png 1200w" sizes="1200w">
         <img
             decoding="async"
             loading="lazy"
             width="500" height="175"
-            srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup_huba26000e2734e8b72619904bc0666970_289808_500x0_resize_box_2.png"
+            srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup_huba26000e2734e8b72619904bc0666970_289808_500x0_resize_box_3.png"
             alt="Actions welcome screen"
             >
     </picture>
@@ -190,16 +187,16 @@ If you have already setup some actions, it will show the previous workflow runs.
 
 <figure class="image">
     <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N&#43;mxAAABBElEQVR4nIyS0W4qMQxEx7F3s3tvH3joL9D//zAkUCnsKok9VUAqlaCl8zjK8UkU23b7VgMkVTUiANIbe4EkAqDUirsMm6z/zDyZIISstbLDAP0yBS5iZqoqIqo65RwMdz&#43;dlvAQp5V1EaDWcj8eZCm3vrmLSMOgGbGEH8&#43;pHxEdx/EB/C1mOs8TwKwc4GNiLwXUccxK1bQs608wCZFkZq214WIiYCASIonmMbfWam0PYUkyv8w8UtW&#43;OvPw&#43;nE8/35pwJvvd/uUEknpWq7rYhF8Bvao6eZ1c36/WaYJ9hfyaj7sDpeP7&#43;&#43;vtbbWTET6QjxLSmn6P3tp1xVQ1VLqZwAAAP//5/aW9uROL4AAAAAASUVORK5CYII=); background-size: cover;">
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup-writing_hu35395197a164a2a0b182472d0804e005_414308_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup-writing_hu35395197a164a2a0b182472d0804e005_414308_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup-writing_hu35395197a164a2a0b182472d0804e005_414308_1000x0_resize_box_2.png github-actions-setup-writing.pngw" sizes="github-actions-setup-writing.pngw" media="(max-width: 1499px)" >
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup-writing_hu35395197a164a2a0b182472d0804e005_414308_500x0_resize_box_3.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup-writing_hu35395197a164a2a0b182472d0804e005_414308_800x0_resize_box_3.png 800w" sizes="800w" media="(max-width: 1199px)" >
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup-writing_hu35395197a164a2a0b182472d0804e005_414308_1000x0_resize_box_3.png github-actions-setup-writing.pngw" sizes="github-actions-setup-writing.pngw" media="(max-width: 1499px)" >
         
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup-writing_hu35395197a164a2a0b182472d0804e005_414308_1200x0_resize_box_2.png 1200w" sizes="1200w">
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup-writing_hu35395197a164a2a0b182472d0804e005_414308_1200x0_resize_box_3.png 1200w" sizes="1200w">
         <img
             decoding="async"
             loading="lazy"
             width="500" height="242"
-            srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup-writing_hu35395197a164a2a0b182472d0804e005_414308_500x0_resize_box_2.png"
+            srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-setup-writing_hu35395197a164a2a0b182472d0804e005_414308_500x0_resize_box_3.png"
             alt="Actions text editor"
             >
     </picture>
@@ -261,7 +258,7 @@ If you have already setup some actions, it will show the previous workflow runs.
 </li>
 </ol>
 <p>Altogether, the workflow should look like</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">CI</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">CI</span>
 
 <span style="color:#f92672">on</span>: [<span style="color:#ae81ff">push]</span>
 
@@ -295,15 +292,15 @@ If you have already setup some actions, it will show the previous workflow runs.
 
 
 <figure class="image">
-    <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAXCAIAAACEf/j0AAACX0lEQVR4nJxT227TWhDdM/uWxLe0J0ftSVudPrbnIPHCl/ABfB5vfEhfQCCBeEMgULm0drBN473tPYPscGlUSFtWnjL2mlkza1ntzvfEDSBjc3j/iAWzYI3qonOfTt7hTZgrEJMBZVEbtDBU4J/9g77dHwBACeataba7s4OyV9F1XQg0m20/f/GyLKsNXARUSRxfLJu8KLxvAYGZiSjP8/4vwO&#43;YPIhVTdN0gbq21Up676WUiJgXCwDADWToZapsmp2f54uy7puBGF4HlGrzvkxBCFCDAMiSiLiHUoqJYEAIAREFAIVQVjWt3bWfokbWCiGKxefhfsBXLv/Lohg2ktyvBkLc0q2BjH/P/rod7RIUADIzwC2i1guWGAKpsqoAxGy2rbVuGmeNQYmh6391/cU5d1UxUSAKiFJJKftgBOqg&#43;74OdKETPCQBYHUNFgz9k7UoKz2xE6I4GnvfRknkvQfmaZo0jZMyMdooJdu2HZwjrVVZ1Xmx&#43;EY2qErnPp7lTIQ9YOjNgRgRnCtWYbTGAMJyuST6OVpJRK311nRa11WSJChl61trjfeemZ1xgNi2bTSZWGtP33&#43;4fAVp7CiaTP47PqqrMktTJeV4PBqNRkkSx3GEKLMss8YkaSolZml6sD9HxKqu&#43;&#43;wf/3&#43;nKIo0iffmc60VMb/NXasz8g0LUtF2aGqBEpUWTF2du7NXq7GIEg7&#43;PexEwGTtS2BPVHebre6tstbCXNx9cC8xaRtaowwzPTl5Wjx6c21U1HgrujjNnz18fLlK1TVjf1ilx2TE67BeBxNFG2jOOSL&#43;GgAA//&#43;BUDi58BRN&#43;wAAAABJRU5ErkJggg==); background-size: cover;">
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-commit_hu513f82d239d704f93cbd0cc62cb95a74_40358_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-commit_hu513f82d239d704f93cbd0cc62cb95a74_40358_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
+    <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAXCAIAAACEf/j0AAACXklEQVR4nJxT227TWhDdM/uWxLe0J0ftSVudPraAxAtfwgfwebzxIX0BgQTiDYFA5dLawTaN97b3DLIDKFUhbVl5ythrZs2sZbU73xM3gIzN4cMjFsyCNaqLzn05&#43;YA3Ya5ATAaURW3QwlCB//YP&#43;nZ/AQAlmLem2e7ODspeRdd1IdBstv3y1euyrDZwEVAlcXyxbPKi8L4FBGYmojzP&#43;78Af2LyIFY1TdMF6tpWK&#43;m9l1IiYl4sAAA3kKGXqbJpdn6eL8q6bwZieB1Qqs37MgUhQDGxEJAlEXEPpRQTwYAQAiIKAAqhrGoiXr9WP3k0skKIYvF1qABfufxvi2KQKLlfDYS4pVvDZPx39s/taGtQAMjMALeIWi9YYgikyqoCELPZtta6aZw1BiWGrv/V9Tfn3FXFRIEoIEolpeyDEaiD7uc60IVO8JAEgNU1WDD0Ty5FWemJnRDF0dj7Nkoi7z0wT9OkaZyUidFGKdm27eAcaa3Kqs6LxQ&#43;yQVU69/ksZyLsAUNvDsSI4FyxCqM1BhCWy&#43;W620oiaq23ptO6rpIkQSlb31prvPfM7IwDxLZto8nEWnv68dP6FaSxo2gyuXN8VFdllqZKyvF4NBqNkiSO4whRZllmjUnSVErM0vRgf46IVV332T&#43;&#43;e68oijSJ9&#43;ZzrRUxv89dqzPyDQtS0XZoaoESlRZMXZ27szersYgSDv4/7ETA5NKXwJ6o7jZb3VtlrYW5uP/oQWLSNrRGGWZ6dvK8ePLu2qio8VZ0cZq/ePx0vUrVNWN/WaXHZMTbcLkOJoo20JxzRPw9AAD//32sOLjKba/zAAAAAElFTkSuQmCC); background-size: cover;">
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-commit_hu513f82d239d704f93cbd0cc62cb95a74_40358_500x0_resize_box_3.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-commit_hu513f82d239d704f93cbd0cc62cb95a74_40358_800x0_resize_box_3.png 800w" sizes="800w" media="(max-width: 1199px)" >
         
         <img
             decoding="async"
             loading="lazy"
             width="500" height="578"
-            srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-commit_hu513f82d239d704f93cbd0cc62cb95a74_40358_500x0_resize_box_2.png"
+            srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-commit_hu513f82d239d704f93cbd0cc62cb95a74_40358_500x0_resize_box_3.png"
             alt="Committing the workflow"
             >
     </picture>
@@ -315,16 +312,16 @@ If you have already setup some actions, it will show the previous workflow runs.
 
 <figure class="image">
     <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAJCAIAAAC9o5sfAAAA10lEQVR4nIyQu07sQBBEqx8zdx/WlUAiAiICAiR&#43;i//kh5CxvHbP9MygXRJbWgwn6&#43;B0lUqfXp9DFmYiYptOyUsDCGiAu&#43;NnCFAfffYchWrD/tgFolorAEtJ4hVHWEpxOsPqL2&#43;WqwGSPm4&#43;31V1mmYzU72mXlCW8xcRun94bK0BYJH/t3cxBIDmeXIvG50vFViX978YD4cDgK47juNpGIYtm2glm6Vam3s2S9uxAFprvLxDDPvdLuetkRfBtJIJ6Pv&#43;e&#43;1fEeaVnHMW1b&#43;YALyUrwAAAP//N1FZzAyjE1oAAAAASUVORK5CYII=); background-size: cover;">
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-run_hu7c92ca0a03a3b65be15066579ab7800d_297626_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-run_hu7c92ca0a03a3b65be15066579ab7800d_297626_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-run_hu7c92ca0a03a3b65be15066579ab7800d_297626_1000x0_resize_box_2.png github-actions-run.pngw" sizes="github-actions-run.pngw" media="(max-width: 1499px)" >
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-run_hu7c92ca0a03a3b65be15066579ab7800d_297626_500x0_resize_box_3.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-run_hu7c92ca0a03a3b65be15066579ab7800d_297626_800x0_resize_box_3.png 800w" sizes="800w" media="(max-width: 1199px)" >
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-run_hu7c92ca0a03a3b65be15066579ab7800d_297626_1000x0_resize_box_3.png github-actions-run.pngw" sizes="github-actions-run.pngw" media="(max-width: 1499px)" >
         
-        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-run_hu7c92ca0a03a3b65be15066579ab7800d_297626_1200x0_resize_box_2.png 1200w" sizes="1200w">
+        <source srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-run_hu7c92ca0a03a3b65be15066579ab7800d_297626_1200x0_resize_box_3.png 1200w" sizes="1200w">
         <img
             decoding="async"
             loading="lazy"
             width="500" height="226"
-            srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-run_hu7c92ca0a03a3b65be15066579ab7800d_297626_500x0_resize_box_2.png"
+            srcset="https://lucasroesler.com/posts/2019/openfaas-github-actions/github-actions-run_hu7c92ca0a03a3b65be15066579ab7800d_297626_500x0_resize_box_3.png"
             alt="Workflow logs"
             >
     </picture>
@@ -334,7 +331,7 @@ If you have already setup some actions, it will show the previous workflow runs.
 <h2 id="next-steps">Next Steps</h2>
 <p>This is just an experiment while GitHub Actions is in beta. But the next step will of course be a GitHub Action to keep the OpenFaaS action up-to-date with the <code>faas-cli</code> releases.</p>
 <p>Additionally, there is some <a href="https://github.com/openfaas/faas-cli/pull/668">interesting work currently going on</a> that should help simplify this workflow even more. We want to add the ability to save the template dependencies to the project repository so that we can pull all of the dependencies with a single command <code>faas-cli template pull stack</code>.  For a standard OpenFaaS project using the default <code>stack.yml</code>, the basic workflow will be completely standardized and require almost no configuration, like this</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">CI</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">name</span>: <span style="color:#ae81ff">CI</span>
 
 <span style="color:#f92672">on</span>: [<span style="color:#ae81ff">push]</span>
 
