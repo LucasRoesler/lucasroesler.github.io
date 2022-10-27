@@ -9,9 +9,10 @@
 <meta property="og:description" content="An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don&rsquo;t own the code in the app. A recently added a feature to faasd got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app!
 This post will show you how to quickly deploy Postgresql along with an event listener and some custom functions. From there it’s up to you what you build." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-01-30T00:00:00+02:00" />
 <meta property="article:modified_time" content="2021-01-30T00:00:00+02:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Event driven functions powered by Postgres"/>
@@ -22,21 +23,17 @@ This post will show you how to quickly deploy Postgresql along with an event lis
 <meta property="og:description" content="An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don&rsquo;t own the code in the app. A recently added a feature to faasd got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app!
 This post will show you how to quickly deploy Postgresql along with an event listener and some custom functions. From there it’s up to you what you build." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-01-30T00:00:00+02:00" />
 <meta property="article:modified_time" content="2021-01-30T00:00:00+02:00" />
 
+
 <meta itemprop="name" content="Event driven functions powered by Postgres">
 <meta itemprop="description" content="An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don&rsquo;t own the code in the app. A recently added a feature to faasd got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app!
-This post will show you how to quickly deploy Postgresql along with an event listener and some custom functions. From there it’s up to you what you build.">
-<meta itemprop="datePublished" content="2021-01-30T00:00:00+02:00" />
+This post will show you how to quickly deploy Postgresql along with an event listener and some custom functions. From there it’s up to you what you build."><meta itemprop="datePublished" content="2021-01-30T00:00:00+02:00" />
 <meta itemprop="dateModified" content="2021-01-30T00:00:00+02:00" />
 <meta itemprop="wordCount" content="1193">
-
-
-
 <meta itemprop="keywords" content="programming,openfaas,serverless,postgres,wal,event driven," />
-
 
 
     <title>
@@ -82,7 +79,7 @@ This post will show you how to quickly deploy Postgresql along with an event lis
 <p>I started looking at <a href="https://github.com/eulerto/wal2json"><code>wal2json</code></a> and but ultimately ended up looking at <a href="https://github.com/ihippik/wal-listener"><code>wal-listener</code></a> because I looked at the OpenFaaS ecosystem and we already have event driven functions via the <a href="https://github.com/openfaas/nats-connector"><code>nats-connector</code></a> and <code>faasd</code> <em>already</em> installs NATS. With <code>wal-listenr</code> plus `Postgres just work directly on top of that.</p>
 <h2 id="get-started">Get started</h2>
 <p>If you have <code>faasd</code> up and running, then you can skip this part, but if not, then I recommend you grab <a href="https://multipass.run/"><code>multipass</code></a>, start a new VM and run this</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone https://github.com/openfaas/faasd
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone https://github.com/openfaas/faasd
 cd faasd
 
 ./hack/install.sh
@@ -92,12 +89,12 @@ cd faasd
 <ol>
 <li>
 <p>clone the example repo</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone https://github.com/LucasRoesler/openfaas-wal-listener.git
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone https://github.com/LucasRoesler/openfaas-wal-listener.git
 cd openfaas-wal-listener
 </code></pre></div></li>
 <li>
 <p>Copy the new docker-compose</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make install 
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make install 
 <span style="color:#75715e"># or manually run </span>
 <span style="color:#75715e"># sudo cp -rf postgres /var/lib/faasd</span>
 <span style="color:#75715e"># sudo mkdir -p /var/lib/faasd/postgres/pgdata</span>
@@ -108,19 +105,19 @@ cd openfaas-wal-listener
 </code></pre></div></li>
 <li>
 <p>Restart faasd</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make restart
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make restart
 <span style="color:#75715e"># or manually: sudo systemctl restart faasd faasd-provider</span>
 </code></pre></div></li>
 <li>
 <p>Deploy a function to receive database events and print them out</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">faas-cli deploy --name receive-event <span style="color:#ae81ff">\
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">faas-cli deploy --name receive-event <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --image theaxer/receive-message:latest <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --fprocess<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./handler&#39;</span> <span style="color:#ae81ff">\
 </span><span style="color:#ae81ff"></span>   --annotation topic<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sample_app&#34;</span>
 </code></pre></div></li>
 </ol>
 <p>You can then verify that the connector is sending events to tne receiver fucntion by manually publishing the topic (you need to install the <a href="https://github.com/nats-io/natscli">natscli</a>)</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ nats pub sample_app <span style="color:#e6db74">&#34;manual push&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ nats pub sample_app <span style="color:#e6db74">&#34;manual push&#34;</span>
 15:21:39 Published <span style="color:#ae81ff">11</span> bytes to <span style="color:#e6db74">&#34;sample_app&#34;</span>
 $ faas-cli logs receive-event
 2021-01-24T14:21:17Z 2021/01/24 14:21:17 Started logging stderr from <span style="color:#66d9ef">function</span>.
@@ -135,7 +132,7 @@ $ faas-cli logs receive-event
 2021-01-24T14:21:39Z 2021/01/24 14:21:39 stderr: 2021/01/24 14:21:39 received <span style="color:#e6db74">&#34;manual push&#34;</span>
 </code></pre></div><h2 id="verify-db-events-are-sent">Verify db events are sent</h2>
 <p>The example repo contains a small SQL script that will create a <code>User</code> table and upsert several users, the events from <code>wal-listener</code> will look like</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
     <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;cd03a0b0-8c98-4809-9347-9f469c773de0&#34;</span>,
     <span style="color:#f92672">&#34;schema&#34;</span>: <span style="color:#e6db74">&#34;public&#34;</span>,
     <span style="color:#f92672">&#34;table&#34;</span>: <span style="color:#e6db74">&#34;users&#34;</span>,
@@ -153,7 +150,7 @@ $ faas-cli logs receive-event
 <ol>
 <li>
 <p>Generate some changes in the db</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> EXTENSION <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> <span style="color:#e6db74">&#34;uuid-ossp&#34;</span>;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> EXTENSION <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> <span style="color:#e6db74">&#34;uuid-ossp&#34;</span>;
 
 <span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> <span style="color:#e6db74">&#34;users&#34;</span> (
     id uuid <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> <span style="color:#66d9ef">DEFAULT</span> uuid_generate_v4(),
@@ -176,17 +173,17 @@ $ faas-cli logs receive-event
     RETURNING <span style="color:#f92672">*</span>;
 </code></pre></div><p>This script is safe to run several time, on the repeated runs it will generate UPDATE events for the function.</p>
 <p>You can run it with the Makefile (or manually), the db password is <code>supersecret</code></p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make init-db
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make init-db
 <span style="color:#75715e"># psql -U postgres -h localhost -d app -f postgres/init_app.sql</span>
 </code></pre></div></li>
 <li>
 <p>You can then see the logs as wal-listener reacts to the inserts by using</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo journalctl -f -t openfaas:wal-listener --since<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;5 minutes ago&#34;</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo journalctl -f -t openfaas:wal-listener --since<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;5 minutes ago&#34;</span>
 </code></pre></div><p>These are cool, but magic is when we look at the function logs.</p>
 </li>
 <li>
 <p>Finally, see that our receiver function was invoked</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ faas-cli logs receive-event
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ faas-cli logs receive-event
 POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">386</span>
 stderr: 2021/01/24 15:04:25 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;92c431a7-9027-4656-9d39-f52ee90d5dd6\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;John Wick\&#34;,\&#34;email\&#34;:\&#34;wick@trouble.com\&#34;,\&#34;id\&#34;:\&#34;99a9c7bf-8f31-4c30-998e-9740f87bdaa0\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:04:25.58604Z\&#34;}&#34;</span>
 POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">383</span>

@@ -6,7 +6,16 @@
     <description>Recent content in programming on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 20 Mar 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Thu, 27 Oct 2022 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/programming/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hard won lessons about Github Actions: Really fixed it this time, number 42.</title>
+      <link>https://lucasroesler.com/posts/2022/2-github-actions-lessons/</link>
+      <pubDate>Thu, 27 Oct 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/posts/2022/2-github-actions-lessons/</guid>
+      <description>&lt;p&gt;I have spent the two weeks modernizing a long dormant project at Contiamo. Not only did this require updating various dependencies and subsequently parts of the code base, but it also meant updating an old Jenkinfile into a Github Action workflow. 😬😬😬&lt;/p&gt;</description>
+    </item>
+    
     <item>
       <title>Go 1.18 Released</title>
       <link>https://lucasroesler.com/posts/2022/1-go-1.18-release/</link>

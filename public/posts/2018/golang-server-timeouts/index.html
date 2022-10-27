@@ -10,9 +10,10 @@
 happens in long debugging session in software development, my final fix was
 one line!" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2018/golang-server-timeouts/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2018/golang-server-timeouts/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-07-29T00:00:00+02:00" />
 <meta property="article:modified_time" content="2018-07-29T00:00:00+02:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Golang long-polling: a tale of server timeouts"/>
@@ -25,22 +26,18 @@ one line!"/>
 happens in long debugging session in software development, my final fix was
 one line!" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2018/golang-server-timeouts/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2018/golang-server-timeouts/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-07-29T00:00:00+02:00" />
 <meta property="article:modified_time" content="2018-07-29T00:00:00+02:00" />
+
 
 <meta itemprop="name" content="Golang long-polling: a tale of server timeouts">
 <meta itemprop="description" content="I recently had a week long battle implementing HTTP long-polling. As so often
 happens in long debugging session in software development, my final fix was
-one line!">
-<meta itemprop="datePublished" content="2018-07-29T00:00:00+02:00" />
+one line!"><meta itemprop="datePublished" content="2018-07-29T00:00:00+02:00" />
 <meta itemprop="dateModified" content="2018-07-29T00:00:00+02:00" />
 <meta itemprop="wordCount" content="717">
-
-
-
 <meta itemprop="keywords" content="programming,http,golang,long-polling," />
-
 
 
     <title>
@@ -101,7 +98,7 @@ We settled on the follow request sequence
 
 
 <figure class="image">
-    <picture style="background: url(data:image/jpeg;base64,/9j/2wCEAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDIBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIABIAFAMBIgACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5&#43;gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4&#43;Tl5ufo6ery8/T19vf4&#43;fr/2gAMAwEAAhEDEQA/APc2lSDdmcoCx&#43;8hPNEJmDylSsilvvHjt0/OpMTZLR&#43;UfmPXIOPTvUaoHuJFdGBz95D8vTv79aAJt1x/zzT/AL6o3T/88k/76qaigCOEAK2AB81U7pjHkoSpLc7TjNXIvun61Sven/AqAGRSyFOZHPP96n&#43;ZJ/fb86hh/wBX&#43;NSUAf/Z); background-size: cover;">
+    <picture style="background: url(data:image/jpeg;base64,/9j/2wCEAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDIBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AAAsIABIAFAEBEQD/xADSAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5&#43;v/aAAgBAQAAPwD3NpUg3ZnKAsfvITzRCZg8pUrIpb7x47dPzqbdcf8APNP&#43;&#43;qbibJaPyj8x65Bx6d6jVA9xIrowOfvIfl6d/frVyo4QArYAHzVTumMeShKktztOM1HFLIU5kc8/3q//2Q==); background-size: cover;">
         <source srcset="https://lucasroesler.com/posts/2018/golang-server-timeouts/longpolling_hue67e01cf9d3f22dd0d57962d76080ae0_35609_500x0_resize_q75_box.jpg 500w" sizes="500w" media="(max-width: 799px)">
         <source srcset="https://lucasroesler.com/posts/2018/golang-server-timeouts/longpolling_hue67e01cf9d3f22dd0d57962d76080ae0_35609_800x0_resize_q75_box.jpg 800w" sizes="800w" media="(max-width: 1199px)" >
         
@@ -120,7 +117,7 @@ We settled on the follow request sequence
 the polling parameters</p>
 <p>A very simple example that replicates this long polling sequence (but with GET parameters) looks like
 this</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
 
 <span style="color:#f92672">import</span> (
 	<span style="color:#e6db74">&#34;context&#34;</span>
@@ -213,12 +210,12 @@ this</p>
 </code></pre></div><p>You can run this at <a href="https://play.golang.org/p/kXMm-mE-tgl">https://play.golang.org/p/kXMm-mE-tgl</a></p>
 <p>My troubles, when implementing this and then exposing it with an nginx proxy
 was complicated by this line</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">	<span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Config</span>.<span style="color:#a6e22e">WriteTimeout</span> = <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">	<span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Config</span>.<span style="color:#a6e22e">WriteTimeout</span> = <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>
 </code></pre></div><p>When we fist implemented the REST api, we set the default server timeouts to
 10 seconds, but, when I started implementing the long polling, I set the
 minimum wait to 15 seconds. This results in sporadic 502 errors from nginx.
 Nginx was actually generating an error:</p>
-<pre><code>upstream prematurely closed connection while reading response header from upstream
+<pre tabindex="0"><code>upstream prematurely closed connection while reading response header from upstream
 </code></pre><p>Ultimately, the error message is correct and points to the exact issue (go
 closing the request due to the timeout and then my handler trying to write to
 it after it is closed), but the search results online were not super helpful.

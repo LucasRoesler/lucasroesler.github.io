@@ -8,9 +8,10 @@
     <meta property="og:title" content="Moving the data directory of Multipass and Docker" />
 <meta property="og:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2020/multipass-data-partition/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2020/multipass-data-partition/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-12-13T00:00:00+02:00" />
 <meta property="article:modified_time" content="2020-12-13T00:00:00+02:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Moving the data directory of Multipass and Docker"/>
@@ -19,20 +20,16 @@
 <meta property="og:title" content="Moving the data directory of Multipass and Docker" />
 <meta property="og:description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2020/multipass-data-partition/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2020/multipass-data-partition/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2020-12-13T00:00:00+02:00" />
 <meta property="article:modified_time" content="2020-12-13T00:00:00+02:00" />
 
+
 <meta itemprop="name" content="Moving the data directory of Multipass and Docker">
-<meta itemprop="description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too.">
-<meta itemprop="datePublished" content="2020-12-13T00:00:00+02:00" />
+<meta itemprop="description" content="This weekend was my first adventure in Snaps. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &ldquo;disk is almost out of space&rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too."><meta itemprop="datePublished" content="2020-12-13T00:00:00+02:00" />
 <meta itemprop="dateModified" content="2020-12-13T00:00:00+02:00" />
 <meta itemprop="wordCount" content="1055">
-
-
-
 <meta itemprop="keywords" content="programming,multipass,docker," />
-
 
 
     <title>
@@ -83,67 +80,67 @@
 <ol>
 <li>First I cleaned up the existing Docker data,</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">docker system prune -f --volumes --all
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">docker system prune -f --volumes --all
 </code></pre></div><p>You can probably skip this, but I prefer fresh starts.</p>
 <ol start="2">
 <li>Then, stop the docker daemon:</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo service docker stop
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo service docker stop
 </code></pre></div><ol start="3">
 <li>Next, create your new data folder</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir -p /home/docker/data
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir -p /home/docker/data
 </code></pre></div><p>the folder will be owned by root, but this is ok.</p>
 <ol start="4">
 <li>Now add or edit the configuration file <code>/etc/docker/daemon.json</code> so that it contains</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
   <span style="color:#f92672">&#34;data-root&#34;</span>: <span style="color:#e6db74">&#34;/home/docker/data&#34;</span>
 }
 </code></pre></div><ol start="5">
 <li>Now you can copy and remaining Docker metadata to the new location</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo rsync -aP /var/lib/docker/ /home/docker/data
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo rsync -aP /var/lib/docker/ /home/docker/data
 </code></pre></div><p>If you are being cautious, rename the old data folder so that you can safely revert if anything goes wrong</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mv /var/lib/docker /var/lib/docker.old
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mv /var/lib/docker /var/lib/docker.old
 </code></pre></div><ol start="6">
 <li>Resart the docker daemon and test everything is work</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo service docker start
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo service docker start
 docker run --rm hello-world
 </code></pre></div><ol start="7">
 <li>Cleanup the old data</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo rm -rf /var/lib/docker.old
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo rm -rf /var/lib/docker.old
 </code></pre></div><h2 id="setting-up-multipass">Setting up multipass</h2>
 <p>Multipass is a bit harder than Docker. It <em>can</em> be done, but the feature is much newer. It was <a href="https://github.com/canonical/multipass/pull/1789">just merged in October 2020</a></p>
 <p>The author <a href="https://github.com/Saviq">Michał</a> has kindly (provided instructions)[https://github.com/canonical/multipass/pull/1789#issuecomment-704991752] that I have adapted and extended below</p>
 <ol>
 <li>First I want to safely clear any cached multipass data, the simplest way to do this is the uninstall and reinstall multipass</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap remove multipass
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap remove multipass
 sudo snap install multipass
 </code></pre></div><ol start="2">
 <li>Make the new data directory</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir /home/multipass
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir /home/multipass
 </code></pre></div><ol start="3">
 <li>I created a new group for my user and <code>root</code>, so that I would have simpler access to the data directory</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo groupadd multipass
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo groupadd multipass
 sudo usermod -a G root multipass
 sudo usermod -a -G multipass $USER
 sudo chown -R root:multipass /home/multipass
 </code></pre></div><ol start="4">
 <li>Stop you multipass daemon and enable the required volumn plugins for snap</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap stop multipass
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap stop multipass
 sudo snap connect multipass:removable-media  <span style="color:#75715e"># for /mnt /media https://snapcraft.io/docs/removable-media-interface</span>
 sudo snap connect multipass:all-home  <span style="color:#75715e"># for /home/* https://snapcraft.io/docs/home-interface</span>
 </code></pre></div><ol start="5">
 <li>Update the multipass service definition to set the required <code>MULTIPASS_STORAGE</code> environment variable.</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir /etc/systemd/system/snap.multipass.multipassd.service.d/
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo mkdir /etc/systemd/system/snap.multipass.multipassd.service.d/
 sudo tee /etc/systemd/system/snap.multipass.multipassd.service.d/override.conf <span style="color:#e6db74">&lt;&lt;EOF
 </span><span style="color:#e6db74">[Service]
 </span><span style="color:#e6db74">Environment=MULTIPASS_STORAGE=/home/multipass
@@ -151,15 +148,15 @@ sudo tee /etc/systemd/system/snap.multipass.multipassd.service.d/override.conf <
 </code></pre></div><ol start="6">
 <li>Reload the service defitions</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo  systemctl daemon-reload
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo  systemctl daemon-reload
 </code></pre></div><ol start="7">
 <li>Restart the multipass daemon</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap start multipass
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo snap start multipass
 </code></pre></div><ol start="8">
 <li>Check that things are working</li>
 </ol>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ls -al /home/multipass
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ ls -al /home/multipass
 total 16K
 drwxrwxr-x <span style="color:#ae81ff">4</span> root multipass 4,0K Dez <span style="color:#ae81ff">13</span> 16:00 .
 drwxr-xr-x <span style="color:#ae81ff">6</span> root root      4,0K Dez <span style="color:#ae81ff">12</span> 21:58 ..
@@ -172,7 +169,7 @@ start seeing data in the <code>/home/multipass/cache/vault/images</code>, for ex
 <p>Within the last couple days, it seems that Docker changed the way it uses iptables. The consequence is that the <code>iptables</code> Multipass needs are disabled and the VMs have <em>no network access</em>.  See this <a href="https://github.com/canonical/multipass/issues/1866">Github issue</a>.</p>
 <p>Networking questions are generally above my paygrade, but the summary seems to be that the Multipass snap uses legacy <code>iptables</code> while Docker switched to <code>nftables</code>. Once <code>nftables</code> are used, the legacy tables are ignored.</p>
 <p>This looks like</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo iptables -S
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ sudo iptables -S
 <span style="color:#75715e"># Warning: iptables-legacy tables present, use iptables-legacy to see them</span>
 -P INPUT ACCEPT
 -P FORWARD DROP

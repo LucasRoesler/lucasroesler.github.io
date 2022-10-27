@@ -1,0 +1,368 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Really fixed it this time, number 42.">
+    <meta property="og:title" content="Hard won lessons about Github Actions: Really fixed it this time, number 42." />
+<meta property="og:description" content="Really fixed it this time, number 42." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2022/2-github-actions-lessons/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-27T00:00:00+02:00" />
+<meta property="article:modified_time" content="2022-10-27T00:00:00+02:00" />
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Hard won lessons about Github Actions: Really fixed it this time, number 42."/>
+<meta name="twitter:description" content="Really fixed it this time, number 42."/>
+
+<meta property="og:title" content="Hard won lessons about Github Actions: Really fixed it this time, number 42." />
+<meta property="og:description" content="Really fixed it this time, number 42." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2022/2-github-actions-lessons/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-10-27T00:00:00+02:00" />
+<meta property="article:modified_time" content="2022-10-27T00:00:00+02:00" />
+
+
+<meta itemprop="name" content="Hard won lessons about Github Actions: Really fixed it this time, number 42.">
+<meta itemprop="description" content="Really fixed it this time, number 42."><meta itemprop="datePublished" content="2022-10-27T00:00:00+02:00" />
+<meta itemprop="dateModified" content="2022-10-27T00:00:00+02:00" />
+<meta itemprop="wordCount" content="1579">
+<meta itemprop="keywords" content="github actions,programming,ci/cd," />
+
+
+    <title>
+        Hard won lessons about Github Actions: Really fixed it this time, number 42. &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="https://lucasroesler.com/posts/2022/2-github-actions-lessons/">
+
+    
+    <link rel="stylesheet" href="https://lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/posts/2022/2-github-actions-lessons/images/belinda-fewings-_CyyAj0QboY-unsplash.jpg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>Hard won lessons about Github Actions: Really fixed it this time, number 42.</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>I have spent the two weeks modernizing a long dormant project at Contiamo. Not only did this require updating various dependencies and subsequently parts of the code base, but it also meant updating an old Jenkinfile into a Github Action workflow. 😬😬😬</p>
+<p>I can&rsquo;t say I am proud of my commit history:</p>
+<pre tabindex="0"><code>| | * 43adfcl final fix, final.
+| | * 2e4f2c1 final fix, again.
+| | * 147361f final fix
+| | * f60de9f actually fixed this time
+| | * 81451a8 actually fixed 2
+| | * e40d511 really fixed it this time
+| | * plkanaf really fixed it
+| | * adf9afj fix the build
+| | * 6acf203 switch to github actions
+</code></pre><p>but I was eventually victorious! In addition to the usual silly mistakes that happen when writing a CI/CD pipeline, I stumbled on some pretty esoteric pitfalls. Here are some of the bigger lessons I learned along the way.</p>
+<h2 id="inputs-are-strings">Inputs are strings</h2>
+<p>Do not trust the input <code>type</code> for <code>workflow_dispatch</code>. Yes, sure, the schema <em>says</em> you can do this to specify a boolean input</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">workflow_dispatch</span>:
+  <span style="color:#f92672">inputs</span>:
+    <span style="color:#f92672">environment</span>:
+      <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;The environment to deploy to&#34;</span>
+      <span style="color:#f92672">required</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#f92672">default</span>: <span style="color:#e6db74">&#34;dev&#34;</span>
+      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">choice</span>
+      <span style="color:#f92672">options</span>:
+        - <span style="color:#e6db74">&#34;dev&#34;</span>
+        - <span style="color:#e6db74">&#34;stg&#34;</span>
+        - <span style="color:#e6db74">&#34;prod&#34;</span>
+    <span style="color:#f92672">process</span>:
+      <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Control if the SQL/materialization processing is run.&#34;</span>
+      <span style="color:#f92672">required</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#f92672">default</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">boolean</span>
+</code></pre></div><p>It has not completely lied to you, because this spec will allow you to manually trigger the workflow from the Github UI and it will produce a checkbox in the</p>
+
+
+<figure class="image">
+    <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAASCAIAAADUsmlHAAABs0lEQVR4nJxS227TQBDd2R07u3ZaaJuISyryUNEPQDzxNXwYH1eJkoiINrFjfNnLDNpNVaSgJhFHfrDXe&#43;acMzN4dfNFHMMox1KrvcPeEqYXPkw2uXw/KQWA0QZADMPQNL8rEAjUC&#43;b4vIymsXe2ff4EQUKoIQAqVzPTYWX2ouv3DwNLFII/3t7awWYZjka6rmutdVVtVqvV4Yrk&#43;5j5x/09AHDCU9UQDjOTHxHJWuvJdMpEXdeZotjW26raHCcLAW&#43;ub2KVpLnT//svgYhSk/ZH4pyNyh/m865ty/F46PuiLAXzerPRWlMI4/HY&#43;/D4&#43;JAJ/lXVe7ajcrOtASB4z8cGvkOejxAzZpaxBNF0OlGo6GTs0kXbs8&#43;furvv568uiEghKimZ2TlnjBmGYdcRRHweQQghXrApszYmOz8vyjLtXYNKaWO8cxeXl3VdZ1lGRKiUdU5Jmef5crmMRSFlZubZ7FqqKJghOu8phLZti6JYLBYvJXfWPpFP6dO/5Gj76uvbs9dnLjiUmEl82K7X336ewo9ku7J914EAK0KQntsTdjPtDUzezf/DNQjhvPsTAAD//6pTHBQqa/hwAAAAAElFTkSuQmCC); background-size: cover;">
+        <source srcset="https://lucasroesler.com/posts/2022/2-github-actions-lessons/images/workflow_dispatch_ui_hu421b5130b5db79e87c122ac5112cbe1f_43496_500x0_resize_box_3.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2022/2-github-actions-lessons/images/workflow_dispatch_ui_hu421b5130b5db79e87c122ac5112cbe1f_43496_800x0_resize_box_3.png 800w" sizes="800w" media="(max-width: 1199px)" >
+        
+        <img
+            decoding="async"
+            loading="lazy"
+            width="500" height="457"
+            srcset="https://lucasroesler.com/posts/2022/2-github-actions-lessons/images/workflow_dispatch_ui_hu421b5130b5db79e87c122ac5112cbe1f_43496_500x0_resize_box_3.png"
+            alt="Github Workflow manual trigger UI"
+            >
+    </picture>
+    <figcaption class="caption">Github Workflow manual trigger UI</figcaption>
+</figure>
+
+<p>Unfortunately, that is all it gets you because you might think that a statement like this would work</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">process-sql</span>:
+  <span style="color:#f92672">if</span>: <span style="color:#ae81ff">${{ github.events.inputs.process }}</span>
+</code></pre></div><p>But it does not. The value <code>process</code> is defined to be a boolean but it is actually a string, the above snippet behaves like</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">process-sql</span>:
+  <span style="color:#f92672">if</span>: <span style="color:#e6db74">&#34;false&#34;</span>
+</code></pre></div><p>Which is truthy, so that step/job will still execute!</p>
+<p>To get the expected behavior I had to use a string comparison like this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">process-sql</span>:
+  <span style="color:#f92672">if</span>: <span style="color:#ae81ff">${{ github.events.inputs.process == &#39;true&#39; }}</span>
+</code></pre></div><p>In theory, you can also use this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">process-sql</span>:
+  <span style="color:#f92672">if</span>: <span style="color:#ae81ff">${{ fromJSON(github.events.inputs.process) }}</span>
+</code></pre></div><p>but I haven&rsquo;t tested it.</p>
+<p>Github is well aware of this and fixed it by updating an example workflow file, but I haven&rsquo;t found an explicit statement in the docs. See <a href="https://github.com/actions/runner/issues/1483">https://github.com/actions/runner/issues/1483</a> and <a href="https://github.com/cylc/cylc-doc/pull/317">https://github.com/cylc/cylc-doc/pull/317</a></p>
+<h2 id="inputs-are-strings-except-for-when-they-are-not">Inputs are strings, except for when they are not</h2>
+<p>Github recently added support for <a href="https://docs.github.com/en/actions/using-workflows/reusing-workflows">&ldquo;Reusable Workflows&rdquo;</a>. In the workflow file, this is called <code>workflow_call</code> and it looks very similar to <code>workflow_dispatch</code> (see the previous section). Here is an example definition</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">workflow_call</span>:
+  <span style="color:#f92672">inputs</span>:
+    <span style="color:#f92672">environment</span>:
+      <span style="color:#f92672">required</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">string</span>
+
+    <span style="color:#f92672">process</span>:
+      <span style="color:#f92672">required</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#f92672">type</span>: <span style="color:#ae81ff">boolean</span>
+      <span style="color:#f92672">default</span>: <span style="color:#66d9ef">true</span>
+      <span style="color:#f92672">description</span>: <span style="color:#e6db74">&#34;Control if the SQL/materialization processing is run.&#34;</span>
+</code></pre></div><p>A quick glance and you might think this is exactly the same before. It is certainly <em>very</em> similar, so you might expect similar behavior. Of course, they are only similar, not the same.</p>
+<p>First, let&rsquo;s discuss how to access inputs. In the previous section I used <code>${{ github.events.inputs.process }}</code>. This is essentially accessing the webhook payload that triggers the workflow. Github provides a detailed description of this <a href="https://docs.github.com/en/actions/learn-github-actions/contexts#github-context"><code>github</code> context</a>, there is a lot of data in there. However, this will <em>not</em> have the input values for the <code>workflow_call</code>. Instead these are exposed from the <a href="https://docs.github.com/en/actions/learn-github-actions/contexts#inputs-context"><code>inputs</code> context</a> which contains the inputs from both the <code>workflow_call</code> <em>and</em> <code>workflow_dispatch</code>. Let&rsquo;s return to our boolean for a moment</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">process</span>:
+  <span style="color:#f92672">required</span>: <span style="color:#66d9ef">true</span>
+  <span style="color:#f92672">type</span>: <span style="color:#ae81ff">boolean</span>
+</code></pre></div><p>This definition will work for both <code>workflow_call</code> <em>and</em> <code>workflow_dispatch</code> and can be accessed as <code>inputs.process</code> but you will get two different values</p>
+<ul>
+<li>when you use <code>workflow_call</code>, <code>inputs.process</code> is an actual boolean!</li>
+<li>when you use <code>workflow_dispatch</code>, <code>inputs.process</code> is a string!</li>
+</ul>
+<p>If you are mixing workflow triggers and use the same name for the inputs, then you can never be sure if you get a boolean or a string. This is really confusing and hard to debug &hellip; which brings us to the next section.</p>
+<p>P.S. A full example of using <a href="#slack-notifications"><code>workflow_call</code> is provided later</a>.</p>
+<h2 id="debugging-json-objects">Debugging json objects</h2>
+<p>Sometimes you will want to debug the workflow context, for example, to check why value <code>inputs.process</code> contains. The workflow context also contains information like the workflow event, the actor (person or bot) that triggered the event, repository information, etc. A full description of the each available context can be found <a href="https://docs.github.com/en/actions/learn-github-actions/contexts">in the docs</a>. A typical way to debug a single value in the context might look like this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Debug</span>
+  <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">    </span>    <span style="color:#ae81ff">echo &#34;actor=${{github.actor}}&#34;</span>
+</code></pre></div><p>This works really well if you want to debug a single value and you know that it is a string or number. But sometimes you want to debug the entire context, you want to see all of the inputs to your workflow, for example. You will be tempted to try this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Debug</span>
+  <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">    </span>    <span style="color:#ae81ff">echo &#34;event.inputs: ${{ toJSON(github.event.input) }}&#34;</span>
+</code></pre></div><p>But this will fail because <code>toJSON</code> pretty prints the JSON string, which will include quote characters and new-lines, these will cause <code>bash</code> errors.</p>
+<p>The <a href="https://github.com/actions/runner/issues/1656">suggested workaround</a> is to pass the JSON string as an env variable, this will auto-escape the string for you</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Debug</span>
+  <span style="color:#f92672">env</span>:
+    <span style="color:#f92672">INPUT</span>: <span style="color:#ae81ff">${{ toJSON(inputs) }}</span>
+    <span style="color:#f92672">EVENT_INPUT</span>: <span style="color:#ae81ff">${{ toJSON(github.event.inputs) }}</span>
+  <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">    echo &#34;event.inputs: $EVENT_INPUT&#34;
+</span><span style="color:#e6db74">    echo &#34;inputs: $INPUT&#34;</span>    
+</code></pre></div><p>Also, note that the <code>github.event.inputs</code> is not the same as the <code>inputs</code> context. The <code>github.event.inputs</code> is the inputs to the original event. If you are using reusable workflows via <code>workflow_call</code>, these inputs are only available in the <a href="https://docs.github.com/en/actions/learn-github-actions/contexts#inputs-context"><code>inputs</code> context</a>. Which does not seem to be available to the <a href="https://github.com/actions/github-script"><code>actions/github-script</code></a>, so you can not work around the potential BASH problems by switching to JS.</p>
+<h2 id="slack-notifications">Slack notifications</h2>
+<p>This last section is not about any kind of gotchya, rather it is a &ldquo;you might like this too&rdquo;.</p>
+<p>There are several slack notification apps in the <a href="https://github.com/marketplace?type=actions&amp;query=slack">Actions Marketplace</a>. Some of them are going to fit your needs perfectly. But if they don&rsquo;t or you decide you want to customize something they don&rsquo;t expose, you can fallback to the <a href="https://github.com/marketplace/actions/slack-send">official Slack action <code>slack-send</code></a>.</p>
+<p>But this has a major downside, sending a formatted message to an incoming webhook is a pain and requires actually knowing the Slack API. Here is the example from the <code>slack-send</code> docs</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml">- <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Send custom JSON data to Slack workflow</span>
+  <span style="color:#f92672">id</span>: <span style="color:#ae81ff">slack</span>
+  <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">slackapi/slack-github-action@v1.23.0</span>
+  <span style="color:#f92672">with</span>:
+    <span style="color:#75715e"># For posting a rich message using Block Kit</span>
+    <span style="color:#f92672">payload</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">      {
+</span><span style="color:#e6db74">        &#34;text&#34;: &#34;GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}&#34;,
+</span><span style="color:#e6db74">        &#34;blocks&#34;: [
+</span><span style="color:#e6db74">          {
+</span><span style="color:#e6db74">            &#34;type&#34;: &#34;section&#34;,
+</span><span style="color:#e6db74">            &#34;text&#34;: {
+</span><span style="color:#e6db74">              &#34;type&#34;: &#34;mrkdwn&#34;,
+</span><span style="color:#e6db74">              &#34;text&#34;: &#34;GitHub Action build result: ${{ job.status }}\n${{ github.event.pull_request.html_url || github.event.head_commit.url }}&#34;
+</span><span style="color:#e6db74">            }
+</span><span style="color:#e6db74">          }
+</span><span style="color:#e6db74">        ]
+</span><span style="color:#e6db74">      }</span>      
+  <span style="color:#f92672">env</span>:
+    <span style="color:#f92672">SLACK_WEBHOOK_URL</span>: <span style="color:#ae81ff">${{ secrets.SLACK_WEBHOOK_URL }}</span>
+    <span style="color:#f92672">SLACK_WEBHOOK_TYPE</span>: <span style="color:#ae81ff">INCOMING_WEBHOOK</span>
+</code></pre></div><p>This might be too much customization. But I also prefer to use &ldquo;officially&rdquo; supported actions. It is slightly easier to trust that the action provided by the Slack team will stay up-to-date with the Slack API and Github guidelines / best practices. However, now that we have <a href="https://docs.github.com/en/actions/using-workflows/reusing-workflows">reusable workflows</a> (<a href="#inputs-are-strings-except-for-when-they-are-not">remember earlier</a>) it is relatively easy to create our own custom actions that wrap this &ldquo;official&rdquo; action, to have a nicer interface. For example, I want to do something like this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">notify</span>:
+  <span style="color:#f92672">needs</span>: [<span style="color:#ae81ff">training, process-sql, training, deploy]</span>
+  <span style="color:#f92672">if</span>: <span style="color:#ae81ff">${{ always() }}</span>
+  <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">./.github/workflows/notify.yaml</span>
+  <span style="color:#f92672">secrets</span>: <span style="color:#ae81ff">inherit</span>
+  <span style="color:#f92672">with</span>:
+    <span style="color:#f92672">color</span>: <span style="color:#ae81ff">${{ needs.deploy.result }}</span>
+    <span style="color:#f92672">message</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">      *Environment:* `${{ inputs.environment }}`
+</span><span style="color:#e6db74">      *Process SQL:* ${{ needs.process-sql.result }}
+</span><span style="color:#e6db74">      *Training*: ${{ needs.training.result }} (model hash: `${{ needs.training.outputs.model_tag }}`)
+</span><span style="color:#e6db74">      *Deploy*: ${{ needs.deploy.result }}</span>      
+</code></pre></div><p>Nice and simple, no need to write a JSON payload. Here is an example output</p>
+
+
+<figure class="image">
+    <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAKCAIAAAA7N&#43;mxAAABU0lEQVR4nHTQwW4TMRDG8bE9XnuTTSRIESrlFTnBM3LiwqVHboBgGxpie3dtj2dQiwRK0/xPPnw/WRp89/7D9c3m08dbABCAFJPvfWftNM3OdXd3&#43;1LLMi9KqWMIcBquXqJ&#43;u9v3crVIOh7398Fa67qutRZTijH&#43;3YkInGVUabefv0Se448Qp&#43;TXG&#43;N65gYiC2ARJY&#43;B8DMY3Sb9Dm1w6VDm4VUkCbkFcEG7yiJ&#43;BcMLAFFlPsf47/V6cNsBRFBYOme/f/vqNI2/MvMzfz7FAiAszKy1rrVev7nJOWs/e&#43;epUQjxcDhcxK21EAILi4BSyhizLAsi5nwEgHN5gksppu8BgFsDpYiq0ZqIjDFEtFr1zEJEWj2MFUCTU3y125VSBKXUqrXhxo&#43;GLaIxBhGnFDrdRB5kJvUfb7fb9bD25MdxRGuN0T/vx1rrpWsBwJ8AAAD//&#43;GP1YVthOCpAAAAAElFTkSuQmCC); background-size: cover;">
+        <source srcset="https://lucasroesler.com/posts/2022/2-github-actions-lessons/images/message-screenshot_hu954b475cbd87a8a5c586575d32c97ea0_73629_500x0_resize_box_3.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2022/2-github-actions-lessons/images/message-screenshot_hu954b475cbd87a8a5c586575d32c97ea0_73629_800x0_resize_box_3.png 800w" sizes="800w" media="(max-width: 1199px)" >
+        
+        <img
+            decoding="async"
+            loading="lazy"
+            width="500" height="243"
+            srcset="https://lucasroesler.com/posts/2022/2-github-actions-lessons/images/message-screenshot_hu954b475cbd87a8a5c586575d32c97ea0_73629_500x0_resize_box_3.png"
+            alt="Sample of the slack message."
+            >
+    </picture>
+    <figcaption class="caption">Sample of the slack message.</figcaption>
+</figure>
+
+<p>Now, we just need to create the reusable notify workflow.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#75715e"># save as .github/workflows/notify.yaml</span>
+<span style="color:#f92672">name</span>: <span style="color:#ae81ff">Slack Notify</span>
+
+<span style="color:#f92672">on</span>:
+  <span style="color:#f92672">workflow_call</span>:
+    <span style="color:#f92672">inputs</span>:
+      <span style="color:#f92672">message</span>:
+        <span style="color:#f92672">required</span>: <span style="color:#66d9ef">true</span>
+        <span style="color:#f92672">type</span>: <span style="color:#ae81ff">string</span>
+      <span style="color:#f92672">color</span>:
+        <span style="color:#f92672">required</span>: <span style="color:#66d9ef">false</span>
+        <span style="color:#f92672">default</span>: <span style="color:#e6db74">&#34;info&#34;</span>
+        <span style="color:#f92672">type</span>: <span style="color:#ae81ff">string</span>
+      <span style="color:#f92672">title</span>:
+        <span style="color:#f92672">required</span>: <span style="color:#66d9ef">false</span>
+        <span style="color:#f92672">default</span>: <span style="color:#e6db74">&#34;&#34;</span>
+        <span style="color:#f92672">type</span>: <span style="color:#ae81ff">string</span>
+    <span style="color:#f92672">secrets</span>:
+      <span style="color:#f92672">SLACK_WEBHOOK</span>:
+        <span style="color:#f92672">required</span>: <span style="color:#66d9ef">true</span>
+
+<span style="color:#f92672">jobs</span>:
+  <span style="color:#f92672">slack</span>:
+    <span style="color:#f92672">runs-on</span>: <span style="color:#ae81ff">ubuntu-latest</span>
+    <span style="color:#f92672">steps</span>:
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">Debug</span>
+        <span style="color:#f92672">env</span>:
+          <span style="color:#f92672">INPUT</span>: <span style="color:#ae81ff">${{ toJSON(inputs) }}</span>
+          <span style="color:#f92672">EVENT_INPUT</span>: <span style="color:#ae81ff">${{ toJSON(github.event.inputs) }}</span>
+        <span style="color:#f92672">run</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">          echo &#34;EVENT_INPUTS: $EVENT_INPUT&#34;
+</span><span style="color:#e6db74">          echo &#34;INPUTS: $INPUT&#34;</span>          
+
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">metadata</span>
+        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">actions/github-script@v6</span>
+        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">metadata</span>
+        <span style="color:#f92672">with</span>:
+          <span style="color:#f92672">script</span>: |<span style="color:#e6db74">
+</span><span style="color:#e6db74">            const inputColor = &#39;${{ inputs.color }}&#39; || &#39;info&#39;
+</span><span style="color:#e6db74">            const inputTitle = &#39;${{ inputs.title }}&#39;
+</span><span style="color:#e6db74">            const inputMessage = ${{ toJSON(inputs.message) }}
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">            const colors = {
+</span><span style="color:#e6db74">              &#34;success&#34;: &#34;good&#34;,
+</span><span style="color:#e6db74">              &#34;failure&#34;: &#34;danger&#34;,
+</span><span style="color:#e6db74">              &#34;info&#34;: &#34;#17a2b8&#34;,
+</span><span style="color:#e6db74">              &#34;good&#34;: &#34;good&#34;,
+</span><span style="color:#e6db74">              &#34;warning&#34;: &#34;warning&#34;,
+</span><span style="color:#e6db74">              &#34;danger&#34;: &#34;danger&#34;,
+</span><span style="color:#e6db74">            }
+</span><span style="color:#e6db74">            const color = colors[inputColor]
+</span><span style="color:#e6db74">            core.setOutput(&#34;color&#34;, color)
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">            const repoBaseURL = `${context.serverUrl}/${context.repo.owner}/${context.repo.repo}`
+</span><span style="color:#e6db74">            const github_ref = context.eventName == &#34;pull_request&#34; ? context.payload.pull_request.head.ref : context.ref
+</span><span style="color:#e6db74">            const branch = github_ref.replace(/^refs\/heads\//, &#39;&#39;)
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">            const title = inputTitle || `${context.workflow} ${context.sha.substr(0, 8)}`
+</span><span style="color:#e6db74">            const title_url = `${repoBaseURL}/actions/runs/${context.runId}`
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">            core.setOutput(&#34;title&#34;, title)
+</span><span style="color:#e6db74">            core.setOutput(&#34;title_url&#34;, title_url)
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">            const author_name = context.actor
+</span><span style="color:#e6db74">            const author_link = `${context.serverUrl}/${context.actor}`
+</span><span style="color:#e6db74">            const author_icon = `${context.serverUrl}/${context.actor}.png`
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">            core.setOutput(&#34;author_name&#34;, author_name)
+</span><span style="color:#e6db74">            core.setOutput(&#34;author_link&#34;, author_link)
+</span><span style="color:#e6db74">            core.setOutput(&#34;author_icon&#34;, author_icon)
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">            const footer = `*&lt;${repoBaseURL}|${context.repo.owner}/${context.repo.repo}&gt;* &lt;${repoBaseURL}/tree/${branch}|${branch}&gt;`
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">            const payload = {
+</span><span style="color:#e6db74">              &#34;attachments&#34;: [
+</span><span style="color:#e6db74">                {
+</span><span style="color:#e6db74">                  &#34;color&#34;: color,
+</span><span style="color:#e6db74">                  &#34;title&#34;: title,
+</span><span style="color:#e6db74">                  &#34;title_link&#34;: title_url,
+</span><span style="color:#e6db74">                  &#34;author_name&#34;: author_name,
+</span><span style="color:#e6db74">                  &#34;author_link&#34;: author_link,
+</span><span style="color:#e6db74">                  &#34;author_icon&#34;: author_icon,
+</span><span style="color:#e6db74">                  &#34;mrkdwn_in&#34;: [&#34;text&#34;],
+</span><span style="color:#e6db74">                  &#34;text&#34;: inputMessage,
+</span><span style="color:#e6db74">                  &#34;fallback&#34;: inputMessage,
+</span><span style="color:#e6db74">                  &#34;footer&#34;: footer,
+</span><span style="color:#e6db74">                  &#34;footer_icon&#34;: &#39;https://slack.github.com/static/img/favicon-neutral.png&#39;,
+</span><span style="color:#e6db74">                }
+</span><span style="color:#e6db74">              ]
+</span><span style="color:#e6db74">            }
+</span><span style="color:#e6db74">            core.setOutput(&#34;payload&#34;, payload)
+</span><span style="color:#e6db74">
+</span><span style="color:#e6db74">            console.log(&#39;payload&#39;, payload)</span>            
+
+      - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">notification</span>
+        <span style="color:#f92672">id</span>: <span style="color:#ae81ff">slack</span>
+        <span style="color:#f92672">uses</span>: <span style="color:#ae81ff">slackapi/slack-github-action@v1.23.0</span>
+        <span style="color:#f92672">with</span>:
+          <span style="color:#f92672">payload</span>: <span style="color:#ae81ff">${{ steps.metadata.outputs.payload }}</span>
+        <span style="color:#f92672">env</span>:
+          <span style="color:#f92672">SLACK_WEBHOOK_URL</span>: <span style="color:#ae81ff">${{ secrets.SLACK_WEBHOOK }}</span>
+          <span style="color:#f92672">SLACK_WEBHOOK_TYPE</span>: <span style="color:#ae81ff">INCOMING_WEBHOOK</span>
+</code></pre></div><p>Obviously, this message payload is designed to match my own preferences, but you can easily copy or fork it to match your own messaging style.</p>
+<h2 id="conclusion">Conclusion</h2>
+<p>I actually really like Github Actions, it took awhile to win me over, but Github is constantly improving it and it is really good now. But, it is still a CI/CD system which means it will always take more than one <code>fix ci</code> commit and it will always have a few surprises for you. Hopefully, the few that I found will mean they are less surprising for you when <em>you</em> find them. In the mean time, keep committing, and don&rsquo;t worry, you too can fix your failing build 😉</p>
+<hr>
+<p>Cover Photo by <a href="https://unsplash.com/@bel2000a?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Belinda Fewings</a> on <a href="https://unsplash.com/?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/github-actions/">github actions</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/programming/">programming</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/ci/cd/">ci/cd</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2022 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>

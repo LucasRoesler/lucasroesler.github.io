@@ -8,9 +8,10 @@
     <meta property="og:title" content="Deploying a private registry in Docker Swarm" />
 <meta property="og:description" content="At Contiamo I am currently working a project that will eventually integrate with OpenFaaS.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-10-09T12:00:00+00:00" />
 <meta property="article:modified_time" content="2017-10-09T12:00:00+00:00" />
+
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Deploying a private registry in Docker Swarm"/>
@@ -19,20 +20,16 @@
 <meta property="og:title" content="Deploying a private registry in Docker Swarm" />
 <meta property="og:description" content="At Contiamo I am currently working a project that will eventually integrate with OpenFaaS.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-10-09T12:00:00+00:00" />
 <meta property="article:modified_time" content="2017-10-09T12:00:00+00:00" />
 
+
 <meta itemprop="name" content="Deploying a private registry in Docker Swarm">
-<meta itemprop="description" content="At Contiamo I am currently working a project that will eventually integrate with OpenFaaS.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm.">
-<meta itemprop="datePublished" content="2017-10-09T12:00:00+00:00" />
+<meta itemprop="description" content="At Contiamo I am currently working a project that will eventually integrate with OpenFaaS.  I am really excited about this project because we will soon bring some serverless magic to data scientists that use Contiamo.  That is, once I figure out how to deploy a private Docker registry inside a Docker Swarm."><meta itemprop="datePublished" content="2017-10-09T12:00:00+00:00" />
 <meta itemprop="dateModified" content="2017-10-09T12:00:00+00:00" />
 <meta itemprop="wordCount" content="1175">
-
-
-
 <meta itemprop="keywords" content="programming,golang,docker,docker swarm," />
-
 
 
     <title>
@@ -73,15 +70,15 @@
 
 
 <figure class="image">
-    <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAABhElEQVR4nLySv0vzQBzGn&#43;bXW/K&#43;LwFNSZbWzUEopdD/wM2tSxwc/L&#43;cnDplK9Q1g2OhIB3EgtKhxkuhp5ZSc5pErlzhSINVKD5w4S6X7&#43;f744mCHUsGlncBVKW9CeAfgBiALpJZAP4CWH4XWMqdy91u12u1WhyMKIr8RqNBAbyLe6Xf7x9blnXED8Ph8Krdbt/JAC0HTF3XPaWUnlSrVYRhOABwA2AfwAv/gDF2Np/Pzx3HQbPZHAF4kBIib0qmqiqSJEGWZSCE/BFjWYrkShzHKmMMi8WisOV8hbBt&#43;4IxFkwmE3U6nd4DWEcm/FGr1S5ns9nINM3XMAxveRFfzZQnMMTaE4YY0j3vqCKZaWyr8EPaWyIw4qMTwf9F&#43;1mBoSsVvpRkdDqdgyAIDuv1OnEcZ&#43;B5XiJVx7bEb0gnhAwopRlfvV6vInWmFBW0YUpe4/EYmqatXF8nETAbwDOAt58AS67rXuu6/pimqeL7PsScOf2pMGALUJEcTde/zq/qMwAA//9or4KGmUtbWAAAAABJRU5ErkJggg==); background-size: cover;">
-        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
-        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
+    <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAABgUlEQVR4nLxSv0v7QBx9vab3DflqC8bSdghuDg6l0P4Hbu7VwcGp/5ST3Z2awdUhW4dCJ7GgFIL1MvRUCNUzP&#43;TKFY40WIXigwt3ubz3eZ/PC8GWoQua2xAsansLwA6ADwAlVawC4D&#43;AxU8FC5mz6bruaafTkcJgjF23Wi0O4FPdk&#43;FweFwul4/kYTwe33S73XtdwMgIJo1G44xzfuI4DnzfH0keABvAq/xACHEehuFFrVZDu92eAHjUCiIbSkoIQRzHSNMUQRD8U2NZqOJECFEUQiAMw9yWsw5h2/ZlFEW3vu8XOecPAFbMWD4cx7maz&#43;cTy7LeZrPZnTTx3UxlAarWngqEaveyo6oWJt3kMNL2FUUM5OgUeVe1n&#43;YEukTuSw203&#43;8feJ532Gw2mWmao16vF2vuxAb&#43;GkqMsRHnPJXLdd2q1hnJM7QWShbT6RSGYSxTXxVRYvsAXgC8/0awUK/XPUrpU5IkZDAYQM1Zqj/nEjYIEi3RZPXr/Cm&#43;AgAA//&#43;fcoKkIUp1xgAAAABJRU5ErkJggg==); background-size: cover;">
+        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_500x0_resize_box_3.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_800x0_resize_box_3.png 800w" sizes="800w" media="(max-width: 1199px)" >
         
         <img
             decoding="async"
             loading="lazy"
             width="500" height="375"
-            srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_500x0_resize_box_2.png"
+            srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_500x0_resize_box_3.png"
             alt="The basic swarm structure"
             >
     </picture>
@@ -89,7 +86,7 @@
 </figure>
 
 <p>The natural thing to do is to start with a single machine swarm.  If you have already played with OpenFaaS, then you already have one and it is probably called <code>moby</code>.  The next natural thing is to google for <code>docker swarm private registry</code> or something similar.   If you do this you will probably be very excited to see that there are <a href="https://docs.docker.com/registry/deploying/">official docs</a> that will walk you through the process of running a Docker registry.  It will even show you how to run it as a swarm service, jackpot!  This all works <em>roughly</em> as expected. Following the tutorial, my initial docker-compose file for this project ended up looking like this:</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">version: &#34;3.2&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">version: &#34;3.2&#34;
 services:
     gateway:
         volumes:
@@ -158,14 +155,14 @@ volumes:
 networks:
     functions:
 </code></pre></div><p><em>Quick aside</em>, it took me awhile to figure out how to best test that images were actually being pushed into the registry.  The trick is to use the registry API directly via <code>curl</code>.  If you follow the <a href="https://docs.docker.com/registry/deploying/">Docker tutorial</a> and have a registry bound to <code>localhost:5001</code>, then you can use</p>
-<pre><code>$ curl http://localhost:5001/v2/_catalog
+<pre tabindex="0"><code>$ curl http://localhost:5001/v2/_catalog
 {&quot;repositories&quot;:[]}
 </code></pre><p>to see a list of repositiories in your registry.  It should be empty to start and then grow with each new image you push.  For my proof-of-concept project, I bound everything to <code>builderpoc</code> and because it is not on localhost, I used self-signed certs, so the above command becomes</p>
-<pre><code>$ curl -k https://builderpoc:5001/v2/_catalog
+<pre tabindex="0"><code>$ curl -k https://builderpoc:5001/v2/_catalog
 {&quot;repositories&quot;:[]}
 </code></pre><p>Using the API directly is much simpler to consistently test versus changing your Docker env variables and trying to test this via the Docker cli.</p>
 <p>Back to the project, if you clone the project run the following commands</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ git clone git@github.com:LucasRoesler/builderpoc.git
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ git clone git@github.com:LucasRoesler/builderpoc.git
 $ cd builderpoc
 $ go get github.com/LK4D4/vndr
 $ vndr
@@ -175,15 +172,15 @@ $ docker stack deploy builderpoc --compose-file docker-compose.yaml
 
 
 <figure class="image">
-    <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAABgklEQVR4nLRTQUvzQBB97ZekHyQSrEjbQylCIVhFeunNk0dPBX&#43;C/0E8&#43;YMK2l69i5ccPJa29rQHW0yKBKVsm2xly1SWbVM96MCwyczmzbx5kyx&#43;2Yxv8hadCyWWASAAxD8Bt&#43;lZdp7bcjc1/097dwGYABIAsy2AC&#43;rSorvp1ul0zoMgaEtnjF3q&#43;W63ezwajdrSB4PBNXX7ZfoMjXw&#43;v9Pv95vVahVCiBcAtwAc6njm&#43;/5hpVJpuq6LQqEwJ4xZGmCmVCoJIYQEg23bHMAb&#43;dIajcbrdDqFZVkq/dQOMZlM7h3HOWq1Wnv1ev1ZzzPG/OFweOp53nscx&#43;HW&#43;ZEgK5MqHmhF5crsazH1mzWVDUW1/0psQcPfJfqy2Jxiq73cSDmhIvL8kN7r9U4YYxdJkmTL5fJdrVYLlKU29PXaBKjv1pnneTdSJM55BOBJobr2t&#43;iAOQLMEKUllSiKYJrmUnnl3lylmgbIyVc5YzwePxaLxSsZCMPwgQpyHejP7DMAAP//V6yKaR27ROYAAAAASUVORK5CYII=); background-size: cover;">
-        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/failed-single-swarm-structure_hu18b7b038415b4e3039925852754af923_27377_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
-        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/failed-single-swarm-structure_hu18b7b038415b4e3039925852754af923_27377_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
+    <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAABg0lEQVR4nLRTsUv7UBD&#43;0l&#43;S/iDaIMFSOkUotEHJ3MHJ0angn&#43;D/IE7&#43;Ra2d3cXFglNLCU7tkEISkGCGpkmevHKV52tTHfTgeMndy3f33Xep4JdN/Sav08mEmAKgAJD9BNygZ955dc/d0vw/6d0EoAHIAaR7ABl1qdPdchsMBpdhGA65z&#43;fzazk/Ho/PFovFkLvnebfU7afJM1Qtyzr0PK/XarWQZZnPawA4oI7T0Wjk2LbdM00TjUZjRRhpGaDSbDYLxhiKooBhGEsAb&#43;Rr63a7QZIk0HVdpF/aIaIoeqjVaqf9ft9yXfdVzvu&#43;/zyZTM47nc57kiTR3vmRIBvjKp5IRfnKHEsx8ZstlVVBtf9CjNHwj4g&#43;L7ai2GYvd1LOqQg/E&#43;7T6dSdzWZXjLGKbdv37XY7FJZalddrF&#43;CX3VIU5cJxnDsuUpqmMYAXgerW3yIDVglQIUprxeM4hqZpyPNcvLcSqZYBLsk3OTUIgqd6vX7DgaMoeqSCSxnoz&#43;wjAAD///HAkFGmzoYyAAAAAElFTkSuQmCC); background-size: cover;">
+        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/failed-single-swarm-structure_hu18b7b038415b4e3039925852754af923_27377_500x0_resize_box_3.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/failed-single-swarm-structure_hu18b7b038415b4e3039925852754af923_27377_800x0_resize_box_3.png 800w" sizes="800w" media="(max-width: 1199px)" >
         
         <img
             decoding="async"
             loading="lazy"
             width="500" height="375"
-            srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/failed-single-swarm-structure_hu18b7b038415b4e3039925852754af923_27377_500x0_resize_box_2.png"
+            srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/failed-single-swarm-structure_hu18b7b038415b4e3039925852754af923_27377_500x0_resize_box_3.png"
             alt="The failed single node swarm structure"
             >
     </picture>
@@ -192,7 +189,7 @@ $ docker stack deploy builderpoc --compose-file docker-compose.yaml
 
 <p>and it will appear to work as expected. It will pull and tag an image, it will even deploy a function, but &hellip; it isn&rsquo;t actually pulling the image during the deploy.  In this single node configuration the <code>server</code> and the <code>gateway</code> service are both mounting the same <code>docker.sock</code> and therefore share same Docker image cache. The whole swarm is sharing the same cache, so when the OpenFaaS <code>gateway</code> starts the swarm service for this new function, it is just referencing the cached image.  In fact, if you comment out line 101 of the <code>builder/main.go</code> and stop the registry service, you should see everything &ldquo;work&rdquo;.</p>
 <p>When I noticed this in my own project, I decided that I needed to develop in a multi-node environment. So, I issue a few <code>docker-machine create</code> and various other commands, all documented and scripted in the <a href="https://github.com/LucasRoesler/builderpoc/blob/master/swarm">swarm script</a>, and I have my swarm. For the <code>buildpoc</code> all you need to do is</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># setup a two node swarm</span>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh"><span style="color:#75715e"># setup a two node swarm</span>
 ./swarm init
 <span style="color:#75715e"># set the docker env so that our cli points to the manager1 docker engine</span>
 eval <span style="color:#66d9ef">$(</span>docker-machine env manager1<span style="color:#66d9ef">)</span>
@@ -207,15 +204,15 @@ docker save theaxer/builderpoc:latest | docker-machine ssh worker1 <span style="
 
 
 <figure class="image">
-    <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAABhElEQVR4nLySv0vzQBzGn&#43;bXW/K&#43;LwFNSZbWzUEopdD/wM2tSxwc/L&#43;cnDplK9Q1g2OhIB3EgtKhxkuhp5ZSc5pErlzhSINVKD5w4S6X7&#43;f744mCHUsGlncBVKW9CeAfgBiALpJZAP4CWH4XWMqdy91u12u1WhyMKIr8RqNBAbyLe6Xf7x9blnXED8Ph8Krdbt/JAC0HTF3XPaWUnlSrVYRhOABwA2AfwAv/gDF2Np/Pzx3HQbPZHAF4kBIib0qmqiqSJEGWZSCE/BFjWYrkShzHKmMMi8WisOV8hbBt&#43;4IxFkwmE3U6nd4DWEcm/FGr1S5ns9nINM3XMAxveRFfzZQnMMTaE4YY0j3vqCKZaWyr8EPaWyIw4qMTwf9F&#43;1mBoSsVvpRkdDqdgyAIDuv1OnEcZ&#43;B5XiJVx7bEb0gnhAwopRlfvV6vInWmFBW0YUpe4/EYmqatXF8nETAbwDOAt58AS67rXuu6/pimqeL7PsScOf2pMGALUJEcTde/zq/qMwAA//9or4KGmUtbWAAAAABJRU5ErkJggg==); background-size: cover;">
-        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_500x0_resize_box_2.png 500w" sizes="500w" media="(max-width: 799px)">
-        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_800x0_resize_box_2.png 800w" sizes="800w" media="(max-width: 1199px)" >
+    <picture style="background: url(data:image/jpeg;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAPCAYAAADkmO9VAAABgUlEQVR4nLxSv0v7QBx9vab3DflqC8bSdghuDg6l0P4Hbu7VwcGp/5ST3Z2awdUhW4dCJ7GgFIL1MvRUCNUzP&#43;TKFY40WIXigwt3ubz3eZ/PC8GWoQua2xAsansLwA6ADwAlVawC4D&#43;AxU8FC5mz6bruaafTkcJgjF23Wi0O4FPdk&#43;FweFwul4/kYTwe33S73XtdwMgIJo1G44xzfuI4DnzfH0keABvAq/xACHEehuFFrVZDu92eAHjUCiIbSkoIQRzHSNMUQRD8U2NZqOJECFEUQiAMw9yWsw5h2/ZlFEW3vu8XOecPAFbMWD4cx7maz&#43;cTy7LeZrPZnTTx3UxlAarWngqEaveyo6oWJt3kMNL2FUUM5OgUeVe1n&#43;YEukTuSw203&#43;8feJ532Gw2mWmao16vF2vuxAb&#43;GkqMsRHnPJXLdd2q1hnJM7QWShbT6RSGYSxTXxVRYvsAXgC8/0awUK/XPUrpU5IkZDAYQM1Zqj/nEjYIEi3RZPXr/Cm&#43;AgAA//&#43;fcoKkIUp1xgAAAABJRU5ErkJggg==); background-size: cover;">
+        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_500x0_resize_box_3.png 500w" sizes="500w" media="(max-width: 799px)">
+        <source srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_800x0_resize_box_3.png 800w" sizes="800w" media="(max-width: 1199px)" >
         
         <img
             decoding="async"
             loading="lazy"
             width="500" height="375"
-            srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_500x0_resize_box_2.png"
+            srcset="https://lucasroesler.com/posts/2017/docker-registries-in-docker-swarm/basic-swarm-structure_hu1a6a252409c50e58ab1c397f9f7a2edd_30127_500x0_resize_box_3.png"
             alt="The basic swarm structure"
             >
     </picture>
@@ -242,11 +239,11 @@ docker save theaxer/builderpoc:latest | docker-machine ssh worker1 <span style="
 </figure>
 
 <p>In particular, the push from the <code>server</code> service to the <code>privateregistry</code> was giving me errors like</p>
-<pre><code>Get https://privateregistry:5001/v2/: dial tcp: lookup privateregistry on 10.0.2.3:53: no such host
+<pre tabindex="0"><code>Get https://privateregistry:5001/v2/: dial tcp: lookup privateregistry on 10.0.2.3:53: no such host
 </code></pre><p>You can reproduce this in the <code>buildpoc</code> with a simple change at <a href="https://github.com/LucasRoesler/builderpoc/blob/master/docker-compose.yaml#L50">line 50 of the compose file</a> from</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">    &#34;-registry=localhost:5001&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">    &#34;-registry=localhost:5001&#34;
 </code></pre></div><p>back to</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">    &#34;-registry=privateregistry:5001&#34;
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-md" data-lang="md">    &#34;-registry=privateregistry:5001&#34;
 </code></pre></div><p>The core of the issue is that we have mounted the <code>docker.sock</code> from our host vm into the container for the <code>server</code>.  This means that all of the docker commands, e.g. <code>push</code>, <code>pull</code>, and <code>tag</code>, are actually running on the host vm, including DNS resolution.  But service discovery for a stack is only available to the services inside the stack, not to the host vm.</p>
 <p>Switching back to <code>localhost:5001</code> works because <a href="https://github.com/LucasRoesler/builderpoc/blob/master/docker-compose.yaml#L24">26 lines above that one</a>, we have bound the registry ports to <code>5001</code>. So, each host machine now resolves <code>localhost:5001</code> to the internal port <code>5001</code> of <code>privateregistry</code>, much like in a standard docker-compose configuration. Of course, this all breaks if we then remove that port binding.</p>
 <p>This took me several days to debug and then finally fix. I had considered many complicated things, from some nasty bash scripting to update host files to adding in Consul.  I have to give a lot of thanks to pav at <a href="http://codeblog.dotsandbrackets.com/">Dots and Brackets</a> for a small little update in his own blog post about <a href="http://codeblog.dotsandbrackets.com/private-registry-swarm/">Using private registry in Docker Swarm</a>.  He has a short little update in the middle of the post:</p>
