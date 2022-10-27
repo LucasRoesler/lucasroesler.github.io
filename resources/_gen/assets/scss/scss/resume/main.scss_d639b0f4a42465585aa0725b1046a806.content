@@ -1,3 +1,0 @@
-@media print{.noprint{display:none}}html,body{height:"100%"}.resume{margin:5vh auto;max-width:800px}@media screen and (max-width: 1000px){.resume{margin:5vh 15vw}}a{text-decoration:none;color:unset}.nav--mini{margin-top:5vh}.nav--mini .btn--nav{color:#edf7ff;background-color:#5C6B73;border-radius:0;padding-right:10px;padding-left:20px}.nav--mini .btn--nav:first-of-type{border-radius:5px 0 0 5px}.nav--mini .btn--nav:last-of-type{border-radius:0 5px 5px 0}.nav--mini .btn--nav:hover{color:#edf7ff}@media screen and (max-width: 768px){.nav--mini .btn--nav{font-size:.85rem;padding:10px}}
-
-/*# sourceMappingURL=resume.style.css.map */
