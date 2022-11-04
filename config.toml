@@ -67,21 +67,28 @@ canonifyurls = true
     url = "https://github.com/lucasroesler"
 
   [[menu.links]]
-    weight = 3
-    identifier = "stackoverflow"
-    name = "Stack Overflow"
-    url = "https://stackoverflow.com/users/826102/theaxer"
-    [menu.links.params]
-      icon = "stack-overflow"
-
-  [[menu.links]]
     weight = 2
     identifier = "twitter"
     name = "Twitter"
     url = "https://twitter.com/theaxer"
 
   [[menu.links]]
+    weight = 3
+    identifier = "mastodon"
+    name = "Mastodon"
+    url = "https://floss.social/@theaxer"
+
+  [[menu.links]]
     weight = 4
+    identifier = "stackoverflow"
+    name = "Stack Overflow"
+    url = "https://stackoverflow.com/users/826102/theaxer"
+    [menu.links.params]
+      icon = "stack-overflow"
+
+
+  [[menu.links]]
+    weight = 5
     identifier = "linkedin"
     name = "LinkedIn"
     url = "https://www.linkedin.com/in/lucasroesler"
