@@ -1,0 +1,137 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Generics, string utils, and workspaces, oh my!">
+    <meta property="og:title" content="Go 1.18 Released" />
+<meta property="og:description" content="Generics, string utils, and workspaces, oh my!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2022/1-go-1.18-release/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-20T00:00:00+02:00" />
+<meta property="article:modified_time" content="2022-03-20T00:00:00+02:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Go 1.18 Released"/>
+<meta name="twitter:description" content="Generics, string utils, and workspaces, oh my!"/>
+
+<meta property="og:title" content="Go 1.18 Released" />
+<meta property="og:description" content="Generics, string utils, and workspaces, oh my!" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2022/1-go-1.18-release/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2022-03-20T00:00:00+02:00" />
+<meta property="article:modified_time" content="2022-03-20T00:00:00+02:00" />
+
+<meta itemprop="name" content="Go 1.18 Released">
+<meta itemprop="description" content="Generics, string utils, and workspaces, oh my!"><meta itemprop="datePublished" content="2022-03-20T00:00:00+02:00" />
+<meta itemprop="dateModified" content="2022-03-20T00:00:00+02:00" />
+<meta itemprop="wordCount" content="886">
+<meta itemprop="keywords" content="golang,programming," />
+
+
+    <title>
+        Go 1.18 Released &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="https://lucasroesler.com/posts/2022/1-go-1.18-release/">
+
+    
+    <link rel="stylesheet" href="https://lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/posts/2022/1-go-1.18-release/images/remy_loz-3S0INpfREQc-unsplash.jpg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>Go 1.18 Released</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>Go 1.18 was <a href="https://twitter.com/golang/status/1503787326060875782?s=20&amp;t=BJLVhJnsJKSloA1D0LPEHg">released last week (March 15)</a> and I have finally had a chance to play with it. I have been excited for it in the month leading to the release, reading almost every preview that I saw on Twitter, and the release has not disappointed! I think the last release that got me this excited was 1.16, when they added <a href="https://pkg.go.dev/embed"><code>embed</code></a>.</p>
+<p>Today, I want to share a few of things that made me a bit more excited than usual for a Go release.</p>
+<hr>
+<h2 id="generics">Generics!</h2>
+<p>First, let&rsquo;s deal with the <a href="https://en.wikipedia.org/wiki/Elephant_in_the_room">elephant in the room</a>, <a href="https://go.dev/doc/go1.18#generics">generics</a>! To say that this has been a <a href="https://go.dev/blog/generics-proposal">long time coming</a> and controversial would be an understatement. As a result, this has been in the works for a long time. One of the first proposals for Generics was <a href="https://go.dev/design/15292/2010-06-type-functions">back in 2010!</a>.</p>
+<p>I am one of those people that was actually looking forward to this change. Over the past year I have actually had a few moments where Generics would have made my life <em>much</em> simpler. I am not going to start using it for <em>every</em> function I write or anything like that, but I will not shy away. However, I am also not going to review how Go&rsquo;s Generics work, the Go team has already written a <a href="https://go.dev/doc/tutorial/generics">great tutorial</a> and I recommend you start there.</p>
+<h2 id="strings">Strings!</h2>
+<p>Oddly, the feature I was most excited for was a new <code>Cut</code> method added to <a href="https://pkg.go.dev/strings#Cut"><code>strings</code></a> and <a href="https://pkg.go.dev/bytes#Cut"><code>bytes</code></a>. When I first read about that addition, I yelled &ldquo;oh yeah, awesome!&rdquo;, my wife can confirm. This is a small quality of life change and I love it. This is the perfect function to help you do things like parsing <code>key=value</code> pairs, which is where I have already used it. If you aren&rsquo;t sure about the usefulness of <code>Cut</code>, &ldquo;why not use use <code>Index</code> and string slicing?&rdquo;, then checkout the <a href="https://github.com/golang/go/issues/46336">detailed explanation from Russ in the Pull Request</a>.</p>
+<h2 id="workspaces">Workspaces!</h2>
+<p>The next feature I didn&rsquo;t realize I <em>should</em> have been excited for and will probably use almost daily is <a href="https://go.dev/doc/tutorial/workspaces">workspaces</a>. Workspace mode makes it easier to work with multiple modules. This is obviously a huge boon for teams/projects that use monorepos. I don&rsquo;t really prefer monorepos. Personally, the tooling for them are not that great (yet). However, I do like working on distributed systems and will probably use <code>workspaces</code> everyday.</p>
+<p>So what is a workspace? From the docs, they say</p>
+<blockquote>
+<p>A workspace is a collection of modules on disk that are used as the root modules when running minimal version selection (MVS).</p>
+</blockquote>
+<blockquote>
+<p>A workspace can be declared in a go.work file that specifies relative paths to the module directories of each of the modules in the workspace. When no go.work file exists, the workspace consists of the single module containing the current directory.</p>
+</blockquote>
+<p>Basically, this can be <em>any</em> folder where the sub-folders are Go modules. Even if you don&rsquo;t use a monorepo, you will still want to create a workspace for any project with multiple components/repos. Creating a workspace will allow your editor/IDE to simultaneously lint and autocomplete all of the components in that workspace.</p>
+<p>I like to organize my <code>code</code> folder so that components are nested together in sub-folders:</p>
+<pre tabindex="0"><code>code
+├── company
+│   ├── componet-a
+│   ├── componet-b
+├── openfaas
+│   ├── faas
+│   ├── faas-cli
+│   ├── ...
+│   └── faas-netes
+└── sandbox
+    └── bug-repro
+</code></pre><p>As a result, previously, when I opened <code>company</code> in VSCode, linting would just be broken. It would complain about detecting multiple modules and just mark everything in red. It was not a workable dev environment until switched to a subdirectory for a single component.</p>
+<p>With Go 1.18, I can create a <code>go.work</code> workspace for my <code>company</code> folder like this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd code/company
+</span></span><span style="display:flex;"><span>go work init .
+</span></span><span style="display:flex;"><span>go work use component-a
+</span></span><span style="display:flex;"><span>go work use component-b
+</span></span></code></pre></div><p>and just open the <code>company</code> folder and everything works! This really cuts down on the number of editors I need open at the same time (or switching the active project in my current editor window).</p>
+<p>You probably don&rsquo;t want to create a workspace for your <em>entire</em> code folder. I suspect there would be performance issues and it would be annoying to manager that <code>go.work</code> file .</p>
+<h3 id="workspaces-for-openfaas">Workspaces for OpenFaas?</h3>
+<p>One area where I do use a &ldquo;monorepo&rdquo; is when I am building serverless projects that are composed of multiple functions.</p>
+<p>OpenFaaS already supports Go modules. But now adding a workspace to the project root (like above) it is really easy to edit all of the Go functions in a single project from the same editor.</p>
+<p>However, none of the official templates have any native support for workspaces yet, in fact, adding a workspace to a function itself would likely break it or be ignored (at best).</p>
+<h2 id="next-steps">Next steps</h2>
+<p>In the next weeks I am going to explore what proper support of workspaces or maybe use workspaces to simplify some of the build code we use for OpenFaaS templates. I really want to see what can be made of the <a href="https://github.com/openfaas/faas-cli/issues/322"><code>copy common folders</code></a> feature in combination with workspaces. I originally built the copy feature to make sharing code between python and nodejs functions easier, but there was no great way to do this before. I think the combination of workspace and a replace statement might allow the same code share for Go functions.</p>
+<hr>
+<p>Cover Photo by <a href="https://unsplash.com/@remyloz?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Remy_Loz</a> on <a href="https://unsplash.com/s/photos/workspace?utm_source=unsplash&amp;utm_medium=referral&amp;utm_content=creditCopyText">Unsplash</a></p>
+
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/golang/">golang</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/programming/">programming</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>

@@ -39,7 +39,7 @@ Berlin, DE \
 >
 > *Go - Kubernetes - Docker - Containerd*
 
-**Senior Engineer**, Contiamo GmbH, Berlin Germany, - **2017 -- present**
+**Software Architect and Team Lead**, Contiamo GmbH, Berlin Germany, - **2017 -- present**
 
 > - Team lead for the API, Authentication, Application, and Platform team.
 > - Responsible for running daily stand-ups and one-on-ones.

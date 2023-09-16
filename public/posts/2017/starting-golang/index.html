@@ -8,7 +8,7 @@
     <meta property="og:title" content="Berlin and Golang" />
 <meta property="og:description" content="At the beginning of the month I left Teem I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at Contiamo and will be working on the Labs feature." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2017/starting-golang/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/starting-golang/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-08-02T11:00:00-04:00" />
 <meta property="article:modified_time" content="2017-08-02T11:00:00-04:00" />
 
@@ -19,20 +19,15 @@
 <meta property="og:title" content="Berlin and Golang" />
 <meta property="og:description" content="At the beginning of the month I left Teem I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at Contiamo and will be working on the Labs feature." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2017/starting-golang/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/starting-golang/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-08-02T11:00:00-04:00" />
 <meta property="article:modified_time" content="2017-08-02T11:00:00-04:00" />
 
 <meta itemprop="name" content="Berlin and Golang">
-<meta itemprop="description" content="At the beginning of the month I left Teem I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at Contiamo and will be working on the Labs feature.">
-<meta itemprop="datePublished" content="2017-08-02T11:00:00-04:00" />
+<meta itemprop="description" content="At the beginning of the month I left Teem I was Director of Engineering and it was and still is a great company.  There are some amazing developers there, so if you are looking for a job in SLC, hit them up.  This weekend (Aug 5) I will be moving to Berlin to start a new role at Contiamo and will be working on the Labs feature."><meta itemprop="datePublished" content="2017-08-02T11:00:00-04:00" />
 <meta itemprop="dateModified" content="2017-08-02T11:00:00-04:00" />
 <meta itemprop="wordCount" content="492">
-
-
-
 <meta itemprop="keywords" content="golang,berlin," />
-
 
 
     <title>
@@ -59,7 +54,7 @@
                 <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/">
                     <icon class="nav-icon fas fa-home"></icon>
                 </a>
-                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/index.xml">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/">
                     <icon class="nav-icon fas fa-rss"></icon>
                 </a>
             </div>
@@ -82,19 +77,19 @@
 <p>Second to simply being in Germany, I am really excited to deep dive into <a href="https://golang.org/">Go</a>.  I have of course worked with a typed language for little projects here or there, but most of my professional work has been Python and Javascript. Of course, most of that time was spent swearing at the language :cough: Java :cough:, just ask the developers at Teem.  One thing I have <em>very slowly</em> been working on is a port of <a href="https://github.com/enderlabs/octoeb">octoeb</a> to  Go. This is great because I wrote and designed the original, so I have a very clear picture and understanding of the design. I can focus on learning the particulars of Go. Additionally, I can add some needed improvements to the initial design. Among other things, I plan on adding an <code>init</code> command to simplify configuration and to redesign the internal logic to allow it to be more easily extended to other services beyond Github and Jira (Bitbucket, Github issues, etc).</p>
 <p>This blog has so far focused on Python work I have done, naturally a large portion of the technical posts will begin focusing on Go.  But I don&rsquo;t expect to completely stop Python anytime soon.  I do expect most of my Go posts to pretty introductory, at least for the remainder of the year.</p>
 <p>First noob lesson in go: variables defined in a package are exposed and defined in all files in that package.  For example, if you have two files <code>foo.go</code> and <code>bar.go</code>, this will produce a compile error.</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// file/foo.go
-</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">foo</span>
-<span style="color:#66d9ef">var</span> (
-    <span style="color:#a6e22e">Foo</span> <span style="color:#66d9ef">string</span>
-    <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
-)
-</code></pre></div><div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// file/bar.go
-</span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">foo</span>
-<span style="color:#66d9ef">var</span> (
-    <span style="color:#a6e22e">Bar</span> <span style="color:#66d9ef">string</span>
-    <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
-)
-</code></pre></div><p>This was quite a surprise from my python experience.  I am sure that I will run across many more lessons like this. As this goes on, please feel free to let me know of any tweaks or improvements or Go patterns that I am missing.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// file/foo.go
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">foo</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Foo</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// file/bar.go
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#f92672">package</span> <span style="color:#a6e22e">foo</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">var</span> (
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">Bar</span> <span style="color:#66d9ef">string</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>)
+</span></span></code></pre></div><p>This was quite a surprise from my python experience.  I am sure that I will run across many more lessons like this. As this goes on, please feel free to let me know of any tweaks or improvements or Go patterns that I am missing.</p>
 <hr>
 <p>Thanks to <a href="https://flic.kr/p/NcPtQ">m.a.r.c</a> for the CC BY-NC image that I used as the cover on this post.</p>
                 </div>
@@ -115,7 +110,7 @@
         <footer>
     <span class="copyrights">
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
-        &copy; 2017 - 2021 by Lucas Roesler. 
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
     </span>
 </footer>
 

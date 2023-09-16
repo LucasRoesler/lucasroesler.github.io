@@ -17,7 +17,7 @@ it was simply too easy to miss problem migrations when depending on only peer
 reviews. To make our lives easier we created a series of validation checks to
 ensure that each database migration will be backwards compatible." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2017/automatic-migration-validation/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/automatic-migration-validation/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-02-20T00:00:00-07:00" />
 <meta property="article:modified_time" content="2017-02-20T00:00:00-07:00" />
 
@@ -46,7 +46,7 @@ it was simply too easy to miss problem migrations when depending on only peer
 reviews. To make our lives easier we created a series of validation checks to
 ensure that each database migration will be backwards compatible." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2017/automatic-migration-validation/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/automatic-migration-validation/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-02-20T00:00:00-07:00" />
 <meta property="article:modified_time" content="2017-02-20T00:00:00-07:00" />
 
@@ -60,15 +60,10 @@ application model, load on the database for that model, and a bit of general
 experience. This obviously slows down reviews and subsequently deploys. Worse,
 it was simply too easy to miss problem migrations when depending on only peer
 reviews. To make our lives easier we created a series of validation checks to
-ensure that each database migration will be backwards compatible.">
-<meta itemprop="datePublished" content="2017-02-20T00:00:00-07:00" />
+ensure that each database migration will be backwards compatible."><meta itemprop="datePublished" content="2017-02-20T00:00:00-07:00" />
 <meta itemprop="dateModified" content="2017-02-20T00:00:00-07:00" />
 <meta itemprop="wordCount" content="1136">
-
-
-
 <meta itemprop="keywords" content="python,django,automation,postgres," />
-
 
 
     <title>
@@ -95,7 +90,7 @@ ensure that each database migration will be backwards compatible.">
                 <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/">
                     <icon class="nav-icon fas fa-home"></icon>
                 </a>
-                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/index.xml">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/">
                     <icon class="nav-icon fas fa-rss"></icon>
                 </a>
             </div>
@@ -129,7 +124,7 @@ migration,</li>
 <a href="http://click.pocoo.org/5/">Click</a> to create a commandline
 interface.  So, I can get a changelog along with an audit of the migrations
 in my current branch using:</p>
-<pre><code>$ ocotoeb changelog
+<pre tabindex="0"><code>$ ocotoeb changelog
 </code></pre><p>I won&rsquo;t describe the specific python code, instead I will give you equivalent bash commands
 that you can run in your CLI and a simple description of the regex that we
 are using. This will give you all the pieces you need to build a similar script
@@ -176,30 +171,30 @@ place, we rarely have any issues with database migrations during deploy.</p>
 <h2 id="the-how">The how</h2>
 <h3 id="getting-your-list-of-migrations">Getting your list of migrations</h3>
 <p>To find the new migrations you can run the following command</p>
-<pre><code>$ git log --name-status master.. | grep -e  &quot;^[MA].*migrations.*&quot;
+<pre tabindex="0"><code>$ git log --name-status master.. | grep -e  &#34;^[MA].*migrations.*&#34;
 </code></pre><p>Breaking this down, <code>git log --name-status master..</code> will print a log of the
 commits and the file changes in each commit between <code>master</code> and the current
 <code>HEAD</code>.  The <code>grep</code> returns only those lines that start with <code>A</code> or <code>M</code> and
 also contains the work <code>migrations</code>.  These are all of the new or modified
 migration files.  It will return something like this</p>
-<pre><code>A	apps/accounts/migrations/0019_auto_20170126_1830.py
+<pre tabindex="0"><code>A	apps/accounts/migrations/0019_auto_20170126_1830.py
 </code></pre><h3 id="getting-your-sql">Getting your SQL</h3>
 <p>Once you have the list of migration files that you need to check, we need to
 get the actual SQL that is going to be run by Django.  Fortunately, Django
 provides a simple command to get this SQL,
 <a href="https://docs.djangoproject.com/en/1.10/ref/django-admin/#sqlmigrate"><code>sqlmigrate</code></a>.
 For example,</p>
-<pre><code>django-admin sqlmigrate account 0002
+<pre tabindex="0"><code>django-admin sqlmigrate account 0002
 </code></pre><p>will print the sql for the second migration in the <code>accounts</code> app. In the
 pervious section the ouput contains all of the information that we need.
 Specifically, with a command like this</p>
-<pre><code>$ git log --name-status master.. | grep -e  &quot;^[AM].*migrations.*&quot; | cut -d / -f 2,4 | cut -d . -f 1
+<pre tabindex="0"><code>$ git log --name-status master.. | grep -e  &#34;^[AM].*migrations.*&#34; | cut -d / -f 2,4 | cut -d . -f 1
 </code></pre><p>we would get back exactly the list of apps and the migration name for each
 migration that we need to check</p>
-<pre><code>accounts/0017_auto_20170126_1342
+<pre tabindex="0"><code>accounts/0017_auto_20170126_1342
 </code></pre><p>This still isn&rsquo;t quite what we need.  At the end of the day the following
 command will generate the SQL for you</p>
-<pre><code>$ git log --name-status master.. | grep -e  &quot;^[AM].*migrations.*&quot; | cut -d / -f 2,4 | cut -d . -f 1 | awk -F&quot;/&quot; '{ print $1,$2}' | xargs -t -L 1 django-admin sqlmigrate
+<pre tabindex="0"><code>$ git log --name-status master.. | grep -e  &#34;^[AM].*migrations.*&#34; | cut -d / -f 2,4 | cut -d . -f 1 | awk -F&#34;/&#34; &#39;{ print $1,$2}&#39; | xargs -t -L 1 django-admin sqlmigrate
 </code></pre><p>We are using python for our scripting, so my script is actually a bit
 different, using the regex <code>apps/((.*)/migrations/(\d+[0-9a-z_]*))\.py</code> and a
 combination of a for loop and subprocess to generate the SQL.</p>
@@ -240,7 +235,7 @@ we run into.</p>
         <footer>
     <span class="copyrights">
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
-        &copy; 2017 - 2021 by Lucas Roesler. 
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
     </span>
 </footer>
 

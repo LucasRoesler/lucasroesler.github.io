@@ -1,6 +1,6 @@
 ---
 title: introduction
-draft: true
+draft: false
 ---
 I am senior engineer at [contiamo.com][contiamo], core contributor to [OpenFaas][openfaas], and an ex-mathematician.
 

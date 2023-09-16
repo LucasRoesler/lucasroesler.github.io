@@ -3,6 +3,6 @@
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
         &copy; {{if .Site.Params.copyright.start }}{{ .Site.Params.copyright.start }} - {{end}}{{ now.Format "2006" }}
         {{- with .Site.Copyright }}{{ . | safeHTML }}
-        {{- else }} by {{ .Site.Author.name }}{{ end }}. {{ i18n "footer.all_rights_reserved" }}
+        {{- else }} by {{ .Site.Author.name }}{{ end }}. {{ i18n "footer.all_rights_reserved" }} - <a href="/posts/index.xml">RSS</a>
     </span>
 </footer>

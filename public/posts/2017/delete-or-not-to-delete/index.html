@@ -8,7 +8,7 @@
     <meta property="og:title" content="Delete or not to delete" />
 <meta property="og:description" content="Should you remove data from the database or simply mark it as deleted?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2017/delete-or-not-to-delete/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/delete-or-not-to-delete/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-04-02T00:00:00-07:00" />
 <meta property="article:modified_time" content="2017-04-02T00:00:00-07:00" />
 
@@ -19,20 +19,15 @@
 <meta property="og:title" content="Delete or not to delete" />
 <meta property="og:description" content="Should you remove data from the database or simply mark it as deleted?" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2017/delete-or-not-to-delete/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/delete-or-not-to-delete/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-04-02T00:00:00-07:00" />
 <meta property="article:modified_time" content="2017-04-02T00:00:00-07:00" />
 
 <meta itemprop="name" content="Delete or not to delete">
-<meta itemprop="description" content="Should you remove data from the database or simply mark it as deleted?">
-<meta itemprop="datePublished" content="2017-04-02T00:00:00-07:00" />
+<meta itemprop="description" content="Should you remove data from the database or simply mark it as deleted?"><meta itemprop="datePublished" content="2017-04-02T00:00:00-07:00" />
 <meta itemprop="dateModified" content="2017-04-02T00:00:00-07:00" />
 <meta itemprop="wordCount" content="755">
-
-
-
 <meta itemprop="keywords" content="programming,python,django," />
-
 
 
     <title>
@@ -59,7 +54,7 @@
                 <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/">
                     <icon class="nav-icon fas fa-home"></icon>
                 </a>
-                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/index.xml">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/">
                     <icon class="nav-icon fas fa-rss"></icon>
                 </a>
             </div>
@@ -95,9 +90,9 @@ implements the ORM cascade delete.  It is interesting to note that Django does
 not rely on the database&rsquo;s cascade functionality but instead manages the delete
 process itself. The benefit of doing this is that you can then specify behavior
 at delete time via the <code>on_delete</code> argument to the model field.  For example:</p>
-<pre><code>class Car(models.Model):
+<pre tabindex="0"><code>class Car(models.Model):
     manufacturer = models.ForeignKey(
-        'production.Manufacturer',
+        &#39;production.Manufacturer&#39;,
         blank=True, null=True
         on_delete=models.SET_NULL,
     )
@@ -118,8 +113,8 @@ objects into the update bucket. Essentially, I allow Django to do all of the
 collection for me and then I go through the list of objects to inspect if it
 should be archived instead, if it is, I move it to the update bucket and move
 on.</p>
-<pre><code>def cascade_archive(inst_or_qs, using, keep_parents=False):
-    &quot;&quot;&quot;
+<pre tabindex="0"><code>def cascade_archive(inst_or_qs, using, keep_parents=False):
+    &#34;&#34;&#34;
     Return collector instance that has marked ArchiveMixin instances for
     archive (i.e. update) instead of actual delete.
 
@@ -132,7 +127,7 @@ on.</p>
     Returns:
         models.deletion.Collector: this is a standard Collector instance but
             the ArchiveMixin instances are in the fields for update list.
-    &quot;&quot;&quot;
+    &#34;&#34;&#34;
     from .mixins import ArchiveMixin
 
     if not isinstance(inst_or_qs, models.QuerySet):
@@ -146,7 +141,7 @@ on.</p>
     # create a list of models and instances that are connected to
     # this instance.
     collector = models.deletion.Collector(using=using)
-    if StrictVersion(django.get_version()) &lt; StrictVersion('1.9.0'):
+    if StrictVersion(django.get_version()) &lt; StrictVersion(&#39;1.9.0&#39;):
         collector.collect(instances)
     else:
         collector.collect(instances, keep_parents=keep_parents)
@@ -159,7 +154,7 @@ on.</p>
         inst_list = list(instances)
 
         if issubclass(model, ArchiveMixin):
-            deleted_on_field = get_field_by_name(model, 'deleted_on')
+            deleted_on_field = get_field_by_name(model, &#39;deleted_on&#39;)
             collector.add_field_update(
                 deleted_on_field, deleted_ts, inst_list)
 
@@ -171,7 +166,7 @@ on.</p>
         model = qs.model
 
         if issubclass(model, ArchiveMixin):
-            deleted_on_field = get_field_by_name(model, 'deleted_on')
+            deleted_on_field = get_field_by_name(model, &#39;deleted_on&#39;)
             collector.add_field_update(deleted_on_field, deleted_ts, qs)
 
             collector.fast_deletes[i] = qs.none()
@@ -206,7 +201,7 @@ know what you think.</p>
         <footer>
     <span class="copyrights">
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
-        &copy; 2017 - 2021 by Lucas Roesler. 
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
     </span>
 </footer>
 

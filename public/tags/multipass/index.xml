@@ -13,7 +13,7 @@
       <pubDate>Sun, 13 Dec 2020 00:00:00 +0200</pubDate>
       
       <guid>https://lucasroesler.com/posts/2020/multipass-data-partition/</guid>
-      <description>&lt;p&gt;This weekend was my first adventure in &lt;a href=&#34;https://snapcraft.io/&#34;&gt;Snaps&lt;/a&gt;. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &amp;ldquo;disk is almost out of space&amp;rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&amp;rsquo;t entirely Multipass&#39; fault, my good old friend Docker was eating up a decent chunk of my disk too.&lt;/p&gt;</description>
+      <description>&lt;p&gt;This weekend was my first adventure in &lt;a href=&#34;https://snapcraft.io/&#34;&gt;Snaps&lt;/a&gt;. Unfortunately, this adventure quickly devolved into a murder mystery, for my hard drive. The first snap I try to compile triggers a &amp;ldquo;disk is almost out of space&amp;rdquo; notification?! Turns out building Snaps requires a surprising amount of disk space. But it wasn&amp;rsquo;t entirely Multipass&amp;rsquo; fault, my good old friend Docker was eating up a decent chunk of my disk too.&lt;/p&gt;</description>
     </item>
     
   </channel>

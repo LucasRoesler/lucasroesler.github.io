@@ -13,7 +13,7 @@ also, surprisingly, many developers number one frienemy.  I want to share some
 of my favorite tips and tweaks that I have used over the years to make it all
 friend and never my enemy." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2017/how-i-git/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/how-i-git/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-03-19T00:00:00-06:00" />
 <meta property="article:modified_time" content="2017-03-19T00:00:00-06:00" />
 
@@ -34,7 +34,7 @@ also, surprisingly, many developers number one frienemy.  I want to share some
 of my favorite tips and tweaks that I have used over the years to make it all
 friend and never my enemy." />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2017/how-i-git/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2017/how-i-git/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-03-19T00:00:00-06:00" />
 <meta property="article:modified_time" content="2017-03-19T00:00:00-06:00" />
 
@@ -44,15 +44,10 @@ tech company is git.  There are a couple of other technologies that you will
 probably find, like AWS, but git is the only one I expect to find everywhere. It is
 also, surprisingly, many developers number one frienemy.  I want to share some
 of my favorite tips and tweaks that I have used over the years to make it all
-friend and never my enemy.">
-<meta itemprop="datePublished" content="2017-03-19T00:00:00-06:00" />
+friend and never my enemy."><meta itemprop="datePublished" content="2017-03-19T00:00:00-06:00" />
 <meta itemprop="dateModified" content="2017-03-19T00:00:00-06:00" />
 <meta itemprop="wordCount" content="1955">
-
-
-
 <meta itemprop="keywords" content="programming,git," />
-
 
 
     <title>
@@ -79,7 +74,7 @@ friend and never my enemy.">
                 <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/">
                     <icon class="nav-icon fas fa-home"></icon>
                 </a>
-                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/index.xml">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/">
                     <icon class="nav-icon fas fa-rss"></icon>
                 </a>
             </div>
@@ -130,7 +125,7 @@ release, we merge the <code>release</code> branch into <code>master</code> and t
 <h2 id="branch-names">Branch names</h2>
 <p>Please, for the love of all that is good, use descriptive branch names. I
 suggest the following naming patterns</p>
-<pre><code>feature-&lt;ISSUE_ID&gt;-short-summary-of-branch
+<pre tabindex="0"><code>feature-&lt;ISSUE_ID&gt;-short-summary-of-branch
 hotfix-&lt;ISSUE_ID&gt;-short-summary-of-branch
 releasefix-&lt;ISSUE_ID&gt;-short-summary-of-branch
 </code></pre><p>Doing this allows anyone that is reviewing that branch to have some idea of
@@ -148,7 +143,7 @@ advice of
 and the
 <a href="https://www.git-scm.com/book/en/v2/Distributed-Git-Contributing-to-a-Project#Commit-Guidelines"><code>git</code> handbook</a>
 but with a slight tweak. Here is a example commit message</p>
-<pre><code>Capitalized, short (50 chars or less) summary
+<pre tabindex="0"><code>Capitalized, short (50 chars or less) summary
 
 **What**
 - Bullet pointed list of changes you made.
@@ -172,7 +167,7 @@ in the change set and what should not be there. One-line messages help no one.</
 <p>To help ensure that you write a half-decent commit message, <code>git</code> has a feature
 where called <code>.gitmessage</code>.  Create a file called <code>.gitmessage</code> in your home
 folder and put this in it</p>
-<pre><code>Captialized, short (50 chars or less) summary
+<pre tabindex="0"><code>Captialized, short (50 chars or less) summary
 
 **What**
 -
@@ -197,15 +192,15 @@ that they can be reviewed separately. To actually make all of these ideas play
 nicely together I use rebase frequently. I squash my frequent small commit into
 larger (but still fairly small) semantic pieces of history, so my git log will
 go from something like this</p>
-<pre><code>sha1 - &quot;Add new contact method&quot;
-sha2 - &quot;Fix typo in contact method&quot;
-sha3 - &quot;Add new unit test&quot;
-sha4 - &quot;Fix bug found by unit test&quot;
-sha5 - &quot;Fix PEP8 issues with imports&quot;
-sha6 - &quot;Fix PEP8 issues with line lengths&quot;
+<pre tabindex="0"><code>sha1 - &#34;Add new contact method&#34;
+sha2 - &#34;Fix typo in contact method&#34;
+sha3 - &#34;Add new unit test&#34;
+sha4 - &#34;Fix bug found by unit test&#34;
+sha5 - &#34;Fix PEP8 issues with imports&#34;
+sha6 - &#34;Fix PEP8 issues with line lengths&#34;
 </code></pre><p>to something like this</p>
-<pre><code>sha1' - &quot;Add new contact method and unit test&quot;
-sha2' - &quot;Fix PEP8 issues&quot;
+<pre tabindex="0"><code>sha1&#39; - &#34;Add new contact method and unit test&#34;
+sha2&#39; - &#34;Fix PEP8 issues&#34;
 </code></pre><p>This history makes it easy to cherry-pick or revert the new feature and it
 makes it easier for peer reviewers to review the logic change in <code>sah1'</code>
 independently of the potentially noisy and distracting PEP8 changes in <code>sha2'</code>.
@@ -222,7 +217,7 @@ simply live with the end results. With that said, if you are using rebase
 especially if you are using <code>pull -r</code>, which is a standard pull that uses
 rebase instead of merge, then you must enable and configure the <code>rerere</code>
 feature. Quick, update your <code>~/.gitconfig</code> to have</p>
-<pre><code>[rerere]
+<pre tabindex="0"><code>[rerere]
     enabled = 1
     autoupdate = 1
 </code></pre><p>you will thank me. From the <a href="https://git-scm.com/blog/2010/03/08/rerere.html">git
@@ -244,16 +239,16 @@ commands.  So, here are mine.  I have roughly 3 categories of aliases: audit
 and cleanup, historical logging, and commit helpers.</p>
 <h2 id="audit-and-cleanup">Audit and cleanup</h2>
 <p>The following commands help me clean up old branches</p>
-<pre><code>audit = !git branch --merged | grep -v '\*\|master\|develop\|release-'
-clean-audit = !git branch --merged | grep -v '\*\|master\|develop\|release-' | xargs -n 1 git branch -d
-b = !git for-each-ref --sort='-authordate' --format='%(authordate)%09%(objectname:short)%09%(refname)' refs/heads | sed -e 's-refs/heads/--'
+<pre tabindex="0"><code>audit = !git branch --merged | grep -v &#39;\*\|master\|develop\|release-&#39;
+clean-audit = !git branch --merged | grep -v &#39;\*\|master\|develop\|release-&#39; | xargs -n 1 git branch -d
+b = !git for-each-ref --sort=&#39;-authordate&#39; --format=&#39;%(authordate)%09%(objectname:short)%09%(refname)&#39; refs/heads | sed -e &#39;s-refs/heads/--&#39;
 trim = !git reflog expire --expire=now --all &amp;&amp; git gc --prune=now
 </code></pre><p>I use <code>audit</code> and <code>clean-audit</code> the most frequently.  <code>audit</code> simply lists my
 local branches that have already been merged (except for <code>master</code>, <code>develop</code>,
 and the <code>release</code> branches) and hence are not needed anymore. <code>clean-audit</code>
 simply extends that command to delete the listed branches.</p>
 <p>The <code>b</code> alias prints a summary of all local branches, it looks likes this</p>
-<pre><code>Fri Mar 17 16:19:24 2017 -0600	4d2a351	master
+<pre tabindex="0"><code>Fri Mar 17 16:19:24 2017 -0600	4d2a351	master
 Fri Mar 17 15:08:31 2017 -0600	d9ce23e	release-17.12.01
 Fri Mar 17 13:21:34 2017 -0600	a5d5f73	develop
 </code></pre><p>I use <code>trim</code> pretty sparingly. It simply cleans up old branch pointers that are
@@ -262,7 +257,7 @@ do <code>clean-audit</code>.  I only recommend this command if you have OCD.</p>
 <h2 id="historical-logging">Historical Logging</h2>
 <p>The following commands will print your <code>git log</code> in fun, potentially
 informative, ways:</p>
-<pre><code>graph = log --graph --oneline --decorate --all
+<pre tabindex="0"><code>graph = log --graph --oneline --decorate --all
 l = log --pretty=format:%C(yellow)%h\ %ad%Cred%d\ %Creset%s%Cblue\ [%cn] --decorate --date=short
 ll = log --pretty=format:%C(yellow)%h%Cred%d\ %Creset%s%Cblue\ [%cn] --decorate --numstat
 </code></pre><p>Assuming that you and your team are writing good summary lines in your commit
@@ -270,20 +265,20 @@ messages, these commands can be used to quickly find when a certain commit
 happened.  I don&rsquo;t use these frequently, but they have been useful when trying
 to find when something happened in the repo.  <code>git l</code> is great a really short
 summary of the history, e.g.</p>
-<pre><code>af1f3ec 2017-03-05 (HEAD -&gt; source-hugo, origin/source-hugo) Site rebuild Sun Mar  5 13:53:22 MST 2017 [Lucas Roesler]
+<pre tabindex="0"><code>af1f3ec 2017-03-05 (HEAD -&gt; source-hugo, origin/source-hugo) Site rebuild Sun Mar  5 13:53:22 MST 2017 [Lucas Roesler]
 ddfdd9d 2017-03-05 Post new spring hefe beer post [Lucas Roesler]
 e5bd906 2017-02-25 Site rebuild Sat Feb 25 13:33:12 MST 2017 [Lucas Roesler]
 bd21f27 2017-02-25 Add a reading list page [Lucas Roesler]
 dad0fbb 2017-02-18 Site rebuild Sat Feb 18 20:20:50 MST 2017 [Lucas Roesler]
 </code></pre><p>If you need a little more detail, <code>git ll</code> will show you the change stats as
 well as the summary that you get in <code>git l</code>, e.g.</p>
-<pre><code>af1f3ec (HEAD -&gt; source-hugo, origin/source-hugo) Site rebuild Sun Mar  5 13:53:22 MST 2017 [Lucas Roesler]
+<pre tabindex="0"><code>af1f3ec (HEAD -&gt; source-hugo, origin/source-hugo) Site rebuild Sun Mar  5 13:53:22 MST 2017 [Lucas Roesler]
 21      1       public/2017/01/hello/index.html
 21      1       public/2017/01/my-management-philosophy/index.html
 21      1       public/2017/01/spicy-winter-porter/index.html
 </code></pre><h2 id="commit-helpers">Commit helpers</h2>
 <p>I only have one alias related to commits <code>fixup</code></p>
-<pre><code>fixup=!git commit --amend
+<pre tabindex="0"><code>fixup=!git commit --amend
 </code></pre><p>This command will take your staged changes and immediately squash them into the
 previous commit.  This is great for fixing small typos and simply reduces the
 amount of time I need to spend in <code>rebase</code>. This is by far my most frequently
@@ -292,12 +287,12 @@ used alias.</p>
 <p>Adding these aliases to your system is pretty simple. In your <code>~/.gitconfig</code>
 file, add or update the <code>[alias]</code> section with the snippets I shared above. My
 config file looks like</p>
-<pre><code>[alias]
+<pre tabindex="0"><code>[alias]
     fixup=!git commit --amend
 
     # cleanup old branches
-    audit = &quot;!git branch --merged | grep -v '\\*\\|master\\|develop\\|release-'&quot;
-    clean-audit = &quot;!git branch --merged | grep -v '\\*\\|master\\|develop\\|release-' | xargs -n 1 git branch -d&quot;
+    audit = &#34;!git branch --merged | grep -v &#39;\\*\\|master\\|develop\\|release-&#39;&#34;
+    clean-audit = &#34;!git branch --merged | grep -v &#39;\\*\\|master\\|develop\\|release-&#39; | xargs -n 1 git branch -d&#34;
 </code></pre><h1 id="summary">Summary</h1>
 <p>Git is a powerful tool, one of my favorites. I like a semantic git logs, so I
 use rebase. You don&rsquo;t have to do this. But, you better write good commit
@@ -320,7 +315,7 @@ messages :)</p>
         <footer>
     <span class="copyrights">
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
-        &copy; 2017 - 2021 by Lucas Roesler. 
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
     </span>
 </footer>
 

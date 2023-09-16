@@ -1,0 +1,400 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="How to Unit Test Python functions in OpenFaaS">
+    <meta property="og:title" content="Using Tox and PyTest with OpenFaaS" />
+<meta property="og:description" content="How to Unit Test Python functions in OpenFaaS" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2021/test-python-functions/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-03-06T00:00:00+02:00" />
+<meta property="article:modified_time" content="2021-03-06T00:00:00+02:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Using Tox and PyTest with OpenFaaS"/>
+<meta name="twitter:description" content="How to Unit Test Python functions in OpenFaaS"/>
+
+<meta property="og:title" content="Using Tox and PyTest with OpenFaaS" />
+<meta property="og:description" content="How to Unit Test Python functions in OpenFaaS" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2021/test-python-functions/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2021-03-06T00:00:00+02:00" />
+<meta property="article:modified_time" content="2021-03-06T00:00:00+02:00" />
+
+<meta itemprop="name" content="Using Tox and PyTest with OpenFaaS">
+<meta itemprop="description" content="How to Unit Test Python functions in OpenFaaS"><meta itemprop="datePublished" content="2021-03-06T00:00:00+02:00" />
+<meta itemprop="dateModified" content="2021-03-06T00:00:00+02:00" />
+<meta itemprop="wordCount" content="1717">
+<meta itemprop="keywords" content="programming,openfaas,serverless,python,pytest,tox,ci/cd,github actions,testing,unit test," />
+
+
+    <title>
+        Using Tox and PyTest with OpenFaaS &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="https://lucasroesler.com/posts/2021/test-python-functions/">
+
+    
+    <link rel="stylesheet" href="https://lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/posts/2021/test-python-functions/images/cover2-alexander-andrews.jpg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>Using Tox and PyTest with OpenFaaS</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>I think it is an uncontroversial statement to say testing is important in software development. Writing tests may not always be fun, but nothing is a sweet as that moment when a unit test catches a bug before you deploy.</p>
+<p>In OpenFaaS we have tons of tests in each project, even the <a href="https://github.com/openfaas/certifier"><code>certifier</code></a> itself runs a short suite of end-to-end tests. <em>But</em>, not all of our function templates have first class testing support. For Go, Node, and Java, this has already been added. For Go it is easy because there is a standard test command <code>go test</code>. For Node and Java we (or the community) have picked and optional default test command. Soon, we are going to do the same for Python.</p>
+<p>But what do you do in the mean time? Or, what if you have your own Python template and you want to add testing to it?  In this post I am going to show you how to use  <a href="https://tox.readthedocs.io/en/latest/"><code>tox</code></a> and <a href="https://docs.pytest.org/en/stable/"><code>pytest</code></a> with any Python OpenFaaS template.</p>
+<!-- raw HTML omitted -->
+<h2 id="intro">Intro</h2>
+<p>For this demo we are going to create a tiny calculator function. This gives us just enough code to demonstrate interesting but very common test cases:</p>
+<ol>
+<li>is the request correct, i.e did the request specify a valid math operation and two numbers,</li>
+<li>is the response correct, i.e. the calculation.</li>
+</ol>
+<p>Almost all functions will want these kind of tests and, as we will see, they are easy to write.</p>
+<p>If you want to skip to the final result, checkout the sample repo here: <a href="https://github.com/LucasRoesler/pytest-openfaas-sample">https://github.com/LucasRoesler/pytest-openfaas-sample</a></p>
+<h3 id="start-the-project">Start the project</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ mkdir pytest-sample
+</span></span><span style="display:flex;"><span>$ cd pytest-sanmple
+</span></span><span style="display:flex;"><span>$ faas-cli template store pull python3-flask
+</span></span><span style="display:flex;"><span>$ mv calc.yml stack.yml
+</span></span></code></pre></div><p><strong>Note</strong> Don&rsquo;t forget to add this section to your stack file so that the <code>faas-cli</code> will know how to automatically pull the template</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">configuration</span>:
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">templates</span>:
+</span></span><span style="display:flex;"><span>    - <span style="color:#f92672">name</span>: <span style="color:#ae81ff">python3-flask</span>
+</span></span><span style="display:flex;"><span>      <span style="color:#f92672">source</span>: <span style="color:#ae81ff">https://github.com/openfaas/python-flask-template</span>
+</span></span></code></pre></div><h3 id="setup-the-local-python-environment">Setup the local python environment</h3>
+<p>I use <a href="https://docs.conda.io/projects/conda/en/latest/">conda</a> for my local virtual environments, but you can of course use <a href="https://virtualenv.readthedocs.org/en/latest/"><code>virtualenv</code></a> or <a href="https://docs.python.org/3/library/venv.html"><code>venv</code></a> (see also <a href="https://realpython.com/python-virtual-environments-a-primer/">RealPython&rsquo;s primer on virtual environments</a>).</p>
+<p>This creates an isolated and repeatable development environment which you can delete and recreate if you need.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ conda create -n pytest-sample tox
+</span></span><span style="display:flex;"><span>$ conda activate pytest-sample
+</span></span><span style="display:flex;"><span>$ cat <span style="color:#e6db74">&lt;&lt;EOF &gt;&gt; requirements.txt
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">pydantic==1.7.3
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">flask==1.1.2
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>$ cat <span style="color:#e6db74">&lt;&lt;EOF &gt;&gt; dev.txt
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">tox
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">pytest
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">black
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">pylint
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">EOF</span>
+</span></span><span style="display:flex;"><span>$ conda install --yes --file requirements.txt
+</span></span><span style="display:flex;"><span>$ conda install --yes --file dev.txt
+</span></span></code></pre></div><p>Now we are ready to develop the calculator.</p>
+<h3 id="add-the-first-tests">Add the first tests</h3>
+<p>Let&rsquo;s start with some simple tests:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ touch calc/handler_test.py
+</span></span></code></pre></div><p>then add the following test cases for a couple of our happy paths</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">import</span> calc.handler <span style="color:#66d9ef">as</span> h
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">TestParsing</span>:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_operation_addition</span>(self):
+</span></span><span style="display:flex;"><span>        req <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{&#34;op&#34;: &#34;+&#34;, &#34;var1&#34;: &#34;1.0&#34;, &#34;var2&#34;: 0}&#39;</span>
+</span></span><span style="display:flex;"><span>        resp, code <span style="color:#f92672">=</span> h<span style="color:#f92672">.</span>handle(req)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">assert</span> code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">assert</span> resp[<span style="color:#e6db74">&#34;value&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">1.0</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_operation_multiplication</span>(self):
+</span></span><span style="display:flex;"><span>        req <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{&#34;op&#34;: &#34;*&#34;, &#34;var1&#34;: &#34;100.01&#34;, &#34;var2&#34;: 1}&#39;</span>
+</span></span><span style="display:flex;"><span>        resp, code <span style="color:#f92672">=</span> h<span style="color:#f92672">.</span>handle(req)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">assert</span> code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">assert</span> resp[<span style="color:#e6db74">&#34;value&#34;</span>] <span style="color:#f92672">==</span> <span style="color:#ae81ff">100.01</span>
+</span></span></code></pre></div><p>At this point, we have followed normal conventions for pytest, by default pytest will look for files that match the pattern <code>*_test.py</code> and then the run the functions that  match <code>test_*</code> (including matching methods if the class is named <code>Test*</code>, which is what we did above).</p>
+<p>Now, we can run our test and see all of the errors in their wonderful glory.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ pytest
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=========================================</span> test session starts <span style="color:#f92672">=========================================</span>
+</span></span><span style="display:flex;"><span>platform linux -- Python 3.8.8, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
+</span></span><span style="display:flex;"><span>rootdir: /home/lucas/code/openfaas/sandbox/pytest-sample
+</span></span><span style="display:flex;"><span>collected <span style="color:#ae81ff">2</span> items
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>calc/handler_test.py FF                                                                         <span style="color:#f92672">[</span>100%<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==============================================</span> FAILURES <span style="color:#f92672">===============================================</span>
+</span></span><span style="display:flex;"><span>_________________________________ TestParsing.test_operation_addition _________________________________
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>self <span style="color:#f92672">=</span> &lt;calc.handler_test.TestParsing object at 0x7fc8029ad820&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    def test_operation_addition<span style="color:#f92672">(</span>self<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>        req <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{&#34;op&#34;: &#34;+&#34;, &#34;var1&#34;: &#34;1.0&#34;, &#34;var2&#34;: 0}&#39;</span>
+</span></span><span style="display:flex;"><span>&gt;       resp, code <span style="color:#f92672">=</span> h.handle<span style="color:#f92672">(</span>req<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>E       ValueError: too many values to unpack <span style="color:#f92672">(</span>expected 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>calc/handler_test.py:49: ValueError
+</span></span><span style="display:flex;"><span>______________________________ TestParsing.test_operation_multiplication ______________________________
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>self <span style="color:#f92672">=</span> &lt;calc.handler_test.TestParsing object at 0x7fc8029add30&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    def test_operation_multiplication<span style="color:#f92672">(</span>self<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>        req <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{&#34;op&#34;: &#34;^&#34;, &#34;var1&#34;: &#34;2&#34;, &#34;var2&#34;: -2}&#39;</span>
+</span></span><span style="display:flex;"><span>&gt;       resp, code <span style="color:#f92672">=</span> h.handle<span style="color:#f92672">(</span>req<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>E       ValueError: too many values to unpack <span style="color:#f92672">(</span>expected 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>calc/handler_test.py:73: ValueError
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=======================================</span> short test summary info <span style="color:#f92672">=======================================</span>
+</span></span><span style="display:flex;"><span>FAILED calc/handler_test.py::TestParsing::test_operation_addition - ValueError: too many values to u...
+</span></span><span style="display:flex;"><span>FAILED calc/handler_test.py::TestParsing::test_operation_multiplication - ValueError: too many value...
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==========================================</span> <span style="color:#ae81ff">2</span> failed in 0.05s <span style="color:#f92672">==========================================</span>
+</span></span></code></pre></div><p>In this case we get a value error because our handler function only returns a string, not a dictionary and a status code like the test expects.  These test cases expect that the handler to return something that looks like this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;value&#34;</span>: <span style="color:#ae81ff">1.1</span>}, <span style="color:#ae81ff">200</span>
+</span></span></code></pre></div><p>This return value works with Flask; it will json serialize the dictionary and set the status code to 200 for us.  Once we update the function to look like the above snippet and run pytest again, then we get a new error, a value error because we got the wrong calculation result</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ pytest
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=========================================</span> test session starts <span style="color:#f92672">=========================================</span>
+</span></span><span style="display:flex;"><span>platform linux -- Python 3.8.8, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
+</span></span><span style="display:flex;"><span>rootdir: /home/lucas/code/openfaas/sandbox/pytest-sample
+</span></span><span style="display:flex;"><span>collected <span style="color:#ae81ff">2</span> items
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>calc/handler_test.py .F                                                                         <span style="color:#f92672">[</span>100%<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==============================================</span> FAILURES <span style="color:#f92672">===============================================</span>
+</span></span><span style="display:flex;"><span>______________________________ TestParsing.test_operation_multiplication ______________________________
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>self <span style="color:#f92672">=</span> &lt;calc.handler_test.TestParsing object at 0x7f9f30ecbd30&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    def test_operation_multiplication<span style="color:#f92672">(</span>self<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>        req <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{&#34;op&#34;: &#34;^&#34;, &#34;var1&#34;: &#34;2&#34;, &#34;var2&#34;: -2}&#39;</span>
+</span></span><span style="display:flex;"><span>        resp, code <span style="color:#f92672">=</span> h.handle<span style="color:#f92672">(</span>req<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>        assert code <span style="color:#f92672">==</span> <span style="color:#ae81ff">200</span>
+</span></span><span style="display:flex;"><span>&gt;       assert resp<span style="color:#f92672">[</span><span style="color:#e6db74">&#34;value&#34;</span><span style="color:#f92672">]</span> <span style="color:#f92672">==</span> 0.25
+</span></span><span style="display:flex;"><span>E       assert 1 <span style="color:#f92672">==</span> 0.25
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>calc/handler_test.py:75: AssertionError
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=======================================</span> short test summary info <span style="color:#f92672">=======================================</span>
+</span></span><span style="display:flex;"><span>FAILED calc/handler_test.py::TestParsing::test_operation_multiplication - assert 1 <span style="color:#f92672">==</span> 0.25
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=====================================</span> <span style="color:#ae81ff">1</span> failed, <span style="color:#ae81ff">1</span> passed in 0.06s <span style="color:#f92672">=====================================</span>
+</span></span></code></pre></div><h3 id="adding-tox">Adding <code>tox</code></h3>
+<p>Before we fix the test, we want to setup one more thing: <a href="https://tox.readthedocs.io/en/latest/index.html"><code>tox</code></a>: <code>tox</code>provides a unified set of tooling that will run <code>pytest</code> for us. This provides a standardized interface that we will use later in CI. In fact, it ensures we are running exactly the same thing in CI and our local dev environment, hopefully reducing the number of &ldquo;Actually fix CI&rdquo; commit messages.  Later, if you decide that you prefer <code>nose</code> or some other testing tool or if you application is even more complex and requires pre-test configuration &ndash; we can manage that through <code>tox</code>.</p>
+<p>Create a <code>calc/tox.ini</code> file that looks like</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-ini" data-lang="ini"><span style="display:flex;"><span><span style="color:#75715e"># calc/tox.ini</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[tox]</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># list the testenv to run by default</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">envlist</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">lint,test</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">skipsdist</span> <span style="color:#f92672">=</span> <span style="color:#e6db74">true</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[testenv:test]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">deps</span> <span style="color:#f92672">=</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  pytest
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  -rrequirements.txt</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">commands</span> <span style="color:#f92672">=</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  # run unit tests
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  pytest</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">[testenv:lint]</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">deps</span> <span style="color:#f92672">=</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  flake8</span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">commands</span> <span style="color:#f92672">=</span><span style="color:#e6db74">
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  # stop the build if there are Python syntax errors or undefined names
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics --extend-exclude template
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">  flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics --extend-exclude template</span>
+</span></span></code></pre></div><p>This configures <code>tox</code> to create two environments and run our tests and flake8.  Now we can test and lint our <code>calc</code> function using</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd calc
+</span></span><span style="display:flex;"><span>tox
+</span></span></code></pre></div><p>or just run the tests using</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ cd calc
+</span></span><span style="display:flex;"><span>$ tox -q -e test
+</span></span><span style="display:flex;"><span><span style="color:#f92672">========================================</span> test session starts <span style="color:#f92672">========================================</span>
+</span></span><span style="display:flex;"><span>platform linux -- Python 3.8.8, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
+</span></span><span style="display:flex;"><span>cachedir: .tox/test/.pytest_cache
+</span></span><span style="display:flex;"><span>rootdir: /home/lucas/code/openfaas/sandbox/pytest-sample/calc
+</span></span><span style="display:flex;"><span>collected <span style="color:#ae81ff">2</span> items
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>handler_test.py FF                                                                            <span style="color:#f92672">[</span>100%<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=============================================</span> FAILURES <span style="color:#f92672">==============================================</span>
+</span></span><span style="display:flex;"><span>________________________________ TestParsing.test_operation_addition ________________________________
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>self <span style="color:#f92672">=</span> &lt;calc.handler_test.TestParsing object at 0x7ff1aa19a550&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    def test_operation_addition<span style="color:#f92672">(</span>self<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>        req <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{&#34;op&#34;: &#34;+&#34;, &#34;var1&#34;: &#34;1.0&#34;, &#34;var2&#34;: 0}&#39;</span>
+</span></span><span style="display:flex;"><span>&gt;       resp, code <span style="color:#f92672">=</span> h.handle<span style="color:#f92672">(</span>req<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>E       ValueError: too many values to unpack <span style="color:#f92672">(</span>expected 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>handler_test.py:6: ValueError
+</span></span><span style="display:flex;"><span>_____________________________ TestParsing.test_operation_multiplication _____________________________
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>self <span style="color:#f92672">=</span> &lt;calc.handler_test.TestParsing object at 0x7ff1aa19afd0&gt;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    def test_operation_multiplication<span style="color:#f92672">(</span>self<span style="color:#f92672">)</span>:
+</span></span><span style="display:flex;"><span>        req <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{&#34;op&#34;: &#34;*&#34;, &#34;var1&#34;: &#34;100.01&#34;, &#34;var2&#34;: 1}&#39;</span>
+</span></span><span style="display:flex;"><span>&gt;       resp, code <span style="color:#f92672">=</span> h.handle<span style="color:#f92672">(</span>req<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>E       ValueError: too many values to unpack <span style="color:#f92672">(</span>expected 2<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>handler_test.py:12: ValueError
+</span></span><span style="display:flex;"><span><span style="color:#f92672">======================================</span> short test summary info <span style="color:#f92672">======================================</span>
+</span></span><span style="display:flex;"><span>FAILED handler_test.py::TestParsing::test_operation_addition - ValueError: too many values to unpa...
+</span></span><span style="display:flex;"><span>FAILED handler_test.py::TestParsing::test_operation_multiplication - ValueError: too many values t...
+</span></span><span style="display:flex;"><span><span style="color:#f92672">=========================================</span> <span style="color:#ae81ff">2</span> failed in 0.04s <span style="color:#f92672">=========================================</span>
+</span></span><span style="display:flex;"><span>ERROR: InvocationError <span style="color:#66d9ef">for</span> command /home/lucas/code/openfaas/sandbox/pytest-sample/calc/.tox/test/bin/pytest <span style="color:#f92672">(</span>exited with code 1<span style="color:#f92672">)</span>
+</span></span><span style="display:flex;"><span>______________________________________________ summary ______________________________________________
+</span></span><span style="display:flex;"><span>ERROR:   test: commands failed
+</span></span></code></pre></div><h3 id="the-working-implementation">The working implementation</h3>
+<p>Jumping forward a bit, here is the final implementation. I have used the <code>enum</code> package and <code>pydantic</code> to help simplify the validation and parsing of requests into my internal <code>Calculation</code> model</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#f92672">from</span> pydantic <span style="color:#f92672">import</span> BaseModel, ValidationError
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> enum <span style="color:#f92672">import</span> Enum, unique
+</span></span><span style="display:flex;"><span><span style="color:#f92672">from</span> typing <span style="color:#f92672">import</span> Callable
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#a6e22e">@unique</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">OperationType</span>(Enum):
+</span></span><span style="display:flex;"><span>    ADD <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;+&#34;</span>
+</span></span><span style="display:flex;"><span>    SUBTRACT <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;-&#34;</span>
+</span></span><span style="display:flex;"><span>    MULTIPLY <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;*&#34;</span>
+</span></span><span style="display:flex;"><span>    DIVIDE <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;/&#34;</span>
+</span></span><span style="display:flex;"><span>    POWER <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;^&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">Caclucation</span>(BaseModel):
+</span></span><span style="display:flex;"><span>    op: OperationType
+</span></span><span style="display:flex;"><span>    var1: float
+</span></span><span style="display:flex;"><span>    var2: float
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">def</span> <span style="color:#a6e22e">execute</span>(self) <span style="color:#f92672">-&gt;</span> float:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>op <span style="color:#f92672">is</span> OperationType<span style="color:#f92672">.</span>ADD:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>var1 <span style="color:#f92672">+</span> self<span style="color:#f92672">.</span>var2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>op <span style="color:#f92672">is</span> OperationType<span style="color:#f92672">.</span>SUBTRACT:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>var1 <span style="color:#f92672">-</span> self<span style="color:#f92672">.</span>var2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>op <span style="color:#f92672">is</span> OperationType<span style="color:#f92672">.</span>MULTIPLY:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>var1 <span style="color:#f92672">*</span> self<span style="color:#f92672">.</span>var2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>op <span style="color:#f92672">is</span> OperationType<span style="color:#f92672">.</span>DIVIDE:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>var1 <span style="color:#f92672">/</span> self<span style="color:#f92672">.</span>var2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> self<span style="color:#f92672">.</span>op <span style="color:#f92672">is</span> OperationType<span style="color:#f92672">.</span>POWER:
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span> self<span style="color:#f92672">.</span>var1 <span style="color:#f92672">**</span> self<span style="color:#f92672">.</span>var2
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">raise</span> <span style="color:#a6e22e">ValueError</span>(<span style="color:#e6db74">&#34;unknown operation&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">handle</span>(req) <span style="color:#f92672">-&gt;</span> (dict, int):
+</span></span><span style="display:flex;"><span>    <span style="color:#e6db74">&#34;&#34;&#34;handle a request to the function
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    Args:
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">        req (str): request body
+</span></span></span><span style="display:flex;"><span><span style="color:#e6db74">    &#34;&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">try</span>:
+</span></span><span style="display:flex;"><span>        c <span style="color:#f92672">=</span> Caclucation<span style="color:#f92672">.</span>parse_raw(req)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> ValidationError <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;message&#34;</span>: e<span style="color:#f92672">.</span>errors()}, <span style="color:#ae81ff">422</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">except</span> <span style="color:#a6e22e">Exception</span> <span style="color:#66d9ef">as</span> e:
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;message&#34;</span>: e}, <span style="color:#ae81ff">500</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> {<span style="color:#e6db74">&#34;value&#34;</span>: c<span style="color:#f92672">.</span>execute()}, <span style="color:#ae81ff">200</span>
+</span></span></code></pre></div><p>Now our tests will pass</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ tox -q -e test
+</span></span><span style="display:flex;"><span><span style="color:#f92672">========================================</span> test session starts <span style="color:#f92672">========================================</span>
+</span></span><span style="display:flex;"><span>platform linux -- Python 3.8.8, pytest-6.2.2, py-1.10.0, pluggy-0.13.1
+</span></span><span style="display:flex;"><span>cachedir: .tox/test/.pytest_cache
+</span></span><span style="display:flex;"><span>rootdir: /home/lucas/code/openfaas/sandbox/pytest-sample/calc
+</span></span><span style="display:flex;"><span>collected <span style="color:#ae81ff">2</span> items
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>calc/handler_test.py ..                                                                         <span style="color:#f92672">[</span>100%<span style="color:#f92672">]</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">==========================================</span> <span style="color:#ae81ff">2</span> passed in 0.04s <span style="color:#f92672">==========================================</span>
+</span></span></code></pre></div><h3 id="testing-error-cases">Testing error cases</h3>
+<p>We can even extend our test cases to cover validation errors. Because we using <code>pydantic</code> and we are returning <code>{&quot;message&quot;: e.errors()}</code>, these tests look like this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_operation_parsing_error_on_empty_obj</span>(self):
+</span></span><span style="display:flex;"><span>    req <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;</span><span style="color:#e6db74">{}</span><span style="color:#e6db74">&#39;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    resp, code <span style="color:#f92672">=</span> h<span style="color:#f92672">.</span>handle(req)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> code <span style="color:#f92672">==</span> <span style="color:#ae81ff">422</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># should be a list of error</span>
+</span></span><span style="display:flex;"><span>    errors <span style="color:#f92672">=</span> resp<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;message&#34;</span>, [])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> len(errors) <span style="color:#f92672">==</span> <span style="color:#ae81ff">3</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> errors[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;loc&#34;</span>) <span style="color:#f92672">==</span> (<span style="color:#e6db74">&#39;op&#39;</span>, )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> errors[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;msg&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;field required&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> errors[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;loc&#34;</span>) <span style="color:#f92672">==</span> (<span style="color:#e6db74">&#39;var1&#39;</span>, )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> errors[<span style="color:#ae81ff">1</span>]<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;msg&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;field required&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> errors[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;loc&#34;</span>) <span style="color:#f92672">==</span> (<span style="color:#e6db74">&#39;var2&#39;</span>, )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> errors[<span style="color:#ae81ff">2</span>]<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;msg&#34;</span>) <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;field required&#34;</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">test_operation_parsing_error_on_unknown_operation</span>(self):
+</span></span><span style="display:flex;"><span>    req <span style="color:#f92672">=</span> <span style="color:#e6db74">&#39;{&#34;op&#34;: &#34;foo&#34;, &#34;var1&#34;: &#34;1.0&#34;, &#34;var2&#34;: 0}&#39;</span>
+</span></span><span style="display:flex;"><span>    resp, code <span style="color:#f92672">=</span> h<span style="color:#f92672">.</span>handle(req)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> code <span style="color:#f92672">==</span> <span style="color:#ae81ff">422</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e"># should be a list of error</span>
+</span></span><span style="display:flex;"><span>    errors <span style="color:#f92672">=</span> resp<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;message&#34;</span>, [])
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> len(errors) <span style="color:#f92672">==</span> <span style="color:#ae81ff">1</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> errors[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;loc&#34;</span>) <span style="color:#f92672">==</span> (<span style="color:#e6db74">&#39;op&#39;</span>, )
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">assert</span> errors[<span style="color:#ae81ff">0</span>]<span style="color:#f92672">.</span>get(<span style="color:#e6db74">&#34;msg&#34;</span>) <span style="color:#f92672">==</span> (
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;value is not a valid enumeration member; permitted: &#34;</span>
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;&#39;+&#39;, &#39;-&#39;, &#39;*&#39;, &#39;/&#39;, &#39;^&#39;&#34;</span>
+</span></span><span style="display:flex;"><span>    )
+</span></span></code></pre></div><p>Checkout the repo for the other example tests <a href="https://github.com/LucasRoesler/pytest-openfaas-sample/blob/main/calc/handler_test.py">https://github.com/LucasRoesler/pytest-openfaas-sample/blob/main/calc/handler_test.py</a></p>
+<h3 id="running-this-in-ci">Running this in CI</h3>
+<p>I&rsquo;ve added a Github Action Workflow to my sample repo. It is based on the sample testing workflow that <a href="https://docs.github.com/en/actions/guides/building-and-testing-python#starting-with-the-python-workflow-template">Github provides for Python</a> and the function workflow from <a href="https://gumroad.com/l/serverless-for-everyone-else">Serverless for Everyone</a></p>
+<p>This workflow will test and build your function in parallel. The resulting Docker image is pushed to Docker Container Registry.</p>
+<p><strong>NOTE</strong> you need to configure the <code>DOCKER_PASSWORD</code> secret for your Github repo for this workflow to work correctly.</p>
+<h2 id="next-steps">Next steps</h2>
+<p>This is just a tiny step to more stable functions. Over the next couple weeks we are going to look into how to build the <code>tox</code> runner into the Python functions. Which means, you can just add a <code>tox.ini</code> to each function and <code>faas-cli</code> will run any tests you can configured  and then build the function. If you have more examples of interesting <code>tox</code> configurations, let me know on <a href="https://twitter.com/theaxer">Twitter</a> or stop by the <a href="https://docs.openfaas.com/community/#slack-workspace">OpenFaas Slack</a> and share it with the community.</p>
+
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/programming/">programming</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/openfaas/">openfaas</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/serverless/">serverless</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/python/">python</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/pytest/">pytest</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/tox/">tox</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/ci/cd/">ci/cd</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/github-actions/">github actions</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/testing/">testing</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/unit-test/">unit test</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>

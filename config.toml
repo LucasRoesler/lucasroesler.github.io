@@ -41,10 +41,10 @@ canonifyurls = true
     weight = 2
     identifier = "blog"
     name = "Blog"
-    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-quote-right\"></i>"
+    pre = "<i class=\"sidebar-button-icon fa fa-lg fa-rss\"></i>"
     url = "/posts"
     [menu.main.params]
-      icon = "quote-right"
+      icon = "rss"
 
   [[menu.main]]
     weight = 3
@@ -67,21 +67,28 @@ canonifyurls = true
     url = "https://github.com/lucasroesler"
 
   [[menu.links]]
-    weight = 3
-    identifier = "stackoverflow"
-    name = "Stack Overflow"
-    url = "https://stackoverflow.com/users/826102/theaxer"
-    [menu.links.params]
-      icon = "stack-overflow"
-
-  [[menu.links]]
     weight = 2
     identifier = "twitter"
     name = "Twitter"
     url = "https://twitter.com/theaxer"
 
   [[menu.links]]
+    weight = 3
+    identifier = "mastodon"
+    name = "Mastodon"
+    url = "https://floss.social/@theaxer"
+
+  [[menu.links]]
     weight = 4
+    identifier = "stackoverflow"
+    name = "Stack Overflow"
+    url = "https://stackoverflow.com/users/826102/theaxer"
+    [menu.links.params]
+      icon = "stack-overflow"
+
+
+  [[menu.links]]
+    weight = 5
     identifier = "linkedin"
     name = "LinkedIn"
     url = "https://www.linkedin.com/in/lucasroesler"
@@ -101,6 +108,7 @@ canonifyurls = true
     [menu.intro.params]
       iconset = "fas"
       icon = "file-alt"
+      text = "CV"
 
   [[menu.intro]]
     weight = 2
@@ -109,9 +117,11 @@ canonifyurls = true
     url = "/posts"
     [menu.intro.params]
       iconset = "fas"
+      icon = "rss"
+      text = "blog"
 
   [[menu.intro]]
-    weight = 3
+    weight = 1
     identifier = "description"
     name = "Description"
     url = "#a-few-more-details"

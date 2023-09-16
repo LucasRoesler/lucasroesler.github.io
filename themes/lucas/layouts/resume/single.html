@@ -25,10 +25,21 @@
     {{- $sassTemplate := resources.Get "scss/resume/main.scss" }}
     {{- $style := $sassTemplate | resources.ExecuteAsTemplate "main.scss" . | resources.ToCSS $cssOptions }}
     <link rel="stylesheet" href="{{ $style.RelPermalink }}">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
 </head>
 
 <body>
     <main class="resume">
+        <div class="nav--mini noprint">
+            <a class="btn .btn--default btn--nav" href="/">
+                <icon class="nav-icon fas fa-home"></icon> Home
+            </a>
+            <a class="btn .btn--default btn--nav" href="/posts/">
+                <icon class="nav-icon fas fa-rss"></icon> Blog
+            </a>
+        </div>
         <div class="resume-content markdown">
             <div class="resume-content-wrap">
                 {{ .Content }}

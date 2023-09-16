@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Resume on Lucas Roesler</title>
+    <link>https://lucasroesler.com/resume/</link>
+    <description>Recent content in Resume on Lucas Roesler</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Fri, 21 Jun 2013 11:27:27 -0400</lastBuildDate><atom:link href="https://lucasroesler.com/resume/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Resume</title>
+      <link>https://lucasroesler.com/resume/full/</link>
+      <pubDate>Fri, 21 Jun 2013 11:27:27 -0400</pubDate>
+      
+      <guid>https://lucasroesler.com/resume/full/</guid>
+      <description>Lucas Roesler Berlin, DE roesler.lucas@gmail.com
+https://github.com/LucasRoesler
+https://www.linkedin.com/in/lucasroesler/
+Technical Skills Languages: Go, Python, PostgreSQL, MongoDB, Javascript, Typescript, HTML, CSS Technologies: OpenFaaS, Docker, Kubernetes, OpenTracing, Grafana, Loki, Amazon Web Services (AWS), Google Cloud (GCP), Git, OpenAPI Education Ph.D. in Mathematics, University of Connecticut (UConn), Storrs, Connecticut - May 2012
+Dissertation Title: &amp;ldquo;Algebras from surfaces and their derived equivalences&amp;rdquo; Advisor: Dr. Ralf Schiffler
+M.S. in Mathematics, University of Connecticut (UConn), Storrs, Connecticut - May 2009</description>
+    </item>
+    
+  </channel>
+</rss>

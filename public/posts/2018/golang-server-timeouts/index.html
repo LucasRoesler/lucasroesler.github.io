@@ -10,7 +10,7 @@
 happens in long debugging session in software development, my final fix was
 one line!" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2018/golang-server-timeouts/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2018/golang-server-timeouts/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-07-29T00:00:00+02:00" />
 <meta property="article:modified_time" content="2018-07-29T00:00:00+02:00" />
 
@@ -25,22 +25,17 @@ one line!"/>
 happens in long debugging session in software development, my final fix was
 one line!" />
 <meta property="og:type" content="article" />
-<meta property="og:url" content="https://lucasroesler.com/posts/2018/golang-server-timeouts/" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2018/golang-server-timeouts/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2018-07-29T00:00:00+02:00" />
 <meta property="article:modified_time" content="2018-07-29T00:00:00+02:00" />
 
 <meta itemprop="name" content="Golang long-polling: a tale of server timeouts">
 <meta itemprop="description" content="I recently had a week long battle implementing HTTP long-polling. As so often
 happens in long debugging session in software development, my final fix was
-one line!">
-<meta itemprop="datePublished" content="2018-07-29T00:00:00+02:00" />
+one line!"><meta itemprop="datePublished" content="2018-07-29T00:00:00+02:00" />
 <meta itemprop="dateModified" content="2018-07-29T00:00:00+02:00" />
 <meta itemprop="wordCount" content="717">
-
-
-
 <meta itemprop="keywords" content="programming,http,golang,long-polling," />
-
 
 
     <title>
@@ -67,7 +62,7 @@ one line!">
                 <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/">
                     <icon class="nav-icon fas fa-home"></icon>
                 </a>
-                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/index.xml">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/">
                     <icon class="nav-icon fas fa-rss"></icon>
                 </a>
             </div>
@@ -101,7 +96,7 @@ We settled on the follow request sequence
 
 
 <figure class="image">
-    <picture style="background: url(data:image/jpeg;base64,/9j/2wCEAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDIBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AABEIABIAFAMBIgACEQEDEQH/xAGiAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5&#43;gEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoLEQACAQIEBAMEBwUEBAABAncAAQIDEQQFITEGEkFRB2FxEyIygQgUQpGhscEJIzNS8BVictEKFiQ04SXxFxgZGiYnKCkqNTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqCg4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2dri4&#43;Tl5ufo6ery8/T19vf4&#43;fr/2gAMAwEAAhEDEQA/APc2lSDdmcoCx&#43;8hPNEJmDylSsilvvHjt0/OpMTZLR&#43;UfmPXIOPTvUaoHuJFdGBz95D8vTv79aAJt1x/zzT/AL6o3T/88k/76qaigCOEAK2AB81U7pjHkoSpLc7TjNXIvun61Sven/AqAGRSyFOZHPP96n&#43;ZJ/fb86hh/wBX&#43;NSUAf/Z); background-size: cover;">
+    <picture style="background: url(data:image/jpeg;base64,/9j/2wCEAAgGBgcGBQgHBwcJCQgKDBQNDAsLDBkSEw8UHRofHh0aHBwgJC4nICIsIxwcKDcpLDAxNDQ0Hyc5PTgyPC4zNDIBCQkJDAsMGA0NGDIhHCEyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMjIyMv/AAAsIABIAFAEBEQD/xADSAAABBQEBAQEBAQAAAAAAAAAAAQIDBAUGBwgJCgsQAAIBAwMCBAMFBQQEAAABfQECAwAEEQUSITFBBhNRYQcicRQygZGhCCNCscEVUtHwJDNicoIJChYXGBkaJSYnKCkqNDU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6g4SFhoeIiYqSk5SVlpeYmZqio6Slpqeoqaqys7S1tre4ubrCw8TFxsfIycrS09TV1tfY2drh4uPk5ebn6Onq8fLz9PX29/j5&#43;v/aAAgBAQAAPwD3NpUg3ZnKAsfvITzRCZg8pUrIpb7x47dPzqbdcf8APNP&#43;&#43;qbibJaPyj8x65Bx6d6jVA9xIrowOfvIfl6d/frVyo4QArYAHzVTumMeShKktztOM1HFLIU5kc8/3q//2Q==); background-size: cover;">
         <source srcset="https://lucasroesler.com/posts/2018/golang-server-timeouts/longpolling_hue67e01cf9d3f22dd0d57962d76080ae0_35609_500x0_resize_q75_box.jpg 500w" sizes="500w" media="(max-width: 799px)">
         <source srcset="https://lucasroesler.com/posts/2018/golang-server-timeouts/longpolling_hue67e01cf9d3f22dd0d57962d76080ae0_35609_800x0_resize_q75_box.jpg 800w" sizes="800w" media="(max-width: 1199px)" >
         
@@ -120,105 +115,105 @@ We settled on the follow request sequence
 the polling parameters</p>
 <p>A very simple example that replicates this long polling sequence (but with GET parameters) looks like
 this</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
-
-<span style="color:#f92672">import</span> (
-	<span style="color:#e6db74">&#34;context&#34;</span>
-	<span style="color:#e6db74">&#34;fmt&#34;</span>
-	<span style="color:#e6db74">&#34;io/ioutil&#34;</span>
-	<span style="color:#e6db74">&#34;log&#34;</span>
-	<span style="color:#e6db74">&#34;math/rand&#34;</span>
-	<span style="color:#e6db74">&#34;net/http&#34;</span>
-	<span style="color:#e6db74">&#34;net/http/httptest&#34;</span>
-	<span style="color:#e6db74">&#34;time&#34;</span>
-)
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getLongPollDuration</span>(<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span> {
-	<span style="color:#a6e22e">timeout</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">ParseDuration</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">Query</span>().<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;wait&#34;</span>))
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">15</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>
-	}
-
-	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;found custom timeout: %s&#34;</span>, <span style="color:#a6e22e">timeout</span>)
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">timeout</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getResource</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">string</span> {
-	<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;{\&#34;id\&#34;: 1, \&#34;updatedAt\&#34;: \&#34;&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Format</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">RFC3339</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\&#34;}&#34;</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">waitForResource</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">wait</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>) <span style="color:#66d9ef">string</span> {
-
-	<span style="color:#75715e">// randomly wait up to 15 seconds for a &#34;resource changed event&#34;
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rand</span>.<span style="color:#a6e22e">Intn</span>(<span style="color:#ae81ff">15</span>)
-	<span style="color:#a6e22e">ticker</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Tick</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>(<span style="color:#a6e22e">r</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
-	<span style="color:#a6e22e">waiter</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Tick</span>(<span style="color:#a6e22e">wait</span>)
-
-	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;will wait up to %s for the resource&#34;</span>, <span style="color:#a6e22e">wait</span>)
-
-	<span style="color:#66d9ef">select</span> {
-	<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Done</span>():
-		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Received context cancel&#34;</span>)
-		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
-	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ts</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">waiter</span>:
-		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Received method timeout: %s&#34;</span>, <span style="color:#a6e22e">ts</span>)
-		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
-	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ts</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ticker</span>:
-		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Received resource update at: %s&#34;</span>, <span style="color:#a6e22e">ts</span>)
-		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;{\&#34;id\&#34;: 1, \&#34;updatedAt\&#34;: \&#34;&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Format</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">RFC3339</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\&#34;}&#34;</span>
-	}
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">resourceFunc</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
-	<span style="color:#a6e22e">index</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">Query</span>().<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;index&#34;</span>)
-
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">index</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span> {
-		<span style="color:#a6e22e">timeout</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getLongPollDuration</span>(<span style="color:#a6e22e">r</span>)
-		<span style="color:#a6e22e">response</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">waitForResource</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Context</span>(), <span style="color:#a6e22e">timeout</span>)
-		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> {
-			<span style="color:#75715e">// write long poll timeout
-</span><span style="color:#75715e"></span>			<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">WriteHeader</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusNotModified</span>)
-		}
-		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">response</span>)
-		<span style="color:#66d9ef">return</span>
-
-	}
-
-	<span style="color:#a6e22e">response</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getResource</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Context</span>())
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">response</span>)
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
-	<span style="color:#a6e22e">ts</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">httptest</span>.<span style="color:#a6e22e">NewServer</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span>(<span style="color:#a6e22e">resourceFunc</span>))
-	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Close</span>()
-
-	<span style="color:#75715e">// you should always set these timeouts, otherwise requests
-</span><span style="color:#75715e"></span>	<span style="color:#75715e">// can never timeout
-</span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Config</span>.<span style="color:#a6e22e">ReadTimeout</span> = <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>
-	<span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Config</span>.<span style="color:#a6e22e">WriteTimeout</span> = <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>
-
-	<span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">URL</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;?index=2&amp;wait=15s&#34;</span>)
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
-	}
-	<span style="color:#a6e22e">resourceResp</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>)
-	<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
-	}
-
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s\n&#34;</span>, <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Status</span>)
-	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s&#34;</span>, <span style="color:#a6e22e">resourceResp</span>)
-}
-</code></pre></div><p>You can run this at <a href="https://play.golang.org/p/kXMm-mE-tgl">https://play.golang.org/p/kXMm-mE-tgl</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#f92672">package</span> <span style="color:#a6e22e">main</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">import</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;context&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;fmt&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;io/ioutil&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;log&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;math/rand&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;net/http&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;net/http/httptest&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#e6db74">&#34;time&#34;</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getLongPollDuration</span>(<span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">timeout</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">ParseDuration</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">Query</span>().<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;wait&#34;</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">15</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;found custom timeout: %s&#34;</span>, <span style="color:#a6e22e">timeout</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">timeout</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">getResource</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;{\&#34;id\&#34;: 1, \&#34;updatedAt\&#34;: \&#34;&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Now</span>().<span style="color:#a6e22e">Format</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">RFC3339</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">waitForResource</span>(<span style="color:#a6e22e">ctx</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Context</span>, <span style="color:#a6e22e">wait</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>) <span style="color:#66d9ef">string</span> {
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// randomly wait up to 15 seconds for a &#34;resource changed event&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">r</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">rand</span>.<span style="color:#a6e22e">Intn</span>(<span style="color:#ae81ff">15</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ticker</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Tick</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Duration</span>(<span style="color:#a6e22e">r</span>) <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">waiter</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Tick</span>(<span style="color:#a6e22e">wait</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;will wait up to %s for the resource&#34;</span>, <span style="color:#a6e22e">wait</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">select</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">case</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ctx</span>.<span style="color:#a6e22e">Done</span>():
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Received context cancel&#34;</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ts</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">waiter</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Received method timeout: %s&#34;</span>, <span style="color:#a6e22e">ts</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;&#34;</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">case</span> <span style="color:#a6e22e">ts</span> <span style="color:#f92672">:=</span> <span style="color:#f92672">&lt;-</span><span style="color:#a6e22e">ticker</span>:
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;Received resource update at: %s&#34;</span>, <span style="color:#a6e22e">ts</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#e6db74">&#34;{\&#34;id\&#34;: 1, \&#34;updatedAt\&#34;: \&#34;&#34;</span> <span style="color:#f92672">+</span> <span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Format</span>(<span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">RFC3339</span>) <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;\&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">resourceFunc</span>(<span style="color:#a6e22e">w</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">ResponseWriter</span>, <span style="color:#a6e22e">r</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Request</span>) {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">index</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">URL</span>.<span style="color:#a6e22e">Query</span>().<span style="color:#a6e22e">Get</span>(<span style="color:#e6db74">&#34;index&#34;</span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">index</span> <span style="color:#f92672">!=</span> <span style="color:#e6db74">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">timeout</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getLongPollDuration</span>(<span style="color:#a6e22e">r</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">response</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">waitForResource</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Context</span>(), <span style="color:#a6e22e">timeout</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">response</span> <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#75715e">// write long poll timeout
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>			<span style="color:#a6e22e">w</span>.<span style="color:#a6e22e">WriteHeader</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">StatusNotModified</span>)
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">response</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">response</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">getResource</span>(<span style="color:#a6e22e">r</span>.<span style="color:#a6e22e">Context</span>())
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Fprintf</span>(<span style="color:#a6e22e">w</span>, <span style="color:#a6e22e">response</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">main</span>() {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ts</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">httptest</span>.<span style="color:#a6e22e">NewServer</span>(<span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">HandlerFunc</span>(<span style="color:#a6e22e">resourceFunc</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// you should always set these timeouts, otherwise requests
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// can never timeout
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Config</span>.<span style="color:#a6e22e">ReadTimeout</span> = <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Config</span>.<span style="color:#a6e22e">WriteTimeout</span> = <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">res</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">http</span>.<span style="color:#a6e22e">Get</span>(<span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">URL</span> <span style="color:#f92672">+</span> <span style="color:#e6db74">&#34;?index=2&amp;wait=15s&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">resourceResp</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">ioutil</span>.<span style="color:#a6e22e">ReadAll</span>(<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Body</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">log</span>.<span style="color:#a6e22e">Fatal</span>(<span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s\n&#34;</span>, <span style="color:#a6e22e">res</span>.<span style="color:#a6e22e">Status</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Printf</span>(<span style="color:#e6db74">&#34;%s&#34;</span>, <span style="color:#a6e22e">resourceResp</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>You can run this at <a href="https://play.golang.org/p/kXMm-mE-tgl">https://play.golang.org/p/kXMm-mE-tgl</a></p>
 <p>My troubles, when implementing this and then exposing it with an nginx proxy
 was complicated by this line</p>
-<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go">	<span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Config</span>.<span style="color:#a6e22e">WriteTimeout</span> = <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>
-</code></pre></div><p>When we fist implemented the REST api, we set the default server timeouts to
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span>	<span style="color:#a6e22e">ts</span>.<span style="color:#a6e22e">Config</span>.<span style="color:#a6e22e">WriteTimeout</span> = <span style="color:#ae81ff">10</span> <span style="color:#f92672">*</span> <span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>
+</span></span></code></pre></div><p>When we fist implemented the REST api, we set the default server timeouts to
 10 seconds, but, when I started implementing the long polling, I set the
 minimum wait to 15 seconds. This results in sporadic 502 errors from nginx.
 Nginx was actually generating an error:</p>
-<pre><code>upstream prematurely closed connection while reading response header from upstream
+<pre tabindex="0"><code>upstream prematurely closed connection while reading response header from upstream
 </code></pre><p>Ultimately, the error message is correct and points to the exact issue (go
 closing the request due to the timeout and then my handler trying to write to
 it after it is closed), but the search results online were not super helpful.
@@ -250,7 +245,7 @@ that goes into detail about the various go server timeouts</p>
         <footer>
     <span class="copyrights">
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
-        &copy; 2017 - 2021 by Lucas Roesler. 
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
     </span>
 </footer>
 

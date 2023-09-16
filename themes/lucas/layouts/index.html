@@ -20,13 +20,13 @@
                     {{ partial "posts/latest.html" . }}
                     {{ end }}
                     <div class="links">
-                        {{- range .Site.Menus.links.ByWeight -}}
+                        {{- range .Site.Menus.intro.ByWeight -}}
                         <a rel="me" href="{{ .URL | safeURL }}" title="{{ .Title }}">
                             <span class="{{ .Params.iconset | default " fab" }} {{.Params.iconorigin | default "fa" }}-{{ .Params.icon  | default .Identifier}}"></span>
                             <span class="link-text">{{ .Params.text }}</span>
                         </a>
                         {{- end -}}
-                        {{- range .Site.Menus.intro.ByWeight -}}
+                        {{- range .Site.Menus.links.ByWeight -}}
                         <a rel="me" href="{{ .URL | safeURL }}" title="{{ .Title }}">
                             <span class="{{ .Params.iconset | default " fab" }} {{.Params.iconorigin | default "fa" }}-{{ .Params.icon  | default .Identifier}}"></span>
                             <span class="link-text">{{ .Params.text }}</span>
