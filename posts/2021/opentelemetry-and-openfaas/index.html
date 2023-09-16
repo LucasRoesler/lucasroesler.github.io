@@ -12,7 +12,6 @@
 <meta property="article:published_time" content="2021-12-12T00:00:00+02:00" />
 <meta property="article:modified_time" content="2021-12-12T00:00:00+02:00" />
 
-
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="A foray into OpenTelemetry with OpenFaaS"/>
 <meta name="twitter:description" content="Introducing a walk-through for adding OpenTelemetry to your Python functions"/>
@@ -23,7 +22,6 @@
 <meta property="og:url" content="https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-12-12T00:00:00+02:00" />
 <meta property="article:modified_time" content="2021-12-12T00:00:00+02:00" />
-
 
 <meta itemprop="name" content="A foray into OpenTelemetry with OpenFaaS">
 <meta itemprop="description" content="Introducing a walk-through for adding OpenTelemetry to your Python functions"><meta itemprop="datePublished" content="2021-12-12T00:00:00+02:00" />
@@ -69,39 +67,38 @@
 <p>This post won&rsquo;t go through the walk-through, the walk-through already does that. Instead, I will offer some commentary on the experience and some next steps we should take.</p>
 <h2 id="set-up-and-configuring-opentelemetry">Set up and configuring OpenTelemetry</h2>
 <p>OpenTelemetry provides a set of vendor agnostic APIs, SDKs, and tooling to provide telemetry data for you applications. This means: tracing, logging, and metrics. This is an ambitious project to standardize the way we monitor and debug our applications in almost every popular language. This is great but has has certainly made the initial configuration slightly more complex. The minimal configuration of the Flask app looks something like this</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">resource <span style="color:#f92672">=</span> Resource(attributes<span style="color:#f92672">=</span>{SERVICE_NAME: NAME})
-provider <span style="color:#f92672">=</span> TracerProvider(resource<span style="color:#f92672">=</span>resource)
-
-exporter <span style="color:#f92672">=</span> OTLPSpanExporter()
-provider<span style="color:#f92672">.</span>add_span_processor(BatchSpanProcessor(exporter))
-
-trace<span style="color:#f92672">.</span>set_tracer_provider(provider)
-tracer <span style="color:#f92672">=</span> trace<span style="color:#f92672">.</span>get_tracer(__name__)
-
-FlaskInstrumentor()<span style="color:#f92672">.</span>instrument_app(app)
-</code></pre></div><p>Previously, I would have used Jaeger and OpenTracing and it would look something like this</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py">config <span style="color:#f92672">=</span> Config(config<span style="color:#f92672">=</span>{}, service_name<span style="color:#f92672">=</span>NAME, validate<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
-tracer <span style="color:#f92672">=</span>  config<span style="color:#f92672">.</span>initialize_tracer()
-tracing <span style="color:#f92672">=</span> FlaskTracing(tracer, <span style="color:#66d9ef">True</span>, app)
-</code></pre></div><p>It is slightly simpler, because OpenTracing, is slightly less agnostic putting more work onto the tracing provider. This means that the OpenTracing Jaeger provider does a little bit more work, whereas OpenTelemetry needs to expose more configuration options. OpenTelemetry introduces or exposes the concepts of the Resource, Exporter, and Provider that would previously be rolled together as just the Tracer.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>resource <span style="color:#f92672">=</span> Resource(attributes<span style="color:#f92672">=</span>{SERVICE_NAME: NAME})
+</span></span><span style="display:flex;"><span>provider <span style="color:#f92672">=</span> TracerProvider(resource<span style="color:#f92672">=</span>resource)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>exporter <span style="color:#f92672">=</span> OTLPSpanExporter()
+</span></span><span style="display:flex;"><span>provider<span style="color:#f92672">.</span>add_span_processor(BatchSpanProcessor(exporter))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>trace<span style="color:#f92672">.</span>set_tracer_provider(provider)
+</span></span><span style="display:flex;"><span>tracer <span style="color:#f92672">=</span> trace<span style="color:#f92672">.</span>get_tracer(__name__)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>FlaskInstrumentor()<span style="color:#f92672">.</span>instrument_app(app)
+</span></span></code></pre></div><p>Previously, I would have used Jaeger and OpenTracing and it would look something like this</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span>config <span style="color:#f92672">=</span> Config(config<span style="color:#f92672">=</span>{}, service_name<span style="color:#f92672">=</span>NAME, validate<span style="color:#f92672">=</span><span style="color:#66d9ef">True</span>)
+</span></span><span style="display:flex;"><span>tracer <span style="color:#f92672">=</span>  config<span style="color:#f92672">.</span>initialize_tracer()
+</span></span><span style="display:flex;"><span>tracing <span style="color:#f92672">=</span> FlaskTracing(tracer, <span style="color:#66d9ef">True</span>, app)
+</span></span></code></pre></div><p>It is slightly simpler, because OpenTracing, is slightly less agnostic putting more work onto the tracing provider. This means that the OpenTracing Jaeger provider does a little bit more work, whereas OpenTelemetry needs to expose more configuration options. OpenTelemetry introduces or exposes the concepts of the Resource, Exporter, and Provider that would previously be rolled together as just the Tracer.</p>
 <p>My first impression was &ldquo;oh no! what is all of this new stuff?&rdquo; Fortunately, OpenTelemetry is very <a href="https://12factor.net/config">12 Factor App</a> friendly, meaning most or all of the options can be configured via the environment variables. This also means that once you a familiar with what options you need to configure, you can probably hide this configuration behind a simple utility function. Of course, your milage may vary, these configuration options are exposed for a reason and may need to be tweaked based on your preferred language and observability stack.</p>
 <h2 id="backwards-compatibility-for-opentracing">Backwards compatibility for OpenTracing</h2>
 <p>In Python, I was able to completely customize the configuration with the correct <code>pip install</code> and environment variables. Notably, the walk-through integrates traces from NGINX and an OpenFaaS function. Currently NGINX can produce <em>OpenTracing</em> tracing headers with support for <a href="https://www.jaegertracing.io/">Jaeger</a>, <a href="https://zipkin.io/">Zipkin</a>, and Datadog. The default configuration in the Python OpenTelemetry SDK does not parse these headers, but it is very easy to enable it.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">pip install opentelemetry-propagator-jaeger
-
-</code></pre></div><p>and then set this environment variable</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-yaml" data-lang="yaml"><span style="color:#f92672">OTEL_PROPAGATORS</span>: <span style="color:#ae81ff">tracecontext,baggage,jaeger</span>
-</code></pre></div><p>This works really well in Python because it can dynamically import the required <code>opentelemetry-propagator-jaeger</code>, so we don&rsquo;t need to modify our function to enable this compatibility.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>pip install opentelemetry-propagator-jaeger
+</span></span></code></pre></div><p>and then set this environment variable</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">OTEL_PROPAGATORS</span>: <span style="color:#ae81ff">tracecontext,baggage,jaeger</span>
+</span></span></code></pre></div><p>This works really well in Python because it can dynamically import the required <code>opentelemetry-propagator-jaeger</code>, so we don&rsquo;t need to modify our function to enable this compatibility.</p>
 <h2 id="integrating-into-openfaas-templates">Integrating into OpenFaaS templates</h2>
 <p>The OpenTelemetry project, NGINX, and Grafana have made it very easy to install and integrate OpenTracing/OpenTelemetry with minimal changes to your code. If you are writing OpenFaaS functions, this flexibility will depend greatly on your template.</p>
 <p>The default <a href="https://github.com/openfaas/python-flask-template">Flask template</a> is a bit harder to integrate, primarily because it does not directly expose the request headers to your function implementation. We need access to the headers to initialize the tracing context. For my walk-through, I forked the original template to add an <code>initialize</code> hook so that the function can modify the Flask app initialization. In the template, I added</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#75715e"># the template</span>
-<span style="color:#66d9ef">if</span> hasattr(handler, <span style="color:#e6db74">&#34;initialize&#34;</span>):
-    app <span style="color:#f92672">=</span> handler<span style="color:#f92672">.</span>initialize(app)
-</code></pre></div><p>then in handler I can add</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-py" data-lang="py"><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize</span>(app: Flask) <span style="color:#f92672">-&gt;</span> Flask:
-    FlaskInstrumentor()<span style="color:#f92672">.</span>instrument_app(app)
-</code></pre></div><p>This actually seems like a good pattern that we should consider adopting in all of the base OpenFaaS templates. As it stands, we could probably standardize on OpenTelemetry in all templates because it is agnostic of your preferred vendor. Prior to OpenTelemetry, we would have had to pick a preferred SDK, it is much easier to abstract and integrate tracing into each template without adding this <code>initialize</code> hook. However, the pattern would be very useful in general, for example, to customize the logger or other Flask middlewares.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#75715e"># the template</span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">if</span> hasattr(handler, <span style="color:#e6db74">&#34;initialize&#34;</span>):
+</span></span><span style="display:flex;"><span>    app <span style="color:#f92672">=</span> handler<span style="color:#f92672">.</span>initialize(app)
+</span></span></code></pre></div><p>then in handler I can add</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-py" data-lang="py"><span style="display:flex;"><span><span style="color:#66d9ef">def</span> <span style="color:#a6e22e">initialize</span>(app: Flask) <span style="color:#f92672">-&gt;</span> Flask:
+</span></span><span style="display:flex;"><span>    FlaskInstrumentor()<span style="color:#f92672">.</span>instrument_app(app)
+</span></span></code></pre></div><p>This actually seems like a good pattern that we should consider adopting in all of the base OpenFaaS templates. As it stands, we could probably standardize on OpenTelemetry in all templates because it is agnostic of your preferred vendor. Prior to OpenTelemetry, we would have had to pick a preferred SDK, it is much easier to abstract and integrate tracing into each template without adding this <code>initialize</code> hook. However, the pattern would be very useful in general, for example, to customize the logger or other Flask middlewares.</p>
 <p>On the other hand, the base templates are exactly that, generic and basic. I generally advise teams adopting OpenFaaS to take advantage of the custom template repository support. This allows teams to standardize and pre-configure their preferred libraries, utils, and configuration. This is how I work, a repository of private custom templates using my preferred libraries configured in the &ldquo;correct&rdquo; way. Correct for your team might be slightly different, so fork the base templates and &ldquo;fix&rdquo; them to your liking.</p>
 <h2 id="next-steps-and-tracing-openfaas-components">Next steps and tracing OpenFaaS components</h2>
 <p>The obvious next steps are to create more walk-throughs for other languages. Go is my preferred language, so that might happen before the end of the year. Check out the <a href="https://github.com/openfaas/templates/tree/master/template">template store repo</a>, for your favorite language. If you want to give OpenTelemetry a try, then <a href="https://github.com/LucasRoesler/openfaas-tracing-walkthrough">fork my walk-through</a> and provide a new sample function for your favorite language/template. The walk-through already provides all of the setup and configuration for the cluster and tracing, we only need to build out more sample functions.</p>
@@ -159,7 +156,7 @@ tracing <span style="color:#f92672">=</span> FlaskTracing(tracer, <span style="c
         <footer>
     <span class="copyrights">
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
-        &copy; 2017 - 2022 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
     </span>
 </footer>
 

@@ -2,22 +2,37 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://lucasroesler.com/tags/apt/</loc>
+    <lastmod>2023-09-16T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://lucasroesler.com/tags/debian/</loc>
+    <lastmod>2023-09-16T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://lucasroesler.com/tags/firefox/</loc>
+    <lastmod>2023-09-16T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://lucasroesler.com/posts/2023/0-mixing-package-sources-in-debian/</loc>
+    <lastmod>2023-09-16T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://lucasroesler.com/tags/linux/</loc>
+    <lastmod>2023-09-16T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://lucasroesler.com/</loc>
+    <lastmod>2023-09-16T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://lucasroesler.com/posts/</loc>
+    <lastmod>2023-09-16T00:00:00+02:00</lastmod>
+  </url><url>
+    <loc>https://lucasroesler.com/tags/</loc>
+    <lastmod>2023-09-16T00:00:00+02:00</lastmod>
+  </url><url>
     <loc>https://lucasroesler.com/tags/github-actions/</loc>
     <lastmod>2022-10-27T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://lucasroesler.com/posts/2022/2-github-actions-lessons/</loc>
     <lastmod>2022-10-27T00:00:00+02:00</lastmod>
   </url><url>
-    <loc>https://lucasroesler.com/</loc>
-    <lastmod>2022-10-27T00:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://lucasroesler.com/posts/</loc>
-    <lastmod>2022-10-27T00:00:00+02:00</lastmod>
-  </url><url>
     <loc>https://lucasroesler.com/tags/programming/</loc>
-    <lastmod>2022-10-27T00:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://lucasroesler.com/tags/</loc>
     <lastmod>2022-10-27T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://lucasroesler.com/posts/2022/1-go-1.18-release/</loc>
@@ -108,9 +123,6 @@
     <lastmod>2021-01-10T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://lucasroesler.com/tags/keyboard/</loc>
-    <lastmod>2021-01-10T00:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://lucasroesler.com/tags/linux/</loc>
     <lastmod>2021-01-10T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://lucasroesler.com/tags/docker/</loc>

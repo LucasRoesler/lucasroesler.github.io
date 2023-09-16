@@ -1,0 +1,131 @@
+
+
+<!DOCTYPE html>
+<html lang="en-us"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Using unstable packages in Debian">
+    <meta property="og:title" content="Have your Debian cake and eat it too" />
+<meta property="og:description" content="Using unstable packages in Debian" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2023/0-mixing-package-sources-in-debian/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-16T00:00:00+02:00" />
+<meta property="article:modified_time" content="2023-09-16T00:00:00+02:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Have your Debian cake and eat it too"/>
+<meta name="twitter:description" content="Using unstable packages in Debian"/>
+
+<meta property="og:title" content="Have your Debian cake and eat it too" />
+<meta property="og:description" content="Using unstable packages in Debian" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://lucasroesler.com/posts/2023/0-mixing-package-sources-in-debian/" /><meta property="article:section" content="posts" />
+<meta property="article:published_time" content="2023-09-16T00:00:00+02:00" />
+<meta property="article:modified_time" content="2023-09-16T00:00:00+02:00" />
+
+<meta itemprop="name" content="Have your Debian cake and eat it too">
+<meta itemprop="description" content="Using unstable packages in Debian"><meta itemprop="datePublished" content="2023-09-16T00:00:00+02:00" />
+<meta itemprop="dateModified" content="2023-09-16T00:00:00+02:00" />
+<meta itemprop="wordCount" content="474">
+<meta itemprop="keywords" content="debian,firefox,apt,linux," />
+
+
+    <title>
+        Have your Debian cake and eat it too &middot; Lucas Roesler
+    </title>
+    <link rel="canonical" href="https://lucasroesler.com/posts/2023/0-mixing-package-sources-in-debian/">
+
+    
+    <link rel="stylesheet" href="https://lucasroesler.com/css/posts.style.css">
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous">
+
+    </head>
+<body class="article">
+    <main>
+        <section class="cover">
+            <div role="img" class="cover-img" style="
+                background: radial-gradient(ellipse at center, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 24%, rgba(0,0,0,0.65) 100%), url(/posts/2023/0-mixing-package-sources-in-debian/images/jordane-mathieu-k7VgPnWFcx8-unsplash.jpg) no-repeat center center scroll;
+                background-color: #333745;">
+                <h1>Have your Debian cake and eat it too</h1>
+            </div>
+            <div class="nav--mini">
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/">
+                    <icon class="nav-icon fas fa-home"></icon>
+                </a>
+                <a class="btn .btn--default btn--nav" href="https://lucasroesler.com/posts/">
+                    <icon class="nav-icon fas fa-rss"></icon>
+                </a>
+            </div>
+        </section>
+        <article class=" post" itemscope itemType="http://schema.org/BlogPosting">
+            <div class="post-content markdown" itemprop="articleBody">
+                <div class="main-content-wrap">
+                    <p>I recently switched to Debian because I wanted a rock solid plain Gnome environment for my daily driver / work laptop. The main downside is that even Debian testing is a bit more conservative with updates than I would like for certain applications. Normally I would use and recommend Flatpak, but there are a few edge cases where I need to use the Debian package, which leads me to today&rsquo;s post.</p>
+<hr>
+<p>I am really excited because the the Firefox <a href="https://www.mozilla.org/en-US/firefox/117.0/releasenotes/">finally removed the microphone and camera indicator</a>!!!!  I really hated their floating indicator and this update brings me a lot of joy. Like I said in the intro,  I would normally install/update <a href="https://flathub.org/apps/org.mozilla.firefox">Firefox via Flatpak</a>, but this doesn&rsquo;t really work for me because I use <a href="https://1password.com/">1password</a> and I really like the integration of the Firefox extension and the desktop app. This integration throws a small kink into the the install story due to sandboxing in Flatpak not currently <a href="https://1password.community/discussion/121404/issues-with-firefox-native-messaging-need-suggestions">supporitng a native messaging portal</a> (see <a href="https://github.com/flatpak/xdg-desktop-portal/issues/655">also</a>).</p>
+<p>Fortunately, Debian apt just installs the standalone non-sandboxed Firefox. This means 1password integration works as expected. However, Debian stable and testing only ship the <a href="https://support.mozilla.org/en-US/kb/switch-to-firefox-extended-support-release-esr">Firefox Extended Support Release (ESR)</a>! This is <em>not</em> the latest. But Debian unstable (ie Sid) <em>does</em> package the latest Firefox releases.</p>
+<h2 id="manual-approach">Manual approach</h2>
+<p>At first, I just <a href="https://packages.debian.org/sid/firefox">manually downloaded</a> and installed the <code>.deb</code> using <code>dpkg -i &lt;deb file&gt;</code>.</p>
+<p>This naturally has an issue that I need to manually track and update it when a new version is released.</p>
+<h2 id="apt-approach">Apt approach</h2>
+<p>But I found a better approach that allows the installation to be updated via apt. Apparently the source list can have multiple overlapping sources <em>and</em> you can set a preference for packages to prefer a specific source!  I found some <a href="https://www.addictivetips.com/ubuntu-linux-tips/how-to-run-unstable-packages-on-debian-stable/">nice instructions here</a></p>
+<p>First, you need to edit the <code>/etc/apt/sources.list</code> to add this section</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span>deb http://deb.debian.org/debian/ sid main non-free-firmware non-free contrib
+</span></span><span style="display:flex;"><span>deb-src http://deb.debian.org/debian/ sid main non-free-firmware non-free contrib
+</span></span></code></pre></div><p>Next, I created two files in <code>/etc/apt/preferences.d</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span># /etc/apt/preferences.d/debian
+</span></span><span style="display:flex;"><span>Package: *
+</span></span><span style="display:flex;"><span>Pin: release a=trixie
+</span></span><span style="display:flex;"><span>Pin-Priority: 500
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>Package: *
+</span></span><span style="display:flex;"><span>Pin: release a=unstable
+</span></span><span style="display:flex;"><span>Pin-Priority: 100
+</span></span></code></pre></div><p>This file tells debian to prefer packages in the Testing repository.</p>
+<p>Then I created</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-txt" data-lang="txt"><span style="display:flex;"><span># /etc/apt/preferences.d/firefox
+</span></span><span style="display:flex;"><span>Package: firefox
+</span></span><span style="display:flex;"><span>Pin:release a=unstable  
+</span></span><span style="display:flex;"><span>Pin-Priority: 1000  
+</span></span></code></pre></div><p>Which overrides the previous file and tells apt to prefer the Unstable repository for the <code>firefox</code> package.</p>
+<p>Finally, we can update and install Firefox</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo apt update
+</span></span><span style="display:flex;"><span>sudo apt install firefox
+</span></span></code></pre></div><h2 id="conclusion">Conclusion</h2>
+<p>I am now running the latest Firefox <em>and</em> have the standard update flow with <code>apt</code>. However, I would be very cautious about using this approach with other applications and would certainly avoid using it for any of the core system packages like gnome, systemd, etc. <a href="https://wiki.debian.org/DontBreakDebian#Don.27t_make_a_FrankenDebian">Don&rsquo;t make a FrankenDebian</a>!</p>
+<p>Once the desktop portal for native messaging is finalized, I will just switch to Flatpak. But until then, this is a nice solution for me.</p>
+<hr>
+<p>Cover Photo by <!-- raw HTML omitted -->Jordane Mathieu<!-- raw HTML omitted --> on <!-- raw HTML omitted -->Unsplash<!-- raw HTML omitted --></p>
+
+                </div>
+            </div>
+            <div id="post-footer" class="post-footer post-content">
+                
+                <div class="post-footer-tags">
+                    <span class="text-color-light text-small"></span><br />
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/debian/">debian</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/firefox/">firefox</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/apt/">apt</a>
+                    
+                    <a class="tag tag--small" href="https://lucasroesler.com/tags/linux/">linux</a>
+                    
+                </div>
+                
+            </div>
+        </article>
+        <footer>
+    <span class="copyrights">
+        Made with <a href='https://gohugo.io'>Hugo</a><br/>
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
+    </span>
+</footer>
+
+    </main>
+</body>
+
+</html>

@@ -21,7 +21,6 @@ ensure that each database migration will be backwards compatible." />
 <meta property="article:published_time" content="2017-02-20T00:00:00-07:00" />
 <meta property="article:modified_time" content="2017-02-20T00:00:00-07:00" />
 
-
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Zero downtime deploys: A tale of Django migrations"/>
 <meta name="twitter:description" content="At Teem, we aim for zero down-time deploys; so, one of the most
@@ -50,7 +49,6 @@ ensure that each database migration will be backwards compatible." />
 <meta property="og:url" content="https://lucasroesler.com/posts/2017/automatic-migration-validation/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2017-02-20T00:00:00-07:00" />
 <meta property="article:modified_time" content="2017-02-20T00:00:00-07:00" />
-
 
 <meta itemprop="name" content="Zero downtime deploys: A tale of Django migrations">
 <meta itemprop="description" content="At Teem, we aim for zero down-time deploys; so, one of the most
@@ -173,7 +171,7 @@ place, we rarely have any issues with database migrations during deploy.</p>
 <h2 id="the-how">The how</h2>
 <h3 id="getting-your-list-of-migrations">Getting your list of migrations</h3>
 <p>To find the new migrations you can run the following command</p>
-<pre tabindex="0"><code>$ git log --name-status master.. | grep -e  &quot;^[MA].*migrations.*&quot;
+<pre tabindex="0"><code>$ git log --name-status master.. | grep -e  &#34;^[MA].*migrations.*&#34;
 </code></pre><p>Breaking this down, <code>git log --name-status master..</code> will print a log of the
 commits and the file changes in each commit between <code>master</code> and the current
 <code>HEAD</code>.  The <code>grep</code> returns only those lines that start with <code>A</code> or <code>M</code> and
@@ -190,13 +188,13 @@ For example,</p>
 </code></pre><p>will print the sql for the second migration in the <code>accounts</code> app. In the
 pervious section the ouput contains all of the information that we need.
 Specifically, with a command like this</p>
-<pre tabindex="0"><code>$ git log --name-status master.. | grep -e  &quot;^[AM].*migrations.*&quot; | cut -d / -f 2,4 | cut -d . -f 1
+<pre tabindex="0"><code>$ git log --name-status master.. | grep -e  &#34;^[AM].*migrations.*&#34; | cut -d / -f 2,4 | cut -d . -f 1
 </code></pre><p>we would get back exactly the list of apps and the migration name for each
 migration that we need to check</p>
 <pre tabindex="0"><code>accounts/0017_auto_20170126_1342
 </code></pre><p>This still isn&rsquo;t quite what we need.  At the end of the day the following
 command will generate the SQL for you</p>
-<pre tabindex="0"><code>$ git log --name-status master.. | grep -e  &quot;^[AM].*migrations.*&quot; | cut -d / -f 2,4 | cut -d . -f 1 | awk -F&quot;/&quot; '{ print $1,$2}' | xargs -t -L 1 django-admin sqlmigrate
+<pre tabindex="0"><code>$ git log --name-status master.. | grep -e  &#34;^[AM].*migrations.*&#34; | cut -d / -f 2,4 | cut -d . -f 1 | awk -F&#34;/&#34; &#39;{ print $1,$2}&#39; | xargs -t -L 1 django-admin sqlmigrate
 </code></pre><p>We are using python for our scripting, so my script is actually a bit
 different, using the regex <code>apps/((.*)/migrations/(\d+[0-9a-z_]*))\.py</code> and a
 combination of a for loop and subprocess to generate the SQL.</p>
@@ -237,7 +235,7 @@ we run into.</p>
         <footer>
     <span class="copyrights">
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
-        &copy; 2017 - 2022 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
     </span>
 </footer>
 
