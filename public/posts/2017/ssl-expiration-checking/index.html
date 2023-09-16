@@ -12,7 +12,6 @@
 <meta property="article:published_time" content="2017-06-11T11:00:00-06:00" />
 <meta property="article:modified_time" content="2017-06-11T11:00:00-06:00" />
 
-
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="SSL Expiry Quick and Simple"/>
 <meta name="twitter:description" content="Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like Instagram and Google, at Teem recently, and of course for myself with my own home server."/>
@@ -24,11 +23,10 @@
 <meta property="article:published_time" content="2017-06-11T11:00:00-06:00" />
 <meta property="article:modified_time" content="2017-06-11T11:00:00-06:00" />
 
-
 <meta itemprop="name" content="SSL Expiry Quick and Simple">
 <meta itemprop="description" content="Ever have that feeling you are forgetting something right as you leave work? You are probably thinking about your keys or your lunch box but I am talking about your SSL certificate.  They don&rsquo;t last forever, we know this when we setup SSL but that doesn&rsquo;t stop it from sneaking up on us.  It has happened to the big guys like Instagram and Google, at Teem recently, and of course for myself with my own home server."><meta itemprop="datePublished" content="2017-06-11T11:00:00-06:00" />
 <meta itemprop="dateModified" content="2017-06-11T11:00:00-06:00" />
-<meta itemprop="wordCount" content="1118">
+<meta itemprop="wordCount" content="1119">
 <meta itemprop="keywords" content="python,aws,lambda,api gateway,ssl," />
 
 
@@ -87,11 +85,11 @@ import socket
 import ssl
 
 
-logger = logging.getLogger('SSLVerify')
+logger = logging.getLogger(&#39;SSLVerify&#39;)
 
 
 def ssl_expiry_datetime(hostname: str) -&gt; datetime.datetime:
-    ssl_date_fmt = r'%b %d %H:%M:%S %Y %Z'
+    ssl_date_fmt = r&#39;%b %d %H:%M:%S %Y %Z&#39;
 
     context = ssl.create_default_context()
     conn = context.wrap_socket(
@@ -101,18 +99,18 @@ def ssl_expiry_datetime(hostname: str) -&gt; datetime.datetime:
     # 3 second timeout because Lambda has runtime limitations
     conn.settimeout(3.0)
 
-    logger.debug('Connect to {}'.format(hostname))
+    logger.debug(&#39;Connect to {}&#39;.format(hostname))
     conn.connect((hostname, 443))
     ssl_info = conn.getpeercert()
     # parse the string from the certificate into a Python datetime object
-    return datetime.datetime.strptime(ssl_info['notAfter'], ssl_date_fmt)
+    return datetime.datetime.strptime(ssl_info[&#39;notAfter&#39;], ssl_date_fmt)
 
 
 def ssl_valid_time_remaining(hostname: str) -&gt; datetime.timedelta:
-    &quot;&quot;&quot;Get the number of days left in a cert's lifetime.&quot;&quot;&quot;
+    &#34;&#34;&#34;Get the number of days left in a cert&#39;s lifetime.&#34;&#34;&#34;
     expires = ssl_expiry_datetime(hostname)
     logger.debug(
-        'SSL cert for {} expires at {}'.format(
+        &#39;SSL cert for {} expires at {}&#39;.format(
             hostname, expires.isoformat()
         )
     )
@@ -120,30 +118,30 @@ def ssl_valid_time_remaining(hostname: str) -&gt; datetime.timedelta:
 
 
 def test_host(hostname: str, buffer_days: int=30) -&gt; str:
-    &quot;&quot;&quot;Return test message for hostname cert expiration.&quot;&quot;&quot;
+    &#34;&#34;&#34;Return test message for hostname cert expiration.&#34;&#34;&#34;
     try:
         will_expire_in = ssl_valid_time_remaining(hostname)
     except ssl.CertificateError as e:
-        return f'{hostname} cert error {e}'
+        return f&#39;{hostname} cert error {e}&#39;
     except ssl.SSLError as e:
-        return f'{hostname} cert error {e}'
+        return f&#39;{hostname} cert error {e}&#39;
     except socket.timeout as e:
-        return f'{hostname} could not connect'
+        return f&#39;{hostname} could not connect&#39;
     else:
         if will_expire_in &lt; datetime.timedelta(days=0):
-            return f'{hostname} cert will expired'
+            return f&#39;{hostname} cert will expired&#39;
         elif will_expire_in &lt; datetime.timedelta(days=buffer_days):
-            return f'{hostname} cert will expire in {will_expire_in}'
+            return f&#39;{hostname} cert will expire in {will_expire_in}&#39;
         else:
-            return f'{hostname} cert is fine'
+            return f&#39;{hostname} cert is fine&#39;
 </code></pre><p>At the core of this script is the <code>SSLSocket.getpeercert</code> method, using Python&rsquo;s <code>ssl</code> and <code>socket</code> modules, we connect to the provided <code>hostname</code> on port 443 and then <code>getpeercert</code> returns the SSL certificate as a dictionary. At this point you want the <code>notAfter</code> value.</p>
 <p>For the <code>ssl-expiry</code> tool, we parse the <code>notAfter</code> value into a <code>timedelta</code> object because we want to know if the certificate will expire soon (defaults to 30 days).</p>
 <p>If you checkout the source for <code>ssl-expiry</code> you can quickly check if a certificate is expiring soon using</p>
-<pre tabindex="0"><code>$ echo &quot;google.com\nfacebook.com&quot; | python ssl_expiry.py
+<pre tabindex="0"><code>$ echo &#34;google.com\nfacebook.com&#34; | python ssl_expiry.py
 &gt; google.com cert is fine
 &gt; facebook.com cert is fine
 </code></pre><p>Depending on your environment, you may need to explicitly call to <code>python3</code></p>
-<pre tabindex="0"><code>$ echo &quot;google.com\nfacebook.com&quot; | python3 ssl_expiry.py
+<pre tabindex="0"><code>$ echo &#34;google.com\nfacebook.com&#34; | python3 ssl_expiry.py
 </code></pre><h2 id="ssl-expiry-in-action">SSL Expiry in Action</h2>
 <p>At this point, you could easily create a <code>cron</code> job to run this regularly and notify you if the output contains <code>&quot;expire&quot;</code>.  This is what I did for my home server. At Teem we use <a href="https://newrelic.com/">New Relic</a> which provides an awesome tool called <a href="https://newrelic.com/synthetics">Synthetics</a> that provides a cron-like tool that allows you to ping or GET against an API on regular intervals.  It will then trigger alerts that can be forwarded to your favorite on-call to (:cough:PagerDuty:cough:) if the request fails or the response does not contain an expected sub-string. With this tool available, I decided to deploy <code>ssl-expiry</code> as an AWS Lambda function an expose it via an AWS API Gateway api.</p>
 <p>To simplify this deployment, I created a script specifically for Lambda, cleverly called <a href="https://github.com/LucasRoesler/ssl-expiry-check/blob/master/ssl_expiry_lambda.py"><code>ssl-expiry-lambda</code></a> This script simply wraps <code>ssl-expiry</code> so that the output is specialized to the format that Lambda and Gateway need so that I can</p>
@@ -164,8 +162,8 @@ def test_host(hostname: str, buffer_days: int=30) -&gt; str:
 <p>I configured this new Integration Response with a regex of</p>
 <pre tabindex="0"><code>.*Cert Errors.*
 </code></pre><p>and a &ldquo;Body Mapping Template&rdquo; with content type <code>application/json</code> and the template:</p>
-<pre tabindex="0"><code>#set($inputRoot = $input.path('$'))
-$input.path('$.errorMessage')
+<pre tabindex="0"><code>#set($inputRoot = $input.path(&#39;$&#39;))
+$input.path(&#39;$.errorMessage&#39;)
 </code></pre><p>With this configuration, the exception raised by the <code>main</code> method will be parsed and returned as the body of the response. The HTTP status code will be a 400.</p>
 <p>Additionally, in the &ldquo;Method Request&rdquo; section, I declared URL Query String Parameters for <code>host_list</code> and <code>expiry_buffer</code>.  This is helpful for testing the API, since the AWS UI will provide form fields for setting these parameters while testing it.</p>
 <p>Finally, you should also define a &ldquo;Method Response&rdquo; for the 400 status. This can be left with all for the default empty values for response headers and response body.</p>
@@ -197,7 +195,7 @@ $input.path('$.errorMessage')
         <footer>
     <span class="copyrights">
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
-        &copy; 2017 - 2022 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
     </span>
 </footer>
 

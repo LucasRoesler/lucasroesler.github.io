@@ -12,7 +12,6 @@
 <meta property="article:published_time" content="2022-03-20T00:00:00+02:00" />
 <meta property="article:modified_time" content="2022-03-20T00:00:00+02:00" />
 
-
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Go 1.18 Released"/>
 <meta name="twitter:description" content="Generics, string utils, and workspaces, oh my!"/>
@@ -23,7 +22,6 @@
 <meta property="og:url" content="https://lucasroesler.com/posts/2022/1-go-1.18-release/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2022-03-20T00:00:00+02:00" />
 <meta property="article:modified_time" content="2022-03-20T00:00:00+02:00" />
-
 
 <meta itemprop="name" content="Go 1.18 Released">
 <meta itemprop="description" content="Generics, string utils, and workspaces, oh my!"><meta itemprop="datePublished" content="2022-03-20T00:00:00+02:00" />
@@ -96,11 +94,11 @@
     └── bug-repro
 </code></pre><p>As a result, previously, when I opened <code>company</code> in VSCode, linting would just be broken. It would complain about detecting multiple modules and just mark everything in red. It was not a workable dev environment until switched to a subdirectory for a single component.</p>
 <p>With Go 1.18, I can create a <code>go.work</code> workspace for my <code>company</code> folder like this</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">cd code/company
-go work init .
-go work use component-a
-go work use component-b
-</code></pre></div><p>and just open the <code>company</code> folder and everything works! This really cuts down on the number of editors I need open at the same time (or switching the active project in my current editor window).</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>cd code/company
+</span></span><span style="display:flex;"><span>go work init .
+</span></span><span style="display:flex;"><span>go work use component-a
+</span></span><span style="display:flex;"><span>go work use component-b
+</span></span></code></pre></div><p>and just open the <code>company</code> folder and everything works! This really cuts down on the number of editors I need open at the same time (or switching the active project in my current editor window).</p>
 <p>You probably don&rsquo;t want to create a workspace for your <em>entire</em> code folder. I suspect there would be performance issues and it would be annoying to manager that <code>go.work</code> file .</p>
 <h3 id="workspaces-for-openfaas">Workspaces for OpenFaas?</h3>
 <p>One area where I do use a &ldquo;monorepo&rdquo; is when I am building serverless projects that are composed of multiple functions.</p>
@@ -129,7 +127,7 @@ go work use component-b
         <footer>
     <span class="copyrights">
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
-        &copy; 2017 - 2022 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
     </span>
 </footer>
 

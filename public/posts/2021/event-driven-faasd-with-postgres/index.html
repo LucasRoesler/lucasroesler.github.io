@@ -13,7 +13,6 @@ This post will show you how to quickly deploy Postgresql along with an event lis
 <meta property="article:published_time" content="2021-01-30T00:00:00+02:00" />
 <meta property="article:modified_time" content="2021-01-30T00:00:00+02:00" />
 
-
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Event driven functions powered by Postgres"/>
 <meta name="twitter:description" content="An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don&rsquo;t own the code in the app. A recently added a feature to faasd got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app!
@@ -26,7 +25,6 @@ This post will show you how to quickly deploy Postgresql along with an event lis
 <meta property="og:url" content="https://lucasroesler.com/posts/2021/event-driven-faasd-with-postgres/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2021-01-30T00:00:00+02:00" />
 <meta property="article:modified_time" content="2021-01-30T00:00:00+02:00" />
-
 
 <meta itemprop="name" content="Event driven functions powered by Postgres">
 <meta itemprop="description" content="An event-driven architecture can let you seamlessly extend your application or improve the scalability, if you can handle the eventual consistency. But your app may not be ready for this yet, or you don&rsquo;t own the code in the app. A recently added a feature to faasd got me thinking about event driven architecture powered by the Postgres WAL. Which means we can seamlessly extend your app without needing to change the app!
@@ -79,128 +77,128 @@ This post will show you how to quickly deploy Postgresql along with an event lis
 <p>I started looking at <a href="https://github.com/eulerto/wal2json"><code>wal2json</code></a> and but ultimately ended up looking at <a href="https://github.com/ihippik/wal-listener"><code>wal-listener</code></a> because I looked at the OpenFaaS ecosystem and we already have event driven functions via the <a href="https://github.com/openfaas/nats-connector"><code>nats-connector</code></a> and <code>faasd</code> <em>already</em> installs NATS. With <code>wal-listenr</code> plus `Postgres just work directly on top of that.</p>
 <h2 id="get-started">Get started</h2>
 <p>If you have <code>faasd</code> up and running, then you can skip this part, but if not, then I recommend you grab <a href="https://multipass.run/"><code>multipass</code></a>, start a new VM and run this</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone https://github.com/openfaas/faasd
-cd faasd
-
-./hack/install.sh
-</code></pre></div><p>You can also get started with cloud-config, <a href="https://github.com/openfaas/faasd#deploy-faasd">check out this tutorial</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git clone https://github.com/openfaas/faasd
+</span></span><span style="display:flex;"><span>cd faasd
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>./hack/install.sh
+</span></span></code></pre></div><p>You can also get started with cloud-config, <a href="https://github.com/openfaas/faasd#deploy-faasd">check out this tutorial</a></p>
 <h2 id="add-postgres-to-the-mix">Add postgres to the mix</h2>
 <p>I created a small proof-of-concept repo that adds postgres, wal-listener, and a simple &ldquo;receiver&rdquo; function that just prints all of the events it receives. It doesn&rsquo;t do anything, but you can simply replace the function with any logic you want, first thing that comes to my mind <em>webhooks</em> Parse the event and forward it to another function or service.</p>
 <ol>
 <li>
 <p>clone the example repo</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">git clone https://github.com/LucasRoesler/openfaas-wal-listener.git
-cd openfaas-wal-listener
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>git clone https://github.com/LucasRoesler/openfaas-wal-listener.git
+</span></span><span style="display:flex;"><span>cd openfaas-wal-listener
+</span></span></code></pre></div></li>
 <li>
 <p>Copy the new docker-compose</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make install 
-<span style="color:#75715e"># or manually run </span>
-<span style="color:#75715e"># sudo cp -rf postgres /var/lib/faasd</span>
-<span style="color:#75715e"># sudo mkdir -p /var/lib/faasd/postgres/pgdata</span>
-<span style="color:#75715e"># sudo mkdir -p /var/lib/faasd/postgresql/run</span>
-<span style="color:#75715e"># sudo cp -rf wal_listener /var/lib/faasd</span>
-<span style="color:#75715e"># sudo cp docker-compose.yaml /var/lib/faasd</span>
-<span style="color:#75715e"># sudo chown -R 1000:1000 /var/lib/faasd/postgres</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>make install 
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or manually run </span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo cp -rf postgres /var/lib/faasd</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo mkdir -p /var/lib/faasd/postgres/pgdata</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo mkdir -p /var/lib/faasd/postgresql/run</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo cp -rf wal_listener /var/lib/faasd</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo cp docker-compose.yaml /var/lib/faasd</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># sudo chown -R 1000:1000 /var/lib/faasd/postgres</span>
+</span></span></code></pre></div></li>
 <li>
 <p>Restart faasd</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make restart
-<span style="color:#75715e"># or manually: sudo systemctl restart faasd faasd-provider</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>make restart
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># or manually: sudo systemctl restart faasd faasd-provider</span>
+</span></span></code></pre></div></li>
 <li>
 <p>Deploy a function to receive database events and print them out</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">faas-cli deploy --name receive-event <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --image theaxer/receive-message:latest <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --fprocess<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./handler&#39;</span> <span style="color:#ae81ff">\
-</span><span style="color:#ae81ff"></span>   --annotation topic<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sample_app&#34;</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>faas-cli deploy --name receive-event <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --image theaxer/receive-message:latest <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --fprocess<span style="color:#f92672">=</span><span style="color:#e6db74">&#39;./handler&#39;</span> <span style="color:#ae81ff">\
+</span></span></span><span style="display:flex;"><span><span style="color:#ae81ff"></span>   --annotation topic<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;sample_app&#34;</span>
+</span></span></code></pre></div></li>
 </ol>
 <p>You can then verify that the connector is sending events to tne receiver fucntion by manually publishing the topic (you need to install the <a href="https://github.com/nats-io/natscli">natscli</a>)</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ nats pub sample_app <span style="color:#e6db74">&#34;manual push&#34;</span>
-15:21:39 Published <span style="color:#ae81ff">11</span> bytes to <span style="color:#e6db74">&#34;sample_app&#34;</span>
-$ faas-cli logs receive-event
-2021-01-24T14:21:17Z 2021/01/24 14:21:17 Started logging stderr from <span style="color:#66d9ef">function</span>.
-2021-01-24T14:21:17Z 2021/01/24 14:21:17 Started logging stdout from <span style="color:#66d9ef">function</span>.
-2021-01-24T14:21:17Z 2021/01/24 14:21:17 OperationalMode: http
-2021-01-24T14:21:17Z 2021/01/24 14:21:17 Timeouts: read: 10s, write: 10s hard: 10s.
-2021-01-24T14:21:17Z 2021/01/24 14:21:17 Listening on port: <span style="color:#ae81ff">8080</span>
-2021-01-24T14:21:17Z 2021/01/24 14:21:17 Writing lock-file to: /tmp/.lock
-2021-01-24T14:21:17Z 2021/01/24 14:21:17 Metrics listening on port: <span style="color:#ae81ff">8081</span>
-2021-01-24T14:21:17Z Forking - ./handler <span style="color:#f92672">[]</span>
-2021-01-24T14:21:39Z 2021/01/24 14:21:39 POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">27</span>
-2021-01-24T14:21:39Z 2021/01/24 14:21:39 stderr: 2021/01/24 14:21:39 received <span style="color:#e6db74">&#34;manual push&#34;</span>
-</code></pre></div><h2 id="verify-db-events-are-sent">Verify db events are sent</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ nats pub sample_app <span style="color:#e6db74">&#34;manual push&#34;</span>
+</span></span><span style="display:flex;"><span>15:21:39 Published <span style="color:#ae81ff">11</span> bytes to <span style="color:#e6db74">&#34;sample_app&#34;</span>
+</span></span><span style="display:flex;"><span>$ faas-cli logs receive-event
+</span></span><span style="display:flex;"><span>2021-01-24T14:21:17Z 2021/01/24 14:21:17 Started logging stderr from <span style="color:#66d9ef">function</span>.
+</span></span><span style="display:flex;"><span>2021-01-24T14:21:17Z 2021/01/24 14:21:17 Started logging stdout from <span style="color:#66d9ef">function</span>.
+</span></span><span style="display:flex;"><span>2021-01-24T14:21:17Z 2021/01/24 14:21:17 OperationalMode: http
+</span></span><span style="display:flex;"><span>2021-01-24T14:21:17Z 2021/01/24 14:21:17 Timeouts: read: 10s, write: 10s hard: 10s.
+</span></span><span style="display:flex;"><span>2021-01-24T14:21:17Z 2021/01/24 14:21:17 Listening on port: <span style="color:#ae81ff">8080</span>
+</span></span><span style="display:flex;"><span>2021-01-24T14:21:17Z 2021/01/24 14:21:17 Writing lock-file to: /tmp/.lock
+</span></span><span style="display:flex;"><span>2021-01-24T14:21:17Z 2021/01/24 14:21:17 Metrics listening on port: <span style="color:#ae81ff">8081</span>
+</span></span><span style="display:flex;"><span>2021-01-24T14:21:17Z Forking - ./handler <span style="color:#f92672">[]</span>
+</span></span><span style="display:flex;"><span>2021-01-24T14:21:39Z 2021/01/24 14:21:39 POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">27</span>
+</span></span><span style="display:flex;"><span>2021-01-24T14:21:39Z 2021/01/24 14:21:39 stderr: 2021/01/24 14:21:39 received <span style="color:#e6db74">&#34;manual push&#34;</span>
+</span></span></code></pre></div><h2 id="verify-db-events-are-sent">Verify db events are sent</h2>
 <p>The example repo contains a small SQL script that will create a <code>User</code> table and upsert several users, the events from <code>wal-listener</code> will look like</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-json" data-lang="json">{
-    <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;cd03a0b0-8c98-4809-9347-9f469c773de0&#34;</span>,
-    <span style="color:#f92672">&#34;schema&#34;</span>: <span style="color:#e6db74">&#34;public&#34;</span>,
-    <span style="color:#f92672">&#34;table&#34;</span>: <span style="color:#e6db74">&#34;users&#34;</span>,
-    <span style="color:#f92672">&#34;action&#34;</span>: <span style="color:#e6db74">&#34;UPDATE&#34;</span>,
-    <span style="color:#f92672">&#34;data&#34;</span>: {
-        <span style="color:#f92672">&#34;created_at&#34;</span>: <span style="color:#e6db74">&#34;2021-01-23 16:50:53.543372+00&#34;</span>,
-        <span style="color:#f92672">&#34;updated_at&#34;</span>: <span style="color:#e6db74">&#34;2021-01-23 16:50:53.543372+00&#34;</span>,
-        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Sarah Walker&#34;</span>,
-        <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;walker@nerdherd.com&#34;</span>,
-        <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;3879dc32-78cd-456d-8a64-fe7fab540a7f&#34;</span>
-    },
-    <span style="color:#f92672">&#34;commitTime&#34;</span>: <span style="color:#e6db74">&#34;2021-01-24T15:05:00.007715Z&#34;</span>
-}
-</code></pre></div><p>Let&rsquo;s see it in action:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-json" data-lang="json"><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;cd03a0b0-8c98-4809-9347-9f469c773de0&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;schema&#34;</span>: <span style="color:#e6db74">&#34;public&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;table&#34;</span>: <span style="color:#e6db74">&#34;users&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;action&#34;</span>: <span style="color:#e6db74">&#34;UPDATE&#34;</span>,
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;data&#34;</span>: {
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;created_at&#34;</span>: <span style="color:#e6db74">&#34;2021-01-23 16:50:53.543372+00&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;updated_at&#34;</span>: <span style="color:#e6db74">&#34;2021-01-23 16:50:53.543372+00&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;name&#34;</span>: <span style="color:#e6db74">&#34;Sarah Walker&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;email&#34;</span>: <span style="color:#e6db74">&#34;walker@nerdherd.com&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#f92672">&#34;id&#34;</span>: <span style="color:#e6db74">&#34;3879dc32-78cd-456d-8a64-fe7fab540a7f&#34;</span>
+</span></span><span style="display:flex;"><span>    },
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">&#34;commitTime&#34;</span>: <span style="color:#e6db74">&#34;2021-01-24T15:05:00.007715Z&#34;</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>Let&rsquo;s see it in action:</p>
 <ol>
 <li>
 <p>Generate some changes in the db</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql"><span style="color:#66d9ef">CREATE</span> EXTENSION <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> <span style="color:#e6db74">&#34;uuid-ossp&#34;</span>;
-
-<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> <span style="color:#e6db74">&#34;users&#34;</span> (
-    id uuid <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> <span style="color:#66d9ef">DEFAULT</span> uuid_generate_v4(),
-    created_at timestamptz <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> NOW(),
-    updated_at timestamptz <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> NOW(),
-    name text,
-    email text <span style="color:#66d9ef">UNIQUE</span>
-);
-
-<span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">UNIQUE</span> <span style="color:#66d9ef">INDEX</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> users_email_idx <span style="color:#66d9ef">ON</span> users (email);
-
-<span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> users (name, email)
-    <span style="color:#66d9ef">VALUES</span> 
-        (<span style="color:#e6db74">&#39;John Wick&#39;</span>, <span style="color:#e6db74">&#39;wick@trouble.com&#39;</span>),
-        (<span style="color:#e6db74">&#39;James Bond&#39;</span>, <span style="color:#e6db74">&#39;bond@mi6.com&#39;</span>),
-        (<span style="color:#e6db74">&#39;Elim Garak&#39;</span>, <span style="color:#e6db74">&#39;garak@ds9.com&#39;</span>),
-        (<span style="color:#e6db74">&#39;Sarah Walker&#39;</span>, <span style="color:#e6db74">&#39;walker@nerdherd.com&#39;</span>)
-    <span style="color:#66d9ef">ON</span> CONFLICT (email) <span style="color:#66d9ef">DO</span> 
-    <span style="color:#66d9ef">UPDATE</span> <span style="color:#66d9ef">SET</span> name <span style="color:#f92672">=</span> EXCLUDED.name
-    RETURNING <span style="color:#f92672">*</span>;
-</code></pre></div><p>This script is safe to run several time, on the repeated runs it will generate UPDATE events for the function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> EXTENSION <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> <span style="color:#e6db74">&#34;uuid-ossp&#34;</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">TABLE</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> <span style="color:#e6db74">&#34;users&#34;</span> (
+</span></span><span style="display:flex;"><span>    id uuid <span style="color:#66d9ef">PRIMARY</span> <span style="color:#66d9ef">KEY</span> <span style="color:#66d9ef">DEFAULT</span> uuid_generate_v4(),
+</span></span><span style="display:flex;"><span>    created_at timestamptz <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> NOW(),
+</span></span><span style="display:flex;"><span>    updated_at timestamptz <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">NULL</span> <span style="color:#66d9ef">DEFAULT</span> NOW(),
+</span></span><span style="display:flex;"><span>    name text,
+</span></span><span style="display:flex;"><span>    email text <span style="color:#66d9ef">UNIQUE</span>
+</span></span><span style="display:flex;"><span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">CREATE</span> <span style="color:#66d9ef">UNIQUE</span> <span style="color:#66d9ef">INDEX</span> <span style="color:#66d9ef">IF</span> <span style="color:#66d9ef">NOT</span> <span style="color:#66d9ef">EXISTS</span> users_email_idx <span style="color:#66d9ef">ON</span> users (email);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">INSERT</span> <span style="color:#66d9ef">INTO</span> users (name, email)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">VALUES</span> 
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#39;John Wick&#39;</span>, <span style="color:#e6db74">&#39;wick@trouble.com&#39;</span>),
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#39;James Bond&#39;</span>, <span style="color:#e6db74">&#39;bond@mi6.com&#39;</span>),
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#39;Elim Garak&#39;</span>, <span style="color:#e6db74">&#39;garak@ds9.com&#39;</span>),
+</span></span><span style="display:flex;"><span>        (<span style="color:#e6db74">&#39;Sarah Walker&#39;</span>, <span style="color:#e6db74">&#39;walker@nerdherd.com&#39;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">ON</span> CONFLICT (email) <span style="color:#66d9ef">DO</span> 
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">UPDATE</span> <span style="color:#66d9ef">SET</span> name <span style="color:#f92672">=</span> EXCLUDED.name
+</span></span><span style="display:flex;"><span>    RETURNING <span style="color:#f92672">*</span>;
+</span></span></code></pre></div><p>This script is safe to run several time, on the repeated runs it will generate UPDATE events for the function.</p>
 <p>You can run it with the Makefile (or manually), the db password is <code>supersecret</code></p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">make init-db
-<span style="color:#75715e"># psql -U postgres -h localhost -d app -f postgres/init_app.sql</span>
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>make init-db
+</span></span><span style="display:flex;"><span><span style="color:#75715e"># psql -U postgres -h localhost -d app -f postgres/init_app.sql</span>
+</span></span></code></pre></div></li>
 <li>
 <p>You can then see the logs as wal-listener reacts to the inserts by using</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">sudo journalctl -f -t openfaas:wal-listener --since<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;5 minutes ago&#34;</span>
-</code></pre></div><p>These are cool, but magic is when we look at the function logs.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>sudo journalctl -f -t openfaas:wal-listener --since<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;5 minutes ago&#34;</span>
+</span></span></code></pre></div><p>These are cool, but magic is when we look at the function logs.</p>
 </li>
 <li>
 <p>Finally, see that our receiver function was invoked</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">$ faas-cli logs receive-event
-POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">386</span>
-stderr: 2021/01/24 15:04:25 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;92c431a7-9027-4656-9d39-f52ee90d5dd6\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;John Wick\&#34;,\&#34;email\&#34;:\&#34;wick@trouble.com\&#34;,\&#34;id\&#34;:\&#34;99a9c7bf-8f31-4c30-998e-9740f87bdaa0\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:04:25.58604Z\&#34;}&#34;</span>
-POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">383</span>
-stderr: 2021/01/24 15:04:25 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;80a8d33a-0ae5-4aed-825d-1a7f9e24adfb\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;name\&#34;:\&#34;James Bond\&#34;,\&#34;email\&#34;:\&#34;bond@mi6.com\&#34;,\&#34;id\&#34;:\&#34;5a6a9672-722a-40c9-8f10-17cf527a6b41\&#34;,\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:04:25.58604Z\&#34;}&#34;</span>
-POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">384</span>
-stderr: 2021/01/24 15:04:25 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;326ea179-dddb-4c04-bd56-9f02bdec9aaa\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;Elim Garak\&#34;,\&#34;email\&#34;:\&#34;garak@ds9.com\&#34;,\&#34;id\&#34;:\&#34;b1f3cc48-6366-4bff-b0c5-3f5beed02f44\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:04:25.58604Z\&#34;}&#34;</span>
-POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">392</span>
-stderr: 2021/01/24 15:04:25 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;15755624-195a-4617-8d60-6b7cb748caf9\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;id\&#34;:\&#34;3879dc32-78cd-456d-8a64-fe7fab540a7f\&#34;,\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;Sarah Walker\&#34;,\&#34;email\&#34;:\&#34;walker@nerdherd.com\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:04:25.58604Z\&#34;}&#34;</span>
-POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">387</span>
-stderr: 2021/01/24 15:05:00 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;38f4ae55-86a1-466a-8ebd-c2f5a1054439\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;John Wick\&#34;,\&#34;email\&#34;:\&#34;wick@trouble.com\&#34;,\&#34;id\&#34;:\&#34;99a9c7bf-8f31-4c30-998e-9740f87bdaa0\&#34;,\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:05:00.007715Z\&#34;}&#34;</span>
-stderr: 2021/01/24 15:05:00 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;bce01097-815d-4d73-90b9-89230ddca39b\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;email\&#34;:\&#34;bond@mi6.com\&#34;,\&#34;id\&#34;:\&#34;5a6a9672-722a-40c9-8f10-17cf527a6b41\&#34;,\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;James Bond\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:05:00.007715Z\&#34;}&#34;</span>
-POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">384</span>
-POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">385</span>
-stderr: 2021/01/24 15:05:00 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;45f0fc1f-a44f-4546-a7dd-2fec7079667d\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;name\&#34;:\&#34;Elim Garak\&#34;,\&#34;email\&#34;:\&#34;garak@ds9.com\&#34;,\&#34;id\&#34;:\&#34;b1f3cc48-6366-4bff-b0c5-3f5beed02f44\&#34;,\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:05:00.007715Z\&#34;}&#34;</span>
-POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">393</span>
-stderr: 2021/01/24 15:05:00 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;cd03a0b0-8c98-4809-9347-9f469c773de0\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;Sarah Walker\&#34;,\&#34;email\&#34;:\&#34;walker@nerdherd.com\&#34;,\&#34;id\&#34;:\&#34;3879dc32-78cd-456d-8a64-fe7fab540a7f\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:05:00.007715Z\&#34;}&#34;</span>
-</code></pre></div><p>I trimmed log timestamps for legibility.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>$ faas-cli logs receive-event
+</span></span><span style="display:flex;"><span>POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">386</span>
+</span></span><span style="display:flex;"><span>stderr: 2021/01/24 15:04:25 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;92c431a7-9027-4656-9d39-f52ee90d5dd6\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;John Wick\&#34;,\&#34;email\&#34;:\&#34;wick@trouble.com\&#34;,\&#34;id\&#34;:\&#34;99a9c7bf-8f31-4c30-998e-9740f87bdaa0\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:04:25.58604Z\&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">383</span>
+</span></span><span style="display:flex;"><span>stderr: 2021/01/24 15:04:25 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;80a8d33a-0ae5-4aed-825d-1a7f9e24adfb\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;name\&#34;:\&#34;James Bond\&#34;,\&#34;email\&#34;:\&#34;bond@mi6.com\&#34;,\&#34;id\&#34;:\&#34;5a6a9672-722a-40c9-8f10-17cf527a6b41\&#34;,\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:04:25.58604Z\&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">384</span>
+</span></span><span style="display:flex;"><span>stderr: 2021/01/24 15:04:25 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;326ea179-dddb-4c04-bd56-9f02bdec9aaa\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;Elim Garak\&#34;,\&#34;email\&#34;:\&#34;garak@ds9.com\&#34;,\&#34;id\&#34;:\&#34;b1f3cc48-6366-4bff-b0c5-3f5beed02f44\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:04:25.58604Z\&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">392</span>
+</span></span><span style="display:flex;"><span>stderr: 2021/01/24 15:04:25 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;15755624-195a-4617-8d60-6b7cb748caf9\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;id\&#34;:\&#34;3879dc32-78cd-456d-8a64-fe7fab540a7f\&#34;,\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;Sarah Walker\&#34;,\&#34;email\&#34;:\&#34;walker@nerdherd.com\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:04:25.58604Z\&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">387</span>
+</span></span><span style="display:flex;"><span>stderr: 2021/01/24 15:05:00 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;38f4ae55-86a1-466a-8ebd-c2f5a1054439\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;John Wick\&#34;,\&#34;email\&#34;:\&#34;wick@trouble.com\&#34;,\&#34;id\&#34;:\&#34;99a9c7bf-8f31-4c30-998e-9740f87bdaa0\&#34;,\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:05:00.007715Z\&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>stderr: 2021/01/24 15:05:00 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;bce01097-815d-4d73-90b9-89230ddca39b\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;email\&#34;:\&#34;bond@mi6.com\&#34;,\&#34;id\&#34;:\&#34;5a6a9672-722a-40c9-8f10-17cf527a6b41\&#34;,\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;James Bond\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:05:00.007715Z\&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">384</span>
+</span></span><span style="display:flex;"><span>POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">385</span>
+</span></span><span style="display:flex;"><span>stderr: 2021/01/24 15:05:00 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;45f0fc1f-a44f-4546-a7dd-2fec7079667d\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;name\&#34;:\&#34;Elim Garak\&#34;,\&#34;email\&#34;:\&#34;garak@ds9.com\&#34;,\&#34;id\&#34;:\&#34;b1f3cc48-6366-4bff-b0c5-3f5beed02f44\&#34;,\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:05:00.007715Z\&#34;}&#34;</span>
+</span></span><span style="display:flex;"><span>POST / - <span style="color:#ae81ff">200</span> OK - ContentLength: <span style="color:#ae81ff">393</span>
+</span></span><span style="display:flex;"><span>stderr: 2021/01/24 15:05:00 received <span style="color:#e6db74">&#34;{\&#34;id\&#34;:\&#34;cd03a0b0-8c98-4809-9347-9f469c773de0\&#34;,\&#34;schema\&#34;:\&#34;public\&#34;,\&#34;table\&#34;:\&#34;users\&#34;,\&#34;action\&#34;:\&#34;UPDATE\&#34;,\&#34;data\&#34;:{\&#34;created_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;updated_at\&#34;:\&#34;2021-01-23 16:50:53.543372+00\&#34;,\&#34;name\&#34;:\&#34;Sarah Walker\&#34;,\&#34;email\&#34;:\&#34;walker@nerdherd.com\&#34;,\&#34;id\&#34;:\&#34;3879dc32-78cd-456d-8a64-fe7fab540a7f\&#34;},\&#34;commitTime\&#34;:\&#34;2021-01-24T15:05:00.007715Z\&#34;}&#34;</span>
+</span></span></code></pre></div><p>I trimmed log timestamps for legibility.</p>
 </li>
 </ol>
 <h2 id="next-steps">Next steps</h2>
@@ -235,7 +233,7 @@ stderr: 2021/01/24 15:05:00 received <span style="color:#e6db74">&#34;{\&#34;id\
         <footer>
     <span class="copyrights">
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
-        &copy; 2017 - 2022 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
     </span>
 </footer>
 

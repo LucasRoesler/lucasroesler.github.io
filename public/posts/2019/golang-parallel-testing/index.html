@@ -12,7 +12,6 @@
 <meta property="article:published_time" content="2019-02-02T00:00:00+02:00" />
 <meta property="article:modified_time" content="2019-02-02T00:00:00+02:00" />
 
-
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="When sequential tests aren&#39;t"/>
 <meta name="twitter:description" content="A brief reminder that go will default to testing packages in parallel"/>
@@ -23,7 +22,6 @@
 <meta property="og:url" content="https://lucasroesler.com/posts/2019/golang-parallel-testing/" /><meta property="article:section" content="posts" />
 <meta property="article:published_time" content="2019-02-02T00:00:00+02:00" />
 <meta property="article:modified_time" content="2019-02-02T00:00:00+02:00" />
-
 
 <meta itemprop="name" content="When sequential tests aren&#39;t">
 <meta itemprop="description" content="A brief reminder that go will default to testing packages in parallel"><meta itemprop="datePublished" content="2019-02-02T00:00:00+02:00" />
@@ -85,40 +83,40 @@
     ├── service_test.go
     └── validation.go
 </code></pre><p>Each of those test files wants to connect to the DB and will run some queries. To enable running individual tests, we also have a helper method for initializing the database</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#66d9ef">var</span> (
-	<span style="color:#a6e22e">testDatabase</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span>
-	<span style="color:#a6e22e">err</span>          <span style="color:#66d9ef">error</span>
-	<span style="color:#a6e22e">once</span>         <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Once</span>
-)
-
-<span style="color:#75715e">// GetDatabase gets a test database
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetDatabase</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span> {
-	<span style="color:#a6e22e">once</span>.<span style="color:#a6e22e">Do</span>(<span style="color:#66d9ef">func</span>() {
-		<span style="color:#a6e22e">testDatabase</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">connectDB</span>()
-		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-			<span style="color:#66d9ef">return</span>
-		}
-		<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithTimeout</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
-		<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>()
-
-		<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">SetupTables</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">testDatabase</span>)
-		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-			<span style="color:#66d9ef">return</span>
-		}
-	})
-
-	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;Can&#39;t initialize the database: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
-		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
-	}
-	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">testDatabase</span>
-}
-</code></pre></div><h2 id="the-bug">The bug</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#66d9ef">var</span> (
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">testDatabase</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">err</span>          <span style="color:#66d9ef">error</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">once</span>         <span style="color:#a6e22e">sync</span>.<span style="color:#a6e22e">Once</span>
+</span></span><span style="display:flex;"><span>)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GetDatabase gets a test database
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetDatabase</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span> {
+</span></span><span style="display:flex;"><span>	<span style="color:#a6e22e">once</span>.<span style="color:#a6e22e">Do</span>(<span style="color:#66d9ef">func</span>() {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">testDatabase</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">connectDB</span>()
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithTimeout</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">SetupTables</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">testDatabase</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>			<span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>		}
+</span></span><span style="display:flex;"><span>	})
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>		<span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;Can&#39;t initialize the database: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> <span style="color:#a6e22e">testDatabase</span>
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="the-bug">The bug</h2>
 <p>Using <code>sync.Once</code> ensures that the database setup method runs exactly once. This works but with a big caveat, when you run</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">go test ./...
-</code></pre></div><p>Go builds and runs binaries for <code>tenant/service_test.go</code>, <code>user/service_test.go</code>, and <code>bootstrap_test.go</code> in parallel. When they run in parallel at the same time we would see a sql error</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sql" data-lang="sql">pq: duplicate <span style="color:#66d9ef">key</span> value violates <span style="color:#66d9ef">unique</span> <span style="color:#66d9ef">constraint</span> <span style="color:#e6db74">&#34;pg_extension_name_index&#34;</span>
-</code></pre></div><p>which is caused by running <code>CREATE EXTENSION IF NOT EXISTS foo</code> multiple times simultaneously.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>go test ./...
+</span></span></code></pre></div><p>Go builds and runs binaries for <code>tenant/service_test.go</code>, <code>user/service_test.go</code>, and <code>bootstrap_test.go</code> in parallel. When they run in parallel at the same time we would see a sql error</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sql" data-lang="sql"><span style="display:flex;"><span>pq: duplicate <span style="color:#66d9ef">key</span> value violates <span style="color:#66d9ef">unique</span> <span style="color:#66d9ef">constraint</span> <span style="color:#e6db74">&#34;pg_extension_name_index&#34;</span>
+</span></span></code></pre></div><p>which is caused by running <code>CREATE EXTENSION IF NOT EXISTS foo</code> multiple times simultaneously.</p>
 <p>At first, I couldn&rsquo;t determine why. I thought all of the tests were run sequentially. But, after digging through the documentation for <code>go test</code> and then <code>go build</code>, <a href="https://golang.org/cmd/go/#hdr-Compile_packages_and_dependencies">I found</a></p>
 <pre tabindex="0"><code>	-p n
 		the number of programs, such as build commands or
@@ -134,62 +132,62 @@
 <ol>
 <li>
 <p><em>The quick fix to get CI passing</em>: the most obvious way to resolve this issue is to not allow parallel test binaries, using</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">go test -p<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ./...
-</code></pre></div><p>Now each package and test is run exactly in the order that it is printed, nothing in parallel.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-sh" data-lang="sh"><span style="display:flex;"><span>go test -p<span style="color:#f92672">=</span><span style="color:#ae81ff">1</span> ./...
+</span></span></code></pre></div><p>Now each package and test is run exactly in the order that it is printed, nothing in parallel.</p>
 </li>
 <li>
 <p><em>A slightly better fix</em>: Create a new database per test package. In the initial <code>GetDatabase</code> method the same database connection is used over and over. In particular, the same database itself is used. If we modify the method to allow us to pass a new db name, then we can instantiate a fresh database per package and allows us to drop the <code>-p=1</code> flag.</p>
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-go" data-lang="go"><span style="color:#75715e">// GetDatabase gets a test database
-</span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetDatabase</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span> {
-    <span style="color:#a6e22e">once</span>.<span style="color:#a6e22e">Do</span>(<span style="color:#66d9ef">func</span>() {
-        <span style="color:#a6e22e">testDatabase</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">connectDB</span>(<span style="color:#a6e22e">name</span>)
-        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-            <span style="color:#66d9ef">return</span>
-        }
-        <span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithTimeout</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
-        <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>()
-
-        <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">SetupTables</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">testDatabase</span>)
-        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-            <span style="color:#66d9ef">return</span>
-        }
-    })
-
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;Can&#39;t initialize the database: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
-    }
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">testDatabase</span>
-}
-
-<span style="color:#66d9ef">func</span> <span style="color:#a6e22e">connectDB</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) (<span style="color:#a6e22e">db</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
-    <span style="color:#a6e22e">adminConnStr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(
-        <span style="color:#e6db74">&#34;dbname=%s user=%s sslmode=disable host=0.0.0.0 password=%s&#34;</span>,
-        <span style="color:#a6e22e">databaseName</span>,
-        <span style="color:#a6e22e">databaseUser</span>,
-        <span style="color:#a6e22e">databasePassword</span>,
-    )
-
-    <span style="color:#a6e22e">adminDB</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;postgres&#34;</span>, <span style="color:#a6e22e">adminConnStr</span>)
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
-    }
-    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">adminDB</span>.<span style="color:#a6e22e">Close</span>()
-    <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">adminDB</span>.<span style="color:#a6e22e">Exec</span>(<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;CREATE DATABASE %s OWNER %s&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">databaseUser</span>))
-    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
-        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
-    }
-
-    <span style="color:#a6e22e">connStr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(
-        <span style="color:#e6db74">&#34;dbname=%s user=%s sslmode=disable host=0.0.0.0 password=%s&#34;</span>,
-        <span style="color:#a6e22e">name</span>,
-        <span style="color:#a6e22e">databaseUser</span>,
-        <span style="color:#a6e22e">databasePassword</span>,
-    )
-
-    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;postgres&#34;</span>, <span style="color:#a6e22e">connStr</span>)
-}
-</code></pre></div></li>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-go" data-lang="go"><span style="display:flex;"><span><span style="color:#75715e">// GetDatabase gets a test database
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">GetDatabase</span>(<span style="color:#a6e22e">t</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">testing</span>.<span style="color:#a6e22e">T</span>, <span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span> {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">once</span>.<span style="color:#a6e22e">Do</span>(<span style="color:#66d9ef">func</span>() {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">testDatabase</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">connectDB</span>(<span style="color:#a6e22e">name</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">cancel</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">WithTimeout</span>(<span style="color:#a6e22e">context</span>.<span style="color:#a6e22e">Background</span>(), <span style="color:#ae81ff">30</span><span style="color:#f92672">*</span><span style="color:#a6e22e">time</span>.<span style="color:#a6e22e">Second</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">cancel</span>()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">db</span>.<span style="color:#a6e22e">SetupTables</span>(<span style="color:#a6e22e">ctx</span>, <span style="color:#a6e22e">testDatabase</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">return</span>
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    })
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">t</span>.<span style="color:#a6e22e">Fatalf</span>(<span style="color:#e6db74">&#34;Can&#39;t initialize the database: %v&#34;</span>, <span style="color:#a6e22e">err</span>)
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">testDatabase</span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">func</span> <span style="color:#a6e22e">connectDB</span>(<span style="color:#a6e22e">name</span> <span style="color:#66d9ef">string</span>) (<span style="color:#a6e22e">db</span> <span style="color:#f92672">*</span><span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">DB</span>, <span style="color:#a6e22e">err</span> <span style="color:#66d9ef">error</span>) {
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">adminConnStr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;dbname=%s user=%s sslmode=disable host=0.0.0.0 password=%s&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">databaseName</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">databaseUser</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">databasePassword</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">adminDB</span>, <span style="color:#a6e22e">err</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;postgres&#34;</span>, <span style="color:#a6e22e">adminConnStr</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">defer</span> <span style="color:#a6e22e">adminDB</span>.<span style="color:#a6e22e">Close</span>()
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">_</span>, <span style="color:#a6e22e">err</span> = <span style="color:#a6e22e">adminDB</span>.<span style="color:#a6e22e">Exec</span>(<span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(<span style="color:#e6db74">&#34;CREATE DATABASE %s OWNER %s&#34;</span>, <span style="color:#a6e22e">name</span>, <span style="color:#a6e22e">databaseUser</span>))
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> <span style="color:#a6e22e">err</span> <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nil</span> {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">nil</span>, <span style="color:#a6e22e">err</span>
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#a6e22e">connStr</span> <span style="color:#f92672">:=</span> <span style="color:#a6e22e">fmt</span>.<span style="color:#a6e22e">Sprintf</span>(
+</span></span><span style="display:flex;"><span>        <span style="color:#e6db74">&#34;dbname=%s user=%s sslmode=disable host=0.0.0.0 password=%s&#34;</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">name</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">databaseUser</span>,
+</span></span><span style="display:flex;"><span>        <span style="color:#a6e22e">databasePassword</span>,
+</span></span><span style="display:flex;"><span>    )
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#a6e22e">sql</span>.<span style="color:#a6e22e">Open</span>(<span style="color:#e6db74">&#34;postgres&#34;</span>, <span style="color:#a6e22e">connStr</span>)
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
 <li>
 <p><em>The &ldquo;correct&rdquo; solution</em>: separate the datalayer into its own package. Any code that contains SQL or needs to actually access the DB should live in a single package and expose an interface that we can import into the server. If only one package needs to access the db, then there is only one call to setup the db! This also provides various other great benefits. For various, not very good, reasons we didn&rsquo;t do this immediately from the start. This requires a bit more effort to resolve. (Although some other very smart decisions we made will make this refactor much more simple than it seems.)</p>
 </li>
@@ -217,7 +215,7 @@
         <footer>
     <span class="copyrights">
         Made with <a href='https://gohugo.io'>Hugo</a><br/>
-        &copy; 2017 - 2022 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
+        &copy; 2017 - 2023 by Lucas Roesler.  - <a href="https://lucasroesler.com/posts/index.xml">RSS</a>
     </span>
 </footer>
 

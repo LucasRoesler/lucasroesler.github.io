@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>firefox on Lucas Roesler</title>
+    <link>https://lucasroesler.com/tags/firefox/</link>
+    <description>Recent content in firefox on Lucas Roesler</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 16 Sep 2023 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/firefox/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Have your Debian cake and eat it too</title>
+      <link>https://lucasroesler.com/posts/2023/0-mixing-package-sources-in-debian/</link>
+      <pubDate>Sat, 16 Sep 2023 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/posts/2023/0-mixing-package-sources-in-debian/</guid>
+      <description>I recently switched to Debian because I wanted a rock solid plain Gnome environment for my daily driver / work laptop. The main downside is that even Debian testing is a bit more conservative with updates than I would like for certain applications. Normally I would use and recommend Flatpak, but there are a few edge cases where I need to use the Debian package, which leads me to today&amp;rsquo;s post.</description>
+    </item>
+    
+  </channel>
+</rss>
