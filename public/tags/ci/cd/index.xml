@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ci/cd on Lucas Roesler</title>
+    <link>https://lucasroesler.com/tags/ci/cd/</link>
+    <description>Recent content in ci/cd on Lucas Roesler</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language><atom:link href="https://lucasroesler.com/tags/ci/cd/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Hard won lessons about Github Actions: Really fixed it this time, number 42.</title>
+      <link>https://lucasroesler.com/posts/2022/2-github-actions-lessons/</link>
+      <pubDate>Thu, 27 Oct 2022 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/posts/2022/2-github-actions-lessons/</guid>
+      <description>&lt;p&gt;I have spent the two weeks modernizing a long dormant project at Contiamo. Not only did this require updating various dependencies and subsequently parts of the code base, but it also meant updating an old Jenkinfile into a Github Action workflow. 😬😬😬&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Using Tox and PyTest with OpenFaaS</title>
+      <link>https://lucasroesler.com/posts/2021/test-python-functions/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/posts/2021/test-python-functions/</guid>
+      <description>I think it is an uncontroversial statement to say testing is important in software development. Writing tests may not always be fun, but nothing is a sweet as that moment when a unit test catches a bug before you deploy.
+In OpenFaaS we have tons of tests in each project, even the certifier itself runs a short suite of end-to-end tests. But, not all of our function templates have first class testing support.</description>
+    </item>
+    
+  </channel>
+</rss>

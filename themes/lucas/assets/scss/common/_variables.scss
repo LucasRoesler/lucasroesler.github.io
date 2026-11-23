@@ -14,3 +14,10 @@ $break-extra-large: 1200px;
        -moz-transition: $args;
             transition: $args;
 }
+
+
+@media print {
+    .noprint {
+        display: none;
+    }
+}

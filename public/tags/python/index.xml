@@ -6,7 +6,38 @@
     <description>Recent content in python on Lucas Roesler</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sun, 11 Jun 2017 11:00:00 -0600</lastBuildDate><atom:link href="https://lucasroesler.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sun, 12 Dec 2021 00:00:00 +0200</lastBuildDate><atom:link href="https://lucasroesler.com/tags/python/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>A foray into OpenTelemetry with OpenFaaS</title>
+      <link>https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/</link>
+      <pubDate>Sun, 12 Dec 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/posts/2021/opentelemetry-and-openfaas/</guid>
+      <description>I have always been a fan of tracing. My first taste of it was with NewRelic, but the development of OpenTracing and more recently OpenTelemetry have made it an easy must have in every project I start. I have created a new walk-through: Tracing and Observability with OpenFaaS to show you how to add OpenTelemetry to your Python Flask functions.
+This post won&amp;rsquo;t go through the walk-through, the walk-through already does that.</description>
+    </item>
+    
+    <item>
+      <title>Easy settings management for Python functions with Pydantic</title>
+      <link>https://lucasroesler.com/posts/2021/pydantic-settings-for-openfaas-functions/</link>
+      <pubDate>Tue, 03 Aug 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/posts/2021/pydantic-settings-for-openfaas-functions/</guid>
+      <description>File this under quick tips and tricks for Python functions in OpenFaas.
+I just learned about Pydantic&amp;rsquo;s support for reading settings from secret files and it fits perfectly with secrets in OpenFaaS. If you love Python or you are writing Python functions in OpenFaas, this is a great way to simplify your configuration parsing.
+I am going to keep this short and sweet. Let&amp;rsquo;s say you have an OpenFaas function that needs to access a database.</description>
+    </item>
+    
+    <item>
+      <title>Using Tox and PyTest with OpenFaaS</title>
+      <link>https://lucasroesler.com/posts/2021/test-python-functions/</link>
+      <pubDate>Sat, 06 Mar 2021 00:00:00 +0200</pubDate>
+      
+      <guid>https://lucasroesler.com/posts/2021/test-python-functions/</guid>
+      <description>I think it is an uncontroversial statement to say testing is important in software development. Writing tests may not always be fun, but nothing is a sweet as that moment when a unit test catches a bug before you deploy.
+In OpenFaaS we have tons of tests in each project, even the certifier itself runs a short suite of end-to-end tests. But, not all of our function templates have first class testing support.</description>
+    </item>
+    
     <item>
       <title>SSL Expiry Quick and Simple</title>
       <link>https://lucasroesler.com/posts/2017/ssl-expiration-checking/</link>

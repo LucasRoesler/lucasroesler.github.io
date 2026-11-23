@@ -4,3 +4,4 @@ _site
 website.sublime-project
 website.sublime-workspace
 .DS_Store
+resources/_gen/

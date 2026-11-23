@@ -1,3 +1,15 @@
+// Colours
+$color-background: {{ .Site.Params.posts.colors.background | default "#6fcdbd" }};
+$color-foreground: {{ .Site.Params.posts.colors.foreground | default "#fff" }};
+$color-hover: {{ .Site.Params.posts.colors.hover | default "#333" }};
+$color-dark: {{ .Site.Params.posts.colors.dark | default "#6fcdbd" }};
+
+$intro-color-background: {{ .Site.Params.colors.background | default "#6fcdbd" }};
+$intro-color-foreground: {{ .Site.Params.colors.foreground | default "#fff" }};
+$intro-color-hover: {{ .Site.Params.colors.hover | default "#333" }};
+$intro-color-dark: {{ .Site.Params.colors.dark | default "#6fcdbd" }};
+@import '../common/variables';
+
 html, body {
     height: "100%";
 }
@@ -14,4 +26,35 @@ html, body {
 a {
     text-decoration: none;
     color:unset;
+}
+
+
+.nav--mini {
+    margin-top: 5vh;
+
+    .btn--nav {
+        color: $intro-color-foreground;
+        background-color: $intro-color-dark;
+
+        border-radius: 0;
+        padding-right: 10px;
+        padding-left: 20px;
+
+        &:first-of-type {
+            border-radius: 5px 0 0 5px;
+        }
+
+        &:last-of-type {
+            border-radius: 0 5px 5px 0;
+        }
+
+        &:hover {
+            color: $intro-color-foreground;
+        }
+
+        @media screen and (max-width: $break-medium) {
+            font-size: .85rem;
+            padding: 10px;
+        }
+    }
 }
