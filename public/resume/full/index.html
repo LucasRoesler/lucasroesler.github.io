@@ -26,7 +26,7 @@
     <meta itemprop="name" content="Resume">
 <meta itemprop="description" content="Long Form Resume for Lucas Roesler"><meta itemprop="datePublished" content="2013-06-21T11:27:27-04:00" />
 <meta itemprop="dateModified" content="2013-06-21T11:27:27-04:00" />
-<meta itemprop="wordCount" content="1016">
+<meta itemprop="wordCount" content="2050">
 <meta itemprop="keywords" content="" />
     <title>
         Resume &middot; Lucas Roesler
@@ -60,8 +60,10 @@
 <hr>
 <h4 id="technical--skills">Technical  Skills</h4>
 <ul>
-<li>Languages: Go, Python, PostgreSQL, MongoDB, Javascript, Typescript, HTML, CSS</li>
-<li>Technologies: OpenFaaS, Docker, Kubernetes, OpenTracing, Grafana, Loki, Amazon Web Services (AWS), Google Cloud (GCP), Git, OpenAPI</li>
+<li>Languages: Go, Python, SQL, Javascript, Typescript, HTML, CSS</li>
+<li>Data: Snowflake, dbt, Apache Airflow, Data Vault 2.0, PostgreSQL, Apache Spark, Apache Iceberg, MongoDB</li>
+<li>AI: coding agent harnesses (Claude Code, Codex, opencode), the Claude Agent SDK, MCP, agent sandboxing, LLM evaluation, RAG</li>
+<li>Platform: Kubernetes, Docker, Terraform, AWS, Azure, GCP, Prometheus, Grafana, OpenTelemetry</li>
 </ul>
 <hr>
 <h4 id="education">Education</h4>
@@ -74,18 +76,112 @@ Advisor: Dr. Ralf Schiffler</p>
 <p><strong>B.A. in Mathematics</strong>, <em>Central Connecticut State University (CCSU)</em>, New Britain, Connecticut - <strong>May 2007</strong></p>
 <hr>
 <h4 id="experience">Experience</h4>
-<p><strong>Core Developer</strong>, OpenFaaS, - <strong>2017 &ndash; present</strong></p>
+<p><strong>Managing Partner and CTO</strong>, Contiamo GmbH, Berlin Germany, - <strong>2022 &ndash; present</strong></p>
 <blockquote>
+<p>Contiamo converted from a venture-funded data product company into a data and AI consultancy.
+I am one of four managing partners and own the technical side of the firm, while staying hands-on
+in delivery. Engagements run end-to-end, from the business problem to rollout, staffed with small
+senior teams. Clients are large enterprises in telecommunications, real estate, energy,
+insurance, and consumer goods.</p>
+<p><strong>Firm leadership</strong></p>
 <ul>
-<li>Implemented the Secrets, Logs, and Profiles features.</li>
-<li>General contributions, bug fixes, and code reviews.</li>
-<li>Significant contributions to the <code>faas-cli</code>, <code>faas-netes</code>, <code>faasd</code>, <code>faas-provider</code>, the <code>certifier</code>, and the Python function SDK components.</li>
+<li>Set architecture and delivery standards across engagements, and act as the most active
+technical reviewer across client codebases.</li>
+<li>Own engineering and AI standards: the internal agent tooling marketplace, the core agent
+skills every project starts from, and the observability conventions clients inherit.</li>
+<li>Exploratory work on capability-based agent sandboxing, built on Linux Landlock, so engineers
+can run coding agents against real systems (notes, chat, ticketing, source control, cloud)
+without exposing cloud credentials, SSH keys, or other tools&rsquo; secrets.</li>
+<li>Authored the engineering progression framework the firm runs on: four growth dimensions
+(scope, autonomy, complexity, time horizon) across four bands with sub-levels, which also
+drives candidate leveling and anchors salary review. Presented it to the partners and the team.</li>
+<li>Designed and led the engineering hiring process end to end, including the interview rounds.</li>
+<li>Shaped and rolled out the firm&rsquo;s one-on-one framework: a biweekly cadence the engineer drives,
+with a quarterly career conversation, kept separate from project status reporting.</li>
+<li>Built the internal systems the partners run the business on: the capacity and pipeline
+dashboard covering utilization, allocation, and weighted pipeline, and the AI tooling cost
+dashboard that moved the firm onto managed accounts.</li>
+<li>Argued the firm&rsquo;s technical direction in partner strategy sessions, including building on
+existing agent harnesses over bespoke agent frameworks, and the guardrails (written SLA,
+capacity caps, monitoring access) required before signing maintenance contracts.</li>
 </ul>
-<p><em>Go - Kubernetes - Docker - Containerd</em></p>
+<p><strong>Enterprise procurement data platform</strong> (telecommunications, 2024 &ndash; present)</p>
+<ul>
+<li>Technical lead migrating procurement reporting off a vendor SaaS onto Snowflake and Power BI.</li>
+<li>Designed the Data Vault 2.0 warehouse (raw vault, business vault, use-case marts) and the
+repeatable, automated process that builds it: templated dbt models over the AutomateDV macros,
+Airflow orchestration, Terraform-provisioned environments, ingestion through Azure blob
+storage, and DataHub for catalog. Five environments follow the same path to production.</li>
+<li>Now integrating AI natively into the data engineering process itself.</li>
+<li>Authored the data strategy and the business justification for Data Vault over a
+SAP-native approach.</li>
+<li>Wrote the continuous delivery counter-proposal that replaced the operations vendor&rsquo;s
+seven-gate definition of done and deployment handover model.</li>
+<li>Cut pipeline cost and runtime: per-DAG and per-task Snowflake warehouse overrides plus
+partitioned incremental loads brought daily jobs that overran a 05:00 report refresh back
+inside the window.</li>
+<li>Chose Snowflake over Databricks in a proof of concept weighed against the client&rsquo;s
+security requirements.</li>
+<li>Reviewed a production data incident (silent mutation of effective dates producing 177
+duplicate keys across five satellites) and specified the fix. Set strict schema and format
+validation at ingest, so a bad file stops its source rather than corrupting the vault.</li>
+<li>Designed a masked, cleaned production clone shared into the development account so engineers
+could model against realistic data without production access, and pushed back on
+over-broad production grants.</li>
+</ul>
+<p><strong>Data store replatform</strong> (real estate advisory, 2023 &ndash; 2024)</p>
+<ul>
+<li>Designed and built the replacement for a legacy data store: AWS DMS change data capture from
+MSSQL into Snowflake, a dbt Data Vault, and Airflow on AWS MWAA with astronomer-cosmos,
+all provisioned in Terraform.</li>
+<li>Solved foreign key metadata for a source system without referential constraints, and built a
+Terraform generator for per-pipeline resources.</li>
+</ul>
+<p><strong>Property validation service</strong> (real estate advisory, 2025 &ndash; present)</p>
+<ul>
+<li>Engineering lead on a geocoding and address validation service combining Photon for
+normalization and Nominatim for polygons behind one API, with a compliant commercial fallback.</li>
+<li>Benchmarked against an annotated address set and load tested to 94,000 addresses, which
+surfaced an instability in the search cluster. Role-based access control with directory sync.</li>
+</ul>
+<p><strong>AI architecture assessment</strong> (medtech, 2026)</p>
+<ul>
+<li>Assessment for a European clear-aligner group whose patient-facing voice and chat agents had
+outgrown their original design: roughly ten services stitched together, no monitoring, and
+unrestricted production deploys.</li>
+<li>Delivered a current state review, a target architecture, and the migration path I argued for,
+since the client cannot stop the running system to switch over.</li>
+<li>Named the lock-in each recommendation creates and the exit path from it, rather than avoiding
+hosted components a resource-limited team would otherwise have to operate.</li>
+</ul>
+<p><strong>Marketing personalization warehouse</strong> (telecommunications, 2023 &ndash; 2024)</p>
+<ul>
+<li>Kafka into Spark Structured Streaming into Apache Iceberg on S3, modeled with dbt over Athena,
+deployed with Helm and ArgoCD.</li>
+<li>A production ranking job covering more than 22 million user profiles in about two hours.</li>
+<li>Cut Spark cost, removed duplicate events after a crash loop, and resolved a broadcast join
+that exceeded the 8GB limit. Authored and delivered the team knowledge transfer.</li>
+</ul>
+<p><strong>Applied AI delivery</strong></p>
+<ul>
+<li>Design reviews and architecture for a procurement knowledge graph agent and a purchase order
+copilot, including a graph storage review and a semantic views assessment.</li>
+<li>Argued the firm&rsquo;s position against hand-built agent frameworks and for building on existing
+harnesses such as the Claude Code SDK.</li>
+<li>Internal AI tooling: a shared plugin and skill marketplace, automated multi-model code review
+with Claude, Gemini, and Codex as house practice, and a capacity planning application.</li>
+</ul>
+<p><em>Snowflake - dbt - Airflow - Data Vault 2.0 - Terraform - Python - Go - Azure - AWS - Spark - Iceberg</em></p>
 </blockquote>
-<p><strong>Software Architect and Team Lead</strong>, Contiamo GmbH, Berlin Germany, - <strong>2017 &ndash; present</strong></p>
+<p><strong>Software Architect and Team Lead</strong>, Contiamo GmbH, Berlin Germany, - <strong>2017 &ndash; 2022</strong></p>
 <blockquote>
 <ul>
+<li>Owned a machine-learning-as-a-platform product: a cloud native platform on which data
+engineers built, deployed, and supported machine learning models.</li>
+<li>It integrated with the other half of the product, a SQL gateway that spoke the Postgres wire
+protocol, translated queries, and supported cross-database joins, together with the
+associated data catalog.</li>
+<li>Designed and managed authentication and authorization for the data catalog and the SQL proxy.</li>
 <li>Team lead for the API, Authentication, Application, and Platform team.</li>
 <li>Responsible for running daily stand-ups and one-on-ones.</li>
 <li>Contribute to the development of the product roadmap to prioritize features/projects.</li>
@@ -96,6 +192,15 @@ Advisor: Dr. Ralf Schiffler</p>
 <li>Lead the adoption of OpenTracing and Prometheus to ensure the application is observable out-of-the-box.</li>
 </ul>
 <p><em>Go - Postgres - Kubernetes</em></p>
+</blockquote>
+<p><strong>Core Developer</strong>, OpenFaaS, - <strong>2017 &ndash; 2023</strong></p>
+<blockquote>
+<ul>
+<li>Implemented the Secrets, Logs, and Profiles features.</li>
+<li>General contributions, bug fixes, and code reviews.</li>
+<li>Significant contributions to the <code>faas-cli</code>, <code>faas-netes</code>, <code>faasd</code>, <code>faas-provider</code>, the <code>certifier</code>, and the Python function SDK components.</li>
+</ul>
+<p><em>Go - Kubernetes - Docker - Containerd</em></p>
 </blockquote>
 <p><strong>Director of Engineering</strong>, Teem (formerly EventBoard, acquired by WeWork), Salt Lake City, Utah - <strong>2016 &ndash; 2017</strong></p>
 <blockquote>
@@ -163,6 +268,14 @@ for the Pedagogy in Large Lectures research project.</li>
 </blockquote>
 <!-- raw HTML omitted -->
 <!-- raw HTML omitted -->
+<hr>
+<h4 id="open-source">Open Source</h4>
+<ul>
+<li><a href="https://github.com/LucasRoesler/crit"><strong>crit</strong></a> - review loop between a developer and a coding agent, in Go.
+Inline comments on code, plans, and running pages feed structured human feedback back to the agent.</li>
+<li><a href="https://github.com/LucasRoesler/psst"><strong>psst</strong></a> - secrets manager that injects credentials into agent commands without exposing the values.</li>
+<li><a href="https://github.com/LucasRoesler/openfaas-loki"><strong>openfaas-loki</strong></a> - Loki log provider for OpenFaaS.</li>
+</ul>
 <hr>
 <h4 id="talks--publications">Talks / Publications</h4>
 <p><strong>Event Driven Postgres with OpenFaas</strong>, Livestream with Alex Elis - <strong>2021-02-02</strong></p>

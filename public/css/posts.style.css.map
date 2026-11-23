@@ -1,7 +1,7 @@
 {
 	"version": 3,
 	"file": "posts.style.css",
-	"sourceRoot": "/home/lucas/code/lucasroesler.github.io",
+	"sourceRoot": "/tmp/claude-1000/-var-home-lucas-Documents-code-lucasroesler-assistant/458e9dd3-c2bd-4ac5-850f-d0d746166213/scratchpad/site",
 	"sources": [
 		"themes/lucas/assets/scss/posts/main.scss",
 		"themes/lucas/assets/scss/common/_variables.scss",
