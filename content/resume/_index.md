@@ -15,8 +15,10 @@ Berlin, DE \
 
 ---
 #### Technical  Skills
-* Languages: Go, Python, PostgreSQL, MongoDB, Javascript, Typescript, HTML, CSS
-* Technologies: OpenFaaS, Docker, Kubernetes, OpenTracing, Grafana, Loki, Amazon Web Services (AWS), Google Cloud (GCP), Git, OpenAPI
+* Languages: Go, Python, SQL, Javascript, Typescript, HTML, CSS
+* Data: Snowflake, dbt, Apache Airflow, Data Vault 2.0, PostgreSQL, Apache Spark, Apache Iceberg, MongoDB
+* AI: coding agent harnesses (Claude Code, Codex, opencode), the Claude Agent SDK, MCP, agent sandboxing, LLM evaluation, RAG
+* Platform: Kubernetes, Docker, Terraform, AWS, Azure, GCP, Prometheus, Grafana, OpenTelemetry
 
 ---
 
@@ -30,24 +32,56 @@ Berlin, DE \
 ---
 
 #### Experience
-**Core Developer**, OpenFaaS, - **2017 -- present**
+**Managing Partner and CTO**, Contiamo GmbH, Berlin Germany, - **2022 -- present**
+
+- One of four managing partners of a data and AI consultancy that delivers end-to-end
+  engagements for large enterprises in telecommunications, real estate, energy, and insurance.
+- Own engineering and AI standards across the firm: the internal agent tooling marketplace,
+  the core agent skills every project starts from, and the observability conventions clients inherit.
+- Exploratory work on capability-based agent sandboxing, so engineers can run coding agents
+  against real systems without exposing cloud credentials and SSH keys.
+- Authored the engineering progression framework the firm runs on: four growth dimensions across
+  four bands, driving candidate leveling and salary review. Designed and led the hiring process
+  end to end, and rolled out the firm's one-on-one framework.
+- Built the internal systems the partners run the business on: the capacity and pipeline dashboard
+  (utilization, allocation, weighted pipeline) and the AI tooling cost dashboard.
+- Technical lead on a procurement data platform for a European telecommunications group,
+  migrating reporting off a vendor SaaS onto Snowflake. Designed the Data Vault 2.0 warehouse
+  and the repeatable, automated delivery process around it: templated dbt models, Airflow
+  orchestration, and Terraform-provisioned environments.
+- Replaced a seven-gate release handover with a continuous delivery model, and brought daily
+  pipelines that overran the morning reporting window back inside it.
+- Now integrating AI natively into the data engineering process itself.
+- Architecture assessments for clients whose AI systems have outgrown their original design,
+  including a European medtech group running patient-facing voice and chat agents: current state
+  review, target architecture, and a migration path that keeps the running system online.
+- Designed and replatformed a real estate advisory group's data store: change data capture from
+  MSSQL into Snowflake, a dbt Data Vault, and Airflow on AWS MWAA.
+- Built a marketing personalization warehouse on Kafka, Spark Structured Streaming, and Iceberg,
+  with a production job that ranks over 22 million user profiles.
+- *Snowflake - dbt - Airflow - Terraform - Python - Go - Azure - AWS*
+
+**Software Architect and Team Lead**, Contiamo GmbH, Berlin Germany, - **2017 -- 2022**
+
+- Owned a machine-learning-as-a-platform product: a cloud native platform for data engineers to
+  build, deploy, and support machine learning models.
+- It integrated with a SQL gateway that spoke the Postgres wire protocol, translated queries, and
+  supported cross-database joins, together with the associated data catalog.
+- Designed and managed authentication and authorization for the data catalog and the SQL proxy.
+- Team lead for the API, Authentication, Application, and Platform team, running stand-ups and
+  one-on-ones and contributing to the product roadmap.
+- Created and reviewed architectural decisions and implementation plans.
+- Developed a release process for self-hosted on-premise installations, and led the adoption of
+  Kubernetes and Helm as its core components.
+- Led the adoption of OpenTracing and Prometheus so the application was observable out of the box.
+- *Go - Postgres - Kubernetes*
+
+**Core Developer**, OpenFaaS, - **2017 -- 2023**
 
 - Community driven open source serverless framework that runs on Kubernetes and Containerd
 - Implemented the Secrets, Logs, and Profiles features.
 - General contributions, bug fixes, and code reviews.
 - *Go - Kubernetes - Docker - Containerd*
-
-**Software Architect and Team Lead**, Contiamo GmbH, Berlin Germany, - **2017 -- present**
-
-- Team lead for the API, Authentication, Application, and Platform team.
-- Responsible for running daily stand-ups and one-on-ones.
-- Contribute to the development of the product roadmap to prioritize features/projects.
-- Create and review architectural decisions and implementation plans.
-- Design and build the APIs and data model for the Data Catalog.
-- Developed a release process to enable self-hosted on-premise installations of Contiamo.
-- Lead the adoption of Kubernetes and Helm as core components of this release process.
-- Lead the adoption of OpenTracing and Prometheus to ensure the application is observable out-of-the-box.
-- *Go - Postgres - Kubernetes*
 
 **Director of Engineering**, Teem (formerly EventBoard, acquired by WeWork), Salt Lake City, Utah - **2016 -- 2017**
 
@@ -100,6 +134,13 @@ Berlin, DE \
 - Implemented basic security for existing web forms.
 - Created extensive user and developer documentation.
 - *PHP - MySQL - Javascript*
+
+---
+#### Open Source
+
+- [**crit**](https://github.com/LucasRoesler/crit) - review loop between a developer and a coding agent, in Go.
+- [**psst**](https://github.com/LucasRoesler/psst) - secrets manager that injects credentials into agent commands without exposing the values.
+- [**openfaas-loki**](https://github.com/LucasRoesler/openfaas-loki) - Loki log provider for OpenFaaS.
 
 ---
 #### Talks / Publications
