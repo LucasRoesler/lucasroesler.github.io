@@ -53,8 +53,10 @@
 <hr>
 <h4 id="technical--skills">Technical  Skills</h4>
 <ul>
-<li>Languages: Go, Python, PostgreSQL, MongoDB, Javascript, Typescript, HTML, CSS</li>
-<li>Technologies: OpenFaaS, Docker, Kubernetes, OpenTracing, Grafana, Loki, Amazon Web Services (AWS), Google Cloud (GCP), Git, OpenAPI</li>
+<li>Languages: Go, Python, SQL, Javascript, Typescript, HTML, CSS</li>
+<li>Data: Snowflake, dbt, Apache Airflow, Data Vault 2.0, PostgreSQL, Apache Spark, Apache Iceberg, MongoDB</li>
+<li>AI: coding agent harnesses (Claude Code, Codex, opencode), the Claude Agent SDK, MCP, agent sandboxing, LLM evaluation, RAG</li>
+<li>Platform: Kubernetes, Docker, Terraform, AWS, Azure, GCP, Prometheus, Grafana, OpenTelemetry</li>
 </ul>
 <hr>
 <h4 id="education">Education</h4>
@@ -63,24 +65,56 @@
 <p><strong>B.A. in Mathematics</strong>, <em>Central Connecticut State University (CCSU)</em>, New Britain, Connecticut - <strong>May 2007</strong></p>
 <hr>
 <h4 id="experience">Experience</h4>
-<p><strong>Core Developer</strong>, OpenFaaS, - <strong>2017 &ndash; present</strong></p>
+<p><strong>Managing Partner and CTO</strong>, Contiamo GmbH, Berlin Germany, - <strong>2022 &ndash; present</strong></p>
+<ul>
+<li>One of four managing partners of a data and AI consultancy that delivers end-to-end
+engagements for large enterprises in telecommunications, real estate, energy, and insurance.</li>
+<li>Own engineering and AI standards across the firm: the internal agent tooling marketplace,
+the core agent skills every project starts from, and the observability conventions clients inherit.</li>
+<li>Exploratory work on capability-based agent sandboxing, so engineers can run coding agents
+against real systems without exposing cloud credentials and SSH keys.</li>
+<li>Authored the engineering progression framework the firm runs on: four growth dimensions across
+four bands, driving candidate leveling and salary review. Designed and led the hiring process
+end to end, and rolled out the firm&rsquo;s one-on-one framework.</li>
+<li>Built the internal systems the partners run the business on: the capacity and pipeline dashboard
+(utilization, allocation, weighted pipeline) and the AI tooling cost dashboard.</li>
+<li>Technical lead on a procurement data platform for a European telecommunications group,
+migrating reporting off a vendor SaaS onto Snowflake. Designed the Data Vault 2.0 warehouse
+and the repeatable, automated delivery process around it: templated dbt models, Airflow
+orchestration, and Terraform-provisioned environments.</li>
+<li>Replaced a seven-gate release handover with a continuous delivery model, and brought daily
+pipelines that overran the morning reporting window back inside it.</li>
+<li>Now integrating AI natively into the data engineering process itself.</li>
+<li>Architecture assessments for clients whose AI systems have outgrown their original design,
+including a European medtech group running patient-facing voice and chat agents: current state
+review, target architecture, and a migration path that keeps the running system online.</li>
+<li>Designed and replatformed a real estate advisory group&rsquo;s data store: change data capture from
+MSSQL into Snowflake, a dbt Data Vault, and Airflow on AWS MWAA.</li>
+<li>Built a marketing personalization warehouse on Kafka, Spark Structured Streaming, and Iceberg,
+with a production job that ranks over 22 million user profiles.</li>
+<li><em>Snowflake - dbt - Airflow - Terraform - Python - Go - Azure - AWS</em></li>
+</ul>
+<p><strong>Software Architect and Team Lead</strong>, Contiamo GmbH, Berlin Germany, - <strong>2017 &ndash; 2022</strong></p>
+<ul>
+<li>Owned a machine-learning-as-a-platform product: a cloud native platform for data engineers to
+build, deploy, and support machine learning models.</li>
+<li>It integrated with a SQL gateway that spoke the Postgres wire protocol, translated queries, and
+supported cross-database joins, together with the associated data catalog.</li>
+<li>Designed and managed authentication and authorization for the data catalog and the SQL proxy.</li>
+<li>Team lead for the API, Authentication, Application, and Platform team, running stand-ups and
+one-on-ones and contributing to the product roadmap.</li>
+<li>Created and reviewed architectural decisions and implementation plans.</li>
+<li>Developed a release process for self-hosted on-premise installations, and led the adoption of
+Kubernetes and Helm as its core components.</li>
+<li>Led the adoption of OpenTracing and Prometheus so the application was observable out of the box.</li>
+<li><em>Go - Postgres - Kubernetes</em></li>
+</ul>
+<p><strong>Core Developer</strong>, OpenFaaS, - <strong>2017 &ndash; 2023</strong></p>
 <ul>
 <li>Community driven open source serverless framework that runs on Kubernetes and Containerd</li>
 <li>Implemented the Secrets, Logs, and Profiles features.</li>
 <li>General contributions, bug fixes, and code reviews.</li>
 <li><em>Go - Kubernetes - Docker - Containerd</em></li>
-</ul>
-<p><strong>Software Architect and Team Lead</strong>, Contiamo GmbH, Berlin Germany, - <strong>2017 &ndash; present</strong></p>
-<ul>
-<li>Team lead for the API, Authentication, Application, and Platform team.</li>
-<li>Responsible for running daily stand-ups and one-on-ones.</li>
-<li>Contribute to the development of the product roadmap to prioritize features/projects.</li>
-<li>Create and review architectural decisions and implementation plans.</li>
-<li>Design and build the APIs and data model for the Data Catalog.</li>
-<li>Developed a release process to enable self-hosted on-premise installations of Contiamo.</li>
-<li>Lead the adoption of Kubernetes and Helm as core components of this release process.</li>
-<li>Lead the adoption of OpenTracing and Prometheus to ensure the application is observable out-of-the-box.</li>
-<li><em>Go - Postgres - Kubernetes</em></li>
 </ul>
 <p><strong>Director of Engineering</strong>, Teem (formerly EventBoard, acquired by WeWork), Salt Lake City, Utah - <strong>2016 &ndash; 2017</strong></p>
 <ul>
@@ -133,6 +167,13 @@ for the Pedagogy in Large Lectures research project.</li>
 <li>Implemented basic security for existing web forms.</li>
 <li>Created extensive user and developer documentation.</li>
 <li><em>PHP - MySQL - Javascript</em></li>
+</ul>
+<hr>
+<h4 id="open-source">Open Source</h4>
+<ul>
+<li><a href="https://github.com/LucasRoesler/crit"><strong>crit</strong></a> - review loop between a developer and a coding agent, in Go.</li>
+<li><a href="https://github.com/LucasRoesler/psst"><strong>psst</strong></a> - secrets manager that injects credentials into agent commands without exposing the values.</li>
+<li><a href="https://github.com/LucasRoesler/openfaas-loki"><strong>openfaas-loki</strong></a> - Loki log provider for OpenFaaS.</li>
 </ul>
 <hr>
 <h4 id="talks--publications">Talks / Publications</h4>
